@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- Quartz集群Schduler -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!--
+				<ref bean="taskOneJobTrigger" />
+				<ref bean="taskTwoJobTrigger"/>
+				-->
+				<ref bean="job1CallMethod1JobTrigger"/>
+				<ref bean="job1CallMethod2JobTrigger"/>
+				<ref bean="job2CallMethod1JobTrigger"/>
+				<ref bean="job2CallMethod2JobTrigger"/>
+			</list>
+		</property>
+		<!-- quartz配置文件路径, 指向cluster配置 -->
+		<property name="configLocation" value="classpath:quartz-cluster.properties" />
+		<!-- 启动时延期2秒开始任务 -->
+		<property name="startupDelay" value="2" />
+		<!-- 保存Job数据到数据库所需的数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- Job接受applicationContext的成员变量名 -->
+        <property name="applicationContextSchedulerContextKey" value="applicationContext" />
+        <!-- 修改job时，更新到数据库 -->
+        <property name="overwriteExistingJobs" value="true" />
+	</bean>
+    
+	<!-- TaskOneJob start -->
+	<!--
+    <bean id="taskOneJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="taskOneJobDetail" />
+        <property name="cronExpression" value="*/5 * * * * ? " />
+    </bean>
+    <bean id="taskOneJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="durability" value="true" />
+        <property name="jobClass" value="com.cw.quartz.job.TaskOneJob" />
+    </bean>
+    -->
+    <!-- TaskOneJob end -->
+    
+    <!-- TaskTwoJob start -->
+    <!--
+    <bean id="taskTwoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="taskTwoJobDetail" />
+        <property name="cronExpression" value="*/5 * * * * ? " />
+    </bean>
+    <bean id="taskTwoJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="durability" value="true" />
+        <property name="jobClass" value="com.cw.quartz.job.TaskTwoJob" />
+    </bean>
+    -->
+    <!-- TaskOneJob end -->
+    
+    <!-- job1CallMethod1 start -->
+    <bean id="job1CallMethod1JobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    	<!-- durability 表示任务完成之后是否依然保留到数据库，默认false   --> 
+    	<property name="durability" value="true"></property>
+    	<!-- requestsRecovery属性必须设置为 true，当Quartz服务被中止后，再次启动或集群中其他机器接手任务时会尝试恢复执行之前未完成的所有任务  -->
+    	<property name="requestsRecovery" value="false"></property>
+    	<property name="jobClass" value="com.cw.quartz.support.MyDetailQuartzJobBean"></property>
+    	<property name="jobDataAsMap">
+    		<map>
+    			<entry key="targetObject" value="job1CallMethod"></entry>
+    			<entry key="targetMethod" value="method1"></entry>
+    		</map>
+    	</property>
+    </bean>	
+    <bean id="job1CallMethod1JobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job1CallMethod1JobDetail" />
+        <property name="cronExpression">
+        	<value>*/5 * * * * ?</value>
+        </property>
+    </bean>
+    <!-- job1CallMethod1 end -->
+    
+    <!-- job1CallMethod2 start -->
+    <bean id="job1CallMethod2JobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    	<!-- durability 表示任务完成之后是否依然保留到数据库，默认false   --> 
+    	<property name="durability" value="true"></property>
+    	<!-- requestsRecovery属性必须设置为 true，当Quartz服务被中止后，再次启动或集群中其他机器接手任务时会尝试恢复执行之前未完成的所有任务  -->
+    	<property name="requestsRecovery" value="false"></property>
+    	<property name="jobClass" value="com.cw.quartz.support.MyDetailQuartzJobBean"></property>
+    	<property name="jobDataAsMap">
+    		<map>
+    			<entry key="targetObject" value="job1CallMethod"></entry>
+    			<entry key="targetMethod" value="method2"></entry>
+    		</map>
+    	</property>
+    </bean>	
+    <bean id="job1CallMethod2JobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job1CallMethod2JobDetail" />
+        <property name="cronExpression">
+        	<value>*/5 * * * * ?</value>
+        </property>
+    </bean>
+    <!-- job1CallMethod2 end -->
+    
+    <!-- job2CallMethod1 start -->
+    <bean id="job2CallMethod1JobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    	<!-- durability 表示任务完成之后是否依然保留到数据库，默认false   --> 
+    	<property name="durability" value="true"></property>
+    	<!-- requestsRecovery属性必须设置为 true，当Quartz服务被中止后，再次启动或集群中其他机器接手任务时会尝试恢复执行之前未完成的所有任务  -->
+    	<property name="requestsRecovery" value="false"></property>
+    	<property name="jobClass" value="com.cw.quartz.support.MyDetailQuartzJobBean"></property>
+    	<property name="jobDataAsMap">
+    		<map>
+    			<entry key="targetObject" value="job2CallMethod"></entry>
+    			<entry key="targetMethod" value="method1"></entry>
+    		</map>
+    	</property>
+    </bean>	
+    <bean id="job2CallMethod1JobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job2CallMethod1JobDetail" />
+        <property name="cronExpression">
+        	<value>*/5 * * * * ?</value>
+        </property>
+    </bean>
+    <!-- job2CallMethod1 end -->
+    
+    <!-- job2CallMethod2 start -->
+    <bean id="job2CallMethod2JobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+    	<!-- durability 表示任务完成之后是否依然保留到数据库，默认false   --> 
+    	<property name="durability" value="true"></property>
+    	<!-- requestsRecovery属性必须设置为 true，当Quartz服务被中止后，再次启动或集群中其他机器接手任务时会尝试恢复执行之前未完成的所有任务  -->
+    	<property name="requestsRecovery" value="false"></property>
+    	<property name="jobClass" value="com.cw.quartz.support.MyDetailQuartzJobBean"></property>
+    	<property name="jobDataAsMap">
+    		<map>
+    			<entry key="targetObject" value="job2CallMethod"></entry>
+    			<entry key="targetMethod" value="method2"></entry>
+    		</map>
+    	</property>
+    </bean>	
+    <bean id="job2CallMethod2JobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="job2CallMethod2JobDetail" />
+        <property name="cronExpression">
+        	<value>*/5 * * * * ?</value>
+        </property>
+    </bean>
+    <!-- job2CallMethod2 end -->
+    
+    
+    
+</beans>

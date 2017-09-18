@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE configuration    
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"    
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--
+	<typeHandlers>
+		<typeHandler javaType="String" jdbcType="VARCHAR"
+			handler="com.yy.zbase.platform.dao.mybatis.typehandler.EncryptStringTypeHandler" />
+	</typeHandlers>
+	<plugins>
+		<plugin
+			interceptor="com.yy.zbase.platform.dao.mybatis.interceptor.ExecutorInterceptor"></plugin>
+		<plugin
+			interceptor="com.yy.zbase.platform.dao.mybatis.interceptor.PaginationInterceptor">
+			<property name="dialectClass"
+				value="com.yy.zbase.platform.dao.mybatis.dialect.MySqlDialect" />
+		</plugin>
+		<plugin
+			interceptor="com.yy.zbase.platform.dao.mybatis.interceptor.TranslationInterceptor">
+			<property name="dialectClass"
+				value="com.yy.zbase.platform.dao.mybatis.dialect.MySqlDialect" />
+		</plugin>
+		<plugin interceptor="com.yy.zbase.platform.dao.mybatis.interceptor.EncryptInterceptor">
+		</plugin>
+		<plugin interceptor="com.yy.zbase.platform.dao.mybatis.interceptor.EncryptQueryInterceptor">
+		</plugin>
+	</plugins>
+	-->
+</configuration> 

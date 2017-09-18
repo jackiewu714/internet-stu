@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2010 The myBatis Team Licensed under the Apache License, Version 
+	2.0 (the "License"); you may not use this file except in compliance with 
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="breakAfterAcquireFailure" value="false" />
+		<property name="testConnectionOnCheckout" value="false" />
+		<property name="testConnectionOnCheckin" value="false" />
+		<property name="idleConnectionTestPeriod" value="60" />
+		<property name="acquireRetryAttempts" value="10" />
+		<property name="acquireRetryDelay" value="1000" />
+
+		<property name="maxPoolSize" value="200" />
+		<property name="minPoolSize" value="0" />
+		<property name="initialPoolSize" value="0" />
+		<property name="maxIdleTime" value="500" />
+		<property name="checkoutTimeout" value="6000" />
+		<property name="maxStatements" value="1" />
+		<property name="maxStatementsPerConnection" value="100" />
+	</bean>
+
+	<bean id="dataSource" parent="parentDataSource" destroy-method="close">
+		<property name="driverClass">
+			<bean
+				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				<property name="encryptedProperty" value="${jdbc_driverClassName}" />
+			</bean>
+		</property>
+		<property name="jdbcUrl">
+			<bean
+				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				<property name="encryptedProperty" value="${jdbc_url}" />
+			</bean>
+		</property>
+		<property name="user">
+			<bean
+				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				<property name="encryptedProperty" value="${jdbc_user}" />
+			</bean>
+		</property>
+		<property name="password">
+			<bean
+				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				<property name="encryptedProperty" value="${jdbc_password}" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- transaction manager, use JtaTransactionManager for global tx -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="query*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="get*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="batchQuery*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="batchCalc*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="select*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="judge*">PROPAGATION_NOT_SUPPORTED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="*Service" />
+		<property name="proxyTargetClass" value="true"></property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+</beans>

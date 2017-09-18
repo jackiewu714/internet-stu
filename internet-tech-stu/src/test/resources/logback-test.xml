@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="6 seconds">
+
+	<property name="LOG_HOME" value="D:/logs/internet-tech-stu-test/"></property>
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</Pattern>
+		</layout>
+	</appender>
+
+	<appender name="ERROR"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- Support multiple-JVM writing to the same log file -->
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/error/error.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="WARN"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- Support multiple-JVM writing to the same log file -->
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/warn/warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="INFO"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- Support multiple-JVM writing to the same log file -->
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/info/info.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="DEBUG"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!-- Support multiple-JVM writing to the same log file -->
+		<prudent>true</prudent>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_HOME}/debug/debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- start of base -->
+	<logger name="java.sql.Connection" additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.Statement" additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.PreparedStatement" additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="java.sql.ResultSet" additivity="false">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.springframework" additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="net.sf.ehcache" additivity="false">
+		<level value="ERROR" />
+	</logger>
+	<logger name="com.mchange.v2" additivity="false">
+		<level value="INFO" />
+	</logger>
+	<logger name="org.mybatis.spring" additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<logger name="org.apache.ibatis.io.ResolverUtil" additivity="false">
+		<level value="INFO" />
+	</logger>
+	<logger
+		name="com.yy.zbase.platform.dao.mybatis.interceptor.PaginationInterceptor"
+		additivity="false">
+		<level value="INFO" />
+	</logger>
+	<logger name="com.yy.zbase.platform.session" additivity="true">
+		<level value="INFO" />
+		<appender-ref ref="INFO" />
+	</logger>
+	<logger name="org.apache.commons.beanutils.BeanUtils"
+		additivity="false">
+		<level value="INFO" />
+	</logger>
+	<logger name="og4j.category.com.mchange.v2.log.log4j.Log4jMLog"
+		additivity="false">
+		<level value="DEBUG" />
+	</logger>
+	<!-- end of base -->
+	
+	<root level="INFO">
+		<appender-ref ref="STDOUT" /> 
+		<appender-ref ref="ERROR" />
+		<appender-ref ref="WARN" />
+		<appender-ref ref="INFO" />
+		<appender-ref ref="DEBUG" />		
+	</root>	
+</configuration>

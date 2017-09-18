@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.web.business.sysmgr.staff.persistence.StaffMgrMapper" >
+	<resultMap id="BaseResultMap" type="com.cw.web.business.sysmgr.staff.domain.StaffExtend" >
+		<id column="staff_id" property="staffId" jdbcType="INTEGER" />
+		<result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+		<result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+		<result column="status" property="status" jdbcType="VARCHAR" />
+		<result column="nameOfStatus" property="nameOfStatus" jdbcType="VARCHAR" />
+		<result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
+		<result column="last_loginip" property="lastLoginip" jdbcType="VARCHAR" />
+		<result column="staff_nick" property="staffNick" jdbcType="VARCHAR" />
+		<result column="eff_startdate" property="effStartdate" jdbcType="TIMESTAMP" />
+		<result column="eff_enddate" property="effEnddate" jdbcType="TIMESTAMP" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="login_limit" property="loginLimit" jdbcType="INTEGER" />
+		<result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+		<result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+		<result column="nameOfModStaff" property="nameOfModStaff" jdbcType="VARCHAR" />
+		<result column="role_id" property="roleId" jdbcType="INTEGER" />
+		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="Example_Where_Clause" >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="staffId != null and staffId != ''" >
+         and a.staff_id = #{staffId,jdbcType=INTEGER}
+      </if>
+      <if test="staffName != null and staffName != ''" >
+         and staff_name = #{staffName,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNameRange != null and staffNameRange != ''" >
+         and staff_name like #{staffNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhone != null and linkPhone != ''" >
+         and link_phone = #{linkPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhoneRange != null and linkPhoneRange != ''" >
+         and link_phone like #{linkPhoneRange,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''" >
+         and a.status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="statusRange != null and statusRange != ''" >
+         and a.status like #{statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="lastLogintime != null and lastLogintime != ''" >
+         and last_logintime = #{lastLogintime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLogintimeRange1 != null and lastLogintimeRange1 != ''" >
+         and last_logintime &gt;= #{lastLogintimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLogintimeRange2 != null and lastLogintimeRange2 != ''" >
+         and last_logintime &lt;= #{lastLogintimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLoginip != null and lastLoginip != ''" >
+         and last_loginip = #{lastLoginip,jdbcType=VARCHAR}
+      </if>
+      <if test="lastLoginipRange != null and lastLoginipRange != ''" >
+         and last_loginip like #{lastLoginipRange,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNick != null and staffNick != ''" >
+         and staff_nick = #{staffNick,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNickRange != null and staffNickRange != ''" >
+         and staff_nick like #{staffNickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="effStartdate != null and effStartdate != ''" >
+         and eff_startdate = #{effStartdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effStartdateRange1 != null and effStartdateRange1 != ''" >
+         and eff_startdate &gt;= #{effStartdateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effStartdateRange2 != null and effStartdateRange2 != ''" >
+         and eff_startdate &lt;= #{effStartdateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddate != null and effEnddate != ''" >
+         and eff_enddate = #{effEnddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddateRange1 != null and effEnddateRange1 != ''" >
+         and eff_enddate &gt;= #{effEnddateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddateRange2 != null and effEnddateRange2 != ''" >
+         and eff_enddate &lt;= #{effEnddateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="password != null and password != ''" >
+         and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="passwordRange != null and passwordRange != ''" >
+         and password like #{passwordRange,jdbcType=VARCHAR}
+      </if>
+      <if test="loginLimit != null and loginLimit != ''" >
+         and login_limit = #{loginLimit,jdbcType=INTEGER}
+      </if>
+      <if test="modDate != null and modDate != ''" >
+         and a.mod_date = #{modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange1 != null and modDateRange1 != ''" >
+         and a.mod_date &gt;= #{modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange2 != null and modDateRange2 != ''" >
+         and a.mod_date &lt;= #{modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modStaff != null and modStaff != ''" >
+         and a.mod_staff = #{modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+  </sql>
+  
+	<select id="getStaffExtendList" resultMap="BaseResultMap">
+		SELECT a.staff_id,
+		       a.staff_name,
+		       a.link_phone,
+		       a.`status`,
+		       case a.status when 'S0A' then '有效' when 'S0X' then '无效' else '其它' end nameOfStatus,
+		       a.last_logintime,
+		       a.last_loginip,
+		       a.staff_nick,
+		       a.eff_startdate,
+		       a.eff_enddate,
+		       a.`password`,
+		       a.login_limit,
+		       a.mod_date,
+		       a.mod_staff,
+		       (select staff_name from tb_sm_staff t where t.staff_id=a.mod_staff limit 0,1) nameOfModStaff,
+		       c.role_id,
+		       c.role_name
+		  FROM tb_sm_staff a, tb_sm_staff_role b, tb_sm_role c
+		 WHERE a.staff_id = b.staff_id AND b.role_id = c.role_id
+			<if test="_parameter != null" >
+			  <include refid="Example_Where_Clause" />
+			</if>
+			<if test="orderByClause != null" >
+			  order by ${orderByClause}
+			</if>
+	</select>
+</mapper>

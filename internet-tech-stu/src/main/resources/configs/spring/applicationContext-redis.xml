@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2010 The myBatis Team Licensed under the Apache License, Version 
+	2.0 (the "License"); you may not use this file except in compliance with 
+	the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxIdle" value="1000" />
+		<property name="testOnBorrow" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testWhileIdle" value="true" />
+	</bean>
+	
+	<bean id="adminJedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg ref="jedisPoolConfig"></constructor-arg>
+		<constructor-arg value="${jedis_ip_admin}"></constructor-arg>
+		<constructor-arg value="${jedis_port_admin}"></constructor-arg>
+		<constructor-arg value="5000"></constructor-arg>
+	</bean>
+	
+	<bean id="httpSessionJedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg ref="jedisPoolConfig"></constructor-arg>
+		<constructor-arg value="${jedis_ip_httpSession}"></constructor-arg>
+		<constructor-arg value="${jedis_port_httpSession}"></constructor-arg>
+		<constructor-arg value="5000"></constructor-arg>
+	</bean>
+
+	<bean id="scheduleCache" class="com.yy.detect.platform.redis.impl.RedisScheduleCache">
+		<property name="updateScheduleTimeScript">
+			<value>
+				local lastTime = redis.call("get",KEYS[1]);
+				if lastTime == false then
+					redis.call("set",KEYS[1],KEYS[2]);
+					return "true";
+				end
+				local lastTimeNum = tonumber(lastTime);
+				local currentTimeNum = tonumber(KEYS[2]);
+				local intervalNum = tonumber(KEYS[3]);
+				if (currentTimeNum - lastTimeNum) > intervalNum then
+					redis.call("set",KEYS[1],KEYS[2]);
+					return "true";
+				else
+					return "false";
+				end
+			</value>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.common.dao.persistence.sm.GrantMapper" >
+  <resultMap id="BaseResultMap" type="com.cw.common.dao.domain.sm.Grant" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="fact_type" property="factType" jdbcType="VARCHAR" />
+    <result column="fact_id" property="factId" jdbcType="VARCHAR" />
+    <result column="ent_type" property="entType" jdbcType="VARCHAR" />
+    <result column="ent_id" property="entId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+    <result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null and id != ''" >
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="factType != null and factType != ''" >
+         and fact_type = #{factType,jdbcType=VARCHAR}
+      </if>
+      <if test="factTypeRange != null and factTypeRange != ''" >
+         and fact_type like #{factTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="factId != null and factId != ''" >
+         and fact_id = #{factId,jdbcType=VARCHAR}
+      </if>
+      <if test="factIdRange != null and factIdRange != ''" >
+         and fact_id like #{factIdRange,jdbcType=VARCHAR}
+      </if>
+      <if test="entType != null and entType != ''" >
+         and ent_type = #{entType,jdbcType=VARCHAR}
+      </if>
+      <if test="entTypeRange != null and entTypeRange != ''" >
+         and ent_type like #{entTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="entId != null and entId != ''" >
+         and ent_id = #{entId,jdbcType=VARCHAR}
+      </if>
+      <if test="entIdRange != null and entIdRange != ''" >
+         and ent_id like #{entIdRange,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''" >
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="statusRange != null and statusRange != ''" >
+         and status like #{statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="modStaff != null and modStaff != ''" >
+         and mod_staff = #{modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="modDate != null and modDate != ''" >
+         and mod_date = #{modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange1 != null and modDateRange1 != ''" >
+         and mod_date &gt;= #{modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange2 != null and modDateRange2 != ''" >
+         and mod_date &lt;= #{modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null and example.id != ''" >
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.factType != null and example.factType != ''" >
+         and fact_type = #{example.factType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.factTypeRange != null and example.factTypeRange != ''" >
+         and fact_type like #{example.factTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.factId != null and example.factId != ''" >
+         and fact_id = #{example.factId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.factIdRange != null and example.factIdRange != ''" >
+         and fact_id like #{example.factIdRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.entType != null and example.entType != ''" >
+         and ent_type = #{example.entType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.entTypeRange != null and example.entTypeRange != ''" >
+         and ent_type like #{example.entTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.entId != null and example.entId != ''" >
+         and ent_id = #{example.entId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.entIdRange != null and example.entIdRange != ''" >
+         and ent_id like #{example.entIdRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.status != null and example.status != ''" >
+         and status = #{example.status,jdbcType=VARCHAR}
+      </if>
+      <if test="example.statusRange != null and example.statusRange != ''" >
+         and status like #{example.statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modStaff != null and example.modStaff != ''" >
+         and mod_staff = #{example.modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="example.modDate != null and example.modDate != ''" >
+         and mod_date = #{example.modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange1 != null and example.modDateRange1 != ''" >
+         and mod_date &gt;= #{example.modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange2 != null and example.modDateRange2 != ''" >
+         and mod_date &lt;= #{example.modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, fact_type, fact_id, ent_type, ent_id, status, mod_staff, mod_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cw.common.dao.domain.sm.GrantCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_grant a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sm_grant a 
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sm_grant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.common.dao.domain.sm.GrantCriteria" >
+    delete from tb_sm_grant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_grant (fact_type, fact_id, ent_type, 
+      ent_id, status, mod_staff, 
+      mod_date)
+    values (#{factType,jdbcType=VARCHAR}, #{factId,jdbcType=VARCHAR}, #{entType,jdbcType=VARCHAR}, 
+      #{entId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{modStaff,jdbcType=INTEGER}, 
+      #{modDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="factType != null" >
+        fact_type,
+      </if>
+      <if test="factId != null" >
+        fact_id,
+      </if>
+      <if test="entType != null" >
+        ent_type,
+      </if>
+      <if test="entId != null" >
+        ent_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="factType != null" >
+        #{factType,jdbcType=VARCHAR},
+      </if>
+      <if test="factId != null" >
+        #{factId,jdbcType=VARCHAR},
+      </if>
+      <if test="entType != null" >
+        #{entType,jdbcType=VARCHAR},
+      </if>
+      <if test="entId != null" >
+        #{entId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.common.dao.domain.sm.GrantCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_sm_grant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sm_grant
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.factType != null" >
+        fact_type = #{record.factType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factId != null" >
+        fact_id = #{record.factId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entType != null" >
+        ent_type = #{record.entType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entId != null" >
+        ent_id = #{record.entId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.modDate != null" >
+        mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sm_grant
+    set id = #{record.id,jdbcType=INTEGER},
+      fact_type = #{record.factType,jdbcType=VARCHAR},
+      fact_id = #{record.factId,jdbcType=VARCHAR},
+      ent_type = #{record.entType,jdbcType=VARCHAR},
+      ent_id = #{record.entId,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      mod_date = #{record.modDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    update tb_sm_grant
+    <set >
+      <if test="factType != null" >
+        fact_type = #{factType,jdbcType=VARCHAR},
+      </if>
+      <if test="factId != null" >
+        fact_id = #{factId,jdbcType=VARCHAR},
+      </if>
+      <if test="entType != null" >
+        ent_type = #{entType,jdbcType=VARCHAR},
+      </if>
+      <if test="entId != null" >
+        ent_id = #{entId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null" >
+        mod_staff = #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        mod_date = #{modDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    update tb_sm_grant
+    set fact_type = #{factType,jdbcType=VARCHAR},
+      fact_id = #{factId,jdbcType=VARCHAR},
+      ent_type = #{entType,jdbcType=VARCHAR},
+      ent_id = #{entId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      mod_staff = #{modStaff,jdbcType=INTEGER},
+      mod_date = #{modDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="ResultMapWithTranslation" type="com.cw.platform.util.CamelCaseHashMap" extends="BaseResultMap" />
+  <sql id="Translation_Column_List" />
+  <select id="selectByExampleWithTranslation" resultMap="ResultMapWithTranslation" parameterType="com.cw.common.dao.domain.sm.GrantCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    <if test="extracSelectColunm != null and extracSelectColunm != ''" >
+       ,  ${extracSelectColunm} 
+    </if>
+    from tb_sm_grant a 
+    <if test="extracTable != null and extracTable != ''" >
+       ${extracTable} 
+    </if>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.factType != null" >
+        fact_type,
+      </if>
+      <if test="record.factId != null" >
+        fact_id,
+      </if>
+      <if test="record.entType != null" >
+        ent_type,
+      </if>
+      <if test="record.entId != null" >
+        ent_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.factType != null" >
+          #{listItem.factType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factId != null" >
+          #{listItem.factId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entType != null" >
+          #{listItem.entType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entId != null" >
+          #{listItem.entId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.factType != null" >
+        fact_type,
+      </if>
+      <if test="record.factId != null" >
+        fact_id,
+      </if>
+      <if test="record.entType != null" >
+        ent_type,
+      </if>
+      <if test="record.entId != null" >
+        ent_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.factType != null" >
+          #{listItem.factType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factId != null" >
+          #{listItem.factId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entType != null" >
+          #{listItem.entType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entId != null" >
+          #{listItem.entId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    replace into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="factType != null" >
+        fact_type,
+      </if>
+      <if test="factId != null" >
+        fact_id,
+      </if>
+      <if test="entType != null" >
+        ent_type,
+      </if>
+      <if test="entId != null" >
+        ent_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="factType != null" >
+        #{factType,jdbcType=VARCHAR},
+      </if>
+      <if test="factId != null" >
+        #{factId,jdbcType=VARCHAR},
+      </if>
+      <if test="entType != null" >
+        #{entType,jdbcType=VARCHAR},
+      </if>
+      <if test="entId != null" >
+        #{entId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.common.dao.domain.sm.Grant" >
+    insert into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="factType != null" >
+        fact_type,
+      </if>
+      <if test="factId != null" >
+        fact_id,
+      </if>
+      <if test="entType != null" >
+        ent_type,
+      </if>
+      <if test="entId != null" >
+        ent_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="factType != null" >
+        #{factType,jdbcType=VARCHAR},
+      </if>
+      <if test="factId != null" >
+        #{factId,jdbcType=VARCHAR},
+      </if>
+      <if test="entType != null" >
+        #{entType,jdbcType=VARCHAR},
+      </if>
+      <if test="entId != null" >
+        #{entId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="id != null" >
+        id=values(id),
+      </if>
+      <if test="factType != null" >
+        fact_type=values(fact_type),
+      </if>
+      <if test="factId != null" >
+        fact_id=values(fact_id),
+      </if>
+      <if test="entType != null" >
+        ent_type=values(ent_type),
+      </if>
+      <if test="entId != null" >
+        ent_id=values(ent_id),
+      </if>
+      <if test="status != null" >
+        status=values(status),
+      </if>
+      <if test="modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+      <if test="modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into tb_sm_grant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.id != null" >
+        id,
+      </if>
+      <if test="record.factType != null" >
+        fact_type,
+      </if>
+      <if test="record.factId != null" >
+        fact_id,
+      </if>
+      <if test="record.entType != null" >
+        ent_type,
+      </if>
+      <if test="record.entId != null" >
+        ent_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.id != null" >
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.factType != null" >
+          #{listItem.factType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factId != null" >
+          #{listItem.factId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entType != null" >
+          #{listItem.entType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.entId != null" >
+          #{listItem.entId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.id != null" >
+        id=values(id),
+      </if>
+      <if test="record.factType != null" >
+        fact_type=values(fact_type),
+      </if>
+      <if test="record.factId != null" >
+        fact_id=values(fact_id),
+      </if>
+      <if test="record.entType != null" >
+        ent_type=values(ent_type),
+      </if>
+      <if test="record.entId != null" >
+        ent_id=values(ent_id),
+      </if>
+      <if test="record.status != null" >
+        status=values(status),
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+      <if test="record.modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.common.dao.persistence.sm.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.cw.common.dao.domain.sm.Staff" >
+    <id column="staff_id" property="staffId" jdbcType="INTEGER" />
+    <result column="staff_name" property="staffName" jdbcType="VARCHAR" />
+    <result column="link_phone" property="linkPhone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="last_logintime" property="lastLogintime" jdbcType="TIMESTAMP" />
+    <result column="last_loginip" property="lastLoginip" jdbcType="VARCHAR" />
+    <result column="staff_nick" property="staffNick" jdbcType="VARCHAR" />
+    <result column="eff_startdate" property="effStartdate" jdbcType="TIMESTAMP" />
+    <result column="eff_enddate" property="effEnddate" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="login_limit" property="loginLimit" jdbcType="INTEGER" />
+    <result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+    <result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="staffId != null and staffId != ''" >
+         and staff_id = #{staffId,jdbcType=INTEGER}
+      </if>
+      <if test="staffName != null and staffName != ''" >
+         and staff_name = #{staffName,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNameRange != null and staffNameRange != ''" >
+         and staff_name like #{staffNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhone != null and linkPhone != ''" >
+         and link_phone = #{linkPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="linkPhoneRange != null and linkPhoneRange != ''" >
+         and link_phone like #{linkPhoneRange,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''" >
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="statusRange != null and statusRange != ''" >
+         and status like #{statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="lastLogintime != null and lastLogintime != ''" >
+         and last_logintime = #{lastLogintime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLogintimeRange1 != null and lastLogintimeRange1 != ''" >
+         and last_logintime &gt;= #{lastLogintimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLogintimeRange2 != null and lastLogintimeRange2 != ''" >
+         and last_logintime &lt;= #{lastLogintimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLoginip != null and lastLoginip != ''" >
+         and last_loginip = #{lastLoginip,jdbcType=VARCHAR}
+      </if>
+      <if test="lastLoginipRange != null and lastLoginipRange != ''" >
+         and last_loginip like #{lastLoginipRange,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNick != null and staffNick != ''" >
+         and staff_nick = #{staffNick,jdbcType=VARCHAR}
+      </if>
+      <if test="staffNickRange != null and staffNickRange != ''" >
+         and staff_nick like #{staffNickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="effStartdate != null and effStartdate != ''" >
+         and eff_startdate = #{effStartdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effStartdateRange1 != null and effStartdateRange1 != ''" >
+         and eff_startdate &gt;= #{effStartdateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effStartdateRange2 != null and effStartdateRange2 != ''" >
+         and eff_startdate &lt;= #{effStartdateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddate != null and effEnddate != ''" >
+         and eff_enddate = #{effEnddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddateRange1 != null and effEnddateRange1 != ''" >
+         and eff_enddate &gt;= #{effEnddateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="effEnddateRange2 != null and effEnddateRange2 != ''" >
+         and eff_enddate &lt;= #{effEnddateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="password != null and password != ''" >
+         and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="passwordRange != null and passwordRange != ''" >
+         and password like #{passwordRange,jdbcType=VARCHAR}
+      </if>
+      <if test="loginLimit != null and loginLimit != ''" >
+         and login_limit = #{loginLimit,jdbcType=INTEGER}
+      </if>
+      <if test="modDate != null and modDate != ''" >
+         and mod_date = #{modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange1 != null and modDateRange1 != ''" >
+         and mod_date &gt;= #{modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange2 != null and modDateRange2 != ''" >
+         and mod_date &lt;= #{modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modStaff != null and modStaff != ''" >
+         and mod_staff = #{modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.staffId != null and example.staffId != ''" >
+         and staff_id = #{example.staffId,jdbcType=INTEGER}
+      </if>
+      <if test="example.staffName != null and example.staffName != ''" >
+         and staff_name = #{example.staffName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.staffNameRange != null and example.staffNameRange != ''" >
+         and staff_name like #{example.staffNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.linkPhone != null and example.linkPhone != ''" >
+         and link_phone = #{example.linkPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="example.linkPhoneRange != null and example.linkPhoneRange != ''" >
+         and link_phone like #{example.linkPhoneRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.status != null and example.status != ''" >
+         and status = #{example.status,jdbcType=VARCHAR}
+      </if>
+      <if test="example.statusRange != null and example.statusRange != ''" >
+         and status like #{example.statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.lastLogintime != null and example.lastLogintime != ''" >
+         and last_logintime = #{example.lastLogintime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.lastLogintimeRange1 != null and example.lastLogintimeRange1 != ''" >
+         and last_logintime &gt;= #{example.lastLogintimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.lastLogintimeRange2 != null and example.lastLogintimeRange2 != ''" >
+         and last_logintime &lt;= #{example.lastLogintimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.lastLoginip != null and example.lastLoginip != ''" >
+         and last_loginip = #{example.lastLoginip,jdbcType=VARCHAR}
+      </if>
+      <if test="example.lastLoginipRange != null and example.lastLoginipRange != ''" >
+         and last_loginip like #{example.lastLoginipRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.staffNick != null and example.staffNick != ''" >
+         and staff_nick = #{example.staffNick,jdbcType=VARCHAR}
+      </if>
+      <if test="example.staffNickRange != null and example.staffNickRange != ''" >
+         and staff_nick like #{example.staffNickRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.effStartdate != null and example.effStartdate != ''" >
+         and eff_startdate = #{example.effStartdate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.effStartdateRange1 != null and example.effStartdateRange1 != ''" >
+         and eff_startdate &gt;= #{example.effStartdateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.effStartdateRange2 != null and example.effStartdateRange2 != ''" >
+         and eff_startdate &lt;= #{example.effStartdateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.effEnddate != null and example.effEnddate != ''" >
+         and eff_enddate = #{example.effEnddate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.effEnddateRange1 != null and example.effEnddateRange1 != ''" >
+         and eff_enddate &gt;= #{example.effEnddateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.effEnddateRange2 != null and example.effEnddateRange2 != ''" >
+         and eff_enddate &lt;= #{example.effEnddateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.password != null and example.password != ''" >
+         and password = #{example.password,jdbcType=VARCHAR}
+      </if>
+      <if test="example.passwordRange != null and example.passwordRange != ''" >
+         and password like #{example.passwordRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.loginLimit != null and example.loginLimit != ''" >
+         and login_limit = #{example.loginLimit,jdbcType=INTEGER}
+      </if>
+      <if test="example.modDate != null and example.modDate != ''" >
+         and mod_date = #{example.modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange1 != null and example.modDateRange1 != ''" >
+         and mod_date &gt;= #{example.modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange2 != null and example.modDateRange2 != ''" >
+         and mod_date &lt;= #{example.modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modStaff != null and example.modStaff != ''" >
+         and mod_staff = #{example.modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    staff_id, staff_name, link_phone, status, last_logintime, last_loginip, staff_nick, 
+    eff_startdate, eff_enddate, password, login_limit, mod_date, mod_staff
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cw.common.dao.domain.sm.StaffCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_staff a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sm_staff a 
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sm_staff
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.common.dao.domain.sm.StaffCriteria" >
+    delete from tb_sm_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    <selectKey resultType="java.lang.Integer" keyProperty="staffId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_staff (staff_name, link_phone, status, 
+      last_logintime, last_loginip, staff_nick, 
+      eff_startdate, eff_enddate, password, 
+      login_limit, mod_date, mod_staff
+      )
+    values (#{staffName,jdbcType=VARCHAR}, #{linkPhone,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{lastLogintime,jdbcType=TIMESTAMP}, #{lastLoginip,jdbcType=VARCHAR}, #{staffNick,jdbcType=VARCHAR}, 
+      #{effStartdate,jdbcType=TIMESTAMP}, #{effEnddate,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, 
+      #{loginLimit,jdbcType=INTEGER}, #{modDate,jdbcType=TIMESTAMP}, #{modStaff,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    <selectKey resultType="java.lang.Integer" keyProperty="staffId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginip != null" >
+        #{lastLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="staffNick != null" >
+        #{staffNick,jdbcType=VARCHAR},
+      </if>
+      <if test="effStartdate != null" >
+        #{effStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnddate != null" >
+        #{effEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLimit != null" >
+        #{loginLimit,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.common.dao.domain.sm.StaffCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_sm_staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sm_staff
+    <set >
+      <if test="record.staffId != null" >
+        staff_id = #{record.staffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.staffName != null" >
+        staff_name = #{record.staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkPhone != null" >
+        link_phone = #{record.linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLoginip != null" >
+        last_loginip = #{record.lastLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffNick != null" >
+        staff_nick = #{record.staffNick,jdbcType=VARCHAR},
+      </if>
+      <if test="record.effStartdate != null" >
+        eff_startdate = #{record.effStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.effEnddate != null" >
+        eff_enddate = #{record.effEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginLimit != null" >
+        login_limit = #{record.loginLimit,jdbcType=INTEGER},
+      </if>
+      <if test="record.modDate != null" >
+        mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sm_staff
+    set staff_id = #{record.staffId,jdbcType=INTEGER},
+      staff_name = #{record.staffName,jdbcType=VARCHAR},
+      link_phone = #{record.linkPhone,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      last_logintime = #{record.lastLogintime,jdbcType=TIMESTAMP},
+      last_loginip = #{record.lastLoginip,jdbcType=VARCHAR},
+      staff_nick = #{record.staffNick,jdbcType=VARCHAR},
+      eff_startdate = #{record.effStartdate,jdbcType=TIMESTAMP},
+      eff_enddate = #{record.effEnddate,jdbcType=TIMESTAMP},
+      password = #{record.password,jdbcType=VARCHAR},
+      login_limit = #{record.loginLimit,jdbcType=INTEGER},
+      mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{record.modStaff,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    update tb_sm_staff
+    <set >
+      <if test="staffName != null" >
+        staff_name = #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        link_phone = #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip = #{lastLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="staffNick != null" >
+        staff_nick = #{staffNick,jdbcType=VARCHAR},
+      </if>
+      <if test="effStartdate != null" >
+        eff_startdate = #{effStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnddate != null" >
+        eff_enddate = #{effEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLimit != null" >
+        login_limit = #{loginLimit,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        mod_date = #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        mod_staff = #{modStaff,jdbcType=INTEGER},
+      </if>
+    </set>
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    update tb_sm_staff
+    set staff_name = #{staffName,jdbcType=VARCHAR},
+      link_phone = #{linkPhone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      last_logintime = #{lastLogintime,jdbcType=TIMESTAMP},
+      last_loginip = #{lastLoginip,jdbcType=VARCHAR},
+      staff_nick = #{staffNick,jdbcType=VARCHAR},
+      eff_startdate = #{effStartdate,jdbcType=TIMESTAMP},
+      eff_enddate = #{effEnddate,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      login_limit = #{loginLimit,jdbcType=INTEGER},
+      mod_date = #{modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{modStaff,jdbcType=INTEGER}
+    where staff_id = #{staffId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="ResultMapWithTranslation" type="com.cw.platform.util.CamelCaseHashMap" extends="BaseResultMap" />
+  <sql id="Translation_Column_List" />
+  <select id="selectByExampleWithTranslation" resultMap="ResultMapWithTranslation" parameterType="com.cw.common.dao.domain.sm.StaffCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    <if test="extracSelectColunm != null and extracSelectColunm != ''" >
+       ,  ${extracSelectColunm} 
+    </if>
+    from tb_sm_staff a 
+    <if test="extracTable != null and extracTable != ''" >
+       ${extracTable} 
+    </if>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.staffId != null" >
+        staff_id,
+      </if>
+      <if test="record.staffName != null" >
+        staff_name,
+      </if>
+      <if test="record.linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="record.lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="record.staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="record.effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="record.effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="record.password != null" >
+        password,
+      </if>
+      <if test="record.loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.staffId != null" >
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.staffName != null" >
+          #{listItem.staffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.linkPhone != null" >
+          #{listItem.linkPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lastLogintime != null" >
+          #{listItem.lastLogintime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.lastLoginip != null" >
+          #{listItem.lastLoginip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffNick != null" >
+          #{listItem.staffNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.effStartdate != null" >
+          #{listItem.effStartdate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.effEnddate != null" >
+          #{listItem.effEnddate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.password != null" >
+          #{listItem.password,jdbcType=VARCHAR},
+        </if>
+        <if test="record.loginLimit != null" >
+          #{listItem.loginLimit,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.staffId != null" >
+        staff_id,
+      </if>
+      <if test="record.staffName != null" >
+        staff_name,
+      </if>
+      <if test="record.linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="record.lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="record.staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="record.effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="record.effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="record.password != null" >
+        password,
+      </if>
+      <if test="record.loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.staffId != null" >
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.staffName != null" >
+          #{listItem.staffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.linkPhone != null" >
+          #{listItem.linkPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lastLogintime != null" >
+          #{listItem.lastLogintime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.lastLoginip != null" >
+          #{listItem.lastLoginip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffNick != null" >
+          #{listItem.staffNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.effStartdate != null" >
+          #{listItem.effStartdate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.effEnddate != null" >
+          #{listItem.effEnddate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.password != null" >
+          #{listItem.password,jdbcType=VARCHAR},
+        </if>
+        <if test="record.loginLimit != null" >
+          #{listItem.loginLimit,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    replace into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginip != null" >
+        #{lastLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="staffNick != null" >
+        #{staffNick,jdbcType=VARCHAR},
+      </if>
+      <if test="effStartdate != null" >
+        #{effStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnddate != null" >
+        #{effEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLimit != null" >
+        #{loginLimit,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.common.dao.domain.sm.Staff" >
+    insert into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id,
+      </if>
+      <if test="staffName != null" >
+        staff_name,
+      </if>
+      <if test="linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="staffId != null" >
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="staffName != null" >
+        #{staffName,jdbcType=VARCHAR},
+      </if>
+      <if test="linkPhone != null" >
+        #{linkPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLogintime != null" >
+        #{lastLogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginip != null" >
+        #{lastLoginip,jdbcType=VARCHAR},
+      </if>
+      <if test="staffNick != null" >
+        #{staffNick,jdbcType=VARCHAR},
+      </if>
+      <if test="effStartdate != null" >
+        #{effStartdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effEnddate != null" >
+        #{effEnddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginLimit != null" >
+        #{loginLimit,jdbcType=INTEGER},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="staffId != null" >
+        staff_id=values(staff_id),
+      </if>
+      <if test="staffName != null" >
+        staff_name=values(staff_name),
+      </if>
+      <if test="linkPhone != null" >
+        link_phone=values(link_phone),
+      </if>
+      <if test="status != null" >
+        status=values(status),
+      </if>
+      <if test="lastLogintime != null" >
+        last_logintime=values(last_logintime),
+      </if>
+      <if test="lastLoginip != null" >
+        last_loginip=values(last_loginip),
+      </if>
+      <if test="staffNick != null" >
+        staff_nick=values(staff_nick),
+      </if>
+      <if test="effStartdate != null" >
+        eff_startdate=values(eff_startdate),
+      </if>
+      <if test="effEnddate != null" >
+        eff_enddate=values(eff_enddate),
+      </if>
+      <if test="password != null" >
+        password=values(password),
+      </if>
+      <if test="loginLimit != null" >
+        login_limit=values(login_limit),
+      </if>
+      <if test="modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into tb_sm_staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.staffId != null" >
+        staff_id,
+      </if>
+      <if test="record.staffName != null" >
+        staff_name,
+      </if>
+      <if test="record.linkPhone != null" >
+        link_phone,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime,
+      </if>
+      <if test="record.lastLoginip != null" >
+        last_loginip,
+      </if>
+      <if test="record.staffNick != null" >
+        staff_nick,
+      </if>
+      <if test="record.effStartdate != null" >
+        eff_startdate,
+      </if>
+      <if test="record.effEnddate != null" >
+        eff_enddate,
+      </if>
+      <if test="record.password != null" >
+        password,
+      </if>
+      <if test="record.loginLimit != null" >
+        login_limit,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.staffId != null" >
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.staffName != null" >
+          #{listItem.staffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.linkPhone != null" >
+          #{listItem.linkPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.lastLogintime != null" >
+          #{listItem.lastLogintime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.lastLoginip != null" >
+          #{listItem.lastLoginip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffNick != null" >
+          #{listItem.staffNick,jdbcType=VARCHAR},
+        </if>
+        <if test="record.effStartdate != null" >
+          #{listItem.effStartdate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.effEnddate != null" >
+          #{listItem.effEnddate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.password != null" >
+          #{listItem.password,jdbcType=VARCHAR},
+        </if>
+        <if test="record.loginLimit != null" >
+          #{listItem.loginLimit,jdbcType=INTEGER},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.staffId != null" >
+        staff_id=values(staff_id),
+      </if>
+      <if test="record.staffName != null" >
+        staff_name=values(staff_name),
+      </if>
+      <if test="record.linkPhone != null" >
+        link_phone=values(link_phone),
+      </if>
+      <if test="record.status != null" >
+        status=values(status),
+      </if>
+      <if test="record.lastLogintime != null" >
+        last_logintime=values(last_logintime),
+      </if>
+      <if test="record.lastLoginip != null" >
+        last_loginip=values(last_loginip),
+      </if>
+      <if test="record.staffNick != null" >
+        staff_nick=values(staff_nick),
+      </if>
+      <if test="record.effStartdate != null" >
+        eff_startdate=values(eff_startdate),
+      </if>
+      <if test="record.effEnddate != null" >
+        eff_enddate=values(eff_enddate),
+      </if>
+      <if test="record.password != null" >
+        password=values(password),
+      </if>
+      <if test="record.loginLimit != null" >
+        login_limit=values(login_limit),
+      </if>
+      <if test="record.modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+    </trim>
+  </insert>
+</mapper>

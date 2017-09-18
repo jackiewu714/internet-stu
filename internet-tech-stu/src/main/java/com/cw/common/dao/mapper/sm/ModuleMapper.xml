@@ -1,0 +1,840 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.common.dao.persistence.sm.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.cw.common.dao.domain.sm.Module" >
+    <id column="mod_id" property="modId" jdbcType="INTEGER" />
+    <result column="mod_name" property="modName" jdbcType="VARCHAR" />
+    <result column="mod_type" property="modType" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="pkg_name" property="pkgName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="feature" property="feature" jdbcType="VARCHAR" />
+    <result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+    <result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="modId != null and modId != ''" >
+         and mod_id = #{modId,jdbcType=INTEGER}
+      </if>
+      <if test="modName != null and modName != ''" >
+         and mod_name = #{modName,jdbcType=VARCHAR}
+      </if>
+      <if test="modNameRange != null and modNameRange != ''" >
+         and mod_name like #{modNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="modType != null and modType != ''" >
+         and mod_type = #{modType,jdbcType=VARCHAR}
+      </if>
+      <if test="modTypeRange != null and modTypeRange != ''" >
+         and mod_type like #{modTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null and parentId != ''" >
+         and parent_id = #{parentId,jdbcType=INTEGER}
+      </if>
+      <if test="pkgName != null and pkgName != ''" >
+         and pkg_name = #{pkgName,jdbcType=VARCHAR}
+      </if>
+      <if test="pkgNameRange != null and pkgNameRange != ''" >
+         and pkg_name like #{pkgNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''" >
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="statusRange != null and statusRange != ''" >
+         and status like #{statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="feature != null and feature != ''" >
+         and feature = #{feature,jdbcType=VARCHAR}
+      </if>
+      <if test="featureRange != null and featureRange != ''" >
+         and feature like #{featureRange,jdbcType=VARCHAR}
+      </if>
+      <if test="modDate != null and modDate != ''" >
+         and mod_date = #{modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange1 != null and modDateRange1 != ''" >
+         and mod_date &gt;= #{modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange2 != null and modDateRange2 != ''" >
+         and mod_date &lt;= #{modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modStaff != null and modStaff != ''" >
+         and mod_staff = #{modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="url != null and url != ''" >
+         and url = #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="urlRange != null and urlRange != ''" >
+         and url like #{urlRange,jdbcType=VARCHAR}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.modId != null and example.modId != ''" >
+         and mod_id = #{example.modId,jdbcType=INTEGER}
+      </if>
+      <if test="example.modName != null and example.modName != ''" >
+         and mod_name = #{example.modName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modNameRange != null and example.modNameRange != ''" >
+         and mod_name like #{example.modNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modType != null and example.modType != ''" >
+         and mod_type = #{example.modType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modTypeRange != null and example.modTypeRange != ''" >
+         and mod_type like #{example.modTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.parentId != null and example.parentId != ''" >
+         and parent_id = #{example.parentId,jdbcType=INTEGER}
+      </if>
+      <if test="example.pkgName != null and example.pkgName != ''" >
+         and pkg_name = #{example.pkgName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.pkgNameRange != null and example.pkgNameRange != ''" >
+         and pkg_name like #{example.pkgNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.status != null and example.status != ''" >
+         and status = #{example.status,jdbcType=VARCHAR}
+      </if>
+      <if test="example.statusRange != null and example.statusRange != ''" >
+         and status like #{example.statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.feature != null and example.feature != ''" >
+         and feature = #{example.feature,jdbcType=VARCHAR}
+      </if>
+      <if test="example.featureRange != null and example.featureRange != ''" >
+         and feature like #{example.featureRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modDate != null and example.modDate != ''" >
+         and mod_date = #{example.modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange1 != null and example.modDateRange1 != ''" >
+         and mod_date &gt;= #{example.modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange2 != null and example.modDateRange2 != ''" >
+         and mod_date &lt;= #{example.modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modStaff != null and example.modStaff != ''" >
+         and mod_staff = #{example.modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="example.url != null and example.url != ''" >
+         and url = #{example.url,jdbcType=VARCHAR}
+      </if>
+      <if test="example.urlRange != null and example.urlRange != ''" >
+         and url like #{example.urlRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    mod_id, mod_name, mod_type, parent_id, pkg_name, status, feature, mod_date, mod_staff, 
+    url
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cw.common.dao.domain.sm.ModuleCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_module a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sm_module a 
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sm_module
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.common.dao.domain.sm.ModuleCriteria" >
+    delete from tb_sm_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.common.dao.domain.sm.Module" >
+    <selectKey resultType="java.lang.Integer" keyProperty="modId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_module (mod_name, mod_type, parent_id, 
+      pkg_name, status, feature, 
+      mod_date, mod_staff, url
+      )
+    values (#{modName,jdbcType=VARCHAR}, #{modType,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{pkgName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
+      #{modDate,jdbcType=TIMESTAMP}, #{modStaff,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.common.dao.domain.sm.Module" >
+    <selectKey resultType="java.lang.Integer" keyProperty="modId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modName != null" >
+        mod_name,
+      </if>
+      <if test="modType != null" >
+        mod_type,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modName != null" >
+        #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="modType != null" >
+        #{modType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.common.dao.domain.sm.ModuleCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_sm_module
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sm_module
+    <set >
+      <if test="record.modId != null" >
+        mod_id = #{record.modId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modName != null" >
+        mod_name = #{record.modName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modType != null" >
+        mod_type = #{record.modType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feature != null" >
+        feature = #{record.feature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modDate != null" >
+        mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sm_module
+    set mod_id = #{record.modId,jdbcType=INTEGER},
+      mod_name = #{record.modName,jdbcType=VARCHAR},
+      mod_type = #{record.modType,jdbcType=VARCHAR},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      pkg_name = #{record.pkgName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      feature = #{record.feature,jdbcType=VARCHAR},
+      mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      url = #{record.url,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.common.dao.domain.sm.Module" >
+    update tb_sm_module
+    <set >
+      <if test="modName != null" >
+        mod_name = #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="modType != null" >
+        mod_type = #{modType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        pkg_name = #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        mod_date = #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        mod_staff = #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.common.dao.domain.sm.Module" >
+    update tb_sm_module
+    set mod_name = #{modName,jdbcType=VARCHAR},
+      mod_type = #{modType,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      pkg_name = #{pkgName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      mod_date = #{modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{modStaff,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR}
+    where mod_id = #{modId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="ResultMapWithTranslation" type="com.cw.platform.util.CamelCaseHashMap" extends="BaseResultMap" />
+  <sql id="Translation_Column_List" />
+  <select id="selectByExampleWithTranslation" resultMap="ResultMapWithTranslation" parameterType="com.cw.common.dao.domain.sm.ModuleCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    <if test="extracSelectColunm != null and extracSelectColunm != ''" >
+       ,  ${extracSelectColunm} 
+    </if>
+    from tb_sm_module a 
+    <if test="extracTable != null and extracTable != ''" >
+       ${extracTable} 
+    </if>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.modName != null" >
+        mod_name,
+      </if>
+      <if test="record.modType != null" >
+        mod_type,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.url != null" >
+        url,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.modName != null" >
+          #{listItem.modName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modType != null" >
+          #{listItem.modType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.pkgName != null" >
+          #{listItem.pkgName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.url != null" >
+          #{listItem.url,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.modName != null" >
+        mod_name,
+      </if>
+      <if test="record.modType != null" >
+        mod_type,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.url != null" >
+        url,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.modName != null" >
+          #{listItem.modName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modType != null" >
+          #{listItem.modType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.pkgName != null" >
+          #{listItem.pkgName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.url != null" >
+          #{listItem.url,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.common.dao.domain.sm.Module" >
+    replace into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="modName != null" >
+        mod_name,
+      </if>
+      <if test="modType != null" >
+        mod_type,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="modName != null" >
+        #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="modType != null" >
+        #{modType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.common.dao.domain.sm.Module" >
+    insert into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="modName != null" >
+        mod_name,
+      </if>
+      <if test="modType != null" >
+        mod_type,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="modName != null" >
+        #{modName,jdbcType=VARCHAR},
+      </if>
+      <if test="modType != null" >
+        #{modType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="pkgName != null" >
+        #{pkgName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="modId != null" >
+        mod_id=values(mod_id),
+      </if>
+      <if test="modName != null" >
+        mod_name=values(mod_name),
+      </if>
+      <if test="modType != null" >
+        mod_type=values(mod_type),
+      </if>
+      <if test="parentId != null" >
+        parent_id=values(parent_id),
+      </if>
+      <if test="pkgName != null" >
+        pkg_name=values(pkg_name),
+      </if>
+      <if test="status != null" >
+        status=values(status),
+      </if>
+      <if test="feature != null" >
+        feature=values(feature),
+      </if>
+      <if test="modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+      <if test="url != null" >
+        url=values(url),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into tb_sm_module
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.modName != null" >
+        mod_name,
+      </if>
+      <if test="record.modType != null" >
+        mod_type,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+      <if test="record.url != null" >
+        url,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.modName != null" >
+          #{listItem.modName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modType != null" >
+          #{listItem.modType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.pkgName != null" >
+          #{listItem.pkgName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.url != null" >
+          #{listItem.url,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.modId != null" >
+        mod_id=values(mod_id),
+      </if>
+      <if test="record.modName != null" >
+        mod_name=values(mod_name),
+      </if>
+      <if test="record.modType != null" >
+        mod_type=values(mod_type),
+      </if>
+      <if test="record.parentId != null" >
+        parent_id=values(parent_id),
+      </if>
+      <if test="record.pkgName != null" >
+        pkg_name=values(pkg_name),
+      </if>
+      <if test="record.status != null" >
+        status=values(status),
+      </if>
+      <if test="record.feature != null" >
+        feature=values(feature),
+      </if>
+      <if test="record.modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+      <if test="record.url != null" >
+        url=values(url),
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -15,7 +15,7 @@ public class EnCrypterPropertiesFile {
      */
     public static void main(String[] args) {
 //	String url = "E:/study/workspace_clw/yy-study/src/main/resources/test.properties";
-	String url = "F:/workspace_yy_stu/internet-tech-stu/src/main/resources/test.properties";
+	String url = "F:/study/github/java/internet-stu/internet-tech-stu/src/main/resources/test.properties";
 
 	PropertiesConfiguration config = null;
 	try {

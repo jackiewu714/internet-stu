@@ -1,0 +1,9 @@
+.project
+.settings
+target
+.classpath
+${registry.file.rootdir}
+coverage-report
+.idea
+*.iml
+/*.iml

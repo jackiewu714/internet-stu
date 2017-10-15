@@ -139,4 +139,19 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+
+	<!--Spring MVC是通过DispatcherServlet来加载Spring配置文件的，因此不需要在web.xml中配置ContextLoaderListener。 但是CXF却需要通过ContextLoaderListener来加载Spring。-->
+	<!--<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>-->
+	<!-- 配置CXF框架的核心Servlet -->
+	<servlet>
+		<servlet-name>CXFServlet</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CXFServlet</servlet-name>
+		<url-pattern>/server/*</url-pattern>
+	</servlet-mapping>
 </web-app>

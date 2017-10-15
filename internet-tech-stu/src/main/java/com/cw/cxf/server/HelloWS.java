@@ -5,8 +5,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 @WebService(
-        name = "HelloWS",
-        targetNamespace = "http://www.tmp.com/services/hello"
+        name = "HelloWS"
+//        targetNamespace = "http://www.tmp.com/services/hello"
 )
 public interface HelloWS {
 

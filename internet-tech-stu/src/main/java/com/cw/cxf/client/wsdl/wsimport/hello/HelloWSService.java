@@ -29,11 +29,11 @@ public class HelloWSService
     static {
         URL url = null;
         WebServiceException e = null;
-        try {
-            url = new URL("http://localhost:8999/services/hello?wsdl");
-        } catch (MalformedURLException ex) {
-            e = new WebServiceException(ex);
-        }
+//        try {
+//            url = new URL("http://localhost:8999/services/hello?wsdl");
+//        } catch (MalformedURLException ex) {
+//            e = new WebServiceException(ex);
+//        }
         HELLOWSSERVICE_WSDL_LOCATION = url;
         HELLOWSSERVICE_EXCEPTION = e;
     }

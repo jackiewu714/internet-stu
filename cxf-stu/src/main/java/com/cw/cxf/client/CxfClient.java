@@ -42,7 +42,7 @@ public class CxfClient
     private void callHelloByCxf(String name)
     {
         String address = "http://localhost:8999/services/hello";
-        address = "http://localhost:8088/HelloWorld";
+//        address = "http://localhost:8088/HelloWorld";
         JaxWsProxyFactoryBean factoryBean = new JaxWsProxyFactoryBean();
         factoryBean.setServiceClass(IHelloWorldWs.class);
         factoryBean.setAddress(address);
@@ -56,7 +56,7 @@ public class CxfClient
         try
         {
             String address = "http://localhost:8999/services/arith?wsdl";
-            address = "http://localhost:8088/Arith?wsdl";
+//            address = "http://localhost:8088/Arith?wsdl";
             URL url = new URL(address);
             //命名空间和名称
             QName qName = new QName("http://impl.server.cxf.cw.com/", "ArithWsImplService");

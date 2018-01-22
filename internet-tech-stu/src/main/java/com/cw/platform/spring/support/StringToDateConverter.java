@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class StringToDateConverter implements Converter<String, Date> {
 
-    private static final Logger logger  = LoggerFactory.getLogger(StringToDateConverter.class);
+    private static final Logger logger = LoggerFactory.getLogger(StringToDateConverter.class);
 
     private String pattern;
 
@@ -26,7 +26,7 @@ public class StringToDateConverter implements Converter<String, Date> {
 
     @Override
     public Date convert(String s) {
-        if(StringUtil.isEmpty(s)) {
+        if (StringUtil.isEmpty(s)) {
             return null;
         }
 

@@ -2,9 +2,8 @@
  * @Title: UserServiceClient.java
  * @Package com.cw.rop.client.userser
  * @Description: TODO
- * Copyright: Copyright (c) 2014 
+ * Copyright: Copyright (c) 2014
  * Company:YY Inc
- * 
  * @author WuLiangzhi
  * @date Apr 18, 2014 9:53:04 AM
  * @version V1.0
@@ -24,7 +23,7 @@ import com.rop.client.RopClient;
  * @Description: TODO
  * @author WuLiangzhi
  * @date Apr 18, 2014 9:53:04 AM
- * 
+ *
  */
 
 public class UserServiceClient {
@@ -36,13 +35,13 @@ public class UserServiceClient {
     private RopClient ropClient = new DefaultRopClient(SERVER_URL, APP_KEY, APP_SECRET);
 
     public void createSession() {
-	LogonRequest ropRequest = new LogonRequest();
-	ropRequest.setUserName("Jackie");
-	ropRequest.setPassword("123456");
+        LogonRequest ropRequest = new LogonRequest();
+        ropRequest.setUserName("Jackie");
+        ropRequest.setPassword("123456");
 
-	CompositeResponse response = ropClient.buildClientRequest().get(ropRequest, LogonResponse.class,
-		"user.getSession", "1.0");
-	System.out.println("response=" + JSON.toJSONString(response));
+        CompositeResponse response = ropClient.buildClientRequest().get(ropRequest, LogonResponse.class,
+                "user.getSession", "1.0");
+        System.out.println("response=" + JSON.toJSONString(response));
     }
 
     /**
@@ -52,8 +51,8 @@ public class UserServiceClient {
      */
 
     public static void main(String[] args) {
-	UserServiceClient usc = new UserServiceClient();
-	usc.createSession();
+        UserServiceClient usc = new UserServiceClient();
+        usc.createSession();
     }
 
 }

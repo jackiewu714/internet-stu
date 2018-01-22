@@ -2,9 +2,8 @@
  * @Title: MenuExtend.java
  * @Package com.yy.rp.business.sysmgr.grant.domain
  * @Description: TODO
- * Copyright: Copyright (c) 2014 
+ * Copyright: Copyright (c) 2014
  * Company:YY
- * 
  * @author WuLiangzhi
  * @date May 7, 2014 4:54:45 PM
  * @version V1.0
@@ -25,9 +24,9 @@ import com.cw.common.dao.domain.sm.Menu;
 public class MenuExtend extends Menu {
 
     /**
-      * @Fields serialVersionUID : 序列号
-      */
-    
+     * @Fields serialVersionUID : 序列号
+     */
+
     private static final long serialVersionUID = -3932419752468990044L;
 
     private String modUrl; //对应的模块url
@@ -39,7 +38,6 @@ public class MenuExtend extends Menu {
     public void setModUrl(String modUrl) {
         this.modUrl = modUrl;
     }
-    
-    
-    
+
+
 }

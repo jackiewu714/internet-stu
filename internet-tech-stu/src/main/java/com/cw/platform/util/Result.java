@@ -15,8 +15,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
 /**
- * @Client
  * @author zww
+ * @Client
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "result")
@@ -25,8 +25,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Result implements Serializable {
 
     /**
-	 * 
-	 */
+     *
+     */
     private static long serialVersionUID = -556224389062112638L;
 
     @XmlElement
@@ -44,80 +44,80 @@ public class Result implements Serializable {
     private String resultCode;
 
     public Result() {
-	setSuccess(false);
+        setSuccess(false);
     }
 
     public Result(boolean successful, String message) {
-	this(successful, message, null);
+        this(successful, message, null);
     }
 
     public Result(boolean successful, String message, Object result) {
-	setSuccess(successful);
-	setMessage(message);
-	setResult(result);
+        setSuccess(successful);
+        setMessage(message);
+        setResult(result);
     }
 
     public boolean isSuccess() {
-	return success;
+        return success;
     }
 
     public void setSuccess(boolean success) {
-	this.success = success;
+        this.success = success;
     }
 
     public List getResultList() {
-	return resultList;
+        return resultList;
     }
 
     public void setResultList(List resultList) {
-	this.resultList = resultList;
+        this.resultList = resultList;
     }
 
     public String getMessage() {
-	return message;
+        return message;
     }
 
     public void setMessage(String message) {
-	this.message = message;
+        this.message = message;
     }
 
     public Object getResult() {
-	return result;
+        return result;
     }
 
     public void setResult(Object result) {
-	this.result = result;
+        this.result = result;
     }
 
     public Map getResultMap() {
-	return resultMap;
+        return resultMap;
     }
 
     public void setResultMap(Map resultMap) {
-	this.resultMap = resultMap;
+        this.resultMap = resultMap;
     }
 
     @Override
     public String toString() {
-	XStream xstream = new XStream();
-	xstream.processAnnotations(this.getClass());
-	return xstream.toXML(this);
+        XStream xstream = new XStream();
+        xstream.processAnnotations(this.getClass());
+        return xstream.toXML(this);
     }
 
     public String getResultCode() {
-	return resultCode;
+        return resultCode;
     }
 
     public void setResultCode(String resultCode) {
-	this.resultCode = resultCode;
+        this.resultCode = resultCode;
     }
 
     public boolean isError() {
-	return error;
+        return error;
     }
 
     public void setError(boolean error) {
-	this.error = error;
+        this.error = error;
     }
 
 }

@@ -24,7 +24,6 @@ import java.util.Properties;
  * Description: TODO
  * Author WuLiangzhi
  * Date Oct 16, 2014 5:17:30 PM
- *
  */
 
 public class CustomizedPropertyPlaceholderConfigurer extends PropertyPlaceholderConfigurer {
@@ -49,8 +48,9 @@ public class CustomizedPropertyPlaceholderConfigurer extends PropertyPlaceholder
 
     /**
      * 根据properties中的key获取对应的value
+     *
      * @param errorCode int
-     * @return  String
+     * @return String
      */
     public static String getPropertiesValueByKey(int errorCode) {
         return ctxPropertiesMap.get(String.valueOf(errorCode));

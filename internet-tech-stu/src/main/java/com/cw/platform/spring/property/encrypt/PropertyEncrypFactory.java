@@ -5,9 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * 
  * @author Steven
- *
  */
 public final class PropertyEncrypFactory implements FactoryBean {
 
@@ -16,29 +14,29 @@ public final class PropertyEncrypFactory implements FactoryBean {
     private String encryptedProperty;
 
     public Object getObject() throws Exception {
-	if (encryptedProperty == null || encryptedProperty.equals("")) {
-	    log.error("argument[encryptedProperty] is empty. please check your configuration for jdbc.");
-	    return null;
-	}
+        if (encryptedProperty == null || encryptedProperty.equals("")) {
+            log.error("argument[encryptedProperty] is empty. please check your configuration for jdbc.");
+            return null;
+        }
 
-	String property = null;
-	try {
-	    property = EncryptWorker.getDecodeString(encryptedProperty.substring(5));
-	} catch (Exception e) {
-	    log.error("error when decrypted property, please check your configuration for jdbc");
-	    return null;
-	}
+        String property = null;
+        try {
+            property = EncryptWorker.getDecodeString(encryptedProperty.substring(5));
+        } catch (Exception e) {
+            log.error("error when decrypted property, please check your configuration for jdbc");
+            return null;
+        }
 
-	return property;
+        return property;
     }
 
     @SuppressWarnings("unchecked")
     public Class getObjectType() {
-	return String.class;
+        return String.class;
     }
 
     public boolean isSingleton() {
-	return true;
+        return true;
     }
 
     public void setEncryptedProperty(String encryptedProperty) {

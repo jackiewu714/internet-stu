@@ -17,25 +17,26 @@ import org.springframework.stereotype.Repository;
 @PersistJobDataAfterExecution
 public class TaskOneJob extends QuartzJobBean {
 
-	private Logger logger = LoggerFactory.getLogger(TaskOneJob.class);
+    private Logger logger = LoggerFactory.getLogger(TaskOneJob.class);
 
-	protected void executeInternal(JobExecutionContext jobExecutionContext)
-			throws JobExecutionException {
+    protected void executeInternal(JobExecutionContext jobExecutionContext)
+            throws JobExecutionException {
 
 //		logger.info("-- TaskOneJob111 -->>>>" + Calendar.getInstance().getTimeInMillis());
-		try {
-			TimeUnit.SECONDS.sleep(6);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		};
+        try {
+            TimeUnit.SECONDS.sleep(6);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ;
 
-	}
+    }
 
-	protected void executeTaskOne() {
+    protected void executeTaskOne() {
 
-		logger.info("-- TaskOneJob111 executeTaskOne -->>>>"
-				+ Calendar.getInstance().getTimeInMillis());
+        logger.info("-- TaskOneJob111 executeTaskOne -->>>>"
+                + Calendar.getInstance().getTimeInMillis());
 
-	}
+    }
 
 }

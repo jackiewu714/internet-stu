@@ -8,50 +8,50 @@ import com.cw.web.business.sysmgr.grant.domain.MenuExtend;
 
 public class OperInfo implements Serializable {
     /**
-      * @Fields serialVersionUID : 序列号
-      */
-    
+     * @Fields serialVersionUID : 序列号
+     */
+
     private static final long serialVersionUID = -5543798774408473322L;
-    
+
     private Integer operId;// 操作工号
     private String operName;// 操作员名称
     private String loginIp;// 登陆ip
     private String roleId;//角色ID
     private Date lastTime;// 上一次登陆时间
-    
+
     private List<MenuExtend> menuList; //有权限访问的菜单列表
     private List<String> urls; //有权限访问的菜单或者按钮url列表
 
     public Integer getOperId() {
-	return operId;
+        return operId;
     }
 
     public void setOperId(Integer operId) {
-	this.operId = operId;
+        this.operId = operId;
     }
 
     public String getOperName() {
-	return operName;
+        return operName;
     }
 
     public void setOperName(String operName) {
-	this.operName = operName;
+        this.operName = operName;
     }
 
     public String getLoginIp() {
-	return loginIp;
+        return loginIp;
     }
 
     public void setLoginIp(String loginIp) {
-	this.loginIp = loginIp;
+        this.loginIp = loginIp;
     }
 
     public Date getLastTime() {
-	return lastTime;
+        return lastTime;
     }
 
     public void setLastTime(Date lastTime) {
-	this.lastTime = lastTime;
+        this.lastTime = lastTime;
     }
 
     public String getRoleId() {

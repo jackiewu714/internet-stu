@@ -2,9 +2,8 @@
  * @Title: LoginService.java
  * @Package com.yy.rp.business.sysmgr.login.service
  * @Description: 登录services
- * Copyright: Copyright (c) 2014 
+ * Copyright: Copyright (c) 2014
  * Company:YY
- * 
  * @author WuLiangzhi
  * @date May 7, 2014 10:44:24 AM
  * @version V1.0
@@ -33,37 +32,37 @@ import com.cw.platform.util.security.PasswordUtil;
  */
 
 public class LoginService {
-    
+
     /**
      * log printer
      */
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
-    
+
     @Autowired
     private StaffMapper staffMapper;
 
     public Result checkAccount(String staffName, String password, boolean doEncrypt) {
-	Result result = new Result();
-	StaffCriteria sc = new StaffCriteria();
-	sc.setStaffName(staffName);
-	if(doEncrypt) {
-	    sc.setPassword(PasswordUtil.encryptPassword(password));
-	} else {
-	    sc.setPassword(password);
-	}
-	
-	List<Staff> staffList = staffMapper.selectByExample(sc);
-	if(staffList!=null && staffList.size()>0) {
-	    result.setSuccess(true);
-	    result.setMessage("账号验证通过");
-	    result.setResult(staffList.get(0)); //取出用户信息
-	} else {
-	    result.setSuccess(false);
-	    result.setMessage("登录失败，可能用户名或密码不正确，请重新输入！");
-	}
-	
-	logger.info("staff={} checkAccount result={}", staffName, result);
-	return result;
+        Result result = new Result();
+        StaffCriteria sc = new StaffCriteria();
+        sc.setStaffName(staffName);
+        if (doEncrypt) {
+            sc.setPassword(PasswordUtil.encryptPassword(password));
+        } else {
+            sc.setPassword(password);
+        }
+
+        List<Staff> staffList = staffMapper.selectByExample(sc);
+        if (staffList != null && staffList.size() > 0) {
+            result.setSuccess(true);
+            result.setMessage("账号验证通过");
+            result.setResult(staffList.get(0)); //取出用户信息
+        } else {
+            result.setSuccess(false);
+            result.setMessage("登录失败，可能用户名或密码不正确，请重新输入！");
+        }
+
+        logger.info("staff={} checkAccount result={}", staffName, result);
+        return result;
     }
-    
+
 }

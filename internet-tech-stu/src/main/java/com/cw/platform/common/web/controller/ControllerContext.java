@@ -13,31 +13,31 @@ public final class ControllerContext implements Serializable {
     protected transient static ThreadLocal<HttpServletResponse> response = new ThreadLocal<HttpServletResponse>();
 
     public static String getIp() {
-	String ip = request.get().getHeader("X-Forwarded-For");
-	if (ip == null) {
-	    ip = request.get().getRemoteAddr();
-	}
-	ip = ip == null ? "127.0.0.1" : ip;
-	return ip;
+        String ip = request.get().getHeader("X-Forwarded-For");
+        if (ip == null) {
+            ip = request.get().getRemoteAddr();
+        }
+        ip = ip == null ? "127.0.0.1" : ip;
+        return ip;
     }
 
     public static HttpSession getSession() {
-	return request.get().getSession();
+        return request.get().getSession();
     }
 
     public static HttpServletRequest getRequest() {
-	return request.get();
+        return request.get();
     }
 
     public static void setRequest(HttpServletRequest request) {
-	ControllerContext.request.set(request);
+        ControllerContext.request.set(request);
     }
 
     public static HttpServletResponse getResponse() {
-	return response.get();
+        return response.get();
     }
 
     public static void setResponse(HttpServletResponse response) {
-	ControllerContext.response.set(response);
+        ControllerContext.response.set(response);
     }
 }

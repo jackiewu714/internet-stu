@@ -2,9 +2,8 @@
  * @Title: LogonResponse.java
  * @Package com.cw.rop.userser
  * @Description: TODO
- * Copyright: Copyright (c) 2014 
+ * Copyright: Copyright (c) 2014
  * Company:YY Inc
- * 
  * @author WuLiangzhi
  * @date Apr 17, 2014 8:25:33 PM
  * @version V1.0
@@ -24,18 +23,18 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="logonResponse")
+@XmlRootElement(name = "logonResponse")
 public class LogonResponse {
 
-	private String sessionId;
+    private String sessionId;
 
-	public String getSessionId() {
-		return sessionId;
-	}
+    public String getSessionId() {
+        return sessionId;
+    }
 
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
-	}
-	
-	
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+
 }

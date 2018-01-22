@@ -16,11 +16,10 @@ import java.util.Calendar;
 import java.util.Random;
 
 /**
+ * @author WuLiangzhi
  * @ClassName: RandomUtil
  * @Description: 随机数工具类
- * @author WuLiangzhi
  * @date Dec 16, 2013 2:37:36 PM
- *
  */
 
 public class RandomUtil {
@@ -32,11 +31,10 @@ public class RandomUtil {
     /**
      * 生成指定位数的随机字符串(只包含大小写字母、数字)
      *
+     * @param length 长度
+     * @return
      * @Title: generateRandomString
      * @Description: 生成指定位数的随机字符串(只包含大小写字母 、 数字)
-     * @param length
-     *            长度
-     * @return
      */
     public static String generateRandomString(int length) {
         StringBuffer sb = new StringBuffer();
@@ -50,11 +48,10 @@ public class RandomUtil {
     /**
      * 生成指定位数的随机字符串(只包含大小写字母)
      *
+     * @param length 长度
+     * @return
      * @Title: generateRandomMixString
      * @Description: 生成指定位数的随机字符串(只包含大小写字母)
-     * @param length
-     *            长度
-     * @return
      */
     public static String generateRandomMixString(int length) {
         StringBuffer sb = new StringBuffer();
@@ -68,11 +65,10 @@ public class RandomUtil {
     /**
      * 生成指定位数的随机字符串(只包含数字)
      *
+     * @param length 长度
+     * @return
      * @Title: generateRandomNumberString
      * @Description: 生成指定位数的随机字符串(只包含数字)
-     * @param length
-     *            长度
-     * @return
      */
     public static String generateRandomNumberString(int length) {
         StringBuffer sb = new StringBuffer();
@@ -86,11 +82,10 @@ public class RandomUtil {
     /**
      * 生成指定位数的随机字符串(只包含数字)
      *
+     * @param length 长度
+     * @return
      * @Title: generateRandomNumberString
      * @Description: 生成指定位数的随机字符串(只包含数字)
-     * @param length
-     *            长度
-     * @return
      */
     public static int getCurrentMilliseconds() {
         Calendar calendar = Calendar.getInstance();
@@ -100,9 +95,9 @@ public class RandomUtil {
     /**
      * 获得当前时间字符串，格式yyMMddHHmmssSSS，例如:131217102334987
      *
+     * @return 当前时间字符串，格式yyMMddHHmmssSSS，例如:131217102334987
      * @Title: getCurrentDateString
      * @Description: 获得当前时间字符串，格式yyMMddHHmmssSSS，例如:131217102334987
-     * @return 当前时间字符串，格式yyMMddHHmmssSSS，例如:131217102334987
      */
     public static String getCurrentDateString() {
         Calendar calendar = Calendar.getInstance();

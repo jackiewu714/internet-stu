@@ -9,14 +9,14 @@ import com.cw.solr.util.TestCoreSolrServer;
 public class SolrClientTest {
 
     public static void main(String[] args) {
-	TestCoreSolrServer client = new TestCoreSolrServer();
-	try {
-	    client.get("admin");
-	} catch (SolrServerException e) {
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
+        TestCoreSolrServer client = new TestCoreSolrServer();
+        try {
+            client.get("admin");
+        } catch (SolrServerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    
+
 }

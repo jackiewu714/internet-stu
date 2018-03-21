@@ -20,9 +20,7 @@ public class TaskTwoJob extends QuartzJobBean {
 
     protected void executeInternal(JobExecutionContext jobExecutionContext)
             throws JobExecutionException {
-
         logger.info("-- TaskTwoJob222 -->>>>" + Calendar.getInstance().getTimeInMillis());
-
     }
 
 }

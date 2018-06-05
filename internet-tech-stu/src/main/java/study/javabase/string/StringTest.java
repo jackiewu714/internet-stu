@@ -75,4 +75,22 @@ public class StringTest {
 
     }
 
+    @Test
+    public void testGetString() {
+        int i = 3;
+        String s = getString(i);
+        System.out.println("s=" + s);
+    }
+
+    /**
+     * 获取字符串，如果obj为空则返回null
+     * @param obj   Object
+     * @return  String
+     */
+    public static String getString(Object obj) {
+        if(obj == null) {
+            return null;
+        }
+        return obj.toString();
+    }
 }

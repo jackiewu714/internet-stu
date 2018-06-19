@@ -1,5 +1,6 @@
 package study.javabase.math;
 
+import com.cw.platform.util.math.ArithUtil;
 import com.cw.platform.util.math.HisArithUtils;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -71,6 +72,31 @@ public class DoubleTest {
         BigDecimal bd = new BigDecimal(d1);
         boolean lessEqualThanZero = HisArithUtils.lessThanZero(bd) || HisArithUtils.equalToZero(bd);
         System.out.println("lessEqualThanZero=" + lessEqualThanZero);
+    }
+
+    /**
+     * 费用如果为0.0，则替换为空字符串
+     * @param douBle    Double
+     * @return  String
+     */
+    private String replaceCharges(Double douBle) {
+        //modify by zhilw, for ZJYYXM-1936【住院收费工作站 - 出院结算】发票上面大类费用为零的就不打印
+        Double chargesD = ArithUtil.accuracy(douBle);
+        String chargesStr = String.valueOf(chargesD);
+        if(chargesD.doubleValue() == 0.0d) {
+            chargesStr = ""; //自理自费大类费用为0，则将其设置为空字符串
+        }
+        return chargesStr;
+    }
+
+    @Test
+    public void testDouble3() {
+        double d1 = 0.000001;
+        d1 = 0.01;
+        d1 = 89.91;
+        d1 = 0.0d;
+        String str = replaceCharges(d1);
+        System.out.println("str=" + str);
     }
 
 }

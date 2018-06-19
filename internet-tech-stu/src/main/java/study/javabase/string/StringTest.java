@@ -1,6 +1,7 @@
 package study.javabase.string;
 
 import com.alibaba.fastjson.JSON;
+import com.cw.platform.util.math.HisStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -42,6 +43,7 @@ public class StringTest {
         System.out.println("list2=" + JSON.toJSONString(list2));
     }
 
+    @Ignore
     @Test
     public void testCheckCardNew(){
         String trackData = "%E?;2900045138=99015015659;";
@@ -75,6 +77,7 @@ public class StringTest {
 
     }
 
+    @Ignore
     @Test
     public void testGetString() {
         int i = 3;
@@ -93,4 +96,25 @@ public class StringTest {
         }
         return obj.toString();
     }
+
+    @Test
+    public void testReplaceString(){
+        String insurLevelName = "甲类";
+        insurLevelName = "乙类";
+        insurLevelName = "丙类";
+//        insurLevelName = null;
+//        insurLevelName = "112";
+//        insurLevelName = "甲类乙类丙类类";
+        String sName = getSimpleInsurLevelName(insurLevelName);
+        System.out.println(String.format("insurLevelName=%s, sName=%s", insurLevelName, sName));
+    }
+
+    private String getSimpleInsurLevelName(String insurLevelName) {
+        if(HisStringUtils.isEmpty(insurLevelName)) {
+            return "";
+        }
+
+        return insurLevelName.replaceAll("类", "");
+    }
+
 }

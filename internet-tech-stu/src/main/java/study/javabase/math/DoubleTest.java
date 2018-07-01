@@ -76,19 +76,21 @@ public class DoubleTest {
 
     /**
      * 费用如果为0.0，则替换为空字符串
-     * @param douBle    Double
-     * @return  String
+     *
+     * @param douBle Double
+     * @return String
      */
     private String replaceCharges(Double douBle) {
         //modify by zhilw, for ZJYYXM-1936【住院收费工作站 - 出院结算】发票上面大类费用为零的就不打印
         Double chargesD = ArithUtil.accuracy(douBle);
         String chargesStr = String.valueOf(chargesD);
-        if(chargesD.doubleValue() == 0.0d) {
+        if (chargesD.doubleValue() == 0.0d) {
             chargesStr = ""; //自理自费大类费用为0，则将其设置为空字符串
         }
         return chargesStr;
     }
 
+    @Ignore
     @Test
     public void testDouble3() {
         double d1 = 0.000001;
@@ -97,6 +99,29 @@ public class DoubleTest {
         d1 = 0.0d;
         String str = replaceCharges(d1);
         System.out.println("str=" + str);
+    }
+
+    /**
+     * 测试double精度丢失问题
+     */
+    @Test
+    public void testDoublePrecision() {
+        Double balance = 3.14;
+        Double fee = Double.valueOf("3.15");
+
+        if (fee > balance) {
+            System.out.println("d1 greater than d2");
+            BigDecimal bd1 = new BigDecimal(balance);   //直接以Double/double类型进行构造，会造成精度丢失
+            BigDecimal bd2 = new BigDecimal(fee);       //直接以Double/double类型进行构造，会造成精度丢失
+//            BigDecimal bd1 = new BigDecimal(String.valueOf(balance)); //以String类型进行构造，不会造成精度丢失
+//            BigDecimal bd2 = new BigDecimal(String.valueOf(fee));     //以String类型进行构造，不会造成精度丢失
+            System.out.println(String.format("bd1=%s", bd1));
+            System.out.println(String.format("bd2=%s", bd2));
+
+            double recharge = bd2.subtract(bd1).doubleValue();
+            System.out.println(String.format("recharge=%s", recharge));
+        }
+
     }
 
 }

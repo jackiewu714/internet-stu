@@ -11,6 +11,7 @@
         <module>internet-tech-stu</module>
         <module>cxf-stu</module>
         <module>dubbo-test</module>
+        <module>audit-webservice</module>
     </modules>
 
     <properties>

@@ -117,4 +117,23 @@ public class StringTest {
         return insurLevelName.replaceAll("类", "");
     }
 
+    @Test
+    public void testFilePath() {
+        String filePath = "c:\\111\\222\\test.xlsx";
+        int lIdx = filePath.lastIndexOf("\\");
+        System.out.println("lIdx=" + lIdx);
+
+        String fileName = filePath.substring(lIdx + 1);
+        System.out.println("fileName=" + fileName);
+
+        filePath = filePath.replaceAll("\\\\", "/");
+        System.out.println("filePath=" + filePath);
+        lIdx = filePath.lastIndexOf("/");
+        if (lIdx > 0) {
+            fileName = filePath.substring(lIdx + 1);
+        }
+        System.out.println("fileName=" + fileName);
+
+    }
+
 }

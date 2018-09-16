@@ -37,6 +37,8 @@ public class ChatRoomClient {
 
             //在主线程中，从键盘读取数据输入到服务器端
             Scanner scan = new Scanner(System.in);
+
+            System.out.println("客户端准备就绪，可以开始聊天了。");
             while (scan.hasNextLine()) {
                 String line = scan.nextLine();
                 if ("".equals(line)) { //不允许发空消息
@@ -77,6 +79,8 @@ public class ChatRoomClient {
                         SelectionKey selectionKey = iterator.next();
                         iterator.remove();
 
+                        // 处理 SelectionKey 的各种事件
+                        handleSelectionKey(selectionKey);
                     }
                 } catch (IOException e) {
                     e.printStackTrace();

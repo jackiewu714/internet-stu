@@ -1,6 +1,6 @@
-package com.cw.stu.internet.tech.stu.spring.aop.proxy;
+package com.cw.stu.spring.aop.proxy;
 
-import com.cw.stu.internet.tech.stu.spring.aop.proxy.impl.UserManagerImpl;
+import com.cw.stu.spring.aop.proxy.impl.UserManagerImpl;
 
 /**
  * 代理测试类

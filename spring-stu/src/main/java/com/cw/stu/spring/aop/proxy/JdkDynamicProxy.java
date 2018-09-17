@@ -1,4 +1,4 @@
-package com.cw.stu.internet.tech.stu.spring.aop.proxy;
+package com.cw.stu.spring.aop.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

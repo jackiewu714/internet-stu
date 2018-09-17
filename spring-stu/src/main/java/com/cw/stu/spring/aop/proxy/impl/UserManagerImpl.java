@@ -1,6 +1,6 @@
-package com.cw.stu.internet.tech.stu.spring.aop.proxy.impl;
+package com.cw.stu.spring.aop.proxy.impl;
 
-import com.cw.stu.internet.tech.stu.spring.aop.proxy.IUserManager;
+import com.cw.stu.spring.aop.proxy.IUserManager;
 
 /**
  * 用户接口实现类

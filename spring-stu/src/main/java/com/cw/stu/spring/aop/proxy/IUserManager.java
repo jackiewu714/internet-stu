@@ -1,4 +1,4 @@
-package com.cw.stu.internet.tech.stu.spring.aop.proxy;
+package com.cw.stu.spring.aop.proxy;
 
 /**
  * 用户接口

@@ -1,0 +1,948 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.stu.internet.tech.common.dao.persistence.sm.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_type" property="menuType" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="idx" property="idx" jdbcType="INTEGER" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="mod_id" property="modId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="feature" property="feature" jdbcType="VARCHAR" />
+    <result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+    <result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="menuId != null and menuId != ''" >
+         and menu_id = #{menuId,jdbcType=INTEGER}
+      </if>
+      <if test="menuName != null and menuName != ''" >
+         and menu_name = #{menuName,jdbcType=VARCHAR}
+      </if>
+      <if test="menuNameRange != null and menuNameRange != ''" >
+         and menu_name like #{menuNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="menuType != null and menuType != ''" >
+         and menu_type = #{menuType,jdbcType=VARCHAR}
+      </if>
+      <if test="menuTypeRange != null and menuTypeRange != ''" >
+         and menu_type like #{menuTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="level != null and level != ''" >
+         and level = #{level,jdbcType=INTEGER}
+      </if>
+      <if test="idx != null and idx != ''" >
+         and idx = #{idx,jdbcType=INTEGER}
+      </if>
+      <if test="parentId != null and parentId != ''" >
+         and parent_id = #{parentId,jdbcType=INTEGER}
+      </if>
+      <if test="icon != null and icon != ''" >
+         and icon = #{icon,jdbcType=VARCHAR}
+      </if>
+      <if test="iconRange != null and iconRange != ''" >
+         and icon like #{iconRange,jdbcType=VARCHAR}
+      </if>
+      <if test="modId != null and modId != ''" >
+         and mod_id = #{modId,jdbcType=INTEGER}
+      </if>
+      <if test="status != null and status != ''" >
+         and status = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="statusRange != null and statusRange != ''" >
+         and status like #{statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="feature != null and feature != ''" >
+         and feature = #{feature,jdbcType=VARCHAR}
+      </if>
+      <if test="featureRange != null and featureRange != ''" >
+         and feature like #{featureRange,jdbcType=VARCHAR}
+      </if>
+      <if test="modDate != null and modDate != ''" >
+         and mod_date = #{modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange1 != null and modDateRange1 != ''" >
+         and mod_date &gt;= #{modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modDateRange2 != null and modDateRange2 != ''" >
+         and mod_date &lt;= #{modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modStaff != null and modStaff != ''" >
+         and mod_staff = #{modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.menuId != null and example.menuId != ''" >
+         and menu_id = #{example.menuId,jdbcType=INTEGER}
+      </if>
+      <if test="example.menuName != null and example.menuName != ''" >
+         and menu_name = #{example.menuName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.menuNameRange != null and example.menuNameRange != ''" >
+         and menu_name like #{example.menuNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.menuType != null and example.menuType != ''" >
+         and menu_type = #{example.menuType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.menuTypeRange != null and example.menuTypeRange != ''" >
+         and menu_type like #{example.menuTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.level != null and example.level != ''" >
+         and level = #{example.level,jdbcType=INTEGER}
+      </if>
+      <if test="example.idx != null and example.idx != ''" >
+         and idx = #{example.idx,jdbcType=INTEGER}
+      </if>
+      <if test="example.parentId != null and example.parentId != ''" >
+         and parent_id = #{example.parentId,jdbcType=INTEGER}
+      </if>
+      <if test="example.icon != null and example.icon != ''" >
+         and icon = #{example.icon,jdbcType=VARCHAR}
+      </if>
+      <if test="example.iconRange != null and example.iconRange != ''" >
+         and icon like #{example.iconRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modId != null and example.modId != ''" >
+         and mod_id = #{example.modId,jdbcType=INTEGER}
+      </if>
+      <if test="example.status != null and example.status != ''" >
+         and status = #{example.status,jdbcType=VARCHAR}
+      </if>
+      <if test="example.statusRange != null and example.statusRange != ''" >
+         and status like #{example.statusRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.feature != null and example.feature != ''" >
+         and feature = #{example.feature,jdbcType=VARCHAR}
+      </if>
+      <if test="example.featureRange != null and example.featureRange != ''" >
+         and feature like #{example.featureRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modDate != null and example.modDate != ''" >
+         and mod_date = #{example.modDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange1 != null and example.modDateRange1 != ''" >
+         and mod_date &gt;= #{example.modDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modDateRange2 != null and example.modDateRange2 != ''" >
+         and mod_date &lt;= #{example.modDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modStaff != null and example.modStaff != ''" >
+         and mod_staff = #{example.modStaff,jdbcType=INTEGER}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    menu_id, menu_name, menu_type, level, idx, parent_id, icon, mod_id, status, feature, 
+    mod_date, mod_staff
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.MenuCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_menu a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sm_menu a 
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sm_menu
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.MenuCriteria" >
+    delete from tb_sm_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="menuId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_menu (menu_name, menu_type, level, 
+      idx, parent_id, icon, 
+      mod_id, status, feature, 
+      mod_date, mod_staff)
+    values (#{menuName,jdbcType=VARCHAR}, #{menuType,jdbcType=VARCHAR}, #{level,jdbcType=INTEGER}, 
+      #{idx,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{modId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, 
+      #{modDate,jdbcType=TIMESTAMP}, #{modStaff,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="menuId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuType != null" >
+        menu_type,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="idx != null" >
+        idx,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="idx != null" >
+        #{idx,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.MenuCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_sm_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sm_menu
+    <set >
+      <if test="record.menuId != null" >
+        menu_id = #{record.menuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuName != null" >
+        menu_name = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuType != null" >
+        menu_type = #{record.menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=INTEGER},
+      </if>
+      <if test="record.idx != null" >
+        idx = #{record.idx,jdbcType=INTEGER},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null" >
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modId != null" >
+        mod_id = #{record.modId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feature != null" >
+        feature = #{record.feature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modDate != null" >
+        mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff = #{record.modStaff,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sm_menu
+    set menu_id = #{record.menuId,jdbcType=INTEGER},
+      menu_name = #{record.menuName,jdbcType=VARCHAR},
+      menu_type = #{record.menuType,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=INTEGER},
+      idx = #{record.idx,jdbcType=INTEGER},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      mod_id = #{record.modId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=VARCHAR},
+      feature = #{record.feature,jdbcType=VARCHAR},
+      mod_date = #{record.modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{record.modStaff,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    update tb_sm_menu
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        menu_type = #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="idx != null" >
+        idx = #{idx,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modId != null" >
+        mod_id = #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        mod_date = #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        mod_staff = #{modStaff,jdbcType=INTEGER},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    update tb_sm_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_type = #{menuType,jdbcType=VARCHAR},
+      level = #{level,jdbcType=INTEGER},
+      idx = #{idx,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      mod_id = #{modId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      mod_date = #{modDate,jdbcType=TIMESTAMP},
+      mod_staff = #{modStaff,jdbcType=INTEGER}
+    where menu_id = #{menuId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="ResultMapWithTranslation" type="com.cw.stu.internet.tech.platform.util.CamelCaseHashMap" extends="BaseResultMap" />
+  <sql id="Translation_Column_List" />
+  <select id="selectByExampleWithTranslation" resultMap="ResultMapWithTranslation" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.MenuCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    <if test="extracSelectColunm != null and extracSelectColunm != ''" >
+       ,  ${extracSelectColunm} 
+    </if>
+    from tb_sm_menu a 
+    <if test="extracTable != null and extracTable != ''" >
+       ${extracTable} 
+    </if>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.menuId != null" >
+        menu_id,
+      </if>
+      <if test="record.menuName != null" >
+        menu_name,
+      </if>
+      <if test="record.menuType != null" >
+        menu_type,
+      </if>
+      <if test="record.level != null" >
+        level,
+      </if>
+      <if test="record.idx != null" >
+        idx,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.icon != null" >
+        icon,
+      </if>
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.menuId != null" >
+          #{listItem.menuId,jdbcType=INTEGER},
+        </if>
+        <if test="record.menuName != null" >
+          #{listItem.menuName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.menuType != null" >
+          #{listItem.menuType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.level != null" >
+          #{listItem.level,jdbcType=INTEGER},
+        </if>
+        <if test="record.idx != null" >
+          #{listItem.idx,jdbcType=INTEGER},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.icon != null" >
+          #{listItem.icon,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.menuId != null" >
+        menu_id,
+      </if>
+      <if test="record.menuName != null" >
+        menu_name,
+      </if>
+      <if test="record.menuType != null" >
+        menu_type,
+      </if>
+      <if test="record.level != null" >
+        level,
+      </if>
+      <if test="record.idx != null" >
+        idx,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.icon != null" >
+        icon,
+      </if>
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.menuId != null" >
+          #{listItem.menuId,jdbcType=INTEGER},
+        </if>
+        <if test="record.menuName != null" >
+          #{listItem.menuName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.menuType != null" >
+          #{listItem.menuType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.level != null" >
+          #{listItem.level,jdbcType=INTEGER},
+        </if>
+        <if test="record.idx != null" >
+          #{listItem.idx,jdbcType=INTEGER},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.icon != null" >
+          #{listItem.icon,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    replace into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuType != null" >
+        menu_type,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="idx != null" >
+        idx,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="idx != null" >
+        #{idx,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.Menu" >
+    insert into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuType != null" >
+        menu_type,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="idx != null" >
+        idx,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="modId != null" >
+        mod_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="feature != null" >
+        feature,
+      </if>
+      <if test="modDate != null" >
+        mod_date,
+      </if>
+      <if test="modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuType != null" >
+        #{menuType,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="idx != null" >
+        #{idx,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="modId != null" >
+        #{modId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null" >
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modStaff != null" >
+        #{modStaff,jdbcType=INTEGER},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="menuId != null" >
+        menu_id=values(menu_id),
+      </if>
+      <if test="menuName != null" >
+        menu_name=values(menu_name),
+      </if>
+      <if test="menuType != null" >
+        menu_type=values(menu_type),
+      </if>
+      <if test="level != null" >
+        level=values(level),
+      </if>
+      <if test="idx != null" >
+        idx=values(idx),
+      </if>
+      <if test="parentId != null" >
+        parent_id=values(parent_id),
+      </if>
+      <if test="icon != null" >
+        icon=values(icon),
+      </if>
+      <if test="modId != null" >
+        mod_id=values(mod_id),
+      </if>
+      <if test="status != null" >
+        status=values(status),
+      </if>
+      <if test="feature != null" >
+        feature=values(feature),
+      </if>
+      <if test="modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into tb_sm_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.menuId != null" >
+        menu_id,
+      </if>
+      <if test="record.menuName != null" >
+        menu_name,
+      </if>
+      <if test="record.menuType != null" >
+        menu_type,
+      </if>
+      <if test="record.level != null" >
+        level,
+      </if>
+      <if test="record.idx != null" >
+        idx,
+      </if>
+      <if test="record.parentId != null" >
+        parent_id,
+      </if>
+      <if test="record.icon != null" >
+        icon,
+      </if>
+      <if test="record.modId != null" >
+        mod_id,
+      </if>
+      <if test="record.status != null" >
+        status,
+      </if>
+      <if test="record.feature != null" >
+        feature,
+      </if>
+      <if test="record.modDate != null" >
+        mod_date,
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.menuId != null" >
+          #{listItem.menuId,jdbcType=INTEGER},
+        </if>
+        <if test="record.menuName != null" >
+          #{listItem.menuName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.menuType != null" >
+          #{listItem.menuType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.level != null" >
+          #{listItem.level,jdbcType=INTEGER},
+        </if>
+        <if test="record.idx != null" >
+          #{listItem.idx,jdbcType=INTEGER},
+        </if>
+        <if test="record.parentId != null" >
+          #{listItem.parentId,jdbcType=INTEGER},
+        </if>
+        <if test="record.icon != null" >
+          #{listItem.icon,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modId != null" >
+          #{listItem.modId,jdbcType=INTEGER},
+        </if>
+        <if test="record.status != null" >
+          #{listItem.status,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null" >
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modDate != null" >
+          #{listItem.modDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.modStaff != null" >
+          #{listItem.modStaff,jdbcType=INTEGER},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.menuId != null" >
+        menu_id=values(menu_id),
+      </if>
+      <if test="record.menuName != null" >
+        menu_name=values(menu_name),
+      </if>
+      <if test="record.menuType != null" >
+        menu_type=values(menu_type),
+      </if>
+      <if test="record.level != null" >
+        level=values(level),
+      </if>
+      <if test="record.idx != null" >
+        idx=values(idx),
+      </if>
+      <if test="record.parentId != null" >
+        parent_id=values(parent_id),
+      </if>
+      <if test="record.icon != null" >
+        icon=values(icon),
+      </if>
+      <if test="record.modId != null" >
+        mod_id=values(mod_id),
+      </if>
+      <if test="record.status != null" >
+        status=values(status),
+      </if>
+      <if test="record.feature != null" >
+        feature=values(feature),
+      </if>
+      <if test="record.modDate != null" >
+        mod_date=values(mod_date),
+      </if>
+      <if test="record.modStaff != null" >
+        mod_staff=values(mod_staff),
+      </if>
+    </trim>
+  </insert>
+</mapper>

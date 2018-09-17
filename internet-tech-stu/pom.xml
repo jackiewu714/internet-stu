@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.cw</groupId>
+		<groupId>com.cw.stu</groupId>
 		<artifactId>internet-stu</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>

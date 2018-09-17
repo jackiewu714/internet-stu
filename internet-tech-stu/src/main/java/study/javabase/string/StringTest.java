@@ -1,7 +1,7 @@
 package study.javabase.string;
 
 import com.alibaba.fastjson.JSON;
-import com.cw.platform.util.math.HisStringUtils;
+import com.cw.stu.internet.tech.platform.util.math.HisStringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 

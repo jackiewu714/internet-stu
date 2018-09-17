@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>dubbo-test</artifactId>
-        <groupId>com.cw</groupId>
+        <groupId>com.cw.stu</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -15,7 +15,7 @@
     <dependencies>
         <!-- 添加 dubbo-test-api 的jar包 -->
         <dependency>
-            <groupId>com.cw</groupId>
+            <groupId>com.cw.stu</groupId>
             <artifactId>dubbo-test-api</artifactId>
             <version>${project.version}</version>
         </dependency>

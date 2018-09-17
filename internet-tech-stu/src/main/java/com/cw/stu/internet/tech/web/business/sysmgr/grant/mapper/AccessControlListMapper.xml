@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.stu.internet.tech.web.business.sysmgr.grant.persistence.AccessControlListMapper" >
+	<resultMap id="MenuResultMap" type="com.cw.stu.internet.tech.web.business.sysmgr.grant.domain.MenuExtend" >
+	    <id column="menu_id" property="menuId" jdbcType="INTEGER" />
+	    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+	    <result column="menu_type" property="menuType" jdbcType="VARCHAR" />
+	    <result column="level" property="level" jdbcType="INTEGER" />
+	    <result column="idx" property="idx" jdbcType="INTEGER" />
+	    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+	    <result column="icon" property="icon" jdbcType="VARCHAR" />
+	    <result column="mod_id" property="modId" jdbcType="INTEGER" />
+	    <result column="status" property="status" jdbcType="VARCHAR" />
+	    <result column="feature" property="feature" jdbcType="VARCHAR" />
+	    <result column="mod_date" property="modDate" jdbcType="TIMESTAMP" />
+	    <result column="mod_staff" property="modStaff" jdbcType="INTEGER" />
+	    <result column="mod_url" property="modUrl" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<select id="getAccessUrlList" resultType="String">
+		SELECT (SELECT url
+		          FROM tb_sm_module b
+		         WHERE b.mod_id = a.mod_id AND b.status = 'S0A'
+		         LIMIT 0, 1)
+		          AS url
+		  FROM tb_sm_menu a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.menu_id = b.fact_id
+		                      AND b.fact_type = 'S01'
+		                      AND b.ent_type = 'S01'
+		                      AND b.ent_id in (select role_id from tb_sm_staff_role where staff_id=#{staffId} and status='S0A')
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+		UNION
+		SELECT (SELECT url
+		          FROM tb_sm_module b
+		         WHERE b.mod_id = a.mod_id AND b.status = 'S0A'
+		         LIMIT 0, 1)
+		          AS url
+		  FROM tb_sm_menu a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.menu_id = b.fact_id
+		                      AND b.fact_type = 'S01'
+		                      AND b.ent_type = 'S02'
+		                      AND b.ent_id = #{staffId}
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+		UNION
+		SELECT url
+		  FROM tb_sm_module a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.mod_id = b.fact_id
+		                      AND b.fact_type = 'S02'
+		                      AND b.ent_type = 'S01'
+		                      AND b.ent_id in (select role_id from tb_sm_staff_role where staff_id=#{staffId} and status='S0A')
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+		UNION
+		SELECT url
+		  FROM tb_sm_module a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.mod_id = b.fact_id
+		                      AND b.fact_type = 'S02'
+		                      AND b.ent_type = 'S02'
+		                      AND b.ent_id = #{staffId}
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+	</select>
+	
+	<select id="getAccessMenuList" resultMap="MenuResultMap">
+		SELECT a.*,
+		       (SELECT url
+				          FROM tb_sm_module b
+				         WHERE b.mod_id = a.mod_id AND b.status = 'S0A'
+				         LIMIT 0, 1)
+				          AS mod_url
+		  FROM tb_sm_menu a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.menu_id = b.fact_id
+		                      AND b.fact_type = 'S01'
+		                      AND b.ent_type = 'S01'
+		                      AND b.ent_id in (select role_id from tb_sm_staff_role where staff_id=#{staffId} and status='S0A')
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+		UNION
+		SELECT a.*,
+		       (SELECT url
+				          FROM tb_sm_module b
+				         WHERE b.mod_id = a.mod_id AND b.status = 'S0A'
+				         LIMIT 0, 1)
+				          AS mod_url
+		  FROM tb_sm_menu a
+		 WHERE     EXISTS
+		              (SELECT 1
+		                 FROM tb_sm_grant b
+		                WHERE     a.menu_id = b.fact_id
+		                      AND b.fact_type = 'S01'
+		                      AND b.ent_type = 'S02'
+		                      AND b.ent_id = #{staffId}
+		                      AND b.status = 'S0A')
+		       AND a.status = 'S0A'
+	</select>
+</mapper>

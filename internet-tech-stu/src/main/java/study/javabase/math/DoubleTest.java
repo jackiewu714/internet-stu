@@ -1,7 +1,7 @@
 package study.javabase.math;
 
-import com.cw.platform.util.math.ArithUtil;
-import com.cw.platform.util.math.HisArithUtils;
+import com.cw.stu.internet.tech.platform.util.math.ArithUtil;
+import com.cw.stu.internet.tech.platform.util.math.HisArithUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 

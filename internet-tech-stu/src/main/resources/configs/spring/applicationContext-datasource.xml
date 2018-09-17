@@ -38,25 +38,25 @@
 	<bean id="dataSource" parent="parentDataSource" destroy-method="close">
 		<property name="driverClass">
 			<bean
-				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				class="com.cw.stu.internet.tech.platform.spring.property.encrypt.PropertyEncrypFactory">
 				<property name="encryptedProperty" value="${jdbc_driverClassName}" />
 			</bean>
 		</property>
 		<property name="jdbcUrl">
 			<bean
-				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				class="com.cw.stu.internet.tech.platform.spring.property.encrypt.PropertyEncrypFactory">
 				<property name="encryptedProperty" value="${jdbc_url}" />
 			</bean>
 		</property>
 		<property name="user">
 			<bean
-				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				class="com.cw.stu.internet.tech.platform.spring.property.encrypt.PropertyEncrypFactory">
 				<property name="encryptedProperty" value="${jdbc_user}" />
 			</bean>
 		</property>
 		<property name="password">
 			<bean
-				class="com.cw.platform.spring.property.encrypt.PropertyEncrypFactory">
+				class="com.cw.stu.internet.tech.platform.spring.property.encrypt.PropertyEncrypFactory">
 				<property name="encryptedProperty" value="${jdbc_password}" />
 			</bean>
 		</property>

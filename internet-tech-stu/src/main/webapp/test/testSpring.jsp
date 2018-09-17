@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="org.springframework.context.ApplicationContext, org.springframework.context.support.ClassPathXmlApplicationContext" %>
-<%@ page import="study.spring.test.HelloSpringService, com.cw.platform.util.SpringUtils" %>
+<%@ page import="study.spring.test.HelloSpringService, com.cw.stu.internet.tech.platform.util.SpringUtils" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";

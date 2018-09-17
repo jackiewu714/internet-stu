@@ -13,7 +13,7 @@
     <!--发布webservice begin-->
     <!-- WebService的实现Bean定义 -->
     <!--web.xml配置了webservice的访问路径/server/*，那么/server/web-publish?wsdl就是该webservice的访问路径-->
-    <bean id="arithWs" class="com.cw.cxf.server.impl.ArithWsImpl"/>
+    <bean id="arithWs" class="ArithWsImpl"/>
     <!-- jax-ws endpoint定义 -->
     <jaxws:endpoint id="arith" implementor="#arithWs"
                     address="/arith">

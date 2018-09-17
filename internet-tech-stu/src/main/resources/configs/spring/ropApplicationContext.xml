@@ -15,5 +15,5 @@
 	-->
 	<!-- 启动rop框架 -->						
 	<rop:annotation-driven app-secret-manager="appSecretManager" sign-enable="true" />
-	<bean id="appSecretManager" class="com.cw.rop.util.RopAppSecretManager" />
+	<bean id="appSecretManager" class="com.cw.stu.internet.tech.rop.util.RopAppSecretManager" />
 </beans>

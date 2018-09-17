@@ -14,5 +14,5 @@
     <dubbo:registry protocol="zookeeper" address="zookeeper://127.0.0.1:2181" />
 
     <!-- 生成远程服务代理，可以和本地bean一样使用 HelloWorldServiceImpl -->
-    <dubbo:reference id="helloWorldService" interface="com.cw.dubbo.api.intf.IHelloWorldService" />
+    <dubbo:reference id="helloWorldService" interface="com.cw.stu.internet.tech.dubbo.api.intf.IHelloWorldService" />
 </beans>

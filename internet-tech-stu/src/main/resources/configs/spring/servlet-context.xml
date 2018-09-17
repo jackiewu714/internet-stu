@@ -23,7 +23,7 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
-                <bean class="com.cw.platform.spring.support.StringToDateConverter">
+                <bean class="com.cw.stu.internet.tech.platform.spring.support.StringToDateConverter">
                     <constructor-arg index="0" value="yyyy-MM-dd HH:mm:ss" />
                 </bean>
             </set>
@@ -38,7 +38,7 @@
 				<constructor-arg name="defaultCharset" value="UTF-8" />
 			</bean>
 			<bean class="org.springframework.http.converter.FormHttpMessageConverter" />
-			<bean class="com.cw.platform.spring.support.MappingFastJsonHttpMessageConverter" />
+			<bean class="com.cw.stu.internet.tech.platform.spring.support.MappingFastJsonHttpMessageConverter" />
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 

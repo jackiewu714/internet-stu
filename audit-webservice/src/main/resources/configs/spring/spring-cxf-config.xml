@@ -7,8 +7,8 @@
     <!--<import resource="classpath:META-INF/cxf/cxf.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>-->
 
-    <jaxws:endpoint id="helloWorld" implementor="com.cw.cxf.server.impl.HelloWorldWsImpl" address="/HelloWorld"/>
-    <jaxws:endpoint id="arith" implementor="com.cw.cxf.server.impl.ArithWsImpl" address="/Arith"/>
+    <jaxws:endpoint id="helloWorld" implementor="HelloWorldWsImpl" address="/HelloWorld"/>
+    <jaxws:endpoint id="arith" implementor="ArithWsImpl" address="/Arith"/>
 
 </beans>
 <!-- END SNIPPET: beans -->

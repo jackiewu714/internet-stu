@@ -1,0 +1,906 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cw.stu.internet.tech.common.dao.persistence.sm.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="log_type" property="logType" jdbcType="VARCHAR" />
+    <result column="log_serial" property="logSerial" jdbcType="VARCHAR" />
+    <result column="oper_staff_name" property="operStaffName" jdbcType="VARCHAR" />
+    <result column="oper_date" property="operDate" jdbcType="TIMESTAMP" />
+    <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="mac_address" property="macAddress" jdbcType="VARCHAR" />
+    <result column="create_staff" property="createStaff" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <if test="oredCriteria != null" >
+        <foreach collection="oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="logId != null and logId != ''" >
+         and log_id = #{logId,jdbcType=INTEGER}
+      </if>
+      <if test="logType != null and logType != ''" >
+         and log_type = #{logType,jdbcType=VARCHAR}
+      </if>
+      <if test="logTypeRange != null and logTypeRange != ''" >
+         and log_type like #{logTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="logSerial != null and logSerial != ''" >
+         and log_serial = #{logSerial,jdbcType=VARCHAR}
+      </if>
+      <if test="logSerialRange != null and logSerialRange != ''" >
+         and log_serial like #{logSerialRange,jdbcType=VARCHAR}
+      </if>
+      <if test="operStaffName != null and operStaffName != ''" >
+         and oper_staff_name = #{operStaffName,jdbcType=VARCHAR}
+      </if>
+      <if test="operStaffNameRange != null and operStaffNameRange != ''" >
+         and oper_staff_name like #{operStaffNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="operDate != null and operDate != ''" >
+         and oper_date = #{operDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operDateRange1 != null and operDateRange1 != ''" >
+         and oper_date &gt;= #{operDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operDateRange2 != null and operDateRange2 != ''" >
+         and oper_date &lt;= #{operDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ipAddress != null and ipAddress != ''" >
+         and ip_address = #{ipAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="ipAddressRange != null and ipAddressRange != ''" >
+         and ip_address like #{ipAddressRange,jdbcType=VARCHAR}
+      </if>
+      <if test="macAddress != null and macAddress != ''" >
+         and mac_address = #{macAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="macAddressRange != null and macAddressRange != ''" >
+         and mac_address like #{macAddressRange,jdbcType=VARCHAR}
+      </if>
+      <if test="createStaff != null and createStaff != ''" >
+         and create_staff = #{createStaff,jdbcType=INTEGER}
+      </if>
+      <if test="createDate != null and createDate != ''" >
+         and create_date = #{createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateRange1 != null and createDateRange1 != ''" >
+         and create_date &gt;= #{createDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createDateRange2 != null and createDateRange2 != ''" >
+         and create_date &lt;= #{createDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="content != null and content != ''" >
+         and content = #{content,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="contentRange != null and contentRange != ''" >
+         and content like #{contentRange,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="extracClause != null and extracClause != ''" >
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <if test="example.oredCriteria != null" >
+        <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+          <if test="criteria.valid" >
+            <trim prefix="(" suffix=")" prefixOverrides="and" >
+              <foreach collection="criteria.criteria" item="criterion" >
+                <choose >
+                  <when test="criterion.noValue" >
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue" >
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue" >
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue" >
+                    and ${criterion.condition}
+                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.logId != null and example.logId != ''" >
+         and log_id = #{example.logId,jdbcType=INTEGER}
+      </if>
+      <if test="example.logType != null and example.logType != ''" >
+         and log_type = #{example.logType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.logTypeRange != null and example.logTypeRange != ''" >
+         and log_type like #{example.logTypeRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.logSerial != null and example.logSerial != ''" >
+         and log_serial = #{example.logSerial,jdbcType=VARCHAR}
+      </if>
+      <if test="example.logSerialRange != null and example.logSerialRange != ''" >
+         and log_serial like #{example.logSerialRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operStaffName != null and example.operStaffName != ''" >
+         and oper_staff_name = #{example.operStaffName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operStaffNameRange != null and example.operStaffNameRange != ''" >
+         and oper_staff_name like #{example.operStaffNameRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operDate != null and example.operDate != ''" >
+         and oper_date = #{example.operDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.operDateRange1 != null and example.operDateRange1 != ''" >
+         and oper_date &gt;= #{example.operDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.operDateRange2 != null and example.operDateRange2 != ''" >
+         and oper_date &lt;= #{example.operDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.ipAddress != null and example.ipAddress != ''" >
+         and ip_address = #{example.ipAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="example.ipAddressRange != null and example.ipAddressRange != ''" >
+         and ip_address like #{example.ipAddressRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.macAddress != null and example.macAddress != ''" >
+         and mac_address = #{example.macAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="example.macAddressRange != null and example.macAddressRange != ''" >
+         and mac_address like #{example.macAddressRange,jdbcType=VARCHAR}
+      </if>
+      <if test="example.createStaff != null and example.createStaff != ''" >
+         and create_staff = #{example.createStaff,jdbcType=INTEGER}
+      </if>
+      <if test="example.createDate != null and example.createDate != ''" >
+         and create_date = #{example.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createDateRange1 != null and example.createDateRange1 != ''" >
+         and create_date &gt;= #{example.createDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createDateRange2 != null and example.createDateRange2 != ''" >
+         and create_date &lt;= #{example.createDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.content != null and example.content != ''" >
+         and content = #{example.content,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="example.contentRange != null and example.contentRange != ''" >
+         and content like #{example.contentRange,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''" >
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    log_id, log_type, log_serial, oper_staff_name, oper_date, ip_address, mac_address, 
+    create_staff, create_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_sm_sys_log a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_sys_log a 
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_sm_sys_log a 
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sm_sys_log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLogCriteria" >
+    delete from tb_sm_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="logId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_sys_log (log_type, log_serial, oper_staff_name, 
+      oper_date, ip_address, mac_address, 
+      create_staff, create_date, content
+      )
+    values (#{logType,jdbcType=VARCHAR}, #{logSerial,jdbcType=VARCHAR}, #{operStaffName,jdbcType=VARCHAR}, 
+      #{operDate,jdbcType=TIMESTAMP}, #{ipAddress,jdbcType=VARCHAR}, #{macAddress,jdbcType=VARCHAR}, 
+      #{createStaff,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    <selectKey resultType="java.lang.Integer" keyProperty="logId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logSerial != null" >
+        log_serial,
+      </if>
+      <if test="operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="operDate != null" >
+        oper_date,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="macAddress != null" >
+        mac_address,
+      </if>
+      <if test="createStaff != null" >
+        create_staff,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSerial != null" >
+        #{logSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="operStaffName != null" >
+        #{operStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null" >
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLogCriteria" resultType="java.lang.Integer" >
+    select count(*) from tb_sm_sys_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sm_sys_log
+    <set >
+      <if test="record.logId != null" >
+        log_id = #{record.logId,jdbcType=INTEGER},
+      </if>
+      <if test="record.logType != null" >
+        log_type = #{record.logType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logSerial != null" >
+        log_serial = #{record.logSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operStaffName != null" >
+        oper_staff_name = #{record.operStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operDate != null" >
+        oper_date = #{record.operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ipAddress != null" >
+        ip_address = #{record.ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address = #{record.macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createStaff != null" >
+        create_staff = #{record.createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update tb_sm_sys_log
+    set log_id = #{record.logId,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=VARCHAR},
+      log_serial = #{record.logSerial,jdbcType=VARCHAR},
+      oper_staff_name = #{record.operStaffName,jdbcType=VARCHAR},
+      oper_date = #{record.operDate,jdbcType=TIMESTAMP},
+      ip_address = #{record.ipAddress,jdbcType=VARCHAR},
+      mac_address = #{record.macAddress,jdbcType=VARCHAR},
+      create_staff = #{record.createStaff,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sm_sys_log
+    set log_id = #{record.logId,jdbcType=INTEGER},
+      log_type = #{record.logType,jdbcType=VARCHAR},
+      log_serial = #{record.logSerial,jdbcType=VARCHAR},
+      oper_staff_name = #{record.operStaffName,jdbcType=VARCHAR},
+      oper_date = #{record.operDate,jdbcType=TIMESTAMP},
+      ip_address = #{record.ipAddress,jdbcType=VARCHAR},
+      mac_address = #{record.macAddress,jdbcType=VARCHAR},
+      create_staff = #{record.createStaff,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    update tb_sm_sys_log
+    <set >
+      <if test="logType != null" >
+        log_type = #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSerial != null" >
+        log_serial = #{logSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="operStaffName != null" >
+        oper_staff_name = #{operStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        oper_date = #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        ip_address = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null" >
+        mac_address = #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaff != null" >
+        create_staff = #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    update tb_sm_sys_log
+    set log_type = #{logType,jdbcType=VARCHAR},
+      log_serial = #{logSerial,jdbcType=VARCHAR},
+      oper_staff_name = #{operStaffName,jdbcType=VARCHAR},
+      oper_date = #{operDate,jdbcType=TIMESTAMP},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      create_staff = #{createStaff,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    update tb_sm_sys_log
+    set log_type = #{logType,jdbcType=VARCHAR},
+      log_serial = #{logSerial,jdbcType=VARCHAR},
+      oper_staff_name = #{operStaffName,jdbcType=VARCHAR},
+      oper_date = #{operDate,jdbcType=TIMESTAMP},
+      ip_address = #{ipAddress,jdbcType=VARCHAR},
+      mac_address = #{macAddress,jdbcType=VARCHAR},
+      create_staff = #{createStaff,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="ResultMapWithTranslation" type="com.cw.stu.internet.tech.platform.util.CamelCaseHashMap" extends="BaseResultMap" />
+  <sql id="Translation_Column_List" />
+  <select id="selectByExampleWithTranslation" resultMap="ResultMapWithTranslation" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLogCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    <if test="extracSelectColunm != null and extracSelectColunm != ''" >
+       ,  ${extracSelectColunm} 
+    </if>
+    from tb_sm_sys_log a 
+    <if test="extracTable != null and extracTable != ''" >
+       ${extracTable} 
+    </if>
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertListSelective" parameterType="map" >
+    insert into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.logId != null" >
+        log_id,
+      </if>
+      <if test="record.logType != null" >
+        log_type,
+      </if>
+      <if test="record.logSerial != null" >
+        log_serial,
+      </if>
+      <if test="record.operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="record.operDate != null" >
+        oper_date,
+      </if>
+      <if test="record.ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address,
+      </if>
+      <if test="record.createStaff != null" >
+        create_staff,
+      </if>
+      <if test="record.createDate != null" >
+        create_date,
+      </if>
+      <if test="record.content != null" >
+        content,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.logId != null" >
+          #{listItem.logId,jdbcType=INTEGER},
+        </if>
+        <if test="record.logType != null" >
+          #{listItem.logType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logSerial != null" >
+          #{listItem.logSerial,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operStaffName != null" >
+          #{listItem.operStaffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operDate != null" >
+          #{listItem.operDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ipAddress != null" >
+          #{listItem.ipAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.macAddress != null" >
+          #{listItem.macAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createStaff != null" >
+          #{listItem.createStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.createDate != null" >
+          #{listItem.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.content != null" >
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map" >
+    replace into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.logId != null" >
+        log_id,
+      </if>
+      <if test="record.logType != null" >
+        log_type,
+      </if>
+      <if test="record.logSerial != null" >
+        log_serial,
+      </if>
+      <if test="record.operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="record.operDate != null" >
+        oper_date,
+      </if>
+      <if test="record.ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address,
+      </if>
+      <if test="record.createStaff != null" >
+        create_staff,
+      </if>
+      <if test="record.createDate != null" >
+        create_date,
+      </if>
+      <if test="record.content != null" >
+        content,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.logId != null" >
+          #{listItem.logId,jdbcType=INTEGER},
+        </if>
+        <if test="record.logType != null" >
+          #{listItem.logType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logSerial != null" >
+          #{listItem.logSerial,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operStaffName != null" >
+          #{listItem.operStaffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operDate != null" >
+          #{listItem.operDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ipAddress != null" >
+          #{listItem.ipAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.macAddress != null" >
+          #{listItem.macAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createStaff != null" >
+          #{listItem.createStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.createDate != null" >
+          #{listItem.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.content != null" >
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    replace into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logSerial != null" >
+        log_serial,
+      </if>
+      <if test="operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="operDate != null" >
+        oper_date,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="macAddress != null" >
+        mac_address,
+      </if>
+      <if test="createStaff != null" >
+        create_staff,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSerial != null" >
+        #{logSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="operStaffName != null" >
+        #{operStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null" >
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.stu.internet.tech.common.dao.domain.sm.SysLog" >
+    insert into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="logType != null" >
+        log_type,
+      </if>
+      <if test="logSerial != null" >
+        log_serial,
+      </if>
+      <if test="operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="operDate != null" >
+        oper_date,
+      </if>
+      <if test="ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="macAddress != null" >
+        mac_address,
+      </if>
+      <if test="createStaff != null" >
+        create_staff,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="logType != null" >
+        #{logType,jdbcType=VARCHAR},
+      </if>
+      <if test="logSerial != null" >
+        #{logSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="operStaffName != null" >
+        #{operStaffName,jdbcType=VARCHAR},
+      </if>
+      <if test="operDate != null" >
+        #{operDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="macAddress != null" >
+        #{macAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="logId != null" >
+        log_id=values(log_id),
+      </if>
+      <if test="logType != null" >
+        log_type=values(log_type),
+      </if>
+      <if test="logSerial != null" >
+        log_serial=values(log_serial),
+      </if>
+      <if test="operStaffName != null" >
+        oper_staff_name=values(oper_staff_name),
+      </if>
+      <if test="operDate != null" >
+        oper_date=values(oper_date),
+      </if>
+      <if test="ipAddress != null" >
+        ip_address=values(ip_address),
+      </if>
+      <if test="macAddress != null" >
+        mac_address=values(mac_address),
+      </if>
+      <if test="createStaff != null" >
+        create_staff=values(create_staff),
+      </if>
+      <if test="createDate != null" >
+        create_date=values(create_date),
+      </if>
+      <if test="content != null" >
+        content=values(content),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map" >
+    insert into tb_sm_sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="record.logId != null" >
+        log_id,
+      </if>
+      <if test="record.logType != null" >
+        log_type,
+      </if>
+      <if test="record.logSerial != null" >
+        log_serial,
+      </if>
+      <if test="record.operStaffName != null" >
+        oper_staff_name,
+      </if>
+      <if test="record.operDate != null" >
+        oper_date,
+      </if>
+      <if test="record.ipAddress != null" >
+        ip_address,
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address,
+      </if>
+      <if test="record.createStaff != null" >
+        create_staff,
+      </if>
+      <if test="record.createDate != null" >
+        create_date,
+      </if>
+      <if test="record.content != null" >
+        content,
+      </if>
+    </trim>
+    <foreach collection="records" item="listItem" open="values " close=" " separator="," >
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="record.logId != null" >
+          #{listItem.logId,jdbcType=INTEGER},
+        </if>
+        <if test="record.logType != null" >
+          #{listItem.logType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logSerial != null" >
+          #{listItem.logSerial,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operStaffName != null" >
+          #{listItem.operStaffName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operDate != null" >
+          #{listItem.operDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ipAddress != null" >
+          #{listItem.ipAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.macAddress != null" >
+          #{listItem.macAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createStaff != null" >
+          #{listItem.createStaff,jdbcType=INTEGER},
+        </if>
+        <if test="record.createDate != null" >
+          #{listItem.createDate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.content != null" >
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides="," >
+      <if test="record.logId != null" >
+        log_id=values(log_id),
+      </if>
+      <if test="record.logType != null" >
+        log_type=values(log_type),
+      </if>
+      <if test="record.logSerial != null" >
+        log_serial=values(log_serial),
+      </if>
+      <if test="record.operStaffName != null" >
+        oper_staff_name=values(oper_staff_name),
+      </if>
+      <if test="record.operDate != null" >
+        oper_date=values(oper_date),
+      </if>
+      <if test="record.ipAddress != null" >
+        ip_address=values(ip_address),
+      </if>
+      <if test="record.macAddress != null" >
+        mac_address=values(mac_address),
+      </if>
+      <if test="record.createStaff != null" >
+        create_staff=values(create_staff),
+      </if>
+      <if test="record.createDate != null" >
+        create_date=values(create_date),
+      </if>
+      <if test="record.content != null" >
+        content=values(content),
+      </if>
+    </trim>
+  </insert>
+</mapper>

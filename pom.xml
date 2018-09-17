@@ -12,6 +12,7 @@
         <module>cxf-stu</module>
         <module>dubbo-test</module>
         <module>audit-webservice</module>
+        <module>spring-stu</module>
     </modules>
 
     <properties>
@@ -202,13 +203,13 @@
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
-                <version>2.2</version>
-                <exclusions>
+                <version>2.2.2</version>
+                <!--<exclusions>
                     <exclusion>
                         <groupId>asm</groupId>
                         <artifactId>asm</artifactId>
                     </exclusion>
-                </exclusions>
+                </exclusions>-->
             </dependency>
             <dependency>
                 <groupId>commons-configuration</groupId>

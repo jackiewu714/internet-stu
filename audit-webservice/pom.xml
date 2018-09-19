@@ -89,7 +89,7 @@
                     <port>8088</port>
                     <path>/</path>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <finalName>cxf-stu</finalName>
+                    <finalName>audit-webservice</finalName>
                     <server>mytomcat7</server>
                 </configuration>
             </plugin>
@@ -134,8 +134,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <encoding>utf-8</encoding>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <meminitial>128m</meminitial>
                     <maxmem>512m</maxmem>
                 </configuration>

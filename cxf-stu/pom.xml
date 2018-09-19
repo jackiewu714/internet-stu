@@ -134,8 +134,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <encoding>utf-8</encoding>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <meminitial>128m</meminitial>
                     <maxmem>512m</maxmem>
                 </configuration>

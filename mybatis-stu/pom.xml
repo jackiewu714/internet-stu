@@ -42,6 +42,8 @@
     </dependencies>
 
     <build>
+        <!-- 过滤器，用于过滤resource中的各个文件 -->
+        <!-- maven filter可利用指定的xxx.properties中对应的key=value对资源文件中的${key}进行替换，最终把你的资源文件中的username=${key}替换成username=value -->
         <filters>
             <filter>src/main/resources/jdbc.properties</filter>
         </filters>
@@ -55,6 +57,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <!-- 配置成为true，则会使用filter中的值替换资源文件中的占位符号，如：mybatis-config.xml 中的 ${jdbc.url} 被替换为 jdbc.properties 文件中 jdbc.url 对应的值 -->
                 <filtering>true</filtering>
             </resource>
         </resources>

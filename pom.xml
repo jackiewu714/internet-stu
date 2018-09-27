@@ -13,6 +13,7 @@
         <module>dubbo-test</module>
         <module>audit-webservice</module>
         <module>spring-stu</module>
+        <module>mybatis-stu</module>
     </modules>
 
     <properties>
@@ -22,15 +23,18 @@
         <maven.junit.skip>true</maven.junit.skip>
         <maven.junit.testFailureIgnore>true</maven.junit.testFailureIgnore>
 
-        <org.springframework.version>4.3.3.RELEASE</org.springframework.version>
+        <org.springframework.version>5.0.8.RELEASE</org.springframework.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jackson.version>1.9.5</jackson.version>
         <jackson2.core.version>2.8.4</jackson2.core.version>
         <activemq.version>5.7.0</activemq.version>
-        <slf4j.version>1.7.9</slf4j.version>
+        <slf4j.version>1.7.25</slf4j.version>
         <logback.version>1.2.3</logback.version>
         <jedis.version>2.8.1</jedis.version>
-        <fastjson.version>1.2.38</fastjson.version>
+        <fastjson.version>1.2.49</fastjson.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <mybatis-spring.version>1.3.2</mybatis-spring.version>
+        <mysql-connector-java.version>5.1.42</mysql-connector-java.version>
         <!-- CXF版本 -->
         <cxf.version>3.1.9</cxf.version>
     </properties>
@@ -171,12 +175,12 @@
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis</artifactId>
-                <version>3.2.5</version>
+                <version>${mybatis.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
-                <version>1.2.2</version>
+                <version>${mybatis-spring.version}</version>
                 <exclusions>
                     <exclusion>
                         <artifactId>spring-tx</artifactId>
@@ -239,7 +243,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.37</version>
+                <version>${mysql-connector-java.version}</version>
             </dependency>
             <dependency> <!--Jackson核心包-->
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -330,6 +334,20 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -363,6 +381,24 @@
                         </manifest>
                     </archive>
                 </configuration>
+            </plugin>
+
+            <!-- 利用Maven的Source插件,对Maven工程的源码进行打jar包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <attach>true</attach>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

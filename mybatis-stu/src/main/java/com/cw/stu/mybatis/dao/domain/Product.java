@@ -13,7 +13,7 @@ public class Product {
     private String price;
     private int sort;
     private int falseSales;
-    private long category_id;
+    private long categoryId;
     private byte type;
     private byte state;
 
@@ -65,12 +65,12 @@ public class Product {
         this.falseSales = falseSales;
     }
 
-    public long getCategory_id() {
-        return category_id;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory_id(long category_id) {
-        this.category_id = category_id;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public byte getType() {

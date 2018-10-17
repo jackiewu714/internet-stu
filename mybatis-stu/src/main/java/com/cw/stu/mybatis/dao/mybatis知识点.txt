@@ -1,0 +1,15 @@
+
+mybatis如何获取数据源:
+org.apache.ibatis.session.SqlSessionFactoryBuilder.build(java.io.InputStream)
+    -> org.apache.ibatis.builder.xml.XMLConfigBuilder
+        -> org.apache.ibatis.builder.xml.XMLConfigBuilder.parse()
+            -> org.apache.ibatis.builder.xml.XMLConfigBuilder.environmentsElement(XNode context)
+                -> org.apache.ibatis.builder.xml.XMLConfigBuilder#dataSourceElement(XNode context)
+                    -> org.apache.ibatis.builder.BaseBuilder.resolveAlias((String alias))
+
+mybatis如何获取sql语句:
+org.apache.ibatis.session.SqlSessionFactoryBuilder.build(java.io.InputStream)
+    -> org.apache.ibatis.builder.xml.XMLConfigBuilder
+        -> org.apache.ibatis.builder.xml.XMLConfigBuilder.parse()
+            -> org.apache.ibatis.builder.xml.XMLConfigBuilder.mapperElementt(XNode parent)
+

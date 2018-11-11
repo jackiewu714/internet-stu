@@ -28,11 +28,17 @@ public class MyBatisInitTest {
             inputStream = Resources.getResourceAsStream(resource);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             sqlSession = sqlSessionFactory.openSession();
+
+            //获取到mapper，通过mapper进行操作
             ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
             List<Product> productList = productMapper.selectProductList();
             for (Product product : productList) {
-                System.out.println(JSON.toJSONString(product));
+                System.out.println("ProductMapper操作: " + JSON.toJSONString(product));
             }
+
+            //使用 SqlSession 封装好的方法进行操作
+            List<Product> queryProductList = sqlSession.selectList("com.cw.stu.mybatis.dao.persistence.ProductMapper.selectProductList");
+            System.out.println("SqlSession操作, queryProductList: " + JSON.toJSONString(queryProductList));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {

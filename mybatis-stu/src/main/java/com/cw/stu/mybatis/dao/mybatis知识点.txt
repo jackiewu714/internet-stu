@@ -12,4 +12,24 @@ org.apache.ibatis.session.SqlSessionFactoryBuilder.build(java.io.InputStream)
     -> org.apache.ibatis.builder.xml.XMLConfigBuilder
         -> org.apache.ibatis.builder.xml.XMLConfigBuilder.parse()
             -> org.apache.ibatis.builder.xml.XMLConfigBuilder.mapperElementt(XNode parent)
+                -> org.apache.ibatis.builder.xml.XMLMapperBuilder
+                    -> org.apache.ibatis.builder.xml.XMLMapperBuilder.parse()
+                        -> org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XNode context)
+                            -> org.apache.ibatis.builder.xml.XMLMapperBuilder.buildStatementFromContext(java.util.List<org.apache.ibatis.parsing.XNode>) {
+                                -> org.apache.ibatis.builder.xml.XMLStatementBuilder.parseStatementNode()
+                                    -> org.apache.ibatis.mapping.MappedStatement
+
+mybatis如何操作数据库:
+org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSession()
+    -> org.apache.ibatis.session.defaults.DefaultSqlSessionFactory.openSessionFromDataSource(ExecutorType execType, TransactionIsolationLevel level, boolean autoCommit)
+        -> org.apache.ibatis.session.Configuration.newExecutor(org.apache.ibatis.transaction.Transaction, org.apache.ibatis.session.ExecutorType)
+            -> org.apache.ibatis.executor.SimpleExecutor
+                -> org.apache.ibatis.session.defaults.DefaultSqlSession.DefaultSqlSession(org.apache.ibatis.session.Configuration, org.apache.ibatis.executor.Executor, boolean)
+                    -> org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(java.lang.String)
+                        -> org.apache.ibatis.session.Configuration.getMappedStatement(java.lang.String)
+
+mybatis三种执行器:
+public enum ExecutorType {
+  SIMPLE, REUSE, BATCH
+}
 

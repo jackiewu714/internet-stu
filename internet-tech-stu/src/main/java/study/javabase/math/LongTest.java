@@ -38,10 +38,11 @@ public class LongTest {
     @Test
     public void testContains() {
         List<Long> list = new ArrayList<Long>();
-        list.add(2002l);
-        list.add(2050l);
+        list.add(2002L);
+        list.add(2050L);
 
         Long l1 = 2050L;
+//        Long l2 = 2050.5L;
         System.out.print("list.contains(l1)=" + list.contains(l1));
     }
 

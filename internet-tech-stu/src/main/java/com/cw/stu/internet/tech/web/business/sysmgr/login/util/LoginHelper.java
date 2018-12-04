@@ -10,7 +10,7 @@ public class LoginHelper {
     public static String PRIVATE_KEY = "EF12ACD912AMOZGR";
 
     public static String DOMAIN = "315web.duowan.com";
-//    public static String DOMAIN = "127.0.0.1";
+//    public statics String DOMAIN = "127.0.0.1";
 
     public static String TICKET_NAME = "RP315";
 

@@ -74,6 +74,6 @@ public class FirstAgent implements ClassFileTransformer {
                 e.printStackTrace();
             }
         }
-        return new byte[0];
+        return classfileBuffer;
     }
 }

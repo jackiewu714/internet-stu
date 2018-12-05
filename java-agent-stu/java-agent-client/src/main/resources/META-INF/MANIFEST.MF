@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Premain-Class: com.cw.stu.java.agent.client.demo.FirstAgent

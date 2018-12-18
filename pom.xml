@@ -13,6 +13,7 @@
         <module>dubbo-test</module>
         <module>audit-webservice</module>
         <module>spring-stu</module>
+        <module>spring-boot-stu</module>
         <module>mybatis-stu</module>
         <module>java-agent-stu</module>
     </modules>

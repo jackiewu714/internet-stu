@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置study sqlSessionFactory -->
+    <bean id="study_sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="study_dataSource" />
+        <property name="configLocation" value="classpath:configs/mybatis/mybatis-config.xml" />
+        <property name="typeAliasesPackage" value="com.cw.stu.spring.transaction.jta.study" />
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:com/cw/stu/spring/transaction/jta/study/**/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置mybatis映射文件自动扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cw.stu.spring.transaction.jta.study"/>
+        <property name="sqlSessionFactoryBeanName" value="study_sqlSessionFactory" />
+    </bean>
+
+    <!-- 配置study sqlSessionFactory -->
+    <bean id="test_sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="test_dataSource" />
+        <property name="configLocation" value="classpath:configs/mybatis/mybatis-config.xml" />
+        <property name="typeAliasesPackage" value="com.cw.stu.spring.transaction.jta.test" />
+        <property name="mapperLocations">
+            <list>
+                <value>classpath*:com/cw/stu/spring/transaction/jta/test/**/*Mapper.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--配置mybatis映射文件自动扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.cw.stu.spring.transaction.jta.test"/>
+        <property name="sqlSessionFactoryBeanName" value="test_sqlSessionFactory" />
+    </bean>
+</beans>

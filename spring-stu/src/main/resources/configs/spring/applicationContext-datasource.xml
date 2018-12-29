@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置XADataSource -->
+    <bean id="abstractXADataSource" class="com.atomikos.jdbc.AtomikosDataSourceBean" init-method="init"
+          destroy-method="close" abstract="true">
+        <property name="xaDataSourceClassName" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
+        <property name="poolSize" value="10" />
+        <property name="minPoolSize" value="10" />
+        <property name="maxPoolSize" value="30" />
+        <property name="borrowConnectionTimeout" value="60" />
+        <property name="reapTimeout" value="20" />
+        <property name="maxIdleTime" value="60" />
+        <property name="maintenanceInterval" value="60" />
+        <property name="testQuery">
+            <value>SELECT 1</value>
+        </property>
+    </bean>
+
+    <!-- study数据库XADataSource -->
+    <bean id="study_dataSource" parent="abstractXADataSource">
+        <property name="uniqueResourceName">
+            <value>study_dataSource</value>
+        </property>
+        <property name="xaDataSourceClassName" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
+        <property name="xaProperties">
+            <props>
+                <prop key="URL">${jdbc.study.url}</prop>
+                <prop key="user">${jdbc.study.username}</prop>
+                <prop key="password">${jdbc.study.password}</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- test数据库XADataSource -->
+    <bean id="test_dataSource" parent="abstractXADataSource">
+        <property name="uniqueResourceName">
+            <value>test_dataSource</value>
+        </property>
+        <property name="xaDataSourceClassName" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
+        <property name="xaProperties">
+            <props>
+                <prop key="URL">${jdbc.test.url}</prop>
+                <prop key="user">${jdbc.test.username}</prop>
+                <prop key="password">${jdbc.test.password}</prop>
+                <prop key="pinGlobalTxToPhysicalConnection">true</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

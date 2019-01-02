@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.stu.spring.transaction.jta.study.dao.persistence.LoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="yyuid" jdbcType="BIGINT" property="yyuid" />
+    <result column="yyid" jdbcType="VARCHAR" property="yyid" />
+    <result column="staff_id" jdbcType="INTEGER" property="staffId" />
+    <result column="sys" jdbcType="VARCHAR" property="sys" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="mac" jdbcType="VARCHAR" property="mac" />
+    <result column="cre_date" jdbcType="TIMESTAMP" property="creDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null and id != ''">
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="userName != null and userName != ''">
+         and user_name = #{userName,jdbcType=VARCHAR}
+      </if>
+      <if test="userNameRange != null and userNameRange != ''">
+         and user_name like concat('%',#{userNameRange},'%')
+      </if>
+      <if test="yyuid != null and yyuid != ''">
+         and yyuid = #{yyuid,jdbcType=BIGINT}
+      </if>
+      <if test="yyid != null and yyid != ''">
+         and yyid = #{yyid,jdbcType=VARCHAR}
+      </if>
+      <if test="yyidRange != null and yyidRange != ''">
+         and yyid like concat('%',#{yyidRange},'%')
+      </if>
+      <if test="staffId != null and staffId != ''">
+         and staff_id = #{staffId,jdbcType=INTEGER}
+      </if>
+      <if test="sys != null and sys != ''">
+         and sys = #{sys,jdbcType=VARCHAR}
+      </if>
+      <if test="sysRange != null and sysRange != ''">
+         and sys like concat('%',#{sysRange},'%')
+      </if>
+      <if test="ip != null and ip != ''">
+         and ip = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="ipRange != null and ipRange != ''">
+         and ip like concat('%',#{ipRange},'%')
+      </if>
+      <if test="mac != null and mac != ''">
+         and mac = #{mac,jdbcType=VARCHAR}
+      </if>
+      <if test="macRange != null and macRange != ''">
+         and mac like concat('%',#{macRange},'%')
+      </if>
+      <if test="creDate != null and creDate != ''">
+         and cre_date = #{creDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="creDateRange1 != null and creDateRange1 != ''">
+         and cre_date &gt;= #{creDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="creDateRange2 != null and creDateRange2 != ''">
+         and cre_date &lt;= #{creDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null and example.id != ''">
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.userName != null and example.userName != ''">
+         and user_name = #{example.userName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.userNameRange != null and example.userNameRange != ''">
+         and user_name like concat('%',#{example.userNameRange},'%')
+      </if>
+      <if test="example.yyuid != null and example.yyuid != ''">
+         and yyuid = #{example.yyuid,jdbcType=BIGINT}
+      </if>
+      <if test="example.yyid != null and example.yyid != ''">
+         and yyid = #{example.yyid,jdbcType=VARCHAR}
+      </if>
+      <if test="example.yyidRange != null and example.yyidRange != ''">
+         and yyid like concat('%',#{example.yyidRange},'%')
+      </if>
+      <if test="example.staffId != null and example.staffId != ''">
+         and staff_id = #{example.staffId,jdbcType=INTEGER}
+      </if>
+      <if test="example.sys != null and example.sys != ''">
+         and sys = #{example.sys,jdbcType=VARCHAR}
+      </if>
+      <if test="example.sysRange != null and example.sysRange != ''">
+         and sys like concat('%',#{example.sysRange},'%')
+      </if>
+      <if test="example.ip != null and example.ip != ''">
+         and ip = #{example.ip,jdbcType=VARCHAR}
+      </if>
+      <if test="example.ipRange != null and example.ipRange != ''">
+         and ip like concat('%',#{example.ipRange},'%')
+      </if>
+      <if test="example.mac != null and example.mac != ''">
+         and mac = #{example.mac,jdbcType=VARCHAR}
+      </if>
+      <if test="example.macRange != null and example.macRange != ''">
+         and mac like concat('%',#{example.macRange},'%')
+      </if>
+      <if test="example.creDate != null and example.creDate != ''">
+         and cre_date = #{example.creDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.creDateRange1 != null and example.creDateRange1 != ''">
+         and cre_date &gt;= #{example.creDateRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.creDateRange2 != null and example.creDateRange2 != ''">
+         and cre_date &lt;= #{example.creDateRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_name, yyuid, yyid, staff_id, sys, ip, mac, cre_date
+  </sql>
+  <select id="selectByExample" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLogCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tb_sm_login_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sm_login_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_sm_login_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLogCriteria">
+    delete from tb_sm_login_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    insert into tb_sm_login_log (id, user_name, yyuid, 
+      yyid, staff_id, sys, 
+      ip, mac, cre_date)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{yyuid,jdbcType=BIGINT}, 
+      #{yyid,jdbcType=VARCHAR}, #{staffId,jdbcType=INTEGER}, #{sys,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{creDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    insert into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="yyuid != null">
+        yyuid,
+      </if>
+      <if test="yyid != null">
+        yyid,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="sys != null">
+        sys,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuid != null">
+        #{yyuid,jdbcType=BIGINT},
+      </if>
+      <if test="yyid != null">
+        #{yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="sys != null">
+        #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        #{creDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLogCriteria" resultType="java.lang.Long">
+    select count(*) from tb_sm_login_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_sm_login_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yyuid != null">
+        yyuid = #{record.yyuid,jdbcType=BIGINT},
+      </if>
+      <if test="record.yyid != null">
+        yyid = #{record.yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffId != null">
+        staff_id = #{record.staffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sys != null">
+        sys = #{record.sys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null">
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creDate != null">
+        cre_date = #{record.creDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_sm_login_log
+    set id = #{record.id,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      yyuid = #{record.yyuid,jdbcType=BIGINT},
+      yyid = #{record.yyid,jdbcType=VARCHAR},
+      staff_id = #{record.staffId,jdbcType=INTEGER},
+      sys = #{record.sys,jdbcType=VARCHAR},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      cre_date = #{record.creDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    update tb_sm_login_log
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuid != null">
+        yyuid = #{yyuid,jdbcType=BIGINT},
+      </if>
+      <if test="yyid != null">
+        yyid = #{yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        staff_id = #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="sys != null">
+        sys = #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        cre_date = #{creDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    update tb_sm_login_log
+    set user_name = #{userName,jdbcType=VARCHAR},
+      yyuid = #{yyuid,jdbcType=BIGINT},
+      yyid = #{yyid,jdbcType=VARCHAR},
+      staff_id = #{staffId,jdbcType=INTEGER},
+      sys = #{sys,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      cre_date = #{creDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.userName != null">
+        user_name,
+      </if>
+      <if test="record.yyuid != null">
+        yyuid,
+      </if>
+      <if test="record.yyid != null">
+        yyid,
+      </if>
+      <if test="record.staffId != null">
+        staff_id,
+      </if>
+      <if test="record.sys != null">
+        sys,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.userName != null">
+          #{listItem.userName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.yyuid != null">
+          #{listItem.yyuid,jdbcType=BIGINT},
+        </if>
+        <if test="record.yyid != null">
+          #{listItem.yyid,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffId != null">
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.sys != null">
+          #{listItem.sys,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.creDate != null">
+          #{listItem.creDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.userName != null">
+        user_name,
+      </if>
+      <if test="record.yyuid != null">
+        yyuid,
+      </if>
+      <if test="record.yyid != null">
+        yyid,
+      </if>
+      <if test="record.staffId != null">
+        staff_id,
+      </if>
+      <if test="record.sys != null">
+        sys,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.userName != null">
+          #{listItem.userName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.yyuid != null">
+          #{listItem.yyuid,jdbcType=BIGINT},
+        </if>
+        <if test="record.yyid != null">
+          #{listItem.yyid,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffId != null">
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.sys != null">
+          #{listItem.sys,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.creDate != null">
+          #{listItem.creDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    replace into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="yyuid != null">
+        yyuid,
+      </if>
+      <if test="yyid != null">
+        yyid,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="sys != null">
+        sys,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuid != null">
+        #{yyuid,jdbcType=BIGINT},
+      </if>
+      <if test="yyid != null">
+        #{yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="sys != null">
+        #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        #{creDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.cw.stu.spring.transaction.jta.study.dao.domain.LoginLog">
+    insert into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="yyuid != null">
+        yyuid,
+      </if>
+      <if test="yyid != null">
+        yyid,
+      </if>
+      <if test="staffId != null">
+        staff_id,
+      </if>
+      <if test="sys != null">
+        sys,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="yyuid != null">
+        #{yyuid,jdbcType=BIGINT},
+      </if>
+      <if test="yyid != null">
+        #{yyid,jdbcType=VARCHAR},
+      </if>
+      <if test="staffId != null">
+        #{staffId,jdbcType=INTEGER},
+      </if>
+      <if test="sys != null">
+        #{sys,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null">
+        #{creDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id=values(id),
+      </if>
+      <if test="userName != null">
+        user_name=values(user_name),
+      </if>
+      <if test="yyuid != null">
+        yyuid=values(yyuid),
+      </if>
+      <if test="yyid != null">
+        yyid=values(yyid),
+      </if>
+      <if test="staffId != null">
+        staff_id=values(staff_id),
+      </if>
+      <if test="sys != null">
+        sys=values(sys),
+      </if>
+      <if test="ip != null">
+        ip=values(ip),
+      </if>
+      <if test="mac != null">
+        mac=values(mac),
+      </if>
+      <if test="creDate != null">
+        cre_date=values(cre_date),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into tb_sm_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.userName != null">
+        user_name,
+      </if>
+      <if test="record.yyuid != null">
+        yyuid,
+      </if>
+      <if test="record.yyid != null">
+        yyid,
+      </if>
+      <if test="record.staffId != null">
+        staff_id,
+      </if>
+      <if test="record.sys != null">
+        sys,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.creDate != null">
+        cre_date,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.userName != null">
+          #{listItem.userName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.yyuid != null">
+          #{listItem.yyuid,jdbcType=BIGINT},
+        </if>
+        <if test="record.yyid != null">
+          #{listItem.yyid,jdbcType=VARCHAR},
+        </if>
+        <if test="record.staffId != null">
+          #{listItem.staffId,jdbcType=INTEGER},
+        </if>
+        <if test="record.sys != null">
+          #{listItem.sys,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.creDate != null">
+          #{listItem.creDate,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.id != null">
+        id=values(id),
+      </if>
+      <if test="record.userName != null">
+        user_name=values(user_name),
+      </if>
+      <if test="record.yyuid != null">
+        yyuid=values(yyuid),
+      </if>
+      <if test="record.yyid != null">
+        yyid=values(yyid),
+      </if>
+      <if test="record.staffId != null">
+        staff_id=values(staff_id),
+      </if>
+      <if test="record.sys != null">
+        sys=values(sys),
+      </if>
+      <if test="record.ip != null">
+        ip=values(ip),
+      </if>
+      <if test="record.mac != null">
+        mac=values(mac),
+      </if>
+      <if test="record.creDate != null">
+        cre_date=values(cre_date),
+      </if>
+    </trim>
+  </insert>
+</mapper>

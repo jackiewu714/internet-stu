@@ -26,14 +26,14 @@
     <!--声明式事务-->
     <tx:advice id="txAdvice" transaction-manager="jtaTranactionManager">
         <tx:attributes>
-            <tx:method name="add*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="modify*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="update*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="delete*" propagation="REQUIRED" read-only="true"/>
-            <tx:method name="*" propagation="SUPPORTS" rollback-for="Exception" />
+            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="list*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
         </tx:attributes>
     </tx:advice>
     <aop:config proxy-target-class="true">
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.cw.stu.spring.transaction.jta.service.impl.JtaTestServiceImpl.jtaUpdateTransaction(..))" />
+        <aop:advisor advice-ref="txAdvice"
+                     pointcut="execution(* com.cw.stu.spring.transaction.jta.service.impl.JtaTestServiceImpl.jtaUpdateTransaction(..))" />
     </aop:config>
 </beans>

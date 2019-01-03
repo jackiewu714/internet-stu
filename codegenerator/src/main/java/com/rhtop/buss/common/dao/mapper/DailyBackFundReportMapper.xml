@@ -1,0 +1,713 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.DailyBackFundReportMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    <id column="report_id" jdbcType="VARCHAR" property="reportId" />
+    <result column="report_bank_name" jdbcType="VARCHAR" property="reportBankName" />
+    <result column="report_summary" jdbcType="VARCHAR" property="reportSummary" />
+    <result column="report_time" jdbcType="TIMESTAMP" property="reportTime" />
+    <result column="report_lend" jdbcType="VARCHAR" property="reportLend" />
+    <result column="report_borrow" jdbcType="VARCHAR" property="reportBorrow" />
+    <result column="report_balance" jdbcType="DECIMAL" property="reportBalance" />
+    <result column="report_comment" jdbcType="VARCHAR" property="reportComment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="reportId != null and reportId != ''">
+         and report_id = #{reportId,jdbcType=VARCHAR}
+      </if>
+      <if test="reportIdRange != null and reportIdRange != ''">
+         and report_id like concat('%',#{reportIdRange},'%')
+      </if>
+      <if test="reportBankName != null and reportBankName != ''">
+         and report_bank_name = #{reportBankName,jdbcType=VARCHAR}
+      </if>
+      <if test="reportBankNameRange != null and reportBankNameRange != ''">
+         and report_bank_name like concat('%',#{reportBankNameRange},'%')
+      </if>
+      <if test="reportSummary != null and reportSummary != ''">
+         and report_summary = #{reportSummary,jdbcType=VARCHAR}
+      </if>
+      <if test="reportSummaryRange != null and reportSummaryRange != ''">
+         and report_summary like concat('%',#{reportSummaryRange},'%')
+      </if>
+      <if test="reportTime != null and reportTime != ''">
+         and report_time = #{reportTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportTimeRange1 != null and reportTimeRange1 != ''">
+         and report_time &gt;= #{reportTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportTimeRange2 != null and reportTimeRange2 != ''">
+         and report_time &lt;= #{reportTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportLend != null and reportLend != ''">
+         and report_lend = #{reportLend,jdbcType=VARCHAR}
+      </if>
+      <if test="reportLendRange != null and reportLendRange != ''">
+         and report_lend like concat('%',#{reportLendRange},'%')
+      </if>
+      <if test="reportBorrow != null and reportBorrow != ''">
+         and report_borrow = #{reportBorrow,jdbcType=VARCHAR}
+      </if>
+      <if test="reportBorrowRange != null and reportBorrowRange != ''">
+         and report_borrow like concat('%',#{reportBorrowRange},'%')
+      </if>
+      <if test="reportBalance != null and reportBalance != ''">
+         and report_balance = #{reportBalance,jdbcType=DECIMAL}
+      </if>
+      <if test="reportComment != null and reportComment != ''">
+         and report_comment = #{reportComment,jdbcType=VARCHAR}
+      </if>
+      <if test="reportCommentRange != null and reportCommentRange != ''">
+         and report_comment like concat('%',#{reportCommentRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.reportId != null and example.reportId != ''">
+         and report_id = #{example.reportId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportIdRange != null and example.reportIdRange != ''">
+         and report_id like concat('%',#{example.reportIdRange},'%')
+      </if>
+      <if test="example.reportBankName != null and example.reportBankName != ''">
+         and report_bank_name = #{example.reportBankName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportBankNameRange != null and example.reportBankNameRange != ''">
+         and report_bank_name like concat('%',#{example.reportBankNameRange},'%')
+      </if>
+      <if test="example.reportSummary != null and example.reportSummary != ''">
+         and report_summary = #{example.reportSummary,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportSummaryRange != null and example.reportSummaryRange != ''">
+         and report_summary like concat('%',#{example.reportSummaryRange},'%')
+      </if>
+      <if test="example.reportTime != null and example.reportTime != ''">
+         and report_time = #{example.reportTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportTimeRange1 != null and example.reportTimeRange1 != ''">
+         and report_time &gt;= #{example.reportTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportTimeRange2 != null and example.reportTimeRange2 != ''">
+         and report_time &lt;= #{example.reportTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportLend != null and example.reportLend != ''">
+         and report_lend = #{example.reportLend,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportLendRange != null and example.reportLendRange != ''">
+         and report_lend like concat('%',#{example.reportLendRange},'%')
+      </if>
+      <if test="example.reportBorrow != null and example.reportBorrow != ''">
+         and report_borrow = #{example.reportBorrow,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportBorrowRange != null and example.reportBorrowRange != ''">
+         and report_borrow like concat('%',#{example.reportBorrowRange},'%')
+      </if>
+      <if test="example.reportBalance != null and example.reportBalance != ''">
+         and report_balance = #{example.reportBalance,jdbcType=DECIMAL}
+      </if>
+      <if test="example.reportComment != null and example.reportComment != ''">
+         and report_comment = #{example.reportComment,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportCommentRange != null and example.reportCommentRange != ''">
+         and report_comment like concat('%',#{example.reportCommentRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    report_id, report_bank_name, report_summary, report_time, report_lend, report_borrow, 
+    report_balance, report_comment
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReportCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_daily_back_fund_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_daily_back_fund_report
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_daily_back_fund_report
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReportCriteria">
+    delete from buss_daily_back_fund_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    insert into buss_daily_back_fund_report (report_id, report_bank_name, report_summary, 
+      report_time, report_lend, report_borrow, 
+      report_balance, report_comment)
+    values (#{reportId,jdbcType=VARCHAR}, #{reportBankName,jdbcType=VARCHAR}, #{reportSummary,jdbcType=VARCHAR}, 
+      #{reportTime,jdbcType=TIMESTAMP}, #{reportLend,jdbcType=VARCHAR}, #{reportBorrow,jdbcType=VARCHAR}, 
+      #{reportBalance,jdbcType=DECIMAL}, #{reportComment,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    insert into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="reportSummary != null">
+        report_summary,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportLend != null">
+        report_lend,
+      </if>
+      <if test="reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="reportBalance != null">
+        report_balance,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBankName != null">
+        #{reportBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSummary != null">
+        #{reportSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportLend != null">
+        #{reportLend,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBorrow != null">
+        #{reportBorrow,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBalance != null">
+        #{reportBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReportCriteria" resultType="java.lang.Long">
+    select count(*) from buss_daily_back_fund_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_daily_back_fund_report
+    <set>
+      <if test="record.reportId != null">
+        report_id = #{record.reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportBankName != null">
+        report_bank_name = #{record.reportBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportSummary != null">
+        report_summary = #{record.reportSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportTime != null">
+        report_time = #{record.reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportLend != null">
+        report_lend = #{record.reportLend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportBorrow != null">
+        report_borrow = #{record.reportBorrow,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportBalance != null">
+        report_balance = #{record.reportBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.reportComment != null">
+        report_comment = #{record.reportComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_daily_back_fund_report
+    set report_id = #{record.reportId,jdbcType=VARCHAR},
+      report_bank_name = #{record.reportBankName,jdbcType=VARCHAR},
+      report_summary = #{record.reportSummary,jdbcType=VARCHAR},
+      report_time = #{record.reportTime,jdbcType=TIMESTAMP},
+      report_lend = #{record.reportLend,jdbcType=VARCHAR},
+      report_borrow = #{record.reportBorrow,jdbcType=VARCHAR},
+      report_balance = #{record.reportBalance,jdbcType=DECIMAL},
+      report_comment = #{record.reportComment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    update buss_daily_back_fund_report
+    <set>
+      <if test="reportBankName != null">
+        report_bank_name = #{reportBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSummary != null">
+        report_summary = #{reportSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTime != null">
+        report_time = #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportLend != null">
+        report_lend = #{reportLend,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBorrow != null">
+        report_borrow = #{reportBorrow,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBalance != null">
+        report_balance = #{reportBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="reportComment != null">
+        report_comment = #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    update buss_daily_back_fund_report
+    set report_bank_name = #{reportBankName,jdbcType=VARCHAR},
+      report_summary = #{reportSummary,jdbcType=VARCHAR},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_lend = #{reportLend,jdbcType=VARCHAR},
+      report_borrow = #{reportBorrow,jdbcType=VARCHAR},
+      report_balance = #{reportBalance,jdbcType=DECIMAL},
+      report_comment = #{reportComment,jdbcType=VARCHAR}
+    where report_id = #{reportId,jdbcType=VARCHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="record.reportSummary != null">
+        report_summary,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportLend != null">
+        report_lend,
+      </if>
+      <if test="record.reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="record.reportBalance != null">
+        report_balance,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBankName != null">
+          #{listItem.reportBankName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportSummary != null">
+          #{listItem.reportSummary,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportLend != null">
+          #{listItem.reportLend,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBorrow != null">
+          #{listItem.reportBorrow,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBalance != null">
+          #{listItem.reportBalance,jdbcType=DECIMAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="record.reportSummary != null">
+        report_summary,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportLend != null">
+        report_lend,
+      </if>
+      <if test="record.reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="record.reportBalance != null">
+        report_balance,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBankName != null">
+          #{listItem.reportBankName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportSummary != null">
+          #{listItem.reportSummary,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportLend != null">
+          #{listItem.reportLend,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBorrow != null">
+          #{listItem.reportBorrow,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBalance != null">
+          #{listItem.reportBalance,jdbcType=DECIMAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    replace into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="reportSummary != null">
+        report_summary,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportLend != null">
+        report_lend,
+      </if>
+      <if test="reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="reportBalance != null">
+        report_balance,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBankName != null">
+        #{reportBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSummary != null">
+        #{reportSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportLend != null">
+        #{reportLend,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBorrow != null">
+        #{reportBorrow,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBalance != null">
+        #{reportBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReport">
+    insert into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="reportSummary != null">
+        report_summary,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportLend != null">
+        report_lend,
+      </if>
+      <if test="reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="reportBalance != null">
+        report_balance,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBankName != null">
+        #{reportBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportSummary != null">
+        #{reportSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportLend != null">
+        #{reportLend,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBorrow != null">
+        #{reportBorrow,jdbcType=VARCHAR},
+      </if>
+      <if test="reportBalance != null">
+        #{reportBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="reportId != null">
+        report_id=values(report_id),
+      </if>
+      <if test="reportBankName != null">
+        report_bank_name=values(report_bank_name),
+      </if>
+      <if test="reportSummary != null">
+        report_summary=values(report_summary),
+      </if>
+      <if test="reportTime != null">
+        report_time=values(report_time),
+      </if>
+      <if test="reportLend != null">
+        report_lend=values(report_lend),
+      </if>
+      <if test="reportBorrow != null">
+        report_borrow=values(report_borrow),
+      </if>
+      <if test="reportBalance != null">
+        report_balance=values(report_balance),
+      </if>
+      <if test="reportComment != null">
+        report_comment=values(report_comment),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_daily_back_fund_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportBankName != null">
+        report_bank_name,
+      </if>
+      <if test="record.reportSummary != null">
+        report_summary,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportLend != null">
+        report_lend,
+      </if>
+      <if test="record.reportBorrow != null">
+        report_borrow,
+      </if>
+      <if test="record.reportBalance != null">
+        report_balance,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBankName != null">
+          #{listItem.reportBankName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportSummary != null">
+          #{listItem.reportSummary,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportLend != null">
+          #{listItem.reportLend,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBorrow != null">
+          #{listItem.reportBorrow,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportBalance != null">
+          #{listItem.reportBalance,jdbcType=DECIMAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id=values(report_id),
+      </if>
+      <if test="record.reportBankName != null">
+        report_bank_name=values(report_bank_name),
+      </if>
+      <if test="record.reportSummary != null">
+        report_summary=values(report_summary),
+      </if>
+      <if test="record.reportTime != null">
+        report_time=values(report_time),
+      </if>
+      <if test="record.reportLend != null">
+        report_lend=values(report_lend),
+      </if>
+      <if test="record.reportBorrow != null">
+        report_borrow=values(report_borrow),
+      </if>
+      <if test="record.reportBalance != null">
+        report_balance=values(report_balance),
+      </if>
+      <if test="record.reportComment != null">
+        report_comment=values(report_comment),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.DailyBackFundReportCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_daily_back_fund_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

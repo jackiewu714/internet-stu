@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.sys.persistence.BizCodeMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="catalog" jdbcType="VARCHAR" property="catalog" />
+    <result column="block" jdbcType="VARCHAR" property="block" />
+    <result column="biz_code" jdbcType="VARCHAR" property="bizCode" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="feature" jdbcType="VARCHAR" property="feature" />
+    <result column="log_format" jdbcType="VARCHAR" property="logFormat" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null and id != ''">
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="catalog != null and catalog != ''">
+         and catalog = #{catalog,jdbcType=VARCHAR}
+      </if>
+      <if test="catalogRange != null and catalogRange != ''">
+         and catalog like concat('%',#{catalogRange},'%')
+      </if>
+      <if test="block != null and block != ''">
+         and block = #{block,jdbcType=VARCHAR}
+      </if>
+      <if test="blockRange != null and blockRange != ''">
+         and block like concat('%',#{blockRange},'%')
+      </if>
+      <if test="bizCode != null and bizCode != ''">
+         and biz_code = #{bizCode,jdbcType=VARCHAR}
+      </if>
+      <if test="bizCodeRange != null and bizCodeRange != ''">
+         and biz_code like concat('%',#{bizCodeRange},'%')
+      </if>
+      <if test="name != null and name != ''">
+         and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="nameRange != null and nameRange != ''">
+         and name like concat('%',#{nameRange},'%')
+      </if>
+      <if test="feature != null and feature != ''">
+         and feature = #{feature,jdbcType=VARCHAR}
+      </if>
+      <if test="featureRange != null and featureRange != ''">
+         and feature like concat('%',#{featureRange},'%')
+      </if>
+      <if test="logFormat != null and logFormat != ''">
+         and log_format = #{logFormat,jdbcType=VARCHAR}
+      </if>
+      <if test="logFormatRange != null and logFormatRange != ''">
+         and log_format like concat('%',#{logFormatRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null and example.id != ''">
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.catalog != null and example.catalog != ''">
+         and catalog = #{example.catalog,jdbcType=VARCHAR}
+      </if>
+      <if test="example.catalogRange != null and example.catalogRange != ''">
+         and catalog like concat('%',#{example.catalogRange},'%')
+      </if>
+      <if test="example.block != null and example.block != ''">
+         and block = #{example.block,jdbcType=VARCHAR}
+      </if>
+      <if test="example.blockRange != null and example.blockRange != ''">
+         and block like concat('%',#{example.blockRange},'%')
+      </if>
+      <if test="example.bizCode != null and example.bizCode != ''">
+         and biz_code = #{example.bizCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.bizCodeRange != null and example.bizCodeRange != ''">
+         and biz_code like concat('%',#{example.bizCodeRange},'%')
+      </if>
+      <if test="example.name != null and example.name != ''">
+         and name = #{example.name,jdbcType=VARCHAR}
+      </if>
+      <if test="example.nameRange != null and example.nameRange != ''">
+         and name like concat('%',#{example.nameRange},'%')
+      </if>
+      <if test="example.feature != null and example.feature != ''">
+         and feature = #{example.feature,jdbcType=VARCHAR}
+      </if>
+      <if test="example.featureRange != null and example.featureRange != ''">
+         and feature like concat('%',#{example.featureRange},'%')
+      </if>
+      <if test="example.logFormat != null and example.logFormat != ''">
+         and log_format = #{example.logFormat,jdbcType=VARCHAR}
+      </if>
+      <if test="example.logFormatRange != null and example.logFormatRange != ''">
+         and log_format like concat('%',#{example.logFormatRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, catalog, block, biz_code, name, feature, log_format
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCodeCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_biz_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_biz_code
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_biz_code
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCodeCriteria">
+    delete from sys_biz_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_biz_code (catalog, block, biz_code, 
+      name, feature, log_format
+      )
+    values (#{catalog,jdbcType=VARCHAR}, #{block,jdbcType=VARCHAR}, #{bizCode,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{feature,jdbcType=VARCHAR}, #{logFormat,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="block != null">
+        block,
+      </if>
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="block != null">
+        #{block,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="logFormat != null">
+        #{logFormat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCodeCriteria" resultType="java.lang.Long">
+    select count(*) from sys_biz_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_biz_code
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.catalog != null">
+        catalog = #{record.catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="record.block != null">
+        block = #{record.block,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bizCode != null">
+        biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feature != null">
+        feature = #{record.feature,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logFormat != null">
+        log_format = #{record.logFormat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_biz_code
+    set id = #{record.id,jdbcType=INTEGER},
+      catalog = #{record.catalog,jdbcType=VARCHAR},
+      block = #{record.block,jdbcType=VARCHAR},
+      biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      feature = #{record.feature,jdbcType=VARCHAR},
+      log_format = #{record.logFormat,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    update sys_biz_code
+    <set>
+      <if test="catalog != null">
+        catalog = #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="block != null">
+        block = #{block,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCode != null">
+        biz_code = #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        feature = #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="logFormat != null">
+        log_format = #{logFormat,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    update sys_biz_code
+    set catalog = #{catalog,jdbcType=VARCHAR},
+      block = #{block,jdbcType=VARCHAR},
+      biz_code = #{bizCode,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      feature = #{feature,jdbcType=VARCHAR},
+      log_format = #{logFormat,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.catalog != null">
+        catalog,
+      </if>
+      <if test="record.block != null">
+        block,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.name != null">
+        name,
+      </if>
+      <if test="record.feature != null">
+        feature,
+      </if>
+      <if test="record.logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.catalog != null">
+          #{listItem.catalog,jdbcType=VARCHAR},
+        </if>
+        <if test="record.block != null">
+          #{listItem.block,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.name != null">
+          #{listItem.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null">
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logFormat != null">
+          #{listItem.logFormat,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.catalog != null">
+        catalog,
+      </if>
+      <if test="record.block != null">
+        block,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.name != null">
+        name,
+      </if>
+      <if test="record.feature != null">
+        feature,
+      </if>
+      <if test="record.logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.catalog != null">
+          #{listItem.catalog,jdbcType=VARCHAR},
+        </if>
+        <if test="record.block != null">
+          #{listItem.block,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.name != null">
+          #{listItem.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null">
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logFormat != null">
+          #{listItem.logFormat,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    replace into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="block != null">
+        block,
+      </if>
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="block != null">
+        #{block,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="logFormat != null">
+        #{logFormat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCode">
+    insert into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="catalog != null">
+        catalog,
+      </if>
+      <if test="block != null">
+        block,
+      </if>
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="feature != null">
+        feature,
+      </if>
+      <if test="logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="catalog != null">
+        #{catalog,jdbcType=VARCHAR},
+      </if>
+      <if test="block != null">
+        #{block,jdbcType=VARCHAR},
+      </if>
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="feature != null">
+        #{feature,jdbcType=VARCHAR},
+      </if>
+      <if test="logFormat != null">
+        #{logFormat,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id=values(id),
+      </if>
+      <if test="catalog != null">
+        catalog=values(catalog),
+      </if>
+      <if test="block != null">
+        block=values(block),
+      </if>
+      <if test="bizCode != null">
+        biz_code=values(biz_code),
+      </if>
+      <if test="name != null">
+        name=values(name),
+      </if>
+      <if test="feature != null">
+        feature=values(feature),
+      </if>
+      <if test="logFormat != null">
+        log_format=values(log_format),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into sys_biz_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.catalog != null">
+        catalog,
+      </if>
+      <if test="record.block != null">
+        block,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.name != null">
+        name,
+      </if>
+      <if test="record.feature != null">
+        feature,
+      </if>
+      <if test="record.logFormat != null">
+        log_format,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.catalog != null">
+          #{listItem.catalog,jdbcType=VARCHAR},
+        </if>
+        <if test="record.block != null">
+          #{listItem.block,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.name != null">
+          #{listItem.name,jdbcType=VARCHAR},
+        </if>
+        <if test="record.feature != null">
+          #{listItem.feature,jdbcType=VARCHAR},
+        </if>
+        <if test="record.logFormat != null">
+          #{listItem.logFormat,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.id != null">
+        id=values(id),
+      </if>
+      <if test="record.catalog != null">
+        catalog=values(catalog),
+      </if>
+      <if test="record.block != null">
+        block=values(block),
+      </if>
+      <if test="record.bizCode != null">
+        biz_code=values(biz_code),
+      </if>
+      <if test="record.name != null">
+        name=values(name),
+      </if>
+      <if test="record.feature != null">
+        feature=values(feature),
+      </if>
+      <if test="record.logFormat != null">
+        log_format=values(log_format),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.sys.domain.BizCodeCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_biz_code
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

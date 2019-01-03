@@ -1,0 +1,1652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.SlaOrderMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.SlaOrder">
+    <id column="sla_order_id" jdbcType="CHAR" property="slaOrderId" />
+    <result column="order_id" jdbcType="CHAR" property="orderId" />
+    <result column="sla_order_type" jdbcType="CHAR" property="slaOrderType" />
+    <result column="md_id" jdbcType="CHAR" property="mdId" />
+    <result column="md_name" jdbcType="VARCHAR" property="mdName" />
+    <result column="buss_name" jdbcType="VARCHAR" property="bussName" />
+    <result column="buss_id" jdbcType="CHAR" property="bussId" />
+    <result column="category_id" jdbcType="CHAR" property="categoryId" />
+    <result column="counteroffer_id" jdbcType="CHAR" property="counterofferId" />
+    <result column="tx_amo" jdbcType="VARCHAR" property="txAmo" />
+    <result column="ctof_pri" jdbcType="DECIMAL" property="ctofPri" />
+    <result column="tot_pri" jdbcType="DECIMAL" property="totPri" />
+    <result column="so_status" jdbcType="VARCHAR" property="soStatus" />
+    <result column="cont_status" jdbcType="CHAR" property="contStatus" />
+    <result column="send_status" jdbcType="CHAR" property="sendStatus" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="CHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="offer_avg_weight" jdbcType="DECIMAL" property="offerAvgWeight" />
+    <result column="catchweight_pri" jdbcType="DECIMAL" property="catchweightPri" />
+    <result column="offer_pri" jdbcType="DECIMAL" property="offerPri" />
+    <result column="standard_catch" jdbcType="VARCHAR" property="standardCatch" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="slaOrderId != null and slaOrderId != ''">
+         and sla_order_id = #{slaOrderId,jdbcType=CHAR}
+      </if>
+      <if test="slaOrderIdRange != null and slaOrderIdRange != ''">
+         and sla_order_id like concat('%',#{slaOrderIdRange},'%')
+      </if>
+      <if test="orderId != null and orderId != ''">
+         and order_id = #{orderId,jdbcType=CHAR}
+      </if>
+      <if test="orderIdRange != null and orderIdRange != ''">
+         and order_id like concat('%',#{orderIdRange},'%')
+      </if>
+      <if test="slaOrderType != null and slaOrderType != ''">
+         and sla_order_type = #{slaOrderType,jdbcType=CHAR}
+      </if>
+      <if test="slaOrderTypeRange != null and slaOrderTypeRange != ''">
+         and sla_order_type like concat('%',#{slaOrderTypeRange},'%')
+      </if>
+      <if test="mdId != null and mdId != ''">
+         and md_id = #{mdId,jdbcType=CHAR}
+      </if>
+      <if test="mdIdRange != null and mdIdRange != ''">
+         and md_id like concat('%',#{mdIdRange},'%')
+      </if>
+      <if test="mdName != null and mdName != ''">
+         and md_name = #{mdName,jdbcType=VARCHAR}
+      </if>
+      <if test="mdNameRange != null and mdNameRange != ''">
+         and md_name like concat('%',#{mdNameRange},'%')
+      </if>
+      <if test="bussName != null and bussName != ''">
+         and buss_name = #{bussName,jdbcType=VARCHAR}
+      </if>
+      <if test="bussNameRange != null and bussNameRange != ''">
+         and buss_name like concat('%',#{bussNameRange},'%')
+      </if>
+      <if test="bussId != null and bussId != ''">
+         and buss_id = #{bussId,jdbcType=CHAR}
+      </if>
+      <if test="bussIdRange != null and bussIdRange != ''">
+         and buss_id like concat('%',#{bussIdRange},'%')
+      </if>
+      <if test="categoryId != null and categoryId != ''">
+         and category_id = #{categoryId,jdbcType=CHAR}
+      </if>
+      <if test="categoryIdRange != null and categoryIdRange != ''">
+         and category_id like concat('%',#{categoryIdRange},'%')
+      </if>
+      <if test="counterofferId != null and counterofferId != ''">
+         and counteroffer_id = #{counterofferId,jdbcType=CHAR}
+      </if>
+      <if test="counterofferIdRange != null and counterofferIdRange != ''">
+         and counteroffer_id like concat('%',#{counterofferIdRange},'%')
+      </if>
+      <if test="txAmo != null and txAmo != ''">
+         and tx_amo = #{txAmo,jdbcType=VARCHAR}
+      </if>
+      <if test="txAmoRange != null and txAmoRange != ''">
+         and tx_amo like concat('%',#{txAmoRange},'%')
+      </if>
+      <if test="ctofPri != null and ctofPri != ''">
+         and ctof_pri = #{ctofPri,jdbcType=DECIMAL}
+      </if>
+      <if test="totPri != null and totPri != ''">
+         and tot_pri = #{totPri,jdbcType=DECIMAL}
+      </if>
+      <if test="soStatus != null and soStatus != ''">
+         and so_status = #{soStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="soStatusRange != null and soStatusRange != ''">
+         and so_status like concat('%',#{soStatusRange},'%')
+      </if>
+      <if test="contStatus != null and contStatus != ''">
+         and cont_status = #{contStatus,jdbcType=CHAR}
+      </if>
+      <if test="contStatusRange != null and contStatusRange != ''">
+         and cont_status like concat('%',#{contStatusRange},'%')
+      </if>
+      <if test="sendStatus != null and sendStatus != ''">
+         and send_status = #{sendStatus,jdbcType=CHAR}
+      </if>
+      <if test="sendStatusRange != null and sendStatusRange != ''">
+         and send_status like concat('%',#{sendStatusRange},'%')
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+         and update_user = #{updateUser,jdbcType=CHAR}
+      </if>
+      <if test="updateUserRange != null and updateUserRange != ''">
+         and update_user like concat('%',#{updateUserRange},'%')
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+         and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange1 != null and updateTimeRange1 != ''">
+         and update_time &gt;= #{updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange2 != null and updateTimeRange2 != ''">
+         and update_time &lt;= #{updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerAvgWeight != null and offerAvgWeight != ''">
+         and offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="catchweightPri != null and catchweightPri != ''">
+         and catchweight_pri = #{catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="offerPri != null and offerPri != ''">
+         and offer_pri = #{offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="standardCatch != null and standardCatch != ''">
+         and standard_catch = #{standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="standardCatchRange != null and standardCatchRange != ''">
+         and standard_catch like concat('%',#{standardCatchRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.slaOrderId != null and example.slaOrderId != ''">
+         and sla_order_id = #{example.slaOrderId,jdbcType=CHAR}
+      </if>
+      <if test="example.slaOrderIdRange != null and example.slaOrderIdRange != ''">
+         and sla_order_id like concat('%',#{example.slaOrderIdRange},'%')
+      </if>
+      <if test="example.orderId != null and example.orderId != ''">
+         and order_id = #{example.orderId,jdbcType=CHAR}
+      </if>
+      <if test="example.orderIdRange != null and example.orderIdRange != ''">
+         and order_id like concat('%',#{example.orderIdRange},'%')
+      </if>
+      <if test="example.slaOrderType != null and example.slaOrderType != ''">
+         and sla_order_type = #{example.slaOrderType,jdbcType=CHAR}
+      </if>
+      <if test="example.slaOrderTypeRange != null and example.slaOrderTypeRange != ''">
+         and sla_order_type like concat('%',#{example.slaOrderTypeRange},'%')
+      </if>
+      <if test="example.mdId != null and example.mdId != ''">
+         and md_id = #{example.mdId,jdbcType=CHAR}
+      </if>
+      <if test="example.mdIdRange != null and example.mdIdRange != ''">
+         and md_id like concat('%',#{example.mdIdRange},'%')
+      </if>
+      <if test="example.mdName != null and example.mdName != ''">
+         and md_name = #{example.mdName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.mdNameRange != null and example.mdNameRange != ''">
+         and md_name like concat('%',#{example.mdNameRange},'%')
+      </if>
+      <if test="example.bussName != null and example.bussName != ''">
+         and buss_name = #{example.bussName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.bussNameRange != null and example.bussNameRange != ''">
+         and buss_name like concat('%',#{example.bussNameRange},'%')
+      </if>
+      <if test="example.bussId != null and example.bussId != ''">
+         and buss_id = #{example.bussId,jdbcType=CHAR}
+      </if>
+      <if test="example.bussIdRange != null and example.bussIdRange != ''">
+         and buss_id like concat('%',#{example.bussIdRange},'%')
+      </if>
+      <if test="example.categoryId != null and example.categoryId != ''">
+         and category_id = #{example.categoryId,jdbcType=CHAR}
+      </if>
+      <if test="example.categoryIdRange != null and example.categoryIdRange != ''">
+         and category_id like concat('%',#{example.categoryIdRange},'%')
+      </if>
+      <if test="example.counterofferId != null and example.counterofferId != ''">
+         and counteroffer_id = #{example.counterofferId,jdbcType=CHAR}
+      </if>
+      <if test="example.counterofferIdRange != null and example.counterofferIdRange != ''">
+         and counteroffer_id like concat('%',#{example.counterofferIdRange},'%')
+      </if>
+      <if test="example.txAmo != null and example.txAmo != ''">
+         and tx_amo = #{example.txAmo,jdbcType=VARCHAR}
+      </if>
+      <if test="example.txAmoRange != null and example.txAmoRange != ''">
+         and tx_amo like concat('%',#{example.txAmoRange},'%')
+      </if>
+      <if test="example.ctofPri != null and example.ctofPri != ''">
+         and ctof_pri = #{example.ctofPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.totPri != null and example.totPri != ''">
+         and tot_pri = #{example.totPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.soStatus != null and example.soStatus != ''">
+         and so_status = #{example.soStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="example.soStatusRange != null and example.soStatusRange != ''">
+         and so_status like concat('%',#{example.soStatusRange},'%')
+      </if>
+      <if test="example.contStatus != null and example.contStatus != ''">
+         and cont_status = #{example.contStatus,jdbcType=CHAR}
+      </if>
+      <if test="example.contStatusRange != null and example.contStatusRange != ''">
+         and cont_status like concat('%',#{example.contStatusRange},'%')
+      </if>
+      <if test="example.sendStatus != null and example.sendStatus != ''">
+         and send_status = #{example.sendStatus,jdbcType=CHAR}
+      </if>
+      <if test="example.sendStatusRange != null and example.sendStatusRange != ''">
+         and send_status like concat('%',#{example.sendStatusRange},'%')
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateUser != null and example.updateUser != ''">
+         and update_user = #{example.updateUser,jdbcType=CHAR}
+      </if>
+      <if test="example.updateUserRange != null and example.updateUserRange != ''">
+         and update_user like concat('%',#{example.updateUserRange},'%')
+      </if>
+      <if test="example.updateTime != null and example.updateTime != ''">
+         and update_time = #{example.updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange1 != null and example.updateTimeRange1 != ''">
+         and update_time &gt;= #{example.updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange2 != null and example.updateTimeRange2 != ''">
+         and update_time &lt;= #{example.updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerAvgWeight != null and example.offerAvgWeight != ''">
+         and offer_avg_weight = #{example.offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="example.catchweightPri != null and example.catchweightPri != ''">
+         and catchweight_pri = #{example.catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.offerPri != null and example.offerPri != ''">
+         and offer_pri = #{example.offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.standardCatch != null and example.standardCatch != ''">
+         and standard_catch = #{example.standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="example.standardCatchRange != null and example.standardCatchRange != ''">
+         and standard_catch like concat('%',#{example.standardCatchRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sla_order_id, order_id, sla_order_type, md_id, md_name, buss_name, buss_id, category_id, 
+    counteroffer_id, tx_amo, ctof_pri, tot_pri, so_status, cont_status, send_status, 
+    create_user, create_time, update_user, update_time, offer_avg_weight, catchweight_pri, 
+    offer_pri, standard_catch
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.SlaOrderCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_sla_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_sla_order
+    where sla_order_id = #{slaOrderId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_sla_order
+    where sla_order_id = #{slaOrderId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.SlaOrderCriteria">
+    delete from buss_sla_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    insert into buss_sla_order (sla_order_id, order_id, sla_order_type, 
+      md_id, md_name, buss_name, 
+      buss_id, category_id, counteroffer_id, 
+      tx_amo, ctof_pri, tot_pri, 
+      so_status, cont_status, send_status, 
+      create_user, create_time, update_user, 
+      update_time, offer_avg_weight, catchweight_pri, 
+      offer_pri, standard_catch)
+    values (#{slaOrderId,jdbcType=CHAR}, #{orderId,jdbcType=CHAR}, #{slaOrderType,jdbcType=CHAR}, 
+      #{mdId,jdbcType=CHAR}, #{mdName,jdbcType=VARCHAR}, #{bussName,jdbcType=VARCHAR}, 
+      #{bussId,jdbcType=CHAR}, #{categoryId,jdbcType=CHAR}, #{counterofferId,jdbcType=CHAR}, 
+      #{txAmo,jdbcType=VARCHAR}, #{ctofPri,jdbcType=DECIMAL}, #{totPri,jdbcType=DECIMAL}, 
+      #{soStatus,jdbcType=VARCHAR}, #{contStatus,jdbcType=CHAR}, #{sendStatus,jdbcType=CHAR}, 
+      #{createUser,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{offerAvgWeight,jdbcType=DECIMAL}, #{catchweightPri,jdbcType=DECIMAL}, 
+      #{offerPri,jdbcType=DECIMAL}, #{standardCatch,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    insert into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="bussName != null">
+        buss_name,
+      </if>
+      <if test="bussId != null">
+        buss_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="totPri != null">
+        tot_pri,
+      </if>
+      <if test="soStatus != null">
+        so_status,
+      </if>
+      <if test="contStatus != null">
+        cont_status,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        #{slaOrderId,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=CHAR},
+      </if>
+      <if test="slaOrderType != null">
+        #{slaOrderType,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussName != null">
+        #{bussName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussId != null">
+        #{bussId,jdbcType=CHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="totPri != null">
+        #{totPri,jdbcType=DECIMAL},
+      </if>
+      <if test="soStatus != null">
+        #{soStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contStatus != null">
+        #{contStatus,jdbcType=CHAR},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.SlaOrderCriteria" resultType="java.lang.Long">
+    select count(*) from buss_sla_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_sla_order
+    <set>
+      <if test="record.slaOrderId != null">
+        sla_order_id = #{record.slaOrderId,jdbcType=CHAR},
+      </if>
+      <if test="record.orderId != null">
+        order_id = #{record.orderId,jdbcType=CHAR},
+      </if>
+      <if test="record.slaOrderType != null">
+        sla_order_type = #{record.slaOrderType,jdbcType=CHAR},
+      </if>
+      <if test="record.mdId != null">
+        md_id = #{record.mdId,jdbcType=CHAR},
+      </if>
+      <if test="record.mdName != null">
+        md_name = #{record.mdName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bussName != null">
+        buss_name = #{record.bussName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bussId != null">
+        buss_id = #{record.bussId,jdbcType=CHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=CHAR},
+      </if>
+      <if test="record.counterofferId != null">
+        counteroffer_id = #{record.counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo = #{record.txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri = #{record.ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totPri != null">
+        tot_pri = #{record.totPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.soStatus != null">
+        so_status = #{record.soStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contStatus != null">
+        cont_status = #{record.contStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.sendStatus != null">
+        send_status = #{record.sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch = #{record.standardCatch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_sla_order
+    set sla_order_id = #{record.slaOrderId,jdbcType=CHAR},
+      order_id = #{record.orderId,jdbcType=CHAR},
+      sla_order_type = #{record.slaOrderType,jdbcType=CHAR},
+      md_id = #{record.mdId,jdbcType=CHAR},
+      md_name = #{record.mdName,jdbcType=VARCHAR},
+      buss_name = #{record.bussName,jdbcType=VARCHAR},
+      buss_id = #{record.bussId,jdbcType=CHAR},
+      category_id = #{record.categoryId,jdbcType=CHAR},
+      counteroffer_id = #{record.counterofferId,jdbcType=CHAR},
+      tx_amo = #{record.txAmo,jdbcType=VARCHAR},
+      ctof_pri = #{record.ctofPri,jdbcType=DECIMAL},
+      tot_pri = #{record.totPri,jdbcType=DECIMAL},
+      so_status = #{record.soStatus,jdbcType=VARCHAR},
+      cont_status = #{record.contStatus,jdbcType=CHAR},
+      send_status = #{record.sendStatus,jdbcType=CHAR},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      standard_catch = #{record.standardCatch,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    update buss_sla_order
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=CHAR},
+      </if>
+      <if test="slaOrderType != null">
+        sla_order_type = #{slaOrderType,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        md_id = #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        md_name = #{mdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussName != null">
+        buss_name = #{bussName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussId != null">
+        buss_id = #{bussId,jdbcType=CHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="counterofferId != null">
+        counteroffer_id = #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="txAmo != null">
+        tx_amo = #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri = #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="totPri != null">
+        tot_pri = #{totPri,jdbcType=DECIMAL},
+      </if>
+      <if test="soStatus != null">
+        so_status = #{soStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contStatus != null">
+        cont_status = #{contStatus,jdbcType=CHAR},
+      </if>
+      <if test="sendStatus != null">
+        send_status = #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        offer_pri = #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        standard_catch = #{standardCatch,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sla_order_id = #{slaOrderId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    update buss_sla_order
+    set order_id = #{orderId,jdbcType=CHAR},
+      sla_order_type = #{slaOrderType,jdbcType=CHAR},
+      md_id = #{mdId,jdbcType=CHAR},
+      md_name = #{mdName,jdbcType=VARCHAR},
+      buss_name = #{bussName,jdbcType=VARCHAR},
+      buss_id = #{bussId,jdbcType=CHAR},
+      category_id = #{categoryId,jdbcType=CHAR},
+      counteroffer_id = #{counterofferId,jdbcType=CHAR},
+      tx_amo = #{txAmo,jdbcType=VARCHAR},
+      ctof_pri = #{ctofPri,jdbcType=DECIMAL},
+      tot_pri = #{totPri,jdbcType=DECIMAL},
+      so_status = #{soStatus,jdbcType=VARCHAR},
+      cont_status = #{contStatus,jdbcType=CHAR},
+      send_status = #{sendStatus,jdbcType=CHAR},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{offerPri,jdbcType=DECIMAL},
+      standard_catch = #{standardCatch,jdbcType=VARCHAR}
+    where sla_order_id = #{slaOrderId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="record.orderId != null">
+        order_id,
+      </if>
+      <if test="record.slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.bussName != null">
+        buss_name,
+      </if>
+      <if test="record.bussId != null">
+        buss_id,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.totPri != null">
+        tot_pri,
+      </if>
+      <if test="record.soStatus != null">
+        so_status,
+      </if>
+      <if test="record.contStatus != null">
+        cont_status,
+      </if>
+      <if test="record.sendStatus != null">
+        send_status,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.slaOrderId != null">
+          #{listItem.slaOrderId,jdbcType=CHAR},
+        </if>
+        <if test="record.orderId != null">
+          #{listItem.orderId,jdbcType=CHAR},
+        </if>
+        <if test="record.slaOrderType != null">
+          #{listItem.slaOrderType,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussName != null">
+          #{listItem.bussName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussId != null">
+          #{listItem.bussId,jdbcType=CHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.totPri != null">
+          #{listItem.totPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.soStatus != null">
+          #{listItem.soStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.contStatus != null">
+          #{listItem.contStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.sendStatus != null">
+          #{listItem.sendStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="record.orderId != null">
+        order_id,
+      </if>
+      <if test="record.slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.bussName != null">
+        buss_name,
+      </if>
+      <if test="record.bussId != null">
+        buss_id,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.totPri != null">
+        tot_pri,
+      </if>
+      <if test="record.soStatus != null">
+        so_status,
+      </if>
+      <if test="record.contStatus != null">
+        cont_status,
+      </if>
+      <if test="record.sendStatus != null">
+        send_status,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.slaOrderId != null">
+          #{listItem.slaOrderId,jdbcType=CHAR},
+        </if>
+        <if test="record.orderId != null">
+          #{listItem.orderId,jdbcType=CHAR},
+        </if>
+        <if test="record.slaOrderType != null">
+          #{listItem.slaOrderType,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussName != null">
+          #{listItem.bussName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussId != null">
+          #{listItem.bussId,jdbcType=CHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.totPri != null">
+          #{listItem.totPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.soStatus != null">
+          #{listItem.soStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.contStatus != null">
+          #{listItem.contStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.sendStatus != null">
+          #{listItem.sendStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    replace into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="bussName != null">
+        buss_name,
+      </if>
+      <if test="bussId != null">
+        buss_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="totPri != null">
+        tot_pri,
+      </if>
+      <if test="soStatus != null">
+        so_status,
+      </if>
+      <if test="contStatus != null">
+        cont_status,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        #{slaOrderId,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=CHAR},
+      </if>
+      <if test="slaOrderType != null">
+        #{slaOrderType,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussName != null">
+        #{bussName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussId != null">
+        #{bussId,jdbcType=CHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="totPri != null">
+        #{totPri,jdbcType=DECIMAL},
+      </if>
+      <if test="soStatus != null">
+        #{soStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contStatus != null">
+        #{contStatus,jdbcType=CHAR},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.SlaOrder">
+    insert into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="bussName != null">
+        buss_name,
+      </if>
+      <if test="bussId != null">
+        buss_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="totPri != null">
+        tot_pri,
+      </if>
+      <if test="soStatus != null">
+        so_status,
+      </if>
+      <if test="contStatus != null">
+        cont_status,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="slaOrderId != null">
+        #{slaOrderId,jdbcType=CHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=CHAR},
+      </if>
+      <if test="slaOrderType != null">
+        #{slaOrderType,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussName != null">
+        #{bussName,jdbcType=VARCHAR},
+      </if>
+      <if test="bussId != null">
+        #{bussId,jdbcType=CHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="totPri != null">
+        #{totPri,jdbcType=DECIMAL},
+      </if>
+      <if test="soStatus != null">
+        #{soStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="contStatus != null">
+        #{contStatus,jdbcType=CHAR},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="slaOrderId != null">
+        sla_order_id=values(sla_order_id),
+      </if>
+      <if test="orderId != null">
+        order_id=values(order_id),
+      </if>
+      <if test="slaOrderType != null">
+        sla_order_type=values(sla_order_type),
+      </if>
+      <if test="mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="bussName != null">
+        buss_name=values(buss_name),
+      </if>
+      <if test="bussId != null">
+        buss_id=values(buss_id),
+      </if>
+      <if test="categoryId != null">
+        category_id=values(category_id),
+      </if>
+      <if test="counterofferId != null">
+        counteroffer_id=values(counteroffer_id),
+      </if>
+      <if test="txAmo != null">
+        tx_amo=values(tx_amo),
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri=values(ctof_pri),
+      </if>
+      <if test="totPri != null">
+        tot_pri=values(tot_pri),
+      </if>
+      <if test="soStatus != null">
+        so_status=values(so_status),
+      </if>
+      <if test="contStatus != null">
+        cont_status=values(cont_status),
+      </if>
+      <if test="sendStatus != null">
+        send_status=values(send_status),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_sla_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.slaOrderId != null">
+        sla_order_id,
+      </if>
+      <if test="record.orderId != null">
+        order_id,
+      </if>
+      <if test="record.slaOrderType != null">
+        sla_order_type,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.bussName != null">
+        buss_name,
+      </if>
+      <if test="record.bussId != null">
+        buss_id,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.totPri != null">
+        tot_pri,
+      </if>
+      <if test="record.soStatus != null">
+        so_status,
+      </if>
+      <if test="record.contStatus != null">
+        cont_status,
+      </if>
+      <if test="record.sendStatus != null">
+        send_status,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.slaOrderId != null">
+          #{listItem.slaOrderId,jdbcType=CHAR},
+        </if>
+        <if test="record.orderId != null">
+          #{listItem.orderId,jdbcType=CHAR},
+        </if>
+        <if test="record.slaOrderType != null">
+          #{listItem.slaOrderType,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussName != null">
+          #{listItem.bussName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bussId != null">
+          #{listItem.bussId,jdbcType=CHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.totPri != null">
+          #{listItem.totPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.soStatus != null">
+          #{listItem.soStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.contStatus != null">
+          #{listItem.contStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.sendStatus != null">
+          #{listItem.sendStatus,jdbcType=CHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.slaOrderId != null">
+        sla_order_id=values(sla_order_id),
+      </if>
+      <if test="record.orderId != null">
+        order_id=values(order_id),
+      </if>
+      <if test="record.slaOrderType != null">
+        sla_order_type=values(sla_order_type),
+      </if>
+      <if test="record.mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="record.mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="record.bussName != null">
+        buss_name=values(buss_name),
+      </if>
+      <if test="record.bussId != null">
+        buss_id=values(buss_id),
+      </if>
+      <if test="record.categoryId != null">
+        category_id=values(category_id),
+      </if>
+      <if test="record.counterofferId != null">
+        counteroffer_id=values(counteroffer_id),
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo=values(tx_amo),
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri=values(ctof_pri),
+      </if>
+      <if test="record.totPri != null">
+        tot_pri=values(tot_pri),
+      </if>
+      <if test="record.soStatus != null">
+        so_status=values(so_status),
+      </if>
+      <if test="record.contStatus != null">
+        cont_status=values(cont_status),
+      </if>
+      <if test="record.sendStatus != null">
+        send_status=values(send_status),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="record.updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="record.updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.SlaOrderCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_sla_order
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

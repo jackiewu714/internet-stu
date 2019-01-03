@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE configuration        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 引入外部资源文件 -->
+    <properties resource="jdbc.properties"></properties>
+
+    <!-- 设置驼峰匹配 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 类型别名 -->
+    <!--<typeAliases>
+        <typeAlias alias="Product" type="com.cw.stu.mybatis.dao.domain.Product" />
+    </typeAliases>-->
+
+    <!-- typeHandlers类型句柄 -->
+    <typeHandlers>
+        <!--<typeHandler javaType="String" jdbcType="VARCHAR" handler="liming.student.manager.type.LimingStringTypeHandler" />-->
+    </typeHandlers>
+
+    <!-- environments环境 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--<environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+
+    <!-- mappers映射器 -->
+    <!--<mappers>
+        <mapper resource="com/cw/stu/mybatis/dao/mapper/ProductMapper.xml"/>
+    </mappers>-->
+</configuration>

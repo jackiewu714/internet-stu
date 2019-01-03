@@ -57,7 +57,7 @@ public class Decoder {
 	/**
 	 * 进行字符串的URL编码转换，使用UTF-8编码.
 	 * 
-	 * @param collection
+	 * @param list
 	 *            要进行编码转换的字符串集合
 	 * @return 转换后的对象
 	 */
@@ -110,10 +110,11 @@ public class Decoder {
 				}
 				try {
 					Object value = field.get(obj);
-					if (value != null)
+					if (value != null) {
 						field.set(obj, decode(value));
+					}
 				} catch (Exception e) {
-					// e.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 			return obj;
@@ -156,9 +157,9 @@ public class Decoder {
 					Object value = field.get(obj);
 					field.set(obj, unescape(value));
 				} catch (IllegalArgumentException e) {
-					// e.printStackTrace();
+					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// e.printStackTrace();
+					e.printStackTrace();
 				}
 			}
 		}

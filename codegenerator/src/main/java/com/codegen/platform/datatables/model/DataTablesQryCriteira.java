@@ -1,8 +1,7 @@
 /**
  * @Title: DataTablesQryCriteira.java
  * @Description: datatables 查询条件criteria
- * Copyright: Copyright (c) 2018 
- * 
+ * Copyright: Copyright (c) 2018
  * @author WuLiangzhi
  * @date May 30, 2016 2:47:55 PM
  * @version V1.0
@@ -21,7 +20,7 @@ package com.codegen.platform.datatables.model;
 public class DataTablesQryCriteira {
 
     protected String orderByClause; //排序条件
-    
+
     public String getOrderByClause() {
         return orderByClause;
     }

@@ -53,7 +53,7 @@ public final class DbEncryptUtil {
 		}
 	}
 
-	private static final String strKey = "1daAp~])43pTDY92DEiPKuB1dDe%^D5shdFo%-!x";
+	private static final String strKey = "111222333444";
 
 	public static String getEncodeString(String strMi) {
 		return getEncodeString(strMi, strKey);

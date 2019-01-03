@@ -4,10 +4,10 @@ public class SplitTableUtils {
     static ThreadLocal<String> tableSuffix = new ThreadLocal<String>();
 
     public static void setTableSuffix(String tableSuffix) {
-	SplitTableUtils.tableSuffix.set(tableSuffix);
+        SplitTableUtils.tableSuffix.set(tableSuffix);
     }
 
     public static String getTableSuffix() {
-	return SplitTableUtils.tableSuffix.get();
+        return SplitTableUtils.tableSuffix.get();
     }
 }

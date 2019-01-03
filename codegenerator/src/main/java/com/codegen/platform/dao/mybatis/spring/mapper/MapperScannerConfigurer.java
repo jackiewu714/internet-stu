@@ -248,6 +248,7 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setApplicationContext(ApplicationContext applicationContext) {
     this.applicationContext = applicationContext;
   }
@@ -255,6 +256,7 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
   /**
    * {@inheritDoc}
    */
+  @Override
   public void setBeanName(String name) {
     this.beanName = name;
   }
@@ -262,6 +264,7 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
   /**
    * {@inheritDoc}
    */
+  @Override
   public void afterPropertiesSet() throws Exception {
     notNull(this.basePackage, "Property 'basePackage' is required");
   }
@@ -269,12 +272,14 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
   /**
    * {@inheritDoc}
    */
+  @Override
   public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
   }
 
   /**
    * {@inheritDoc}
    */
+  @Override
   public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry beanDefinitionRegistry) throws BeansException {
     if (this.processPropertyPlaceHolders) {
       processPropertyPlaceHolders();
@@ -373,6 +378,7 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
       if (acceptAllInterfaces) {
         // default include filter that accepts all classes
         addIncludeFilter(new TypeFilter() {
+          @Override
           public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
             return true;
           }
@@ -381,6 +387,7 @@ public class MapperScannerConfigurer implements BeanDefinitionRegistryPostProces
 
       // exclude package-info.java
       addExcludeFilter(new TypeFilter() {
+        @Override
         public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
           String className = metadataReader.getClassMetadata().getClassName();
           return className.endsWith("package-info");

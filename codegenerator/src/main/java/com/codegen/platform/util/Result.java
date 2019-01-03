@@ -24,7 +24,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class Result implements Serializable {
 
     /**
-	 * 
+	 * Serialize number
 	 */
     private static long serialVersionUID = -556224389062112638L;
 

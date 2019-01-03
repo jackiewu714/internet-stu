@@ -45,7 +45,7 @@ public class ListUtil {
 	/**
 	 * 将字符串解析成列表
 	 * 
-	 * @param imids
+	 * @param str
 	 *            IM号字符串，以","分割
 	 * @return List<String>
 	 */
@@ -56,7 +56,7 @@ public class ListUtil {
 	/**
 	 * 将字符串解析成列表
 	 * 
-	 * @param imids
+	 * @param str
 	 *            IM号字符串，以separator分割
 	 * @param separator
 	 *            分隔符
@@ -119,10 +119,6 @@ public class ListUtil {
 	 * 
 	 * @param list
 	 *            List<String> 对象列表
-	 * @param separator
-	 *            分隔符
-	 * @param includeCharacter
-	 *            包含每个字符串的字符，例如单引号"'"，包含 123 后变成 '123'
 	 * @return List<String> 字符串列表，例如: '123','456','789'
 	 */
 	public static String parseListToStringIncludeByCharacter(List<String> list) {
@@ -136,8 +132,6 @@ public class ListUtil {
 	 *            List<Object> 对象列表
 	 * @param separator
 	 *            分隔符
-	 * @param includeCharacter
-	 *            包含每个字符串的字符，例如单引号"'"，包含 123 后变成 '123'
 	 * @return List<String> 字符串列表，例如: '123','456','789'
 	 */
 	public static String parseListToStringIncludeByCharacter(List<String> list, String separator) {

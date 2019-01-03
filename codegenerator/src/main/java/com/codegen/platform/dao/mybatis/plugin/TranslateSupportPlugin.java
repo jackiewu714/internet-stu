@@ -392,8 +392,9 @@ public class TranslateSupportPlugin extends BasePluginAdapter {
 					if (!introspectedColumn.getActualColumnName().equals(columName)) {
 						continue;
 					}
-					if (set.contains(columName))
+					if (set.contains(columName)) {
 						continue;
+					}
 					set.add(columName);
 					IntrospectedColumn ic = new IntrospectedColumn();
 					BeanUtils.copyProperties(introspectedColumn, ic);

@@ -18,12 +18,14 @@ public class MySqlDialect extends Dialect {
 		return getLimitString(sql, -1, -1);
 	}
 
+	@Override
 	public String getLimitString(String sql, int offset, int limit) {
 		sql = getLineSql(sql);
 		sql = sql + " limit " + offset + " ," + limit;
 		return sql;
 	}
 
+	@Override
 	public boolean supportsLimit() {
 		return true;
 	}
@@ -31,6 +33,7 @@ public class MySqlDialect extends Dialect {
 	/**
 	 * 得到查询总数的sql
 	 */
+	@Override
 	public String getCountString(String querySelect) {
 
 		querySelect = getLineSql(querySelect);

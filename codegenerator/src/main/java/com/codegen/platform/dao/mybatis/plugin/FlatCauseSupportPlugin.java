@@ -457,7 +457,8 @@ public class FlatCauseSupportPlugin extends BasePluginAdapter {
 	/**
 	 * This plugin is always valid - no properties are required
 	 */
-	public boolean validate(List<String> warnings) {
+	@Override
+    public boolean validate(List<String> warnings) {
 		return true;
 	}
 
@@ -470,6 +471,7 @@ public class FlatCauseSupportPlugin extends BasePluginAdapter {
 		topLevelClass.addMethod(method);
 	}
 
+	@Override
 	public String getRootClass() {
 		String rootClass = introspectedTable.getTableConfigurationProperty(PropertyRegistry.ANY_ROOT_CLASS);
 		if (rootClass == null) {
@@ -507,6 +509,7 @@ public class FlatCauseSupportPlugin extends BasePluginAdapter {
 		return !introspectedTable.getRules().generateRecordWithBLOBsClass() && introspectedTable.hasBLOBColumns();
 	}
 
+	@Override
 	public Method getJavaBeansSetter(IntrospectedColumn introspectedColumn) {
 		FullyQualifiedJavaType fqjt = introspectedColumn.getFullyQualifiedJavaType();
 		String property = introspectedColumn.getJavaProperty();
@@ -539,6 +542,7 @@ public class FlatCauseSupportPlugin extends BasePluginAdapter {
 		return method;
 	}
 
+	@Override
 	public Method getJavaBeansGetter(IntrospectedColumn introspectedColumn) {
 		FullyQualifiedJavaType fqjt = introspectedColumn.getFullyQualifiedJavaType();
 		String property = introspectedColumn.getJavaProperty();
@@ -558,12 +562,14 @@ public class FlatCauseSupportPlugin extends BasePluginAdapter {
 		return method;
 	}
 
+	@Override
 	public boolean isTrimStringsEnabled() {
 		Properties properties = context.getJavaModelGeneratorConfiguration().getProperties();
 		boolean rc = isTrue(properties.getProperty(PropertyRegistry.MODEL_GENERATOR_TRIM_STRINGS));
 		return rc;
 	}
 
+	@Override
 	public Field getJavaBeansField(IntrospectedColumn introspectedColumn) {
 		FullyQualifiedJavaType fqjt = introspectedColumn.getFullyQualifiedJavaType();
 		String property = introspectedColumn.getJavaProperty();

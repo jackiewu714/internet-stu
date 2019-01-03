@@ -3,7 +3,7 @@ package com.codegen.platform.dao.mybatis.generator;
 public class PcMbGeneratorTest {
 
 	/**
-	 * @param args
+	 * @param args	String[]
 	 */
 	public static void main(String[] args) {
 		String location = "/mbg/base/pc/mbg.xml";

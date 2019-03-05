@@ -5,6 +5,7 @@
 
 <generatorConfiguration>
 	<context id="MySQLTables" targetRuntime="MyBatis3">
+		<property name="projectDir" value="F:\study\github\java\internet-stu\codegenerator\" />
 
 		<property name="suppressTypeWarnings" value="true" />
 		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -27,8 +28,10 @@
 		<plugin
 			type="com.codegen.platform.dao.mybatis.plugin.TranslateSupportPlugin" />
 		-->
+
 		<plugin
-			type="com.codegen.platform.dao.mybatis.plugin.BatchOperSupportPlugin" />
+			type="com.codegen.platform.dao.mybatis.plugin.OracleBatchOperSupportPlugin" />
+
 		<!-- 增加字段注释说明 -->
 		<plugin type="com.codegen.platform.dao.mybatis.plugin.AddCommentPlugin" />
 		<!-- 分页插件 -->
@@ -39,35 +42,52 @@
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 
+		<!--
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/study?useUnicode=true&amp;amp;characterEncoding=utf8&amp;amp;autoReconnect=true&amp;amp;profileSQL=false"
 			userId="root" password="root">
+		</jdbcConnection>
+		-->
+
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+						connectionURL="jdbc:oracle:thin:@192.168.20.212:1521:ORCL"
+						userId="bms" password="bms">
 		</jdbcConnection>
 
 		<javaTypeResolver>
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="com.cw.stu.spring.transaction.jta.study.dao.domain"
-			targetProject="./src/main/java">
+		<javaModelGenerator targetPackage="com.cw.stu.his.common.dao.domain"
+							targetProject="F:/study/github/java/internet-stu/codegenerator/src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="com.cw.stu.spring.transaction.jta.study.dao.mapper"
-			targetProject="./src/main/java">
+		<sqlMapGenerator targetPackage="com.cw.stu.his.common.dao.mapper"
+						 targetProject="F:/study/github/java/internet-stu/codegenerator/src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="com.cw.stu.spring.transaction.jta.study.dao.persistence" targetProject="./src/main/java">
+							 targetPackage="com.cw.stu.his.common.dao.persistence"
+							 targetProject="F:/study/github/java/internet-stu/codegenerator/src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
+		<!--
 		<table schema="study" tableName="tb_sm_login_log" domainObjectName="LoginLog"
 			enableCountByExample="true" enableUpdateByExample="true"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			selectByExampleQueryId="true">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		-->
+
+		<table schema="bms" tableName="test" domainObjectName="BmsTestPojo"
+			   enableCountByExample="true" enableUpdateByExample="true"
+			   enableDeleteByExample="true" enableSelectByExample="true"
+			   selectByExampleQueryId="true">
 			<property name="useActualColumnNames" value="false" />
 		</table>
 		

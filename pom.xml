@@ -43,6 +43,8 @@
         <aspectj.version>1.9.2</aspectj.version>
         <!-- CXF版本 -->
         <cxf.version>3.1.9</cxf.version>
+        <!-- oracle 驱动 -->
+        <ojdbc14.version>1.0.1</ojdbc14.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -401,6 +403,13 @@
                 <version>${jta.version}</version>
             </dependency>
             <!-- jta end -->
+
+            <!-- oracle 驱动 -->
+            <dependency>
+                <groupId>net.carefx.3rdparty.db</groupId>
+                <artifactId>ojdbc14</artifactId>
+                <version>${ojdbc14.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

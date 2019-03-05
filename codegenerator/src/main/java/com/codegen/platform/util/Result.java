@@ -13,10 +13,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-/**
- * @Client
- * @author zww
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "result")
 @XStreamAlias("result")

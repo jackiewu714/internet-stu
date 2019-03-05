@@ -13,7 +13,6 @@ import org.apache.commons.lang.StringUtils;
 /**
  * 字符的解码工具类.
  * 
- * @author huang weijian
  */
 public class Decoder {
 

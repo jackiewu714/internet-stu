@@ -85,6 +85,7 @@ public class MyBatisSurpriseGenerator extends MyBatisGenerator {
      * @throws IOException
      * @throws InterruptedException if the method is canceled through the ProgressCallback
      */
+    @Override
     public void generate(ProgressCallback callback) throws SQLException, IOException, InterruptedException {
         generate(callback, null, null);
     }
@@ -104,6 +105,7 @@ public class MyBatisSurpriseGenerator extends MyBatisGenerator {
      * @throws IOException
      * @throws InterruptedException          if the method is canceled through the ProgressCallback
      */
+    @Override
     public void generate(ProgressCallback callback, Set<String> contextIds)
             throws SQLException, IOException, InterruptedException {
         generate(callback, contextIds, null);

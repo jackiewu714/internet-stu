@@ -40,6 +40,20 @@ public class DaoGeneratorTest {
 	}
 
 	/**
+	 * 生成his系统的dao文件
+	 *
+	 * @Title: genHisDao
+	 * @Description: 生成his系统的dao文件
+	 */
+	private static void genHisDao() {
+		String[] locations = {"/mbg/his/bms/mbg.xml"};
+		for (String location : locations) {
+			MbGenerator.generat(location);
+		}
+		System.out.println("genHisDao end");
+	}
+
+	/**
 	 * 生成本地数据库的dao文件
 	 * 
 	 * @Title: genBussDao
@@ -57,7 +71,8 @@ public class DaoGeneratorTest {
 		// genFrameDao();
 		// genProtalDao();
 //		genBussDao();
-		genLocalDBDao();
+		genHisDao();
+//		genLocalDBDao();
 		System.out.println("end");
 	}
 }

@@ -53,6 +53,7 @@ public class MySqlDialect extends Dialect {
 		}
 	}
 
+	@Override
 	public String getTranslateString(String querySelect, String translateColumn) {
 		querySelect = getLineSql(querySelect);
 		int formIndex = getAfterFormInsertPoint(querySelect);
@@ -64,6 +65,7 @@ public class MySqlDialect extends Dialect {
 		return querySelect;
 	}
 
+	@Override
 	public String[] getSqlColumn(String querySelect) {
 		querySelect = getLineSql(querySelect);
 		int formIndex = getAfterFormInsertPoint(querySelect);

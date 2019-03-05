@@ -136,4 +136,14 @@ public class StringTest {
 
     }
 
+    @Test
+    public void testSpiltString() {
+        String line = "2017-12-08\t280763\t消费交易\t2017-12-08 13:48\t0.11\t00033272\t移动POS商户\t陈晶晶\tW37930763\t\t180418280763";
+        String[] strArr = line.split("\t");
+        int i=0;
+        for (String str : strArr) {
+            System.out.println(String.format("strArr[i=%s]=%s", i, str));
+        }
+    }
+
 }

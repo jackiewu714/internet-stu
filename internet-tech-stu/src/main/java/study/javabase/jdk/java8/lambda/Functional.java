@@ -34,5 +34,6 @@ public interface Functional {
      * @param obj   Object
      * @return  boolean
      */
+    @Override
     boolean equals(Object obj);
 }

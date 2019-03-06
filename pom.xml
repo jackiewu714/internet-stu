@@ -9,6 +9,8 @@
 
     <modules>
         <module>internet-tech-stu</module>
+        <module>internet-tech-platform</module>
+        <module>internet-tech-core</module>
         <module>cxf-stu</module>
         <module>dubbo-test</module>
         <module>audit-webservice</module>

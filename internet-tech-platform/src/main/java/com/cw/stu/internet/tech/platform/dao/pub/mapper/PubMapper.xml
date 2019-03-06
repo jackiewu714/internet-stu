@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pub">
+
+	<select id="dynInfoSql" resultType="com.cw.stu.internet.tech.comm.common.util.camel.CamelCaseHashMap">
+		${dynInfoSql}
+	</select>
+	<select id="dynSingleRowSql" resultType="com.cw.stu.internet.tech.comm.common.util.camel.CamelCaseHashMap">
+		${dynSingleRowSql}
+	</select>
+</mapper>

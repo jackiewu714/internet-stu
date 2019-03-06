@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.sys.persistence.FileAttachMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ref_id" jdbcType="VARCHAR" property="refId" />
+    <result column="ref_busi_type" jdbcType="VARCHAR" property="refBusiType" />
+    <result column="ori_file_name" jdbcType="VARCHAR" property="oriFileName" />
+    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
+    <result column="gen_file_name" jdbcType="VARCHAR" property="genFileName" />
+    <result column="file_save_location" jdbcType="VARCHAR" property="fileSaveLocation" />
+    <result column="file_server_host" jdbcType="VARCHAR" property="fileServerHost" />
+    <result column="file_server_path" jdbcType="VARCHAR" property="fileServerPath" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null and id != ''">
+         and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="refId != null and refId != ''">
+         and ref_id = #{refId,jdbcType=VARCHAR}
+      </if>
+      <if test="refIdRange != null and refIdRange != ''">
+         and ref_id like concat('%',#{refIdRange},'%')
+      </if>
+      <if test="refBusiType != null and refBusiType != ''">
+         and ref_busi_type = #{refBusiType,jdbcType=VARCHAR}
+      </if>
+      <if test="refBusiTypeRange != null and refBusiTypeRange != ''">
+         and ref_busi_type like concat('%',#{refBusiTypeRange},'%')
+      </if>
+      <if test="oriFileName != null and oriFileName != ''">
+         and ori_file_name = #{oriFileName,jdbcType=VARCHAR}
+      </if>
+      <if test="oriFileNameRange != null and oriFileNameRange != ''">
+         and ori_file_name like concat('%',#{oriFileNameRange},'%')
+      </if>
+      <if test="fileType != null and fileType != ''">
+         and file_type = #{fileType,jdbcType=VARCHAR}
+      </if>
+      <if test="fileTypeRange != null and fileTypeRange != ''">
+         and file_type like concat('%',#{fileTypeRange},'%')
+      </if>
+      <if test="genFileName != null and genFileName != ''">
+         and gen_file_name = #{genFileName,jdbcType=VARCHAR}
+      </if>
+      <if test="genFileNameRange != null and genFileNameRange != ''">
+         and gen_file_name like concat('%',#{genFileNameRange},'%')
+      </if>
+      <if test="fileSaveLocation != null and fileSaveLocation != ''">
+         and file_save_location = #{fileSaveLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="fileSaveLocationRange != null and fileSaveLocationRange != ''">
+         and file_save_location like concat('%',#{fileSaveLocationRange},'%')
+      </if>
+      <if test="fileServerHost != null and fileServerHost != ''">
+         and file_server_host = #{fileServerHost,jdbcType=VARCHAR}
+      </if>
+      <if test="fileServerHostRange != null and fileServerHostRange != ''">
+         and file_server_host like concat('%',#{fileServerHostRange},'%')
+      </if>
+      <if test="fileServerPath != null and fileServerPath != ''">
+         and file_server_path = #{fileServerPath,jdbcType=VARCHAR}
+      </if>
+      <if test="fileServerPathRange != null and fileServerPathRange != ''">
+         and file_server_path like concat('%',#{fileServerPathRange},'%')
+      </if>
+      <if test="remark != null and remark != ''">
+         and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="remarkRange != null and remarkRange != ''">
+         and remark like concat('%',#{remarkRange},'%')
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null and example.id != ''">
+         and id = #{example.id,jdbcType=INTEGER}
+      </if>
+      <if test="example.refId != null and example.refId != ''">
+         and ref_id = #{example.refId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.refIdRange != null and example.refIdRange != ''">
+         and ref_id like concat('%',#{example.refIdRange},'%')
+      </if>
+      <if test="example.refBusiType != null and example.refBusiType != ''">
+         and ref_busi_type = #{example.refBusiType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.refBusiTypeRange != null and example.refBusiTypeRange != ''">
+         and ref_busi_type like concat('%',#{example.refBusiTypeRange},'%')
+      </if>
+      <if test="example.oriFileName != null and example.oriFileName != ''">
+         and ori_file_name = #{example.oriFileName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.oriFileNameRange != null and example.oriFileNameRange != ''">
+         and ori_file_name like concat('%',#{example.oriFileNameRange},'%')
+      </if>
+      <if test="example.fileType != null and example.fileType != ''">
+         and file_type = #{example.fileType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.fileTypeRange != null and example.fileTypeRange != ''">
+         and file_type like concat('%',#{example.fileTypeRange},'%')
+      </if>
+      <if test="example.genFileName != null and example.genFileName != ''">
+         and gen_file_name = #{example.genFileName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.genFileNameRange != null and example.genFileNameRange != ''">
+         and gen_file_name like concat('%',#{example.genFileNameRange},'%')
+      </if>
+      <if test="example.fileSaveLocation != null and example.fileSaveLocation != ''">
+         and file_save_location = #{example.fileSaveLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="example.fileSaveLocationRange != null and example.fileSaveLocationRange != ''">
+         and file_save_location like concat('%',#{example.fileSaveLocationRange},'%')
+      </if>
+      <if test="example.fileServerHost != null and example.fileServerHost != ''">
+         and file_server_host = #{example.fileServerHost,jdbcType=VARCHAR}
+      </if>
+      <if test="example.fileServerHostRange != null and example.fileServerHostRange != ''">
+         and file_server_host like concat('%',#{example.fileServerHostRange},'%')
+      </if>
+      <if test="example.fileServerPath != null and example.fileServerPath != ''">
+         and file_server_path = #{example.fileServerPath,jdbcType=VARCHAR}
+      </if>
+      <if test="example.fileServerPathRange != null and example.fileServerPathRange != ''">
+         and file_server_path like concat('%',#{example.fileServerPathRange},'%')
+      </if>
+      <if test="example.remark != null and example.remark != ''">
+         and remark = #{example.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.remarkRange != null and example.remarkRange != ''">
+         and remark like concat('%',#{example.remarkRange},'%')
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, ref_id, ref_busi_type, ori_file_name, file_type, gen_file_name, file_save_location, 
+    file_server_host, file_server_path, remark, create_user, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttachCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_file_attach
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_file_attach
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_file_attach
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttachCriteria">
+    delete from sys_file_attach
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_file_attach (ref_id, ref_busi_type, ori_file_name, 
+      file_type, gen_file_name, file_save_location, 
+      file_server_host, file_server_path, remark, 
+      create_user, create_time)
+    values (#{refId,jdbcType=VARCHAR}, #{refBusiType,jdbcType=VARCHAR}, #{oriFileName,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{genFileName,jdbcType=VARCHAR}, #{fileSaveLocation,jdbcType=VARCHAR}, 
+      #{fileServerHost,jdbcType=VARCHAR}, #{fileServerPath,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="refId != null">
+        ref_id,
+      </if>
+      <if test="refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="refId != null">
+        #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="refBusiType != null">
+        #{refBusiType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriFileName != null">
+        #{oriFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="genFileName != null">
+        #{genFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveLocation != null">
+        #{fileSaveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerHost != null">
+        #{fileServerHost,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerPath != null">
+        #{fileServerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttachCriteria" resultType="java.lang.Long">
+    select count(*) from sys_file_attach
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_file_attach
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.refId != null">
+        ref_id = #{record.refId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refBusiType != null">
+        ref_busi_type = #{record.refBusiType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oriFileName != null">
+        ori_file_name = #{record.oriFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileType != null">
+        file_type = #{record.fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.genFileName != null">
+        gen_file_name = #{record.genFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSaveLocation != null">
+        file_save_location = #{record.fileSaveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileServerHost != null">
+        file_server_host = #{record.fileServerHost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileServerPath != null">
+        file_server_path = #{record.fileServerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_file_attach
+    set id = #{record.id,jdbcType=INTEGER},
+      ref_id = #{record.refId,jdbcType=VARCHAR},
+      ref_busi_type = #{record.refBusiType,jdbcType=VARCHAR},
+      ori_file_name = #{record.oriFileName,jdbcType=VARCHAR},
+      file_type = #{record.fileType,jdbcType=VARCHAR},
+      gen_file_name = #{record.genFileName,jdbcType=VARCHAR},
+      file_save_location = #{record.fileSaveLocation,jdbcType=VARCHAR},
+      file_server_host = #{record.fileServerHost,jdbcType=VARCHAR},
+      file_server_path = #{record.fileServerPath,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    update sys_file_attach
+    <set>
+      <if test="refId != null">
+        ref_id = #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="refBusiType != null">
+        ref_busi_type = #{refBusiType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriFileName != null">
+        ori_file_name = #{oriFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="genFileName != null">
+        gen_file_name = #{genFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveLocation != null">
+        file_save_location = #{fileSaveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerHost != null">
+        file_server_host = #{fileServerHost,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerPath != null">
+        file_server_path = #{fileServerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    update sys_file_attach
+    set ref_id = #{refId,jdbcType=VARCHAR},
+      ref_busi_type = #{refBusiType,jdbcType=VARCHAR},
+      ori_file_name = #{oriFileName,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      gen_file_name = #{genFileName,jdbcType=VARCHAR},
+      file_save_location = #{fileSaveLocation,jdbcType=VARCHAR},
+      file_server_host = #{fileServerHost,jdbcType=VARCHAR},
+      file_server_path = #{fileServerPath,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.refId != null">
+        ref_id,
+      </if>
+      <if test="record.refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="record.oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="record.fileType != null">
+        file_type,
+      </if>
+      <if test="record.genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="record.fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="record.fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="record.fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.refId != null">
+          #{listItem.refId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.refBusiType != null">
+          #{listItem.refBusiType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.oriFileName != null">
+          #{listItem.oriFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileType != null">
+          #{listItem.fileType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.genFileName != null">
+          #{listItem.genFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileSaveLocation != null">
+          #{listItem.fileSaveLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerHost != null">
+          #{listItem.fileServerHost,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerPath != null">
+          #{listItem.fileServerPath,jdbcType=VARCHAR},
+        </if>
+        <if test="record.remark != null">
+          #{listItem.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.refId != null">
+        ref_id,
+      </if>
+      <if test="record.refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="record.oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="record.fileType != null">
+        file_type,
+      </if>
+      <if test="record.genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="record.fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="record.fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="record.fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.refId != null">
+          #{listItem.refId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.refBusiType != null">
+          #{listItem.refBusiType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.oriFileName != null">
+          #{listItem.oriFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileType != null">
+          #{listItem.fileType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.genFileName != null">
+          #{listItem.genFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileSaveLocation != null">
+          #{listItem.fileSaveLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerHost != null">
+          #{listItem.fileServerHost,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerPath != null">
+          #{listItem.fileServerPath,jdbcType=VARCHAR},
+        </if>
+        <if test="record.remark != null">
+          #{listItem.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    replace into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="refId != null">
+        ref_id,
+      </if>
+      <if test="refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="refId != null">
+        #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="refBusiType != null">
+        #{refBusiType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriFileName != null">
+        #{oriFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="genFileName != null">
+        #{genFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveLocation != null">
+        #{fileSaveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerHost != null">
+        #{fileServerHost,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerPath != null">
+        #{fileServerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttach">
+    insert into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="refId != null">
+        ref_id,
+      </if>
+      <if test="refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="fileType != null">
+        file_type,
+      </if>
+      <if test="genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="refId != null">
+        #{refId,jdbcType=VARCHAR},
+      </if>
+      <if test="refBusiType != null">
+        #{refBusiType,jdbcType=VARCHAR},
+      </if>
+      <if test="oriFileName != null">
+        #{oriFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null">
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="genFileName != null">
+        #{genFileName,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSaveLocation != null">
+        #{fileSaveLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerHost != null">
+        #{fileServerHost,jdbcType=VARCHAR},
+      </if>
+      <if test="fileServerPath != null">
+        #{fileServerPath,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id=values(id),
+      </if>
+      <if test="refId != null">
+        ref_id=values(ref_id),
+      </if>
+      <if test="refBusiType != null">
+        ref_busi_type=values(ref_busi_type),
+      </if>
+      <if test="oriFileName != null">
+        ori_file_name=values(ori_file_name),
+      </if>
+      <if test="fileType != null">
+        file_type=values(file_type),
+      </if>
+      <if test="genFileName != null">
+        gen_file_name=values(gen_file_name),
+      </if>
+      <if test="fileSaveLocation != null">
+        file_save_location=values(file_save_location),
+      </if>
+      <if test="fileServerHost != null">
+        file_server_host=values(file_server_host),
+      </if>
+      <if test="fileServerPath != null">
+        file_server_path=values(file_server_path),
+      </if>
+      <if test="remark != null">
+        remark=values(remark),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into sys_file_attach
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        id,
+      </if>
+      <if test="record.refId != null">
+        ref_id,
+      </if>
+      <if test="record.refBusiType != null">
+        ref_busi_type,
+      </if>
+      <if test="record.oriFileName != null">
+        ori_file_name,
+      </if>
+      <if test="record.fileType != null">
+        file_type,
+      </if>
+      <if test="record.genFileName != null">
+        gen_file_name,
+      </if>
+      <if test="record.fileSaveLocation != null">
+        file_save_location,
+      </if>
+      <if test="record.fileServerHost != null">
+        file_server_host,
+      </if>
+      <if test="record.fileServerPath != null">
+        file_server_path,
+      </if>
+      <if test="record.remark != null">
+        remark,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.id != null">
+          #{listItem.id,jdbcType=INTEGER},
+        </if>
+        <if test="record.refId != null">
+          #{listItem.refId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.refBusiType != null">
+          #{listItem.refBusiType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.oriFileName != null">
+          #{listItem.oriFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileType != null">
+          #{listItem.fileType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.genFileName != null">
+          #{listItem.genFileName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileSaveLocation != null">
+          #{listItem.fileSaveLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerHost != null">
+          #{listItem.fileServerHost,jdbcType=VARCHAR},
+        </if>
+        <if test="record.fileServerPath != null">
+          #{listItem.fileServerPath,jdbcType=VARCHAR},
+        </if>
+        <if test="record.remark != null">
+          #{listItem.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.id != null">
+        id=values(id),
+      </if>
+      <if test="record.refId != null">
+        ref_id=values(ref_id),
+      </if>
+      <if test="record.refBusiType != null">
+        ref_busi_type=values(ref_busi_type),
+      </if>
+      <if test="record.oriFileName != null">
+        ori_file_name=values(ori_file_name),
+      </if>
+      <if test="record.fileType != null">
+        file_type=values(file_type),
+      </if>
+      <if test="record.genFileName != null">
+        gen_file_name=values(gen_file_name),
+      </if>
+      <if test="record.fileSaveLocation != null">
+        file_save_location=values(file_save_location),
+      </if>
+      <if test="record.fileServerHost != null">
+        file_server_host=values(file_server_host),
+      </if>
+      <if test="record.fileServerPath != null">
+        file_server_path=values(file_server_path),
+      </if>
+      <if test="record.remark != null">
+        remark=values(remark),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.sys.domain.FileAttachCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_file_attach
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

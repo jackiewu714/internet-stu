@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.ColdMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.Cold">
+    <id column="cold_id" jdbcType="CHAR" property="coldId" />
+    <result column="cold_name" jdbcType="VARCHAR" property="coldName" />
+    <result column="cold_address" jdbcType="VARCHAR" property="coldAddress" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="CHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="cold_location" jdbcType="VARCHAR" property="coldLocation" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="coldId != null and coldId != ''">
+         and cold_id = #{coldId,jdbcType=CHAR}
+      </if>
+      <if test="coldIdRange != null and coldIdRange != ''">
+         and cold_id like concat('%',#{coldIdRange},'%')
+      </if>
+      <if test="coldName != null and coldName != ''">
+         and cold_name = #{coldName,jdbcType=VARCHAR}
+      </if>
+      <if test="coldNameRange != null and coldNameRange != ''">
+         and cold_name like concat('%',#{coldNameRange},'%')
+      </if>
+      <if test="coldAddress != null and coldAddress != ''">
+         and cold_address = #{coldAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="coldAddressRange != null and coldAddressRange != ''">
+         and cold_address like concat('%',#{coldAddressRange},'%')
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+         and update_user = #{updateUser,jdbcType=CHAR}
+      </if>
+      <if test="updateUserRange != null and updateUserRange != ''">
+         and update_user like concat('%',#{updateUserRange},'%')
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+         and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange1 != null and updateTimeRange1 != ''">
+         and update_time &gt;= #{updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange2 != null and updateTimeRange2 != ''">
+         and update_time &lt;= #{updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="coldLocation != null and coldLocation != ''">
+         and cold_location = #{coldLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="coldLocationRange != null and coldLocationRange != ''">
+         and cold_location like concat('%',#{coldLocationRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.coldId != null and example.coldId != ''">
+         and cold_id = #{example.coldId,jdbcType=CHAR}
+      </if>
+      <if test="example.coldIdRange != null and example.coldIdRange != ''">
+         and cold_id like concat('%',#{example.coldIdRange},'%')
+      </if>
+      <if test="example.coldName != null and example.coldName != ''">
+         and cold_name = #{example.coldName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.coldNameRange != null and example.coldNameRange != ''">
+         and cold_name like concat('%',#{example.coldNameRange},'%')
+      </if>
+      <if test="example.coldAddress != null and example.coldAddress != ''">
+         and cold_address = #{example.coldAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="example.coldAddressRange != null and example.coldAddressRange != ''">
+         and cold_address like concat('%',#{example.coldAddressRange},'%')
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateUser != null and example.updateUser != ''">
+         and update_user = #{example.updateUser,jdbcType=CHAR}
+      </if>
+      <if test="example.updateUserRange != null and example.updateUserRange != ''">
+         and update_user like concat('%',#{example.updateUserRange},'%')
+      </if>
+      <if test="example.updateTime != null and example.updateTime != ''">
+         and update_time = #{example.updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange1 != null and example.updateTimeRange1 != ''">
+         and update_time &gt;= #{example.updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange2 != null and example.updateTimeRange2 != ''">
+         and update_time &lt;= #{example.updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.coldLocation != null and example.coldLocation != ''">
+         and cold_location = #{example.coldLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="example.coldLocationRange != null and example.coldLocationRange != ''">
+         and cold_location like concat('%',#{example.coldLocationRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    cold_id, cold_name, cold_address, create_user, create_time, update_user, update_time, 
+    cold_location
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.ColdCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_cold
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_cold
+    where cold_id = #{coldId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_cold
+    where cold_id = #{coldId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.ColdCriteria">
+    delete from buss_cold
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    insert into buss_cold (cold_id, cold_name, cold_address, 
+      create_user, create_time, update_user, 
+      update_time, cold_location)
+    values (#{coldId,jdbcType=CHAR}, #{coldName,jdbcType=VARCHAR}, #{coldAddress,jdbcType=VARCHAR}, 
+      #{createUser,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{coldLocation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    insert into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        cold_id,
+      </if>
+      <if test="coldName != null">
+        cold_name,
+      </if>
+      <if test="coldAddress != null">
+        cold_address,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        #{coldId,jdbcType=CHAR},
+      </if>
+      <if test="coldName != null">
+        #{coldName,jdbcType=VARCHAR},
+      </if>
+      <if test="coldAddress != null">
+        #{coldAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coldLocation != null">
+        #{coldLocation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.ColdCriteria" resultType="java.lang.Long">
+    select count(*) from buss_cold
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_cold
+    <set>
+      <if test="record.coldId != null">
+        cold_id = #{record.coldId,jdbcType=CHAR},
+      </if>
+      <if test="record.coldName != null">
+        cold_name = #{record.coldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coldAddress != null">
+        cold_address = #{record.coldAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.coldLocation != null">
+        cold_location = #{record.coldLocation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_cold
+    set cold_id = #{record.coldId,jdbcType=CHAR},
+      cold_name = #{record.coldName,jdbcType=VARCHAR},
+      cold_address = #{record.coldAddress,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      cold_location = #{record.coldLocation,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    update buss_cold
+    <set>
+      <if test="coldName != null">
+        cold_name = #{coldName,jdbcType=VARCHAR},
+      </if>
+      <if test="coldAddress != null">
+        cold_address = #{coldAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coldLocation != null">
+        cold_location = #{coldLocation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cold_id = #{coldId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    update buss_cold
+    set cold_name = #{coldName,jdbcType=VARCHAR},
+      cold_address = #{coldAddress,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      cold_location = #{coldLocation,jdbcType=VARCHAR}
+    where cold_id = #{coldId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.coldId != null">
+        cold_id,
+      </if>
+      <if test="record.coldName != null">
+        cold_name,
+      </if>
+      <if test="record.coldAddress != null">
+        cold_address,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.coldId != null">
+          #{listItem.coldId,jdbcType=CHAR},
+        </if>
+        <if test="record.coldName != null">
+          #{listItem.coldName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.coldAddress != null">
+          #{listItem.coldAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.coldLocation != null">
+          #{listItem.coldLocation,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.coldId != null">
+        cold_id,
+      </if>
+      <if test="record.coldName != null">
+        cold_name,
+      </if>
+      <if test="record.coldAddress != null">
+        cold_address,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.coldId != null">
+          #{listItem.coldId,jdbcType=CHAR},
+        </if>
+        <if test="record.coldName != null">
+          #{listItem.coldName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.coldAddress != null">
+          #{listItem.coldAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.coldLocation != null">
+          #{listItem.coldLocation,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    replace into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        cold_id,
+      </if>
+      <if test="coldName != null">
+        cold_name,
+      </if>
+      <if test="coldAddress != null">
+        cold_address,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        #{coldId,jdbcType=CHAR},
+      </if>
+      <if test="coldName != null">
+        #{coldName,jdbcType=VARCHAR},
+      </if>
+      <if test="coldAddress != null">
+        #{coldAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coldLocation != null">
+        #{coldLocation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.Cold">
+    insert into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        cold_id,
+      </if>
+      <if test="coldName != null">
+        cold_name,
+      </if>
+      <if test="coldAddress != null">
+        cold_address,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="coldId != null">
+        #{coldId,jdbcType=CHAR},
+      </if>
+      <if test="coldName != null">
+        #{coldName,jdbcType=VARCHAR},
+      </if>
+      <if test="coldAddress != null">
+        #{coldAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="coldLocation != null">
+        #{coldLocation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="coldId != null">
+        cold_id=values(cold_id),
+      </if>
+      <if test="coldName != null">
+        cold_name=values(cold_name),
+      </if>
+      <if test="coldAddress != null">
+        cold_address=values(cold_address),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="coldLocation != null">
+        cold_location=values(cold_location),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_cold
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.coldId != null">
+        cold_id,
+      </if>
+      <if test="record.coldName != null">
+        cold_name,
+      </if>
+      <if test="record.coldAddress != null">
+        cold_address,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.coldLocation != null">
+        cold_location,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.coldId != null">
+          #{listItem.coldId,jdbcType=CHAR},
+        </if>
+        <if test="record.coldName != null">
+          #{listItem.coldName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.coldAddress != null">
+          #{listItem.coldAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.coldLocation != null">
+          #{listItem.coldLocation,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.coldId != null">
+        cold_id=values(cold_id),
+      </if>
+      <if test="record.coldName != null">
+        cold_name=values(cold_name),
+      </if>
+      <if test="record.coldAddress != null">
+        cold_address=values(cold_address),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="record.updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="record.updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="record.coldLocation != null">
+        cold_location=values(cold_location),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.ColdCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_cold
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

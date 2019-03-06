@@ -44,6 +44,12 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!-- oracle 驱动 -->
+        <dependency>
+            <groupId>net.carefx.3rdparty.db</groupId>
+            <artifactId>ojdbc14</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.DailySaleReportMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    <id column="report_id" jdbcType="CHAR" property="reportId" />
+    <result column="report_type" jdbcType="INTEGER" property="reportType" />
+    <result column="report_time" jdbcType="TIMESTAMP" property="reportTime" />
+    <result column="report_saler" jdbcType="VARCHAR" property="reportSaler" />
+    <result column="report_is_send" jdbcType="INTEGER" property="reportIsSend" />
+    <result column="report_is_paid" jdbcType="INTEGER" property="reportIsPaid" />
+    <result column="report_location" jdbcType="VARCHAR" property="reportLocation" />
+    <result column="report_client" jdbcType="VARCHAR" property="reportClient" />
+    <result column="report_product_name" jdbcType="VARCHAR" property="reportProductName" />
+    <result column="report_product_id" jdbcType="VARCHAR" property="reportProductId" />
+    <result column="report_quantity" jdbcType="INTEGER" property="reportQuantity" />
+    <result column="report_weight" jdbcType="REAL" property="reportWeight" />
+    <result column="report_price" jdbcType="REAL" property="reportPrice" />
+    <result column="report_amount" jdbcType="REAL" property="reportAmount" />
+    <result column="report_comment" jdbcType="VARCHAR" property="reportComment" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="reportId != null and reportId != ''">
+         and report_id = #{reportId,jdbcType=CHAR}
+      </if>
+      <if test="reportIdRange != null and reportIdRange != ''">
+         and report_id like concat('%',#{reportIdRange},'%')
+      </if>
+      <if test="reportType != null and reportType != ''">
+         and report_type = #{reportType,jdbcType=INTEGER}
+      </if>
+      <if test="reportTime != null and reportTime != ''">
+         and report_time = #{reportTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportTimeRange1 != null and reportTimeRange1 != ''">
+         and report_time &gt;= #{reportTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportTimeRange2 != null and reportTimeRange2 != ''">
+         and report_time &lt;= #{reportTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="reportSaler != null and reportSaler != ''">
+         and report_saler = #{reportSaler,jdbcType=VARCHAR}
+      </if>
+      <if test="reportSalerRange != null and reportSalerRange != ''">
+         and report_saler like concat('%',#{reportSalerRange},'%')
+      </if>
+      <if test="reportIsSend != null and reportIsSend != ''">
+         and report_is_send = #{reportIsSend,jdbcType=INTEGER}
+      </if>
+      <if test="reportIsPaid != null and reportIsPaid != ''">
+         and report_is_paid = #{reportIsPaid,jdbcType=INTEGER}
+      </if>
+      <if test="reportLocation != null and reportLocation != ''">
+         and report_location = #{reportLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="reportLocationRange != null and reportLocationRange != ''">
+         and report_location like concat('%',#{reportLocationRange},'%')
+      </if>
+      <if test="reportClient != null and reportClient != ''">
+         and report_client = #{reportClient,jdbcType=VARCHAR}
+      </if>
+      <if test="reportClientRange != null and reportClientRange != ''">
+         and report_client like concat('%',#{reportClientRange},'%')
+      </if>
+      <if test="reportProductName != null and reportProductName != ''">
+         and report_product_name = #{reportProductName,jdbcType=VARCHAR}
+      </if>
+      <if test="reportProductNameRange != null and reportProductNameRange != ''">
+         and report_product_name like concat('%',#{reportProductNameRange},'%')
+      </if>
+      <if test="reportProductId != null and reportProductId != ''">
+         and report_product_id = #{reportProductId,jdbcType=VARCHAR}
+      </if>
+      <if test="reportProductIdRange != null and reportProductIdRange != ''">
+         and report_product_id like concat('%',#{reportProductIdRange},'%')
+      </if>
+      <if test="reportQuantity != null and reportQuantity != ''">
+         and report_quantity = #{reportQuantity,jdbcType=INTEGER}
+      </if>
+      <if test="reportWeight != null and reportWeight != ''">
+         and report_weight = #{reportWeight,jdbcType=REAL}
+      </if>
+      <if test="reportPrice != null and reportPrice != ''">
+         and report_price = #{reportPrice,jdbcType=REAL}
+      </if>
+      <if test="reportAmount != null and reportAmount != ''">
+         and report_amount = #{reportAmount,jdbcType=REAL}
+      </if>
+      <if test="reportComment != null and reportComment != ''">
+         and report_comment = #{reportComment,jdbcType=VARCHAR}
+      </if>
+      <if test="reportCommentRange != null and reportCommentRange != ''">
+         and report_comment like concat('%',#{reportCommentRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.reportId != null and example.reportId != ''">
+         and report_id = #{example.reportId,jdbcType=CHAR}
+      </if>
+      <if test="example.reportIdRange != null and example.reportIdRange != ''">
+         and report_id like concat('%',#{example.reportIdRange},'%')
+      </if>
+      <if test="example.reportType != null and example.reportType != ''">
+         and report_type = #{example.reportType,jdbcType=INTEGER}
+      </if>
+      <if test="example.reportTime != null and example.reportTime != ''">
+         and report_time = #{example.reportTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportTimeRange1 != null and example.reportTimeRange1 != ''">
+         and report_time &gt;= #{example.reportTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportTimeRange2 != null and example.reportTimeRange2 != ''">
+         and report_time &lt;= #{example.reportTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.reportSaler != null and example.reportSaler != ''">
+         and report_saler = #{example.reportSaler,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportSalerRange != null and example.reportSalerRange != ''">
+         and report_saler like concat('%',#{example.reportSalerRange},'%')
+      </if>
+      <if test="example.reportIsSend != null and example.reportIsSend != ''">
+         and report_is_send = #{example.reportIsSend,jdbcType=INTEGER}
+      </if>
+      <if test="example.reportIsPaid != null and example.reportIsPaid != ''">
+         and report_is_paid = #{example.reportIsPaid,jdbcType=INTEGER}
+      </if>
+      <if test="example.reportLocation != null and example.reportLocation != ''">
+         and report_location = #{example.reportLocation,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportLocationRange != null and example.reportLocationRange != ''">
+         and report_location like concat('%',#{example.reportLocationRange},'%')
+      </if>
+      <if test="example.reportClient != null and example.reportClient != ''">
+         and report_client = #{example.reportClient,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportClientRange != null and example.reportClientRange != ''">
+         and report_client like concat('%',#{example.reportClientRange},'%')
+      </if>
+      <if test="example.reportProductName != null and example.reportProductName != ''">
+         and report_product_name = #{example.reportProductName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportProductNameRange != null and example.reportProductNameRange != ''">
+         and report_product_name like concat('%',#{example.reportProductNameRange},'%')
+      </if>
+      <if test="example.reportProductId != null and example.reportProductId != ''">
+         and report_product_id = #{example.reportProductId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportProductIdRange != null and example.reportProductIdRange != ''">
+         and report_product_id like concat('%',#{example.reportProductIdRange},'%')
+      </if>
+      <if test="example.reportQuantity != null and example.reportQuantity != ''">
+         and report_quantity = #{example.reportQuantity,jdbcType=INTEGER}
+      </if>
+      <if test="example.reportWeight != null and example.reportWeight != ''">
+         and report_weight = #{example.reportWeight,jdbcType=REAL}
+      </if>
+      <if test="example.reportPrice != null and example.reportPrice != ''">
+         and report_price = #{example.reportPrice,jdbcType=REAL}
+      </if>
+      <if test="example.reportAmount != null and example.reportAmount != ''">
+         and report_amount = #{example.reportAmount,jdbcType=REAL}
+      </if>
+      <if test="example.reportComment != null and example.reportComment != ''">
+         and report_comment = #{example.reportComment,jdbcType=VARCHAR}
+      </if>
+      <if test="example.reportCommentRange != null and example.reportCommentRange != ''">
+         and report_comment like concat('%',#{example.reportCommentRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    report_id, report_type, report_time, report_saler, report_is_send, report_is_paid, 
+    report_location, report_client, report_product_name, report_product_id, report_quantity, 
+    report_weight, report_price, report_amount, report_comment
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReportCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_daily_sale_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_daily_sale_report
+    where report_id = #{reportId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_daily_sale_report
+    where report_id = #{reportId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReportCriteria">
+    delete from buss_daily_sale_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    insert into buss_daily_sale_report (report_id, report_type, report_time, 
+      report_saler, report_is_send, report_is_paid, 
+      report_location, report_client, report_product_name, 
+      report_product_id, report_quantity, report_weight, 
+      report_price, report_amount, report_comment
+      )
+    values (#{reportId,jdbcType=CHAR}, #{reportType,jdbcType=INTEGER}, #{reportTime,jdbcType=TIMESTAMP}, 
+      #{reportSaler,jdbcType=VARCHAR}, #{reportIsSend,jdbcType=INTEGER}, #{reportIsPaid,jdbcType=INTEGER}, 
+      #{reportLocation,jdbcType=VARCHAR}, #{reportClient,jdbcType=VARCHAR}, #{reportProductName,jdbcType=VARCHAR}, 
+      #{reportProductId,jdbcType=VARCHAR}, #{reportQuantity,jdbcType=INTEGER}, #{reportWeight,jdbcType=REAL}, 
+      #{reportPrice,jdbcType=REAL}, #{reportAmount,jdbcType=REAL}, #{reportComment,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    insert into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportSaler != null">
+        report_saler,
+      </if>
+      <if test="reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="reportLocation != null">
+        report_location,
+      </if>
+      <if test="reportClient != null">
+        report_client,
+      </if>
+      <if test="reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="reportWeight != null">
+        report_weight,
+      </if>
+      <if test="reportPrice != null">
+        report_price,
+      </if>
+      <if test="reportAmount != null">
+        report_amount,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=CHAR},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportSaler != null">
+        #{reportSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="reportIsSend != null">
+        #{reportIsSend,jdbcType=INTEGER},
+      </if>
+      <if test="reportIsPaid != null">
+        #{reportIsPaid,jdbcType=INTEGER},
+      </if>
+      <if test="reportLocation != null">
+        #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportClient != null">
+        #{reportClient,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductName != null">
+        #{reportProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductId != null">
+        #{reportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportQuantity != null">
+        #{reportQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reportWeight != null">
+        #{reportWeight,jdbcType=REAL},
+      </if>
+      <if test="reportPrice != null">
+        #{reportPrice,jdbcType=REAL},
+      </if>
+      <if test="reportAmount != null">
+        #{reportAmount,jdbcType=REAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReportCriteria" resultType="java.lang.Long">
+    select count(*) from buss_daily_sale_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_daily_sale_report
+    <set>
+      <if test="record.reportId != null">
+        report_id = #{record.reportId,jdbcType=CHAR},
+      </if>
+      <if test="record.reportType != null">
+        report_type = #{record.reportType,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportTime != null">
+        report_time = #{record.reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.reportSaler != null">
+        report_saler = #{record.reportSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportIsSend != null">
+        report_is_send = #{record.reportIsSend,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportIsPaid != null">
+        report_is_paid = #{record.reportIsPaid,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportLocation != null">
+        report_location = #{record.reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportClient != null">
+        report_client = #{record.reportClient,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportProductName != null">
+        report_product_name = #{record.reportProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportProductId != null">
+        report_product_id = #{record.reportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportQuantity != null">
+        report_quantity = #{record.reportQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.reportWeight != null">
+        report_weight = #{record.reportWeight,jdbcType=REAL},
+      </if>
+      <if test="record.reportPrice != null">
+        report_price = #{record.reportPrice,jdbcType=REAL},
+      </if>
+      <if test="record.reportAmount != null">
+        report_amount = #{record.reportAmount,jdbcType=REAL},
+      </if>
+      <if test="record.reportComment != null">
+        report_comment = #{record.reportComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_daily_sale_report
+    set report_id = #{record.reportId,jdbcType=CHAR},
+      report_type = #{record.reportType,jdbcType=INTEGER},
+      report_time = #{record.reportTime,jdbcType=TIMESTAMP},
+      report_saler = #{record.reportSaler,jdbcType=VARCHAR},
+      report_is_send = #{record.reportIsSend,jdbcType=INTEGER},
+      report_is_paid = #{record.reportIsPaid,jdbcType=INTEGER},
+      report_location = #{record.reportLocation,jdbcType=VARCHAR},
+      report_client = #{record.reportClient,jdbcType=VARCHAR},
+      report_product_name = #{record.reportProductName,jdbcType=VARCHAR},
+      report_product_id = #{record.reportProductId,jdbcType=VARCHAR},
+      report_quantity = #{record.reportQuantity,jdbcType=INTEGER},
+      report_weight = #{record.reportWeight,jdbcType=REAL},
+      report_price = #{record.reportPrice,jdbcType=REAL},
+      report_amount = #{record.reportAmount,jdbcType=REAL},
+      report_comment = #{record.reportComment,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    update buss_daily_sale_report
+    <set>
+      <if test="reportType != null">
+        report_type = #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        report_time = #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportSaler != null">
+        report_saler = #{reportSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="reportIsSend != null">
+        report_is_send = #{reportIsSend,jdbcType=INTEGER},
+      </if>
+      <if test="reportIsPaid != null">
+        report_is_paid = #{reportIsPaid,jdbcType=INTEGER},
+      </if>
+      <if test="reportLocation != null">
+        report_location = #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportClient != null">
+        report_client = #{reportClient,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductName != null">
+        report_product_name = #{reportProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductId != null">
+        report_product_id = #{reportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportQuantity != null">
+        report_quantity = #{reportQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reportWeight != null">
+        report_weight = #{reportWeight,jdbcType=REAL},
+      </if>
+      <if test="reportPrice != null">
+        report_price = #{reportPrice,jdbcType=REAL},
+      </if>
+      <if test="reportAmount != null">
+        report_amount = #{reportAmount,jdbcType=REAL},
+      </if>
+      <if test="reportComment != null">
+        report_comment = #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    update buss_daily_sale_report
+    set report_type = #{reportType,jdbcType=INTEGER},
+      report_time = #{reportTime,jdbcType=TIMESTAMP},
+      report_saler = #{reportSaler,jdbcType=VARCHAR},
+      report_is_send = #{reportIsSend,jdbcType=INTEGER},
+      report_is_paid = #{reportIsPaid,jdbcType=INTEGER},
+      report_location = #{reportLocation,jdbcType=VARCHAR},
+      report_client = #{reportClient,jdbcType=VARCHAR},
+      report_product_name = #{reportProductName,jdbcType=VARCHAR},
+      report_product_id = #{reportProductId,jdbcType=VARCHAR},
+      report_quantity = #{reportQuantity,jdbcType=INTEGER},
+      report_weight = #{reportWeight,jdbcType=REAL},
+      report_price = #{reportPrice,jdbcType=REAL},
+      report_amount = #{reportAmount,jdbcType=REAL},
+      report_comment = #{reportComment,jdbcType=VARCHAR}
+    where report_id = #{reportId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportType != null">
+        report_type,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportSaler != null">
+        report_saler,
+      </if>
+      <if test="record.reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="record.reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="record.reportLocation != null">
+        report_location,
+      </if>
+      <if test="record.reportClient != null">
+        report_client,
+      </if>
+      <if test="record.reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="record.reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="record.reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="record.reportWeight != null">
+        report_weight,
+      </if>
+      <if test="record.reportPrice != null">
+        report_price,
+      </if>
+      <if test="record.reportAmount != null">
+        report_amount,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=CHAR},
+        </if>
+        <if test="record.reportType != null">
+          #{listItem.reportType,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportSaler != null">
+          #{listItem.reportSaler,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportIsSend != null">
+          #{listItem.reportIsSend,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportIsPaid != null">
+          #{listItem.reportIsPaid,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportLocation != null">
+          #{listItem.reportLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportClient != null">
+          #{listItem.reportClient,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductName != null">
+          #{listItem.reportProductName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductId != null">
+          #{listItem.reportProductId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportQuantity != null">
+          #{listItem.reportQuantity,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportWeight != null">
+          #{listItem.reportWeight,jdbcType=REAL},
+        </if>
+        <if test="record.reportPrice != null">
+          #{listItem.reportPrice,jdbcType=REAL},
+        </if>
+        <if test="record.reportAmount != null">
+          #{listItem.reportAmount,jdbcType=REAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportType != null">
+        report_type,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportSaler != null">
+        report_saler,
+      </if>
+      <if test="record.reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="record.reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="record.reportLocation != null">
+        report_location,
+      </if>
+      <if test="record.reportClient != null">
+        report_client,
+      </if>
+      <if test="record.reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="record.reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="record.reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="record.reportWeight != null">
+        report_weight,
+      </if>
+      <if test="record.reportPrice != null">
+        report_price,
+      </if>
+      <if test="record.reportAmount != null">
+        report_amount,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=CHAR},
+        </if>
+        <if test="record.reportType != null">
+          #{listItem.reportType,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportSaler != null">
+          #{listItem.reportSaler,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportIsSend != null">
+          #{listItem.reportIsSend,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportIsPaid != null">
+          #{listItem.reportIsPaid,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportLocation != null">
+          #{listItem.reportLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportClient != null">
+          #{listItem.reportClient,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductName != null">
+          #{listItem.reportProductName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductId != null">
+          #{listItem.reportProductId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportQuantity != null">
+          #{listItem.reportQuantity,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportWeight != null">
+          #{listItem.reportWeight,jdbcType=REAL},
+        </if>
+        <if test="record.reportPrice != null">
+          #{listItem.reportPrice,jdbcType=REAL},
+        </if>
+        <if test="record.reportAmount != null">
+          #{listItem.reportAmount,jdbcType=REAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    replace into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportSaler != null">
+        report_saler,
+      </if>
+      <if test="reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="reportLocation != null">
+        report_location,
+      </if>
+      <if test="reportClient != null">
+        report_client,
+      </if>
+      <if test="reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="reportWeight != null">
+        report_weight,
+      </if>
+      <if test="reportPrice != null">
+        report_price,
+      </if>
+      <if test="reportAmount != null">
+        report_amount,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=CHAR},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportSaler != null">
+        #{reportSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="reportIsSend != null">
+        #{reportIsSend,jdbcType=INTEGER},
+      </if>
+      <if test="reportIsPaid != null">
+        #{reportIsPaid,jdbcType=INTEGER},
+      </if>
+      <if test="reportLocation != null">
+        #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportClient != null">
+        #{reportClient,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductName != null">
+        #{reportProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductId != null">
+        #{reportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportQuantity != null">
+        #{reportQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reportWeight != null">
+        #{reportWeight,jdbcType=REAL},
+      </if>
+      <if test="reportPrice != null">
+        #{reportPrice,jdbcType=REAL},
+      </if>
+      <if test="reportAmount != null">
+        #{reportAmount,jdbcType=REAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReport">
+    insert into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportType != null">
+        report_type,
+      </if>
+      <if test="reportTime != null">
+        report_time,
+      </if>
+      <if test="reportSaler != null">
+        report_saler,
+      </if>
+      <if test="reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="reportLocation != null">
+        report_location,
+      </if>
+      <if test="reportClient != null">
+        report_client,
+      </if>
+      <if test="reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="reportWeight != null">
+        report_weight,
+      </if>
+      <if test="reportPrice != null">
+        report_price,
+      </if>
+      <if test="reportAmount != null">
+        report_amount,
+      </if>
+      <if test="reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=CHAR},
+      </if>
+      <if test="reportType != null">
+        #{reportType,jdbcType=INTEGER},
+      </if>
+      <if test="reportTime != null">
+        #{reportTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportSaler != null">
+        #{reportSaler,jdbcType=VARCHAR},
+      </if>
+      <if test="reportIsSend != null">
+        #{reportIsSend,jdbcType=INTEGER},
+      </if>
+      <if test="reportIsPaid != null">
+        #{reportIsPaid,jdbcType=INTEGER},
+      </if>
+      <if test="reportLocation != null">
+        #{reportLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportClient != null">
+        #{reportClient,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductName != null">
+        #{reportProductName,jdbcType=VARCHAR},
+      </if>
+      <if test="reportProductId != null">
+        #{reportProductId,jdbcType=VARCHAR},
+      </if>
+      <if test="reportQuantity != null">
+        #{reportQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="reportWeight != null">
+        #{reportWeight,jdbcType=REAL},
+      </if>
+      <if test="reportPrice != null">
+        #{reportPrice,jdbcType=REAL},
+      </if>
+      <if test="reportAmount != null">
+        #{reportAmount,jdbcType=REAL},
+      </if>
+      <if test="reportComment != null">
+        #{reportComment,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="reportId != null">
+        report_id=values(report_id),
+      </if>
+      <if test="reportType != null">
+        report_type=values(report_type),
+      </if>
+      <if test="reportTime != null">
+        report_time=values(report_time),
+      </if>
+      <if test="reportSaler != null">
+        report_saler=values(report_saler),
+      </if>
+      <if test="reportIsSend != null">
+        report_is_send=values(report_is_send),
+      </if>
+      <if test="reportIsPaid != null">
+        report_is_paid=values(report_is_paid),
+      </if>
+      <if test="reportLocation != null">
+        report_location=values(report_location),
+      </if>
+      <if test="reportClient != null">
+        report_client=values(report_client),
+      </if>
+      <if test="reportProductName != null">
+        report_product_name=values(report_product_name),
+      </if>
+      <if test="reportProductId != null">
+        report_product_id=values(report_product_id),
+      </if>
+      <if test="reportQuantity != null">
+        report_quantity=values(report_quantity),
+      </if>
+      <if test="reportWeight != null">
+        report_weight=values(report_weight),
+      </if>
+      <if test="reportPrice != null">
+        report_price=values(report_price),
+      </if>
+      <if test="reportAmount != null">
+        report_amount=values(report_amount),
+      </if>
+      <if test="reportComment != null">
+        report_comment=values(report_comment),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_daily_sale_report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id,
+      </if>
+      <if test="record.reportType != null">
+        report_type,
+      </if>
+      <if test="record.reportTime != null">
+        report_time,
+      </if>
+      <if test="record.reportSaler != null">
+        report_saler,
+      </if>
+      <if test="record.reportIsSend != null">
+        report_is_send,
+      </if>
+      <if test="record.reportIsPaid != null">
+        report_is_paid,
+      </if>
+      <if test="record.reportLocation != null">
+        report_location,
+      </if>
+      <if test="record.reportClient != null">
+        report_client,
+      </if>
+      <if test="record.reportProductName != null">
+        report_product_name,
+      </if>
+      <if test="record.reportProductId != null">
+        report_product_id,
+      </if>
+      <if test="record.reportQuantity != null">
+        report_quantity,
+      </if>
+      <if test="record.reportWeight != null">
+        report_weight,
+      </if>
+      <if test="record.reportPrice != null">
+        report_price,
+      </if>
+      <if test="record.reportAmount != null">
+        report_amount,
+      </if>
+      <if test="record.reportComment != null">
+        report_comment,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.reportId != null">
+          #{listItem.reportId,jdbcType=CHAR},
+        </if>
+        <if test="record.reportType != null">
+          #{listItem.reportType,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportTime != null">
+          #{listItem.reportTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.reportSaler != null">
+          #{listItem.reportSaler,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportIsSend != null">
+          #{listItem.reportIsSend,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportIsPaid != null">
+          #{listItem.reportIsPaid,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportLocation != null">
+          #{listItem.reportLocation,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportClient != null">
+          #{listItem.reportClient,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductName != null">
+          #{listItem.reportProductName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportProductId != null">
+          #{listItem.reportProductId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.reportQuantity != null">
+          #{listItem.reportQuantity,jdbcType=INTEGER},
+        </if>
+        <if test="record.reportWeight != null">
+          #{listItem.reportWeight,jdbcType=REAL},
+        </if>
+        <if test="record.reportPrice != null">
+          #{listItem.reportPrice,jdbcType=REAL},
+        </if>
+        <if test="record.reportAmount != null">
+          #{listItem.reportAmount,jdbcType=REAL},
+        </if>
+        <if test="record.reportComment != null">
+          #{listItem.reportComment,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.reportId != null">
+        report_id=values(report_id),
+      </if>
+      <if test="record.reportType != null">
+        report_type=values(report_type),
+      </if>
+      <if test="record.reportTime != null">
+        report_time=values(report_time),
+      </if>
+      <if test="record.reportSaler != null">
+        report_saler=values(report_saler),
+      </if>
+      <if test="record.reportIsSend != null">
+        report_is_send=values(report_is_send),
+      </if>
+      <if test="record.reportIsPaid != null">
+        report_is_paid=values(report_is_paid),
+      </if>
+      <if test="record.reportLocation != null">
+        report_location=values(report_location),
+      </if>
+      <if test="record.reportClient != null">
+        report_client=values(report_client),
+      </if>
+      <if test="record.reportProductName != null">
+        report_product_name=values(report_product_name),
+      </if>
+      <if test="record.reportProductId != null">
+        report_product_id=values(report_product_id),
+      </if>
+      <if test="record.reportQuantity != null">
+        report_quantity=values(report_quantity),
+      </if>
+      <if test="record.reportWeight != null">
+        report_weight=values(report_weight),
+      </if>
+      <if test="record.reportPrice != null">
+        report_price=values(report_price),
+      </if>
+      <if test="record.reportAmount != null">
+        report_amount=values(report_amount),
+      </if>
+      <if test="record.reportComment != null">
+        report_comment=values(report_comment),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.DailySaleReportCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_daily_sale_report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

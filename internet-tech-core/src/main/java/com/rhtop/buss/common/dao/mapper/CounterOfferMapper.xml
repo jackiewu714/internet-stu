@@ -1,0 +1,2181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.CounterOfferMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.CounterOffer">
+    <id column="counteroffer_id" jdbcType="CHAR" property="counterofferId" />
+    <result column="md_id" jdbcType="CHAR" property="mdId" />
+    <result column="md_name" jdbcType="CHAR" property="mdName" />
+    <result column="deal_time" jdbcType="VARCHAR" property="dealTime" />
+    <result column="category_id" jdbcType="CHAR" property="categoryId" />
+    <result column="tx_status" jdbcType="VARCHAR" property="txStatus" />
+    <result column="timing_sta" jdbcType="VARCHAR" property="timingSta" />
+    <result column="tx_amo" jdbcType="VARCHAR" property="txAmo" />
+    <result column="pcas_pri" jdbcType="DECIMAL" property="pcasPri" />
+    <result column="pcas_time" jdbcType="TIMESTAMP" property="pcasTime" />
+    <result column="ctof_pri" jdbcType="DECIMAL" property="ctofPri" />
+    <result column="ctof_time_" jdbcType="TIMESTAMP" property="ctofTime" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="CHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="offer_avg_weight" jdbcType="DECIMAL" property="offerAvgWeight" />
+    <result column="catchweight_pri" jdbcType="DECIMAL" property="catchweightPri" />
+    <result column="offer_pri" jdbcType="DECIMAL" property="offerPri" />
+    <result column="standard_catch" jdbcType="VARCHAR" property="standardCatch" />
+    <result column="sales_offer" jdbcType="DECIMAL" property="salesOffer" />
+    <result column="sales_remark" jdbcType="VARCHAR" property="salesRemark" />
+    <result column="sales_id" jdbcType="VARCHAR" property="salesId" />
+    <result column="sales_name" jdbcType="VARCHAR" property="salesName" />
+    <result column="sales_offer_time" jdbcType="TIMESTAMP" property="salesOfferTime" />
+    <result column="offer_remark" jdbcType="VARCHAR" property="offerRemark" />
+    <result column="auditor_id" jdbcType="VARCHAR" property="auditorId" />
+    <result column="auditor_name" jdbcType="VARCHAR" property="auditorName" />
+    <result column="auditor_remark" jdbcType="VARCHAR" property="auditorRemark" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="auditor_status" jdbcType="VARCHAR" property="auditorStatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="counterofferId != null and counterofferId != ''">
+         and counteroffer_id = #{counterofferId,jdbcType=CHAR}
+      </if>
+      <if test="counterofferIdRange != null and counterofferIdRange != ''">
+         and counteroffer_id like concat('%',#{counterofferIdRange},'%')
+      </if>
+      <if test="mdId != null and mdId != ''">
+         and md_id = #{mdId,jdbcType=CHAR}
+      </if>
+      <if test="mdIdRange != null and mdIdRange != ''">
+         and md_id like concat('%',#{mdIdRange},'%')
+      </if>
+      <if test="mdName != null and mdName != ''">
+         and md_name = #{mdName,jdbcType=CHAR}
+      </if>
+      <if test="mdNameRange != null and mdNameRange != ''">
+         and md_name like concat('%',#{mdNameRange},'%')
+      </if>
+      <if test="dealTime != null and dealTime != ''">
+         and deal_time = #{dealTime,jdbcType=VARCHAR}
+      </if>
+      <if test="dealTimeRange != null and dealTimeRange != ''">
+         and deal_time like concat('%',#{dealTimeRange},'%')
+      </if>
+      <if test="categoryId != null and categoryId != ''">
+         and category_id = #{categoryId,jdbcType=CHAR}
+      </if>
+      <if test="categoryIdRange != null and categoryIdRange != ''">
+         and category_id like concat('%',#{categoryIdRange},'%')
+      </if>
+      <if test="txStatus != null and txStatus != ''">
+         and tx_status = #{txStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="txStatusRange != null and txStatusRange != ''">
+         and tx_status like concat('%',#{txStatusRange},'%')
+      </if>
+      <if test="timingSta != null and timingSta != ''">
+         and timing_sta = #{timingSta,jdbcType=VARCHAR}
+      </if>
+      <if test="timingStaRange != null and timingStaRange != ''">
+         and timing_sta like concat('%',#{timingStaRange},'%')
+      </if>
+      <if test="txAmo != null and txAmo != ''">
+         and tx_amo = #{txAmo,jdbcType=VARCHAR}
+      </if>
+      <if test="txAmoRange != null and txAmoRange != ''">
+         and tx_amo like concat('%',#{txAmoRange},'%')
+      </if>
+      <if test="pcasPri != null and pcasPri != ''">
+         and pcas_pri = #{pcasPri,jdbcType=DECIMAL}
+      </if>
+      <if test="pcasTime != null and pcasTime != ''">
+         and pcas_time = #{pcasTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pcasTimeRange1 != null and pcasTimeRange1 != ''">
+         and pcas_time &gt;= #{pcasTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="pcasTimeRange2 != null and pcasTimeRange2 != ''">
+         and pcas_time &lt;= #{pcasTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ctofPri != null and ctofPri != ''">
+         and ctof_pri = #{ctofPri,jdbcType=DECIMAL}
+      </if>
+      <if test="ctofTime != null and ctofTime != ''">
+         and ctof_time_ = #{ctofTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ctofTimeRange1 != null and ctofTimeRange1 != ''">
+         and ctof_time_ &gt;= #{ctofTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ctofTimeRange2 != null and ctofTimeRange2 != ''">
+         and ctof_time_ &lt;= #{ctofTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+         and update_user = #{updateUser,jdbcType=CHAR}
+      </if>
+      <if test="updateUserRange != null and updateUserRange != ''">
+         and update_user like concat('%',#{updateUserRange},'%')
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+         and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange1 != null and updateTimeRange1 != ''">
+         and update_time &gt;= #{updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange2 != null and updateTimeRange2 != ''">
+         and update_time &lt;= #{updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerAvgWeight != null and offerAvgWeight != ''">
+         and offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="catchweightPri != null and catchweightPri != ''">
+         and catchweight_pri = #{catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="offerPri != null and offerPri != ''">
+         and offer_pri = #{offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="standardCatch != null and standardCatch != ''">
+         and standard_catch = #{standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="standardCatchRange != null and standardCatchRange != ''">
+         and standard_catch like concat('%',#{standardCatchRange},'%')
+      </if>
+      <if test="salesOffer != null and salesOffer != ''">
+         and sales_offer = #{salesOffer,jdbcType=DECIMAL}
+      </if>
+      <if test="salesRemark != null and salesRemark != ''">
+         and sales_remark = #{salesRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="salesRemarkRange != null and salesRemarkRange != ''">
+         and sales_remark like concat('%',#{salesRemarkRange},'%')
+      </if>
+      <if test="salesId != null and salesId != ''">
+         and sales_id = #{salesId,jdbcType=VARCHAR}
+      </if>
+      <if test="salesIdRange != null and salesIdRange != ''">
+         and sales_id like concat('%',#{salesIdRange},'%')
+      </if>
+      <if test="salesName != null and salesName != ''">
+         and sales_name = #{salesName,jdbcType=VARCHAR}
+      </if>
+      <if test="salesNameRange != null and salesNameRange != ''">
+         and sales_name like concat('%',#{salesNameRange},'%')
+      </if>
+      <if test="salesOfferTime != null and salesOfferTime != ''">
+         and sales_offer_time = #{salesOfferTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="salesOfferTimeRange1 != null and salesOfferTimeRange1 != ''">
+         and sales_offer_time &gt;= #{salesOfferTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="salesOfferTimeRange2 != null and salesOfferTimeRange2 != ''">
+         and sales_offer_time &lt;= #{salesOfferTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerRemark != null and offerRemark != ''">
+         and offer_remark = #{offerRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="offerRemarkRange != null and offerRemarkRange != ''">
+         and offer_remark like concat('%',#{offerRemarkRange},'%')
+      </if>
+      <if test="auditorId != null and auditorId != ''">
+         and auditor_id = #{auditorId,jdbcType=VARCHAR}
+      </if>
+      <if test="auditorIdRange != null and auditorIdRange != ''">
+         and auditor_id like concat('%',#{auditorIdRange},'%')
+      </if>
+      <if test="auditorName != null and auditorName != ''">
+         and auditor_name = #{auditorName,jdbcType=VARCHAR}
+      </if>
+      <if test="auditorNameRange != null and auditorNameRange != ''">
+         and auditor_name like concat('%',#{auditorNameRange},'%')
+      </if>
+      <if test="auditorRemark != null and auditorRemark != ''">
+         and auditor_remark = #{auditorRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="auditorRemarkRange != null and auditorRemarkRange != ''">
+         and auditor_remark like concat('%',#{auditorRemarkRange},'%')
+      </if>
+      <if test="auditTime != null and auditTime != ''">
+         and audit_time = #{auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditTimeRange1 != null and auditTimeRange1 != ''">
+         and audit_time &gt;= #{auditTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditTimeRange2 != null and auditTimeRange2 != ''">
+         and audit_time &lt;= #{auditTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditorStatus != null and auditorStatus != ''">
+         and auditor_status = #{auditorStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="auditorStatusRange != null and auditorStatusRange != ''">
+         and auditor_status like concat('%',#{auditorStatusRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.counterofferId != null and example.counterofferId != ''">
+         and counteroffer_id = #{example.counterofferId,jdbcType=CHAR}
+      </if>
+      <if test="example.counterofferIdRange != null and example.counterofferIdRange != ''">
+         and counteroffer_id like concat('%',#{example.counterofferIdRange},'%')
+      </if>
+      <if test="example.mdId != null and example.mdId != ''">
+         and md_id = #{example.mdId,jdbcType=CHAR}
+      </if>
+      <if test="example.mdIdRange != null and example.mdIdRange != ''">
+         and md_id like concat('%',#{example.mdIdRange},'%')
+      </if>
+      <if test="example.mdName != null and example.mdName != ''">
+         and md_name = #{example.mdName,jdbcType=CHAR}
+      </if>
+      <if test="example.mdNameRange != null and example.mdNameRange != ''">
+         and md_name like concat('%',#{example.mdNameRange},'%')
+      </if>
+      <if test="example.dealTime != null and example.dealTime != ''">
+         and deal_time = #{example.dealTime,jdbcType=VARCHAR}
+      </if>
+      <if test="example.dealTimeRange != null and example.dealTimeRange != ''">
+         and deal_time like concat('%',#{example.dealTimeRange},'%')
+      </if>
+      <if test="example.categoryId != null and example.categoryId != ''">
+         and category_id = #{example.categoryId,jdbcType=CHAR}
+      </if>
+      <if test="example.categoryIdRange != null and example.categoryIdRange != ''">
+         and category_id like concat('%',#{example.categoryIdRange},'%')
+      </if>
+      <if test="example.txStatus != null and example.txStatus != ''">
+         and tx_status = #{example.txStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="example.txStatusRange != null and example.txStatusRange != ''">
+         and tx_status like concat('%',#{example.txStatusRange},'%')
+      </if>
+      <if test="example.timingSta != null and example.timingSta != ''">
+         and timing_sta = #{example.timingSta,jdbcType=VARCHAR}
+      </if>
+      <if test="example.timingStaRange != null and example.timingStaRange != ''">
+         and timing_sta like concat('%',#{example.timingStaRange},'%')
+      </if>
+      <if test="example.txAmo != null and example.txAmo != ''">
+         and tx_amo = #{example.txAmo,jdbcType=VARCHAR}
+      </if>
+      <if test="example.txAmoRange != null and example.txAmoRange != ''">
+         and tx_amo like concat('%',#{example.txAmoRange},'%')
+      </if>
+      <if test="example.pcasPri != null and example.pcasPri != ''">
+         and pcas_pri = #{example.pcasPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.pcasTime != null and example.pcasTime != ''">
+         and pcas_time = #{example.pcasTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.pcasTimeRange1 != null and example.pcasTimeRange1 != ''">
+         and pcas_time &gt;= #{example.pcasTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.pcasTimeRange2 != null and example.pcasTimeRange2 != ''">
+         and pcas_time &lt;= #{example.pcasTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.ctofPri != null and example.ctofPri != ''">
+         and ctof_pri = #{example.ctofPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.ctofTime != null and example.ctofTime != ''">
+         and ctof_time_ = #{example.ctofTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.ctofTimeRange1 != null and example.ctofTimeRange1 != ''">
+         and ctof_time_ &gt;= #{example.ctofTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.ctofTimeRange2 != null and example.ctofTimeRange2 != ''">
+         and ctof_time_ &lt;= #{example.ctofTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateUser != null and example.updateUser != ''">
+         and update_user = #{example.updateUser,jdbcType=CHAR}
+      </if>
+      <if test="example.updateUserRange != null and example.updateUserRange != ''">
+         and update_user like concat('%',#{example.updateUserRange},'%')
+      </if>
+      <if test="example.updateTime != null and example.updateTime != ''">
+         and update_time = #{example.updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange1 != null and example.updateTimeRange1 != ''">
+         and update_time &gt;= #{example.updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange2 != null and example.updateTimeRange2 != ''">
+         and update_time &lt;= #{example.updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerAvgWeight != null and example.offerAvgWeight != ''">
+         and offer_avg_weight = #{example.offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="example.catchweightPri != null and example.catchweightPri != ''">
+         and catchweight_pri = #{example.catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.offerPri != null and example.offerPri != ''">
+         and offer_pri = #{example.offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.standardCatch != null and example.standardCatch != ''">
+         and standard_catch = #{example.standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="example.standardCatchRange != null and example.standardCatchRange != ''">
+         and standard_catch like concat('%',#{example.standardCatchRange},'%')
+      </if>
+      <if test="example.salesOffer != null and example.salesOffer != ''">
+         and sales_offer = #{example.salesOffer,jdbcType=DECIMAL}
+      </if>
+      <if test="example.salesRemark != null and example.salesRemark != ''">
+         and sales_remark = #{example.salesRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.salesRemarkRange != null and example.salesRemarkRange != ''">
+         and sales_remark like concat('%',#{example.salesRemarkRange},'%')
+      </if>
+      <if test="example.salesId != null and example.salesId != ''">
+         and sales_id = #{example.salesId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.salesIdRange != null and example.salesIdRange != ''">
+         and sales_id like concat('%',#{example.salesIdRange},'%')
+      </if>
+      <if test="example.salesName != null and example.salesName != ''">
+         and sales_name = #{example.salesName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.salesNameRange != null and example.salesNameRange != ''">
+         and sales_name like concat('%',#{example.salesNameRange},'%')
+      </if>
+      <if test="example.salesOfferTime != null and example.salesOfferTime != ''">
+         and sales_offer_time = #{example.salesOfferTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.salesOfferTimeRange1 != null and example.salesOfferTimeRange1 != ''">
+         and sales_offer_time &gt;= #{example.salesOfferTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.salesOfferTimeRange2 != null and example.salesOfferTimeRange2 != ''">
+         and sales_offer_time &lt;= #{example.salesOfferTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerRemark != null and example.offerRemark != ''">
+         and offer_remark = #{example.offerRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerRemarkRange != null and example.offerRemarkRange != ''">
+         and offer_remark like concat('%',#{example.offerRemarkRange},'%')
+      </if>
+      <if test="example.auditorId != null and example.auditorId != ''">
+         and auditor_id = #{example.auditorId,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditorIdRange != null and example.auditorIdRange != ''">
+         and auditor_id like concat('%',#{example.auditorIdRange},'%')
+      </if>
+      <if test="example.auditorName != null and example.auditorName != ''">
+         and auditor_name = #{example.auditorName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditorNameRange != null and example.auditorNameRange != ''">
+         and auditor_name like concat('%',#{example.auditorNameRange},'%')
+      </if>
+      <if test="example.auditorRemark != null and example.auditorRemark != ''">
+         and auditor_remark = #{example.auditorRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditorRemarkRange != null and example.auditorRemarkRange != ''">
+         and auditor_remark like concat('%',#{example.auditorRemarkRange},'%')
+      </if>
+      <if test="example.auditTime != null and example.auditTime != ''">
+         and audit_time = #{example.auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditTimeRange1 != null and example.auditTimeRange1 != ''">
+         and audit_time &gt;= #{example.auditTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditTimeRange2 != null and example.auditTimeRange2 != ''">
+         and audit_time &lt;= #{example.auditTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditorStatus != null and example.auditorStatus != ''">
+         and auditor_status = #{example.auditorStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditorStatusRange != null and example.auditorStatusRange != ''">
+         and auditor_status like concat('%',#{example.auditorStatusRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    counteroffer_id, md_id, md_name, deal_time, category_id, tx_status, timing_sta, tx_amo, 
+    pcas_pri, pcas_time, ctof_pri, ctof_time_, create_user, create_time, update_user, 
+    update_time, offer_avg_weight, catchweight_pri, offer_pri, standard_catch, sales_offer, 
+    sales_remark, sales_id, sales_name, sales_offer_time, offer_remark, auditor_id, auditor_name, 
+    auditor_remark, audit_time, auditor_status
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.CounterOfferCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_counteroffer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_counteroffer
+    where counteroffer_id = #{counterofferId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_counteroffer
+    where counteroffer_id = #{counterofferId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.CounterOfferCriteria">
+    delete from buss_counteroffer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    insert into buss_counteroffer (counteroffer_id, md_id, md_name, 
+      deal_time, category_id, tx_status, 
+      timing_sta, tx_amo, pcas_pri, 
+      pcas_time, ctof_pri, ctof_time_, 
+      create_user, create_time, update_user, 
+      update_time, offer_avg_weight, catchweight_pri, 
+      offer_pri, standard_catch, sales_offer, 
+      sales_remark, sales_id, sales_name, 
+      sales_offer_time, offer_remark, auditor_id, 
+      auditor_name, auditor_remark, audit_time, 
+      auditor_status)
+    values (#{counterofferId,jdbcType=CHAR}, #{mdId,jdbcType=CHAR}, #{mdName,jdbcType=CHAR}, 
+      #{dealTime,jdbcType=VARCHAR}, #{categoryId,jdbcType=CHAR}, #{txStatus,jdbcType=VARCHAR}, 
+      #{timingSta,jdbcType=VARCHAR}, #{txAmo,jdbcType=VARCHAR}, #{pcasPri,jdbcType=DECIMAL}, 
+      #{pcasTime,jdbcType=TIMESTAMP}, #{ctofPri,jdbcType=DECIMAL}, #{ctofTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{offerAvgWeight,jdbcType=DECIMAL}, #{catchweightPri,jdbcType=DECIMAL}, 
+      #{offerPri,jdbcType=DECIMAL}, #{standardCatch,jdbcType=VARCHAR}, #{salesOffer,jdbcType=DECIMAL}, 
+      #{salesRemark,jdbcType=VARCHAR}, #{salesId,jdbcType=VARCHAR}, #{salesName,jdbcType=VARCHAR}, 
+      #{salesOfferTime,jdbcType=TIMESTAMP}, #{offerRemark,jdbcType=VARCHAR}, #{auditorId,jdbcType=VARCHAR}, 
+      #{auditorName,jdbcType=VARCHAR}, #{auditorRemark,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{auditorStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    insert into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="txStatus != null">
+        tx_status,
+      </if>
+      <if test="timingSta != null">
+        timing_sta,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="salesId != null">
+        sales_id,
+      </if>
+      <if test="salesName != null">
+        sales_name,
+      </if>
+      <if test="salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="auditorId != null">
+        auditor_id,
+      </if>
+      <if test="auditorName != null">
+        auditor_name,
+      </if>
+      <if test="auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="txStatus != null">
+        #{txStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timingSta != null">
+        #{timingSta,jdbcType=VARCHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcasPri != null">
+        #{pcasPri,jdbcType=DECIMAL},
+      </if>
+      <if test="pcasTime != null">
+        #{pcasTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="ctofTime != null">
+        #{ctofTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOffer != null">
+        #{salesOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="salesRemark != null">
+        #{salesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesId != null">
+        #{salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="salesName != null">
+        #{salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOfferTime != null">
+        #{salesOfferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerRemark != null">
+        #{offerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null">
+        #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorRemark != null">
+        #{auditorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorStatus != null">
+        #{auditorStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.CounterOfferCriteria" resultType="java.lang.Long">
+    select count(*) from buss_counteroffer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_counteroffer
+    <set>
+      <if test="record.counterofferId != null">
+        counteroffer_id = #{record.counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="record.mdId != null">
+        md_id = #{record.mdId,jdbcType=CHAR},
+      </if>
+      <if test="record.mdName != null">
+        md_name = #{record.mdName,jdbcType=CHAR},
+      </if>
+      <if test="record.dealTime != null">
+        deal_time = #{record.dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=CHAR},
+      </if>
+      <if test="record.txStatus != null">
+        tx_status = #{record.txStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timingSta != null">
+        timing_sta = #{record.timingSta,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo = #{record.txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pcasPri != null">
+        pcas_pri = #{record.pcasPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.pcasTime != null">
+        pcas_time = #{record.pcasTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri = #{record.ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ctofTime != null">
+        ctof_time_ = #{record.ctofTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch = #{record.standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesOffer != null">
+        sales_offer = #{record.salesOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="record.salesRemark != null">
+        sales_remark = #{record.salesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesId != null">
+        sales_id = #{record.salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesName != null">
+        sales_name = #{record.salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesOfferTime != null">
+        sales_offer_time = #{record.salesOfferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerRemark != null">
+        offer_remark = #{record.offerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorId != null">
+        auditor_id = #{record.auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorName != null">
+        auditor_name = #{record.auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorRemark != null">
+        auditor_remark = #{record.auditorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null">
+        audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditorStatus != null">
+        auditor_status = #{record.auditorStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_counteroffer
+    set counteroffer_id = #{record.counterofferId,jdbcType=CHAR},
+      md_id = #{record.mdId,jdbcType=CHAR},
+      md_name = #{record.mdName,jdbcType=CHAR},
+      deal_time = #{record.dealTime,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=CHAR},
+      tx_status = #{record.txStatus,jdbcType=VARCHAR},
+      timing_sta = #{record.timingSta,jdbcType=VARCHAR},
+      tx_amo = #{record.txAmo,jdbcType=VARCHAR},
+      pcas_pri = #{record.pcasPri,jdbcType=DECIMAL},
+      pcas_time = #{record.pcasTime,jdbcType=TIMESTAMP},
+      ctof_pri = #{record.ctofPri,jdbcType=DECIMAL},
+      ctof_time_ = #{record.ctofTime,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      standard_catch = #{record.standardCatch,jdbcType=VARCHAR},
+      sales_offer = #{record.salesOffer,jdbcType=DECIMAL},
+      sales_remark = #{record.salesRemark,jdbcType=VARCHAR},
+      sales_id = #{record.salesId,jdbcType=VARCHAR},
+      sales_name = #{record.salesName,jdbcType=VARCHAR},
+      sales_offer_time = #{record.salesOfferTime,jdbcType=TIMESTAMP},
+      offer_remark = #{record.offerRemark,jdbcType=VARCHAR},
+      auditor_id = #{record.auditorId,jdbcType=VARCHAR},
+      auditor_name = #{record.auditorName,jdbcType=VARCHAR},
+      auditor_remark = #{record.auditorRemark,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      auditor_status = #{record.auditorStatus,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    update buss_counteroffer
+    <set>
+      <if test="mdId != null">
+        md_id = #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        md_name = #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="dealTime != null">
+        deal_time = #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="txStatus != null">
+        tx_status = #{txStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timingSta != null">
+        timing_sta = #{timingSta,jdbcType=VARCHAR},
+      </if>
+      <if test="txAmo != null">
+        tx_amo = #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcasPri != null">
+        pcas_pri = #{pcasPri,jdbcType=DECIMAL},
+      </if>
+      <if test="pcasTime != null">
+        pcas_time = #{pcasTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri = #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="ctofTime != null">
+        ctof_time_ = #{ctofTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        offer_pri = #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        standard_catch = #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOffer != null">
+        sales_offer = #{salesOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="salesRemark != null">
+        sales_remark = #{salesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesId != null">
+        sales_id = #{salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="salesName != null">
+        sales_name = #{salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOfferTime != null">
+        sales_offer_time = #{salesOfferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerRemark != null">
+        offer_remark = #{offerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        auditor_id = #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null">
+        auditor_name = #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorRemark != null">
+        auditor_remark = #{auditorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorStatus != null">
+        auditor_status = #{auditorStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where counteroffer_id = #{counterofferId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    update buss_counteroffer
+    set md_id = #{mdId,jdbcType=CHAR},
+      md_name = #{mdName,jdbcType=CHAR},
+      deal_time = #{dealTime,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=CHAR},
+      tx_status = #{txStatus,jdbcType=VARCHAR},
+      timing_sta = #{timingSta,jdbcType=VARCHAR},
+      tx_amo = #{txAmo,jdbcType=VARCHAR},
+      pcas_pri = #{pcasPri,jdbcType=DECIMAL},
+      pcas_time = #{pcasTime,jdbcType=TIMESTAMP},
+      ctof_pri = #{ctofPri,jdbcType=DECIMAL},
+      ctof_time_ = #{ctofTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{offerPri,jdbcType=DECIMAL},
+      standard_catch = #{standardCatch,jdbcType=VARCHAR},
+      sales_offer = #{salesOffer,jdbcType=DECIMAL},
+      sales_remark = #{salesRemark,jdbcType=VARCHAR},
+      sales_id = #{salesId,jdbcType=VARCHAR},
+      sales_name = #{salesName,jdbcType=VARCHAR},
+      sales_offer_time = #{salesOfferTime,jdbcType=TIMESTAMP},
+      offer_remark = #{offerRemark,jdbcType=VARCHAR},
+      auditor_id = #{auditorId,jdbcType=VARCHAR},
+      auditor_name = #{auditorName,jdbcType=VARCHAR},
+      auditor_remark = #{auditorRemark,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      auditor_status = #{auditorStatus,jdbcType=VARCHAR}
+    where counteroffer_id = #{counterofferId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.dealTime != null">
+        deal_time,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.txStatus != null">
+        tx_status,
+      </if>
+      <if test="record.timingSta != null">
+        timing_sta,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="record.pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="record.salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="record.salesId != null">
+        sales_id,
+      </if>
+      <if test="record.salesName != null">
+        sales_name,
+      </if>
+      <if test="record.salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="record.offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="record.auditorId != null">
+        auditor_id,
+      </if>
+      <if test="record.auditorName != null">
+        auditor_name,
+      </if>
+      <if test="record.auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.dealTime != null">
+          #{listItem.dealTime,jdbcType=VARCHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.txStatus != null">
+          #{listItem.txStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.timingSta != null">
+          #{listItem.timingSta,jdbcType=VARCHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pcasPri != null">
+          #{listItem.pcasPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.pcasTime != null">
+          #{listItem.pcasTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.ctofTime != null">
+          #{listItem.ctofTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOffer != null">
+          #{listItem.salesOffer,jdbcType=DECIMAL},
+        </if>
+        <if test="record.salesRemark != null">
+          #{listItem.salesRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesId != null">
+          #{listItem.salesId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesName != null">
+          #{listItem.salesName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOfferTime != null">
+          #{listItem.salesOfferTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerRemark != null">
+          #{listItem.offerRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorId != null">
+          #{listItem.auditorId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorName != null">
+          #{listItem.auditorName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorRemark != null">
+          #{listItem.auditorRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditorStatus != null">
+          #{listItem.auditorStatus,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.dealTime != null">
+        deal_time,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.txStatus != null">
+        tx_status,
+      </if>
+      <if test="record.timingSta != null">
+        timing_sta,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="record.pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="record.salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="record.salesId != null">
+        sales_id,
+      </if>
+      <if test="record.salesName != null">
+        sales_name,
+      </if>
+      <if test="record.salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="record.offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="record.auditorId != null">
+        auditor_id,
+      </if>
+      <if test="record.auditorName != null">
+        auditor_name,
+      </if>
+      <if test="record.auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.dealTime != null">
+          #{listItem.dealTime,jdbcType=VARCHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.txStatus != null">
+          #{listItem.txStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.timingSta != null">
+          #{listItem.timingSta,jdbcType=VARCHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pcasPri != null">
+          #{listItem.pcasPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.pcasTime != null">
+          #{listItem.pcasTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.ctofTime != null">
+          #{listItem.ctofTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOffer != null">
+          #{listItem.salesOffer,jdbcType=DECIMAL},
+        </if>
+        <if test="record.salesRemark != null">
+          #{listItem.salesRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesId != null">
+          #{listItem.salesId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesName != null">
+          #{listItem.salesName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOfferTime != null">
+          #{listItem.salesOfferTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerRemark != null">
+          #{listItem.offerRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorId != null">
+          #{listItem.auditorId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorName != null">
+          #{listItem.auditorName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorRemark != null">
+          #{listItem.auditorRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditorStatus != null">
+          #{listItem.auditorStatus,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    replace into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="txStatus != null">
+        tx_status,
+      </if>
+      <if test="timingSta != null">
+        timing_sta,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="salesId != null">
+        sales_id,
+      </if>
+      <if test="salesName != null">
+        sales_name,
+      </if>
+      <if test="salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="auditorId != null">
+        auditor_id,
+      </if>
+      <if test="auditorName != null">
+        auditor_name,
+      </if>
+      <if test="auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="txStatus != null">
+        #{txStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timingSta != null">
+        #{timingSta,jdbcType=VARCHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcasPri != null">
+        #{pcasPri,jdbcType=DECIMAL},
+      </if>
+      <if test="pcasTime != null">
+        #{pcasTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="ctofTime != null">
+        #{ctofTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOffer != null">
+        #{salesOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="salesRemark != null">
+        #{salesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesId != null">
+        #{salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="salesName != null">
+        #{salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOfferTime != null">
+        #{salesOfferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerRemark != null">
+        #{offerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null">
+        #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorRemark != null">
+        #{auditorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorStatus != null">
+        #{auditorStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.CounterOffer">
+    insert into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="dealTime != null">
+        deal_time,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="txStatus != null">
+        tx_status,
+      </if>
+      <if test="timingSta != null">
+        timing_sta,
+      </if>
+      <if test="txAmo != null">
+        tx_amo,
+      </if>
+      <if test="pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="salesId != null">
+        sales_id,
+      </if>
+      <if test="salesName != null">
+        sales_name,
+      </if>
+      <if test="salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="auditorId != null">
+        auditor_id,
+      </if>
+      <if test="auditorName != null">
+        auditor_name,
+      </if>
+      <if test="auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="counterofferId != null">
+        #{counterofferId,jdbcType=CHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="dealTime != null">
+        #{dealTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=CHAR},
+      </if>
+      <if test="txStatus != null">
+        #{txStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timingSta != null">
+        #{timingSta,jdbcType=VARCHAR},
+      </if>
+      <if test="txAmo != null">
+        #{txAmo,jdbcType=VARCHAR},
+      </if>
+      <if test="pcasPri != null">
+        #{pcasPri,jdbcType=DECIMAL},
+      </if>
+      <if test="pcasTime != null">
+        #{pcasTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ctofPri != null">
+        #{ctofPri,jdbcType=DECIMAL},
+      </if>
+      <if test="ctofTime != null">
+        #{ctofTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOffer != null">
+        #{salesOffer,jdbcType=DECIMAL},
+      </if>
+      <if test="salesRemark != null">
+        #{salesRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="salesId != null">
+        #{salesId,jdbcType=VARCHAR},
+      </if>
+      <if test="salesName != null">
+        #{salesName,jdbcType=VARCHAR},
+      </if>
+      <if test="salesOfferTime != null">
+        #{salesOfferTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerRemark != null">
+        #{offerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorName != null">
+        #{auditorName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorRemark != null">
+        #{auditorRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorStatus != null">
+        #{auditorStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="counterofferId != null">
+        counteroffer_id=values(counteroffer_id),
+      </if>
+      <if test="mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="dealTime != null">
+        deal_time=values(deal_time),
+      </if>
+      <if test="categoryId != null">
+        category_id=values(category_id),
+      </if>
+      <if test="txStatus != null">
+        tx_status=values(tx_status),
+      </if>
+      <if test="timingSta != null">
+        timing_sta=values(timing_sta),
+      </if>
+      <if test="txAmo != null">
+        tx_amo=values(tx_amo),
+      </if>
+      <if test="pcasPri != null">
+        pcas_pri=values(pcas_pri),
+      </if>
+      <if test="pcasTime != null">
+        pcas_time=values(pcas_time),
+      </if>
+      <if test="ctofPri != null">
+        ctof_pri=values(ctof_pri),
+      </if>
+      <if test="ctofTime != null">
+        ctof_time_=values(ctof_time_),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+      <if test="salesOffer != null">
+        sales_offer=values(sales_offer),
+      </if>
+      <if test="salesRemark != null">
+        sales_remark=values(sales_remark),
+      </if>
+      <if test="salesId != null">
+        sales_id=values(sales_id),
+      </if>
+      <if test="salesName != null">
+        sales_name=values(sales_name),
+      </if>
+      <if test="salesOfferTime != null">
+        sales_offer_time=values(sales_offer_time),
+      </if>
+      <if test="offerRemark != null">
+        offer_remark=values(offer_remark),
+      </if>
+      <if test="auditorId != null">
+        auditor_id=values(auditor_id),
+      </if>
+      <if test="auditorName != null">
+        auditor_name=values(auditor_name),
+      </if>
+      <if test="auditorRemark != null">
+        auditor_remark=values(auditor_remark),
+      </if>
+      <if test="auditTime != null">
+        audit_time=values(audit_time),
+      </if>
+      <if test="auditorStatus != null">
+        auditor_status=values(auditor_status),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_counteroffer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.counterofferId != null">
+        counteroffer_id,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.dealTime != null">
+        deal_time,
+      </if>
+      <if test="record.categoryId != null">
+        category_id,
+      </if>
+      <if test="record.txStatus != null">
+        tx_status,
+      </if>
+      <if test="record.timingSta != null">
+        timing_sta,
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo,
+      </if>
+      <if test="record.pcasPri != null">
+        pcas_pri,
+      </if>
+      <if test="record.pcasTime != null">
+        pcas_time,
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri,
+      </if>
+      <if test="record.ctofTime != null">
+        ctof_time_,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.salesOffer != null">
+        sales_offer,
+      </if>
+      <if test="record.salesRemark != null">
+        sales_remark,
+      </if>
+      <if test="record.salesId != null">
+        sales_id,
+      </if>
+      <if test="record.salesName != null">
+        sales_name,
+      </if>
+      <if test="record.salesOfferTime != null">
+        sales_offer_time,
+      </if>
+      <if test="record.offerRemark != null">
+        offer_remark,
+      </if>
+      <if test="record.auditorId != null">
+        auditor_id,
+      </if>
+      <if test="record.auditorName != null">
+        auditor_name,
+      </if>
+      <if test="record.auditorRemark != null">
+        auditor_remark,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.auditorStatus != null">
+        auditor_status,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.counterofferId != null">
+          #{listItem.counterofferId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.dealTime != null">
+          #{listItem.dealTime,jdbcType=VARCHAR},
+        </if>
+        <if test="record.categoryId != null">
+          #{listItem.categoryId,jdbcType=CHAR},
+        </if>
+        <if test="record.txStatus != null">
+          #{listItem.txStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.timingSta != null">
+          #{listItem.timingSta,jdbcType=VARCHAR},
+        </if>
+        <if test="record.txAmo != null">
+          #{listItem.txAmo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pcasPri != null">
+          #{listItem.pcasPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.pcasTime != null">
+          #{listItem.pcasTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ctofPri != null">
+          #{listItem.ctofPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.ctofTime != null">
+          #{listItem.ctofTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOffer != null">
+          #{listItem.salesOffer,jdbcType=DECIMAL},
+        </if>
+        <if test="record.salesRemark != null">
+          #{listItem.salesRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesId != null">
+          #{listItem.salesId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesName != null">
+          #{listItem.salesName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.salesOfferTime != null">
+          #{listItem.salesOfferTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerRemark != null">
+          #{listItem.offerRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorId != null">
+          #{listItem.auditorId,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorName != null">
+          #{listItem.auditorName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditorRemark != null">
+          #{listItem.auditorRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditorStatus != null">
+          #{listItem.auditorStatus,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.counterofferId != null">
+        counteroffer_id=values(counteroffer_id),
+      </if>
+      <if test="record.mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="record.mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="record.dealTime != null">
+        deal_time=values(deal_time),
+      </if>
+      <if test="record.categoryId != null">
+        category_id=values(category_id),
+      </if>
+      <if test="record.txStatus != null">
+        tx_status=values(tx_status),
+      </if>
+      <if test="record.timingSta != null">
+        timing_sta=values(timing_sta),
+      </if>
+      <if test="record.txAmo != null">
+        tx_amo=values(tx_amo),
+      </if>
+      <if test="record.pcasPri != null">
+        pcas_pri=values(pcas_pri),
+      </if>
+      <if test="record.pcasTime != null">
+        pcas_time=values(pcas_time),
+      </if>
+      <if test="record.ctofPri != null">
+        ctof_pri=values(ctof_pri),
+      </if>
+      <if test="record.ctofTime != null">
+        ctof_time_=values(ctof_time_),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="record.updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="record.updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+      <if test="record.salesOffer != null">
+        sales_offer=values(sales_offer),
+      </if>
+      <if test="record.salesRemark != null">
+        sales_remark=values(sales_remark),
+      </if>
+      <if test="record.salesId != null">
+        sales_id=values(sales_id),
+      </if>
+      <if test="record.salesName != null">
+        sales_name=values(sales_name),
+      </if>
+      <if test="record.salesOfferTime != null">
+        sales_offer_time=values(sales_offer_time),
+      </if>
+      <if test="record.offerRemark != null">
+        offer_remark=values(offer_remark),
+      </if>
+      <if test="record.auditorId != null">
+        auditor_id=values(auditor_id),
+      </if>
+      <if test="record.auditorName != null">
+        auditor_name=values(auditor_name),
+      </if>
+      <if test="record.auditorRemark != null">
+        auditor_remark=values(auditor_remark),
+      </if>
+      <if test="record.auditTime != null">
+        audit_time=values(audit_time),
+      </if>
+      <if test="record.auditorStatus != null">
+        auditor_status=values(auditor_status),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.CounterOfferCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_counteroffer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

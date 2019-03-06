@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.DistributorMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.Distributor">
+    <id column="dis_id" jdbcType="CHAR" property="disId" />
+    <result column="dis_name" jdbcType="VARCHAR" property="disName" />
+    <result column="md_id" jdbcType="CHAR" property="mdId" />
+    <result column="md_name" jdbcType="CHAR" property="mdName" />
+    <result column="dis_address" jdbcType="VARCHAR" property="disAddress" />
+    <result column="dis_phone" jdbcType="VARCHAR" property="disPhone" />
+    <result column="dis_remark" jdbcType="VARCHAR" property="disRemark" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="channel" jdbcType="VARCHAR" property="channel" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="CHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="disId != null and disId != ''">
+         and dis_id = #{disId,jdbcType=CHAR}
+      </if>
+      <if test="disIdRange != null and disIdRange != ''">
+         and dis_id like concat('%',#{disIdRange},'%')
+      </if>
+      <if test="disName != null and disName != ''">
+         and dis_name = #{disName,jdbcType=VARCHAR}
+      </if>
+      <if test="disNameRange != null and disNameRange != ''">
+         and dis_name like concat('%',#{disNameRange},'%')
+      </if>
+      <if test="mdId != null and mdId != ''">
+         and md_id = #{mdId,jdbcType=CHAR}
+      </if>
+      <if test="mdIdRange != null and mdIdRange != ''">
+         and md_id like concat('%',#{mdIdRange},'%')
+      </if>
+      <if test="mdName != null and mdName != ''">
+         and md_name = #{mdName,jdbcType=CHAR}
+      </if>
+      <if test="mdNameRange != null and mdNameRange != ''">
+         and md_name like concat('%',#{mdNameRange},'%')
+      </if>
+      <if test="disAddress != null and disAddress != ''">
+         and dis_address = #{disAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="disAddressRange != null and disAddressRange != ''">
+         and dis_address like concat('%',#{disAddressRange},'%')
+      </if>
+      <if test="disPhone != null and disPhone != ''">
+         and dis_phone = #{disPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="disPhoneRange != null and disPhoneRange != ''">
+         and dis_phone like concat('%',#{disPhoneRange},'%')
+      </if>
+      <if test="disRemark != null and disRemark != ''">
+         and dis_remark = #{disRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="disRemarkRange != null and disRemarkRange != ''">
+         and dis_remark like concat('%',#{disRemarkRange},'%')
+      </if>
+      <if test="area != null and area != ''">
+         and area = #{area,jdbcType=VARCHAR}
+      </if>
+      <if test="areaRange != null and areaRange != ''">
+         and area like concat('%',#{areaRange},'%')
+      </if>
+      <if test="type != null and type != ''">
+         and type = #{type,jdbcType=VARCHAR}
+      </if>
+      <if test="typeRange != null and typeRange != ''">
+         and type like concat('%',#{typeRange},'%')
+      </if>
+      <if test="channel != null and channel != ''">
+         and channel = #{channel,jdbcType=VARCHAR}
+      </if>
+      <if test="channelRange != null and channelRange != ''">
+         and channel like concat('%',#{channelRange},'%')
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+         and update_user = #{updateUser,jdbcType=CHAR}
+      </if>
+      <if test="updateUserRange != null and updateUserRange != ''">
+         and update_user like concat('%',#{updateUserRange},'%')
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+         and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange1 != null and updateTimeRange1 != ''">
+         and update_time &gt;= #{updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange2 != null and updateTimeRange2 != ''">
+         and update_time &lt;= #{updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.disId != null and example.disId != ''">
+         and dis_id = #{example.disId,jdbcType=CHAR}
+      </if>
+      <if test="example.disIdRange != null and example.disIdRange != ''">
+         and dis_id like concat('%',#{example.disIdRange},'%')
+      </if>
+      <if test="example.disName != null and example.disName != ''">
+         and dis_name = #{example.disName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.disNameRange != null and example.disNameRange != ''">
+         and dis_name like concat('%',#{example.disNameRange},'%')
+      </if>
+      <if test="example.mdId != null and example.mdId != ''">
+         and md_id = #{example.mdId,jdbcType=CHAR}
+      </if>
+      <if test="example.mdIdRange != null and example.mdIdRange != ''">
+         and md_id like concat('%',#{example.mdIdRange},'%')
+      </if>
+      <if test="example.mdName != null and example.mdName != ''">
+         and md_name = #{example.mdName,jdbcType=CHAR}
+      </if>
+      <if test="example.mdNameRange != null and example.mdNameRange != ''">
+         and md_name like concat('%',#{example.mdNameRange},'%')
+      </if>
+      <if test="example.disAddress != null and example.disAddress != ''">
+         and dis_address = #{example.disAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="example.disAddressRange != null and example.disAddressRange != ''">
+         and dis_address like concat('%',#{example.disAddressRange},'%')
+      </if>
+      <if test="example.disPhone != null and example.disPhone != ''">
+         and dis_phone = #{example.disPhone,jdbcType=VARCHAR}
+      </if>
+      <if test="example.disPhoneRange != null and example.disPhoneRange != ''">
+         and dis_phone like concat('%',#{example.disPhoneRange},'%')
+      </if>
+      <if test="example.disRemark != null and example.disRemark != ''">
+         and dis_remark = #{example.disRemark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.disRemarkRange != null and example.disRemarkRange != ''">
+         and dis_remark like concat('%',#{example.disRemarkRange},'%')
+      </if>
+      <if test="example.area != null and example.area != ''">
+         and area = #{example.area,jdbcType=VARCHAR}
+      </if>
+      <if test="example.areaRange != null and example.areaRange != ''">
+         and area like concat('%',#{example.areaRange},'%')
+      </if>
+      <if test="example.type != null and example.type != ''">
+         and type = #{example.type,jdbcType=VARCHAR}
+      </if>
+      <if test="example.typeRange != null and example.typeRange != ''">
+         and type like concat('%',#{example.typeRange},'%')
+      </if>
+      <if test="example.channel != null and example.channel != ''">
+         and channel = #{example.channel,jdbcType=VARCHAR}
+      </if>
+      <if test="example.channelRange != null and example.channelRange != ''">
+         and channel like concat('%',#{example.channelRange},'%')
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateUser != null and example.updateUser != ''">
+         and update_user = #{example.updateUser,jdbcType=CHAR}
+      </if>
+      <if test="example.updateUserRange != null and example.updateUserRange != ''">
+         and update_user like concat('%',#{example.updateUserRange},'%')
+      </if>
+      <if test="example.updateTime != null and example.updateTime != ''">
+         and update_time = #{example.updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange1 != null and example.updateTimeRange1 != ''">
+         and update_time &gt;= #{example.updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange2 != null and example.updateTimeRange2 != ''">
+         and update_time &lt;= #{example.updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    dis_id, dis_name, md_id, md_name, dis_address, dis_phone, dis_remark, area, type, 
+    channel, create_user, create_time, update_user, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.DistributorCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_distributor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_distributor
+    where dis_id = #{disId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_distributor
+    where dis_id = #{disId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.DistributorCriteria">
+    delete from buss_distributor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    insert into buss_distributor (dis_id, dis_name, md_id, 
+      md_name, dis_address, dis_phone, 
+      dis_remark, area, type, 
+      channel, create_user, create_time, 
+      update_user, update_time)
+    values (#{disId,jdbcType=CHAR}, #{disName,jdbcType=VARCHAR}, #{mdId,jdbcType=CHAR}, 
+      #{mdName,jdbcType=CHAR}, #{disAddress,jdbcType=VARCHAR}, #{disPhone,jdbcType=VARCHAR}, 
+      #{disRemark,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{channel,jdbcType=VARCHAR}, #{createUser,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateUser,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    insert into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        dis_id,
+      </if>
+      <if test="disName != null">
+        dis_name,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="disAddress != null">
+        dis_address,
+      </if>
+      <if test="disPhone != null">
+        dis_phone,
+      </if>
+      <if test="disRemark != null">
+        dis_remark,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        #{disId,jdbcType=CHAR},
+      </if>
+      <if test="disName != null">
+        #{disName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="disAddress != null">
+        #{disAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="disPhone != null">
+        #{disPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disRemark != null">
+        #{disRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.DistributorCriteria" resultType="java.lang.Long">
+    select count(*) from buss_distributor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_distributor
+    <set>
+      <if test="record.disId != null">
+        dis_id = #{record.disId,jdbcType=CHAR},
+      </if>
+      <if test="record.disName != null">
+        dis_name = #{record.disName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mdId != null">
+        md_id = #{record.mdId,jdbcType=CHAR},
+      </if>
+      <if test="record.mdName != null">
+        md_name = #{record.mdName,jdbcType=CHAR},
+      </if>
+      <if test="record.disAddress != null">
+        dis_address = #{record.disAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disPhone != null">
+        dis_phone = #{record.disPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disRemark != null">
+        dis_remark = #{record.disRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.channel != null">
+        channel = #{record.channel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_distributor
+    set dis_id = #{record.disId,jdbcType=CHAR},
+      dis_name = #{record.disName,jdbcType=VARCHAR},
+      md_id = #{record.mdId,jdbcType=CHAR},
+      md_name = #{record.mdName,jdbcType=CHAR},
+      dis_address = #{record.disAddress,jdbcType=VARCHAR},
+      dis_phone = #{record.disPhone,jdbcType=VARCHAR},
+      dis_remark = #{record.disRemark,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      channel = #{record.channel,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    update buss_distributor
+    <set>
+      <if test="disName != null">
+        dis_name = #{disName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdId != null">
+        md_id = #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        md_name = #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="disAddress != null">
+        dis_address = #{disAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="disPhone != null">
+        dis_phone = #{disPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disRemark != null">
+        dis_remark = #{disRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dis_id = #{disId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    update buss_distributor
+    set dis_name = #{disName,jdbcType=VARCHAR},
+      md_id = #{mdId,jdbcType=CHAR},
+      md_name = #{mdName,jdbcType=CHAR},
+      dis_address = #{disAddress,jdbcType=VARCHAR},
+      dis_phone = #{disPhone,jdbcType=VARCHAR},
+      dis_remark = #{disRemark,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      channel = #{channel,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where dis_id = #{disId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.disId != null">
+        dis_id,
+      </if>
+      <if test="record.disName != null">
+        dis_name,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.disAddress != null">
+        dis_address,
+      </if>
+      <if test="record.disPhone != null">
+        dis_phone,
+      </if>
+      <if test="record.disRemark != null">
+        dis_remark,
+      </if>
+      <if test="record.area != null">
+        area,
+      </if>
+      <if test="record.type != null">
+        type,
+      </if>
+      <if test="record.channel != null">
+        channel,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.disId != null">
+          #{listItem.disId,jdbcType=CHAR},
+        </if>
+        <if test="record.disName != null">
+          #{listItem.disName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.disAddress != null">
+          #{listItem.disAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disPhone != null">
+          #{listItem.disPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disRemark != null">
+          #{listItem.disRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.area != null">
+          #{listItem.area,jdbcType=VARCHAR},
+        </if>
+        <if test="record.type != null">
+          #{listItem.type,jdbcType=VARCHAR},
+        </if>
+        <if test="record.channel != null">
+          #{listItem.channel,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.disId != null">
+        dis_id,
+      </if>
+      <if test="record.disName != null">
+        dis_name,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.disAddress != null">
+        dis_address,
+      </if>
+      <if test="record.disPhone != null">
+        dis_phone,
+      </if>
+      <if test="record.disRemark != null">
+        dis_remark,
+      </if>
+      <if test="record.area != null">
+        area,
+      </if>
+      <if test="record.type != null">
+        type,
+      </if>
+      <if test="record.channel != null">
+        channel,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.disId != null">
+          #{listItem.disId,jdbcType=CHAR},
+        </if>
+        <if test="record.disName != null">
+          #{listItem.disName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.disAddress != null">
+          #{listItem.disAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disPhone != null">
+          #{listItem.disPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disRemark != null">
+          #{listItem.disRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.area != null">
+          #{listItem.area,jdbcType=VARCHAR},
+        </if>
+        <if test="record.type != null">
+          #{listItem.type,jdbcType=VARCHAR},
+        </if>
+        <if test="record.channel != null">
+          #{listItem.channel,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    replace into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        dis_id,
+      </if>
+      <if test="disName != null">
+        dis_name,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="disAddress != null">
+        dis_address,
+      </if>
+      <if test="disPhone != null">
+        dis_phone,
+      </if>
+      <if test="disRemark != null">
+        dis_remark,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        #{disId,jdbcType=CHAR},
+      </if>
+      <if test="disName != null">
+        #{disName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="disAddress != null">
+        #{disAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="disPhone != null">
+        #{disPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disRemark != null">
+        #{disRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.Distributor">
+    insert into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        dis_id,
+      </if>
+      <if test="disName != null">
+        dis_name,
+      </if>
+      <if test="mdId != null">
+        md_id,
+      </if>
+      <if test="mdName != null">
+        md_name,
+      </if>
+      <if test="disAddress != null">
+        dis_address,
+      </if>
+      <if test="disPhone != null">
+        dis_phone,
+      </if>
+      <if test="disRemark != null">
+        dis_remark,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="disId != null">
+        #{disId,jdbcType=CHAR},
+      </if>
+      <if test="disName != null">
+        #{disName,jdbcType=VARCHAR},
+      </if>
+      <if test="mdId != null">
+        #{mdId,jdbcType=CHAR},
+      </if>
+      <if test="mdName != null">
+        #{mdName,jdbcType=CHAR},
+      </if>
+      <if test="disAddress != null">
+        #{disAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="disPhone != null">
+        #{disPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="disRemark != null">
+        #{disRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="disId != null">
+        dis_id=values(dis_id),
+      </if>
+      <if test="disName != null">
+        dis_name=values(dis_name),
+      </if>
+      <if test="mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="disAddress != null">
+        dis_address=values(dis_address),
+      </if>
+      <if test="disPhone != null">
+        dis_phone=values(dis_phone),
+      </if>
+      <if test="disRemark != null">
+        dis_remark=values(dis_remark),
+      </if>
+      <if test="area != null">
+        area=values(area),
+      </if>
+      <if test="type != null">
+        type=values(type),
+      </if>
+      <if test="channel != null">
+        channel=values(channel),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="updateTime != null">
+        update_time=values(update_time),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_distributor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.disId != null">
+        dis_id,
+      </if>
+      <if test="record.disName != null">
+        dis_name,
+      </if>
+      <if test="record.mdId != null">
+        md_id,
+      </if>
+      <if test="record.mdName != null">
+        md_name,
+      </if>
+      <if test="record.disAddress != null">
+        dis_address,
+      </if>
+      <if test="record.disPhone != null">
+        dis_phone,
+      </if>
+      <if test="record.disRemark != null">
+        dis_remark,
+      </if>
+      <if test="record.area != null">
+        area,
+      </if>
+      <if test="record.type != null">
+        type,
+      </if>
+      <if test="record.channel != null">
+        channel,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.disId != null">
+          #{listItem.disId,jdbcType=CHAR},
+        </if>
+        <if test="record.disName != null">
+          #{listItem.disName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mdId != null">
+          #{listItem.mdId,jdbcType=CHAR},
+        </if>
+        <if test="record.mdName != null">
+          #{listItem.mdName,jdbcType=CHAR},
+        </if>
+        <if test="record.disAddress != null">
+          #{listItem.disAddress,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disPhone != null">
+          #{listItem.disPhone,jdbcType=VARCHAR},
+        </if>
+        <if test="record.disRemark != null">
+          #{listItem.disRemark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.area != null">
+          #{listItem.area,jdbcType=VARCHAR},
+        </if>
+        <if test="record.type != null">
+          #{listItem.type,jdbcType=VARCHAR},
+        </if>
+        <if test="record.channel != null">
+          #{listItem.channel,jdbcType=VARCHAR},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.disId != null">
+        dis_id=values(dis_id),
+      </if>
+      <if test="record.disName != null">
+        dis_name=values(dis_name),
+      </if>
+      <if test="record.mdId != null">
+        md_id=values(md_id),
+      </if>
+      <if test="record.mdName != null">
+        md_name=values(md_name),
+      </if>
+      <if test="record.disAddress != null">
+        dis_address=values(dis_address),
+      </if>
+      <if test="record.disPhone != null">
+        dis_phone=values(dis_phone),
+      </if>
+      <if test="record.disRemark != null">
+        dis_remark=values(dis_remark),
+      </if>
+      <if test="record.area != null">
+        area=values(area),
+      </if>
+      <if test="record.type != null">
+        type=values(type),
+      </if>
+      <if test="record.channel != null">
+        channel=values(channel),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="record.updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="record.updateTime != null">
+        update_time=values(update_time),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.DistributorCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_distributor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

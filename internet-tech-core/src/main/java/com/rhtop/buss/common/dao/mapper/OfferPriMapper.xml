@@ -1,0 +1,3446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.persistence.OfferPriMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.domain.OfferPri">
+    <id column="offer_pri_id" jdbcType="CHAR" property="offerPriId" />
+    <result column="cate_id" jdbcType="CHAR" property="cateId" />
+    <result column="cate_name" jdbcType="VARCHAR" property="cateName" />
+    <result column="cate_stan" jdbcType="VARCHAR" property="cateStan" />
+    <result column="manu_num" jdbcType="VARCHAR" property="manuNum" />
+    <result column="prod_pla" jdbcType="VARCHAR" property="prodPla" />
+    <result column="art_no" jdbcType="VARCHAR" property="artNo" />
+    <result column="his_offer_pri" jdbcType="DECIMAL" property="hisOfferPri" />
+    <result column="offer_num" jdbcType="DECIMAL" property="offerNum" />
+    <result column="expiry_date" jdbcType="VARCHAR" property="expiryDate" />
+    <result column="deadline" jdbcType="TIMESTAMP" property="deadline" />
+    <result column="create_user" jdbcType="CHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_user" jdbcType="CHAR" property="updateUser" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="offer_weight" jdbcType="DECIMAL" property="offerWeight" />
+    <result column="offer_avg_weight" jdbcType="DECIMAL" property="offerAvgWeight" />
+    <result column="catchweight_pri" jdbcType="DECIMAL" property="catchweightPri" />
+    <result column="offer_pri" jdbcType="DECIMAL" property="offerPri" />
+    <result column="standard_catch" jdbcType="VARCHAR" property="standardCatch" />
+    <result column="offer_type" jdbcType="VARCHAR" property="offerType" />
+    <result column="offer_status" jdbcType="VARCHAR" property="offerStatus" />
+    <result column="offer_user" jdbcType="VARCHAR" property="offerUser" />
+    <result column="offer_user_name" jdbcType="VARCHAR" property="offerUserName" />
+    <result column="offer_time" jdbcType="TIMESTAMP" property="offerTime" />
+    <result column="audit_user" jdbcType="VARCHAR" property="auditUser" />
+    <result column="audit_user_name" jdbcType="VARCHAR" property="auditUserName" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="offer_reason" jdbcType="VARCHAR" property="offerReason" />
+    <result column="cate_Ename" jdbcType="VARCHAR" property="cateEname" />
+    <result column="north_colloquialism" jdbcType="VARCHAR" property="northColloquialism" />
+    <result column="south_colloquialism" jdbcType="VARCHAR" property="southColloquialism" />
+    <result column="HS_code" jdbcType="VARCHAR" property="hsCode" />
+    <result column="tax_rate" jdbcType="VARCHAR" property="taxRate" />
+    <result column="rearing_mode" jdbcType="VARCHAR" property="rearingMode" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="per_weight" jdbcType="VARCHAR" property="perWeight" />
+    <result column="per_width" jdbcType="VARCHAR" property="perWidth" />
+    <result column="per_length" jdbcType="VARCHAR" property="perLength" />
+    <result column="net_weight" jdbcType="VARCHAR" property="netWeight" />
+    <result column="per_number" jdbcType="VARCHAR" property="perNumber" />
+    <result column="avg_box_weight" jdbcType="VARCHAR" property="avgBoxWeight" />
+    <result column="cutting_mode" jdbcType="VARCHAR" property="cuttingMode" />
+    <result column="packing_mode" jdbcType="VARCHAR" property="packingMode" />
+    <result column="other_content" jdbcType="VARCHAR" property="otherContent" />
+    <result column="supplier" jdbcType="VARCHAR" property="supplier" />
+    <result column="factory_name" jdbcType="VARCHAR" property="factoryName" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="bak1" jdbcType="VARCHAR" property="bak1" />
+    <result column="priceless_sign" jdbcType="VARCHAR" property="pricelessSign" />
+    <result column="total_inventory" jdbcType="DECIMAL" property="totalInventory" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="offerPriId != null and offerPriId != ''">
+         and offer_pri_id = #{offerPriId,jdbcType=CHAR}
+      </if>
+      <if test="offerPriIdRange != null and offerPriIdRange != ''">
+         and offer_pri_id like concat('%',#{offerPriIdRange},'%')
+      </if>
+      <if test="cateId != null and cateId != ''">
+         and cate_id = #{cateId,jdbcType=CHAR}
+      </if>
+      <if test="cateIdRange != null and cateIdRange != ''">
+         and cate_id like concat('%',#{cateIdRange},'%')
+      </if>
+      <if test="cateName != null and cateName != ''">
+         and cate_name = #{cateName,jdbcType=VARCHAR}
+      </if>
+      <if test="cateNameRange != null and cateNameRange != ''">
+         and cate_name like concat('%',#{cateNameRange},'%')
+      </if>
+      <if test="cateStan != null and cateStan != ''">
+         and cate_stan = #{cateStan,jdbcType=VARCHAR}
+      </if>
+      <if test="cateStanRange != null and cateStanRange != ''">
+         and cate_stan like concat('%',#{cateStanRange},'%')
+      </if>
+      <if test="manuNum != null and manuNum != ''">
+         and manu_num = #{manuNum,jdbcType=VARCHAR}
+      </if>
+      <if test="manuNumRange != null and manuNumRange != ''">
+         and manu_num like concat('%',#{manuNumRange},'%')
+      </if>
+      <if test="prodPla != null and prodPla != ''">
+         and prod_pla = #{prodPla,jdbcType=VARCHAR}
+      </if>
+      <if test="prodPlaRange != null and prodPlaRange != ''">
+         and prod_pla like concat('%',#{prodPlaRange},'%')
+      </if>
+      <if test="artNo != null and artNo != ''">
+         and art_no = #{artNo,jdbcType=VARCHAR}
+      </if>
+      <if test="artNoRange != null and artNoRange != ''">
+         and art_no like concat('%',#{artNoRange},'%')
+      </if>
+      <if test="hisOfferPri != null and hisOfferPri != ''">
+         and his_offer_pri = #{hisOfferPri,jdbcType=DECIMAL}
+      </if>
+      <if test="offerNum != null and offerNum != ''">
+         and offer_num = #{offerNum,jdbcType=DECIMAL}
+      </if>
+      <if test="expiryDate != null and expiryDate != ''">
+         and expiry_date = #{expiryDate,jdbcType=VARCHAR}
+      </if>
+      <if test="expiryDateRange != null and expiryDateRange != ''">
+         and expiry_date like concat('%',#{expiryDateRange},'%')
+      </if>
+      <if test="deadline != null and deadline != ''">
+         and deadline = #{deadline,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deadlineRange1 != null and deadlineRange1 != ''">
+         and deadline &gt;= #{deadlineRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="deadlineRange2 != null and deadlineRange2 != ''">
+         and deadline &lt;= #{deadlineRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createUser != null and createUser != ''">
+         and create_user = #{createUser,jdbcType=CHAR}
+      </if>
+      <if test="createUserRange != null and createUserRange != ''">
+         and create_user like concat('%',#{createUserRange},'%')
+      </if>
+      <if test="createTime != null and createTime != ''">
+         and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange1 != null and createTimeRange1 != ''">
+         and create_time &gt;= #{createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTimeRange2 != null and createTimeRange2 != ''">
+         and create_time &lt;= #{createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateUser != null and updateUser != ''">
+         and update_user = #{updateUser,jdbcType=CHAR}
+      </if>
+      <if test="updateUserRange != null and updateUserRange != ''">
+         and update_user like concat('%',#{updateUserRange},'%')
+      </if>
+      <if test="updateTime != null and updateTime != ''">
+         and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange1 != null and updateTimeRange1 != ''">
+         and update_time &gt;= #{updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTimeRange2 != null and updateTimeRange2 != ''">
+         and update_time &lt;= #{updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerWeight != null and offerWeight != ''">
+         and offer_weight = #{offerWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="offerAvgWeight != null and offerAvgWeight != ''">
+         and offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="catchweightPri != null and catchweightPri != ''">
+         and catchweight_pri = #{catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="offerPri != null and offerPri != ''">
+         and offer_pri = #{offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="standardCatch != null and standardCatch != ''">
+         and standard_catch = #{standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="standardCatchRange != null and standardCatchRange != ''">
+         and standard_catch like concat('%',#{standardCatchRange},'%')
+      </if>
+      <if test="offerType != null and offerType != ''">
+         and offer_type = #{offerType,jdbcType=VARCHAR}
+      </if>
+      <if test="offerTypeRange != null and offerTypeRange != ''">
+         and offer_type like concat('%',#{offerTypeRange},'%')
+      </if>
+      <if test="offerStatus != null and offerStatus != ''">
+         and offer_status = #{offerStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="offerStatusRange != null and offerStatusRange != ''">
+         and offer_status like concat('%',#{offerStatusRange},'%')
+      </if>
+      <if test="offerUser != null and offerUser != ''">
+         and offer_user = #{offerUser,jdbcType=VARCHAR}
+      </if>
+      <if test="offerUserRange != null and offerUserRange != ''">
+         and offer_user like concat('%',#{offerUserRange},'%')
+      </if>
+      <if test="offerUserName != null and offerUserName != ''">
+         and offer_user_name = #{offerUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="offerUserNameRange != null and offerUserNameRange != ''">
+         and offer_user_name like concat('%',#{offerUserNameRange},'%')
+      </if>
+      <if test="offerTime != null and offerTime != ''">
+         and offer_time = #{offerTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerTimeRange1 != null and offerTimeRange1 != ''">
+         and offer_time &gt;= #{offerTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerTimeRange2 != null and offerTimeRange2 != ''">
+         and offer_time &lt;= #{offerTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditUser != null and auditUser != ''">
+         and audit_user = #{auditUser,jdbcType=VARCHAR}
+      </if>
+      <if test="auditUserRange != null and auditUserRange != ''">
+         and audit_user like concat('%',#{auditUserRange},'%')
+      </if>
+      <if test="auditUserName != null and auditUserName != ''">
+         and audit_user_name = #{auditUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="auditUserNameRange != null and auditUserNameRange != ''">
+         and audit_user_name like concat('%',#{auditUserNameRange},'%')
+      </if>
+      <if test="auditTime != null and auditTime != ''">
+         and audit_time = #{auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditTimeRange1 != null and auditTimeRange1 != ''">
+         and audit_time &gt;= #{auditTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="auditTimeRange2 != null and auditTimeRange2 != ''">
+         and audit_time &lt;= #{auditTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="offerReason != null and offerReason != ''">
+         and offer_reason = #{offerReason,jdbcType=VARCHAR}
+      </if>
+      <if test="offerReasonRange != null and offerReasonRange != ''">
+         and offer_reason like concat('%',#{offerReasonRange},'%')
+      </if>
+      <if test="cateEname != null and cateEname != ''">
+         and cate_Ename = #{cateEname,jdbcType=VARCHAR}
+      </if>
+      <if test="cateEnameRange != null and cateEnameRange != ''">
+         and cate_Ename like concat('%',#{cateEnameRange},'%')
+      </if>
+      <if test="northColloquialism != null and northColloquialism != ''">
+         and north_colloquialism = #{northColloquialism,jdbcType=VARCHAR}
+      </if>
+      <if test="northColloquialismRange != null and northColloquialismRange != ''">
+         and north_colloquialism like concat('%',#{northColloquialismRange},'%')
+      </if>
+      <if test="southColloquialism != null and southColloquialism != ''">
+         and south_colloquialism = #{southColloquialism,jdbcType=VARCHAR}
+      </if>
+      <if test="southColloquialismRange != null and southColloquialismRange != ''">
+         and south_colloquialism like concat('%',#{southColloquialismRange},'%')
+      </if>
+      <if test="hsCode != null and hsCode != ''">
+         and HS_code = #{hsCode,jdbcType=VARCHAR}
+      </if>
+      <if test="hsCodeRange != null and hsCodeRange != ''">
+         and HS_code like concat('%',#{hsCodeRange},'%')
+      </if>
+      <if test="taxRate != null and taxRate != ''">
+         and tax_rate = #{taxRate,jdbcType=VARCHAR}
+      </if>
+      <if test="taxRateRange != null and taxRateRange != ''">
+         and tax_rate like concat('%',#{taxRateRange},'%')
+      </if>
+      <if test="rearingMode != null and rearingMode != ''">
+         and rearing_mode = #{rearingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="rearingModeRange != null and rearingModeRange != ''">
+         and rearing_mode like concat('%',#{rearingModeRange},'%')
+      </if>
+      <if test="grade != null and grade != ''">
+         and grade = #{grade,jdbcType=VARCHAR}
+      </if>
+      <if test="gradeRange != null and gradeRange != ''">
+         and grade like concat('%',#{gradeRange},'%')
+      </if>
+      <if test="perWeight != null and perWeight != ''">
+         and per_weight = #{perWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="perWeightRange != null and perWeightRange != ''">
+         and per_weight like concat('%',#{perWeightRange},'%')
+      </if>
+      <if test="perWidth != null and perWidth != ''">
+         and per_width = #{perWidth,jdbcType=VARCHAR}
+      </if>
+      <if test="perWidthRange != null and perWidthRange != ''">
+         and per_width like concat('%',#{perWidthRange},'%')
+      </if>
+      <if test="perLength != null and perLength != ''">
+         and per_length = #{perLength,jdbcType=VARCHAR}
+      </if>
+      <if test="perLengthRange != null and perLengthRange != ''">
+         and per_length like concat('%',#{perLengthRange},'%')
+      </if>
+      <if test="netWeight != null and netWeight != ''">
+         and net_weight = #{netWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="netWeightRange != null and netWeightRange != ''">
+         and net_weight like concat('%',#{netWeightRange},'%')
+      </if>
+      <if test="perNumber != null and perNumber != ''">
+         and per_number = #{perNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="perNumberRange != null and perNumberRange != ''">
+         and per_number like concat('%',#{perNumberRange},'%')
+      </if>
+      <if test="avgBoxWeight != null and avgBoxWeight != ''">
+         and avg_box_weight = #{avgBoxWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="avgBoxWeightRange != null and avgBoxWeightRange != ''">
+         and avg_box_weight like concat('%',#{avgBoxWeightRange},'%')
+      </if>
+      <if test="cuttingMode != null and cuttingMode != ''">
+         and cutting_mode = #{cuttingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="cuttingModeRange != null and cuttingModeRange != ''">
+         and cutting_mode like concat('%',#{cuttingModeRange},'%')
+      </if>
+      <if test="packingMode != null and packingMode != ''">
+         and packing_mode = #{packingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="packingModeRange != null and packingModeRange != ''">
+         and packing_mode like concat('%',#{packingModeRange},'%')
+      </if>
+      <if test="otherContent != null and otherContent != ''">
+         and other_content = #{otherContent,jdbcType=VARCHAR}
+      </if>
+      <if test="otherContentRange != null and otherContentRange != ''">
+         and other_content like concat('%',#{otherContentRange},'%')
+      </if>
+      <if test="supplier != null and supplier != ''">
+         and supplier = #{supplier,jdbcType=VARCHAR}
+      </if>
+      <if test="supplierRange != null and supplierRange != ''">
+         and supplier like concat('%',#{supplierRange},'%')
+      </if>
+      <if test="factoryName != null and factoryName != ''">
+         and factory_name = #{factoryName,jdbcType=VARCHAR}
+      </if>
+      <if test="factoryNameRange != null and factoryNameRange != ''">
+         and factory_name like concat('%',#{factoryNameRange},'%')
+      </if>
+      <if test="category != null and category != ''">
+         and category = #{category,jdbcType=VARCHAR}
+      </if>
+      <if test="categoryRange != null and categoryRange != ''">
+         and category like concat('%',#{categoryRange},'%')
+      </if>
+      <if test="bak1 != null and bak1 != ''">
+         and bak1 = #{bak1,jdbcType=VARCHAR}
+      </if>
+      <if test="bak1Range != null and bak1Range != ''">
+         and bak1 like concat('%',#{bak1Range},'%')
+      </if>
+      <if test="pricelessSign != null and pricelessSign != ''">
+         and priceless_sign = #{pricelessSign,jdbcType=VARCHAR}
+      </if>
+      <if test="pricelessSignRange != null and pricelessSignRange != ''">
+         and priceless_sign like concat('%',#{pricelessSignRange},'%')
+      </if>
+      <if test="totalInventory != null and totalInventory != ''">
+         and total_inventory = #{totalInventory,jdbcType=DECIMAL}
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.offerPriId != null and example.offerPriId != ''">
+         and offer_pri_id = #{example.offerPriId,jdbcType=CHAR}
+      </if>
+      <if test="example.offerPriIdRange != null and example.offerPriIdRange != ''">
+         and offer_pri_id like concat('%',#{example.offerPriIdRange},'%')
+      </if>
+      <if test="example.cateId != null and example.cateId != ''">
+         and cate_id = #{example.cateId,jdbcType=CHAR}
+      </if>
+      <if test="example.cateIdRange != null and example.cateIdRange != ''">
+         and cate_id like concat('%',#{example.cateIdRange},'%')
+      </if>
+      <if test="example.cateName != null and example.cateName != ''">
+         and cate_name = #{example.cateName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.cateNameRange != null and example.cateNameRange != ''">
+         and cate_name like concat('%',#{example.cateNameRange},'%')
+      </if>
+      <if test="example.cateStan != null and example.cateStan != ''">
+         and cate_stan = #{example.cateStan,jdbcType=VARCHAR}
+      </if>
+      <if test="example.cateStanRange != null and example.cateStanRange != ''">
+         and cate_stan like concat('%',#{example.cateStanRange},'%')
+      </if>
+      <if test="example.manuNum != null and example.manuNum != ''">
+         and manu_num = #{example.manuNum,jdbcType=VARCHAR}
+      </if>
+      <if test="example.manuNumRange != null and example.manuNumRange != ''">
+         and manu_num like concat('%',#{example.manuNumRange},'%')
+      </if>
+      <if test="example.prodPla != null and example.prodPla != ''">
+         and prod_pla = #{example.prodPla,jdbcType=VARCHAR}
+      </if>
+      <if test="example.prodPlaRange != null and example.prodPlaRange != ''">
+         and prod_pla like concat('%',#{example.prodPlaRange},'%')
+      </if>
+      <if test="example.artNo != null and example.artNo != ''">
+         and art_no = #{example.artNo,jdbcType=VARCHAR}
+      </if>
+      <if test="example.artNoRange != null and example.artNoRange != ''">
+         and art_no like concat('%',#{example.artNoRange},'%')
+      </if>
+      <if test="example.hisOfferPri != null and example.hisOfferPri != ''">
+         and his_offer_pri = #{example.hisOfferPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.offerNum != null and example.offerNum != ''">
+         and offer_num = #{example.offerNum,jdbcType=DECIMAL}
+      </if>
+      <if test="example.expiryDate != null and example.expiryDate != ''">
+         and expiry_date = #{example.expiryDate,jdbcType=VARCHAR}
+      </if>
+      <if test="example.expiryDateRange != null and example.expiryDateRange != ''">
+         and expiry_date like concat('%',#{example.expiryDateRange},'%')
+      </if>
+      <if test="example.deadline != null and example.deadline != ''">
+         and deadline = #{example.deadline,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.deadlineRange1 != null and example.deadlineRange1 != ''">
+         and deadline &gt;= #{example.deadlineRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.deadlineRange2 != null and example.deadlineRange2 != ''">
+         and deadline &lt;= #{example.deadlineRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createUser != null and example.createUser != ''">
+         and create_user = #{example.createUser,jdbcType=CHAR}
+      </if>
+      <if test="example.createUserRange != null and example.createUserRange != ''">
+         and create_user like concat('%',#{example.createUserRange},'%')
+      </if>
+      <if test="example.createTime != null and example.createTime != ''">
+         and create_time = #{example.createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange1 != null and example.createTimeRange1 != ''">
+         and create_time &gt;= #{example.createTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.createTimeRange2 != null and example.createTimeRange2 != ''">
+         and create_time &lt;= #{example.createTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateUser != null and example.updateUser != ''">
+         and update_user = #{example.updateUser,jdbcType=CHAR}
+      </if>
+      <if test="example.updateUserRange != null and example.updateUserRange != ''">
+         and update_user like concat('%',#{example.updateUserRange},'%')
+      </if>
+      <if test="example.updateTime != null and example.updateTime != ''">
+         and update_time = #{example.updateTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange1 != null and example.updateTimeRange1 != ''">
+         and update_time &gt;= #{example.updateTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.updateTimeRange2 != null and example.updateTimeRange2 != ''">
+         and update_time &lt;= #{example.updateTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerWeight != null and example.offerWeight != ''">
+         and offer_weight = #{example.offerWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="example.offerAvgWeight != null and example.offerAvgWeight != ''">
+         and offer_avg_weight = #{example.offerAvgWeight,jdbcType=DECIMAL}
+      </if>
+      <if test="example.catchweightPri != null and example.catchweightPri != ''">
+         and catchweight_pri = #{example.catchweightPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.offerPri != null and example.offerPri != ''">
+         and offer_pri = #{example.offerPri,jdbcType=DECIMAL}
+      </if>
+      <if test="example.standardCatch != null and example.standardCatch != ''">
+         and standard_catch = #{example.standardCatch,jdbcType=VARCHAR}
+      </if>
+      <if test="example.standardCatchRange != null and example.standardCatchRange != ''">
+         and standard_catch like concat('%',#{example.standardCatchRange},'%')
+      </if>
+      <if test="example.offerType != null and example.offerType != ''">
+         and offer_type = #{example.offerType,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerTypeRange != null and example.offerTypeRange != ''">
+         and offer_type like concat('%',#{example.offerTypeRange},'%')
+      </if>
+      <if test="example.offerStatus != null and example.offerStatus != ''">
+         and offer_status = #{example.offerStatus,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerStatusRange != null and example.offerStatusRange != ''">
+         and offer_status like concat('%',#{example.offerStatusRange},'%')
+      </if>
+      <if test="example.offerUser != null and example.offerUser != ''">
+         and offer_user = #{example.offerUser,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerUserRange != null and example.offerUserRange != ''">
+         and offer_user like concat('%',#{example.offerUserRange},'%')
+      </if>
+      <if test="example.offerUserName != null and example.offerUserName != ''">
+         and offer_user_name = #{example.offerUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerUserNameRange != null and example.offerUserNameRange != ''">
+         and offer_user_name like concat('%',#{example.offerUserNameRange},'%')
+      </if>
+      <if test="example.offerTime != null and example.offerTime != ''">
+         and offer_time = #{example.offerTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerTimeRange1 != null and example.offerTimeRange1 != ''">
+         and offer_time &gt;= #{example.offerTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerTimeRange2 != null and example.offerTimeRange2 != ''">
+         and offer_time &lt;= #{example.offerTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditUser != null and example.auditUser != ''">
+         and audit_user = #{example.auditUser,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditUserRange != null and example.auditUserRange != ''">
+         and audit_user like concat('%',#{example.auditUserRange},'%')
+      </if>
+      <if test="example.auditUserName != null and example.auditUserName != ''">
+         and audit_user_name = #{example.auditUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.auditUserNameRange != null and example.auditUserNameRange != ''">
+         and audit_user_name like concat('%',#{example.auditUserNameRange},'%')
+      </if>
+      <if test="example.auditTime != null and example.auditTime != ''">
+         and audit_time = #{example.auditTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditTimeRange1 != null and example.auditTimeRange1 != ''">
+         and audit_time &gt;= #{example.auditTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.auditTimeRange2 != null and example.auditTimeRange2 != ''">
+         and audit_time &lt;= #{example.auditTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.offerReason != null and example.offerReason != ''">
+         and offer_reason = #{example.offerReason,jdbcType=VARCHAR}
+      </if>
+      <if test="example.offerReasonRange != null and example.offerReasonRange != ''">
+         and offer_reason like concat('%',#{example.offerReasonRange},'%')
+      </if>
+      <if test="example.cateEname != null and example.cateEname != ''">
+         and cate_Ename = #{example.cateEname,jdbcType=VARCHAR}
+      </if>
+      <if test="example.cateEnameRange != null and example.cateEnameRange != ''">
+         and cate_Ename like concat('%',#{example.cateEnameRange},'%')
+      </if>
+      <if test="example.northColloquialism != null and example.northColloquialism != ''">
+         and north_colloquialism = #{example.northColloquialism,jdbcType=VARCHAR}
+      </if>
+      <if test="example.northColloquialismRange != null and example.northColloquialismRange != ''">
+         and north_colloquialism like concat('%',#{example.northColloquialismRange},'%')
+      </if>
+      <if test="example.southColloquialism != null and example.southColloquialism != ''">
+         and south_colloquialism = #{example.southColloquialism,jdbcType=VARCHAR}
+      </if>
+      <if test="example.southColloquialismRange != null and example.southColloquialismRange != ''">
+         and south_colloquialism like concat('%',#{example.southColloquialismRange},'%')
+      </if>
+      <if test="example.hsCode != null and example.hsCode != ''">
+         and HS_code = #{example.hsCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.hsCodeRange != null and example.hsCodeRange != ''">
+         and HS_code like concat('%',#{example.hsCodeRange},'%')
+      </if>
+      <if test="example.taxRate != null and example.taxRate != ''">
+         and tax_rate = #{example.taxRate,jdbcType=VARCHAR}
+      </if>
+      <if test="example.taxRateRange != null and example.taxRateRange != ''">
+         and tax_rate like concat('%',#{example.taxRateRange},'%')
+      </if>
+      <if test="example.rearingMode != null and example.rearingMode != ''">
+         and rearing_mode = #{example.rearingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.rearingModeRange != null and example.rearingModeRange != ''">
+         and rearing_mode like concat('%',#{example.rearingModeRange},'%')
+      </if>
+      <if test="example.grade != null and example.grade != ''">
+         and grade = #{example.grade,jdbcType=VARCHAR}
+      </if>
+      <if test="example.gradeRange != null and example.gradeRange != ''">
+         and grade like concat('%',#{example.gradeRange},'%')
+      </if>
+      <if test="example.perWeight != null and example.perWeight != ''">
+         and per_weight = #{example.perWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="example.perWeightRange != null and example.perWeightRange != ''">
+         and per_weight like concat('%',#{example.perWeightRange},'%')
+      </if>
+      <if test="example.perWidth != null and example.perWidth != ''">
+         and per_width = #{example.perWidth,jdbcType=VARCHAR}
+      </if>
+      <if test="example.perWidthRange != null and example.perWidthRange != ''">
+         and per_width like concat('%',#{example.perWidthRange},'%')
+      </if>
+      <if test="example.perLength != null and example.perLength != ''">
+         and per_length = #{example.perLength,jdbcType=VARCHAR}
+      </if>
+      <if test="example.perLengthRange != null and example.perLengthRange != ''">
+         and per_length like concat('%',#{example.perLengthRange},'%')
+      </if>
+      <if test="example.netWeight != null and example.netWeight != ''">
+         and net_weight = #{example.netWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="example.netWeightRange != null and example.netWeightRange != ''">
+         and net_weight like concat('%',#{example.netWeightRange},'%')
+      </if>
+      <if test="example.perNumber != null and example.perNumber != ''">
+         and per_number = #{example.perNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="example.perNumberRange != null and example.perNumberRange != ''">
+         and per_number like concat('%',#{example.perNumberRange},'%')
+      </if>
+      <if test="example.avgBoxWeight != null and example.avgBoxWeight != ''">
+         and avg_box_weight = #{example.avgBoxWeight,jdbcType=VARCHAR}
+      </if>
+      <if test="example.avgBoxWeightRange != null and example.avgBoxWeightRange != ''">
+         and avg_box_weight like concat('%',#{example.avgBoxWeightRange},'%')
+      </if>
+      <if test="example.cuttingMode != null and example.cuttingMode != ''">
+         and cutting_mode = #{example.cuttingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.cuttingModeRange != null and example.cuttingModeRange != ''">
+         and cutting_mode like concat('%',#{example.cuttingModeRange},'%')
+      </if>
+      <if test="example.packingMode != null and example.packingMode != ''">
+         and packing_mode = #{example.packingMode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.packingModeRange != null and example.packingModeRange != ''">
+         and packing_mode like concat('%',#{example.packingModeRange},'%')
+      </if>
+      <if test="example.otherContent != null and example.otherContent != ''">
+         and other_content = #{example.otherContent,jdbcType=VARCHAR}
+      </if>
+      <if test="example.otherContentRange != null and example.otherContentRange != ''">
+         and other_content like concat('%',#{example.otherContentRange},'%')
+      </if>
+      <if test="example.supplier != null and example.supplier != ''">
+         and supplier = #{example.supplier,jdbcType=VARCHAR}
+      </if>
+      <if test="example.supplierRange != null and example.supplierRange != ''">
+         and supplier like concat('%',#{example.supplierRange},'%')
+      </if>
+      <if test="example.factoryName != null and example.factoryName != ''">
+         and factory_name = #{example.factoryName,jdbcType=VARCHAR}
+      </if>
+      <if test="example.factoryNameRange != null and example.factoryNameRange != ''">
+         and factory_name like concat('%',#{example.factoryNameRange},'%')
+      </if>
+      <if test="example.category != null and example.category != ''">
+         and category = #{example.category,jdbcType=VARCHAR}
+      </if>
+      <if test="example.categoryRange != null and example.categoryRange != ''">
+         and category like concat('%',#{example.categoryRange},'%')
+      </if>
+      <if test="example.bak1 != null and example.bak1 != ''">
+         and bak1 = #{example.bak1,jdbcType=VARCHAR}
+      </if>
+      <if test="example.bak1Range != null and example.bak1Range != ''">
+         and bak1 like concat('%',#{example.bak1Range},'%')
+      </if>
+      <if test="example.pricelessSign != null and example.pricelessSign != ''">
+         and priceless_sign = #{example.pricelessSign,jdbcType=VARCHAR}
+      </if>
+      <if test="example.pricelessSignRange != null and example.pricelessSignRange != ''">
+         and priceless_sign like concat('%',#{example.pricelessSignRange},'%')
+      </if>
+      <if test="example.totalInventory != null and example.totalInventory != ''">
+         and total_inventory = #{example.totalInventory,jdbcType=DECIMAL}
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    offer_pri_id, cate_id, cate_name, cate_stan, manu_num, prod_pla, art_no, his_offer_pri, 
+    offer_num, expiry_date, deadline, create_user, create_time, update_user, update_time, 
+    offer_weight, offer_avg_weight, catchweight_pri, offer_pri, standard_catch, offer_type, 
+    offer_status, offer_user, offer_user_name, offer_time, audit_user, audit_user_name, 
+    audit_time, offer_reason, cate_Ename, north_colloquialism, south_colloquialism, HS_code, 
+    tax_rate, rearing_mode, grade, per_weight, per_width, per_length, net_weight, per_number, 
+    avg_box_weight, cutting_mode, packing_mode, other_content, supplier, factory_name, 
+    category, bak1, priceless_sign, total_inventory
+  </sql>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.domain.OfferPriCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_offer_pri
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_offer_pri
+    where offer_pri_id = #{offerPriId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from buss_offer_pri
+    where offer_pri_id = #{offerPriId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.domain.OfferPriCriteria">
+    delete from buss_offer_pri
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    insert into buss_offer_pri (offer_pri_id, cate_id, cate_name, 
+      cate_stan, manu_num, prod_pla, 
+      art_no, his_offer_pri, offer_num, 
+      expiry_date, deadline, create_user, 
+      create_time, update_user, update_time, 
+      offer_weight, offer_avg_weight, catchweight_pri, 
+      offer_pri, standard_catch, offer_type, 
+      offer_status, offer_user, offer_user_name, 
+      offer_time, audit_user, audit_user_name, 
+      audit_time, offer_reason, cate_Ename, 
+      north_colloquialism, south_colloquialism, 
+      HS_code, tax_rate, rearing_mode, 
+      grade, per_weight, per_width, 
+      per_length, net_weight, per_number, 
+      avg_box_weight, cutting_mode, packing_mode, 
+      other_content, supplier, factory_name, 
+      category, bak1, priceless_sign, 
+      total_inventory)
+    values (#{offerPriId,jdbcType=CHAR}, #{cateId,jdbcType=CHAR}, #{cateName,jdbcType=VARCHAR}, 
+      #{cateStan,jdbcType=VARCHAR}, #{manuNum,jdbcType=VARCHAR}, #{prodPla,jdbcType=VARCHAR}, 
+      #{artNo,jdbcType=VARCHAR}, #{hisOfferPri,jdbcType=DECIMAL}, #{offerNum,jdbcType=DECIMAL}, 
+      #{expiryDate,jdbcType=VARCHAR}, #{deadline,jdbcType=TIMESTAMP}, #{createUser,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=CHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{offerWeight,jdbcType=DECIMAL}, #{offerAvgWeight,jdbcType=DECIMAL}, #{catchweightPri,jdbcType=DECIMAL}, 
+      #{offerPri,jdbcType=DECIMAL}, #{standardCatch,jdbcType=VARCHAR}, #{offerType,jdbcType=VARCHAR}, 
+      #{offerStatus,jdbcType=VARCHAR}, #{offerUser,jdbcType=VARCHAR}, #{offerUserName,jdbcType=VARCHAR}, 
+      #{offerTime,jdbcType=TIMESTAMP}, #{auditUser,jdbcType=VARCHAR}, #{auditUserName,jdbcType=VARCHAR}, 
+      #{auditTime,jdbcType=TIMESTAMP}, #{offerReason,jdbcType=VARCHAR}, #{cateEname,jdbcType=VARCHAR}, 
+      #{northColloquialism,jdbcType=VARCHAR}, #{southColloquialism,jdbcType=VARCHAR}, 
+      #{hsCode,jdbcType=VARCHAR}, #{taxRate,jdbcType=VARCHAR}, #{rearingMode,jdbcType=VARCHAR}, 
+      #{grade,jdbcType=VARCHAR}, #{perWeight,jdbcType=VARCHAR}, #{perWidth,jdbcType=VARCHAR}, 
+      #{perLength,jdbcType=VARCHAR}, #{netWeight,jdbcType=VARCHAR}, #{perNumber,jdbcType=VARCHAR}, 
+      #{avgBoxWeight,jdbcType=VARCHAR}, #{cuttingMode,jdbcType=VARCHAR}, #{packingMode,jdbcType=VARCHAR}, 
+      #{otherContent,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR}, #{factoryName,jdbcType=VARCHAR}, 
+      #{category,jdbcType=VARCHAR}, #{bak1,jdbcType=VARCHAR}, #{pricelessSign,jdbcType=VARCHAR}, 
+      #{totalInventory,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    insert into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="cateName != null">
+        cate_name,
+      </if>
+      <if test="cateStan != null">
+        cate_stan,
+      </if>
+      <if test="manuNum != null">
+        manu_num,
+      </if>
+      <if test="prodPla != null">
+        prod_pla,
+      </if>
+      <if test="artNo != null">
+        art_no,
+      </if>
+      <if test="hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="offerNum != null">
+        offer_num,
+      </if>
+      <if test="expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="offerType != null">
+        offer_type,
+      </if>
+      <if test="offerStatus != null">
+        offer_status,
+      </if>
+      <if test="offerUser != null">
+        offer_user,
+      </if>
+      <if test="offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="offerTime != null">
+        offer_time,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="offerReason != null">
+        offer_reason,
+      </if>
+      <if test="cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="hsCode != null">
+        HS_code,
+      </if>
+      <if test="taxRate != null">
+        tax_rate,
+      </if>
+      <if test="rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="perWidth != null">
+        per_width,
+      </if>
+      <if test="perLength != null">
+        per_length,
+      </if>
+      <if test="netWeight != null">
+        net_weight,
+      </if>
+      <if test="perNumber != null">
+        per_number,
+      </if>
+      <if test="avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="packingMode != null">
+        packing_mode,
+      </if>
+      <if test="otherContent != null">
+        other_content,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="factoryName != null">
+        factory_name,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="bak1 != null">
+        bak1,
+      </if>
+      <if test="pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        #{offerPriId,jdbcType=CHAR},
+      </if>
+      <if test="cateId != null">
+        #{cateId,jdbcType=CHAR},
+      </if>
+      <if test="cateName != null">
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateStan != null">
+        #{cateStan,jdbcType=VARCHAR},
+      </if>
+      <if test="manuNum != null">
+        #{manuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPla != null">
+        #{prodPla,jdbcType=VARCHAR},
+      </if>
+      <if test="artNo != null">
+        #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hisOfferPri != null">
+        #{hisOfferPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerNum != null">
+        #{offerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="expiryDate != null">
+        #{expiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerWeight != null">
+        #{offerWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null">
+        #{offerType,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStatus != null">
+        #{offerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUser != null">
+        #{offerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUserName != null">
+        #{offerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerTime != null">
+        #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerReason != null">
+        #{offerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cateEname != null">
+        #{cateEname,jdbcType=VARCHAR},
+      </if>
+      <if test="northColloquialism != null">
+        #{northColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="southColloquialism != null">
+        #{southColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="hsCode != null">
+        #{hsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="rearingMode != null">
+        #{rearingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perWidth != null">
+        #{perWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="perLength != null">
+        #{perLength,jdbcType=VARCHAR},
+      </if>
+      <if test="netWeight != null">
+        #{netWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perNumber != null">
+        #{perNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="avgBoxWeight != null">
+        #{avgBoxWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="cuttingMode != null">
+        #{cuttingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="packingMode != null">
+        #{packingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherContent != null">
+        #{otherContent,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null">
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="pricelessSign != null">
+        #{pricelessSign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        #{totalInventory,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.domain.OfferPriCriteria" resultType="java.lang.Long">
+    select count(*) from buss_offer_pri
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update buss_offer_pri
+    <set>
+      <if test="record.offerPriId != null">
+        offer_pri_id = #{record.offerPriId,jdbcType=CHAR},
+      </if>
+      <if test="record.cateId != null">
+        cate_id = #{record.cateId,jdbcType=CHAR},
+      </if>
+      <if test="record.cateName != null">
+        cate_name = #{record.cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cateStan != null">
+        cate_stan = #{record.cateStan,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manuNum != null">
+        manu_num = #{record.manuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prodPla != null">
+        prod_pla = #{record.prodPla,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artNo != null">
+        art_no = #{record.artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hisOfferPri != null">
+        his_offer_pri = #{record.hisOfferPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.offerNum != null">
+        offer_num = #{record.offerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.expiryDate != null">
+        expiry_date = #{record.expiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deadline != null">
+        deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createUser != null">
+        create_user = #{record.createUser,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateUser != null">
+        update_user = #{record.updateUser,jdbcType=CHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerWeight != null">
+        offer_weight = #{record.offerWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch = #{record.standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerType != null">
+        offer_type = #{record.offerType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerStatus != null">
+        offer_status = #{record.offerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerUser != null">
+        offer_user = #{record.offerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerUserName != null">
+        offer_user_name = #{record.offerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerTime != null">
+        offer_time = #{record.offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditUser != null">
+        audit_user = #{record.auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditUserName != null">
+        audit_user_name = #{record.auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null">
+        audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerReason != null">
+        offer_reason = #{record.offerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cateEname != null">
+        cate_Ename = #{record.cateEname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.northColloquialism != null">
+        north_colloquialism = #{record.northColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="record.southColloquialism != null">
+        south_colloquialism = #{record.southColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hsCode != null">
+        HS_code = #{record.hsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxRate != null">
+        tax_rate = #{record.taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rearingMode != null">
+        rearing_mode = #{record.rearingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perWeight != null">
+        per_weight = #{record.perWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perWidth != null">
+        per_width = #{record.perWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perLength != null">
+        per_length = #{record.perLength,jdbcType=VARCHAR},
+      </if>
+      <if test="record.netWeight != null">
+        net_weight = #{record.netWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.perNumber != null">
+        per_number = #{record.perNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.avgBoxWeight != null">
+        avg_box_weight = #{record.avgBoxWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cuttingMode != null">
+        cutting_mode = #{record.cuttingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.packingMode != null">
+        packing_mode = #{record.packingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherContent != null">
+        other_content = #{record.otherContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.supplier != null">
+        supplier = #{record.supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.factoryName != null">
+        factory_name = #{record.factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.category != null">
+        category = #{record.category,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bak1 != null">
+        bak1 = #{record.bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pricelessSign != null">
+        priceless_sign = #{record.pricelessSign,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalInventory != null">
+        total_inventory = #{record.totalInventory,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update buss_offer_pri
+    set offer_pri_id = #{record.offerPriId,jdbcType=CHAR},
+      cate_id = #{record.cateId,jdbcType=CHAR},
+      cate_name = #{record.cateName,jdbcType=VARCHAR},
+      cate_stan = #{record.cateStan,jdbcType=VARCHAR},
+      manu_num = #{record.manuNum,jdbcType=VARCHAR},
+      prod_pla = #{record.prodPla,jdbcType=VARCHAR},
+      art_no = #{record.artNo,jdbcType=VARCHAR},
+      his_offer_pri = #{record.hisOfferPri,jdbcType=DECIMAL},
+      offer_num = #{record.offerNum,jdbcType=DECIMAL},
+      expiry_date = #{record.expiryDate,jdbcType=VARCHAR},
+      deadline = #{record.deadline,jdbcType=TIMESTAMP},
+      create_user = #{record.createUser,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_user = #{record.updateUser,jdbcType=CHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      offer_weight = #{record.offerWeight,jdbcType=DECIMAL},
+      offer_avg_weight = #{record.offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{record.catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{record.offerPri,jdbcType=DECIMAL},
+      standard_catch = #{record.standardCatch,jdbcType=VARCHAR},
+      offer_type = #{record.offerType,jdbcType=VARCHAR},
+      offer_status = #{record.offerStatus,jdbcType=VARCHAR},
+      offer_user = #{record.offerUser,jdbcType=VARCHAR},
+      offer_user_name = #{record.offerUserName,jdbcType=VARCHAR},
+      offer_time = #{record.offerTime,jdbcType=TIMESTAMP},
+      audit_user = #{record.auditUser,jdbcType=VARCHAR},
+      audit_user_name = #{record.auditUserName,jdbcType=VARCHAR},
+      audit_time = #{record.auditTime,jdbcType=TIMESTAMP},
+      offer_reason = #{record.offerReason,jdbcType=VARCHAR},
+      cate_Ename = #{record.cateEname,jdbcType=VARCHAR},
+      north_colloquialism = #{record.northColloquialism,jdbcType=VARCHAR},
+      south_colloquialism = #{record.southColloquialism,jdbcType=VARCHAR},
+      HS_code = #{record.hsCode,jdbcType=VARCHAR},
+      tax_rate = #{record.taxRate,jdbcType=VARCHAR},
+      rearing_mode = #{record.rearingMode,jdbcType=VARCHAR},
+      grade = #{record.grade,jdbcType=VARCHAR},
+      per_weight = #{record.perWeight,jdbcType=VARCHAR},
+      per_width = #{record.perWidth,jdbcType=VARCHAR},
+      per_length = #{record.perLength,jdbcType=VARCHAR},
+      net_weight = #{record.netWeight,jdbcType=VARCHAR},
+      per_number = #{record.perNumber,jdbcType=VARCHAR},
+      avg_box_weight = #{record.avgBoxWeight,jdbcType=VARCHAR},
+      cutting_mode = #{record.cuttingMode,jdbcType=VARCHAR},
+      packing_mode = #{record.packingMode,jdbcType=VARCHAR},
+      other_content = #{record.otherContent,jdbcType=VARCHAR},
+      supplier = #{record.supplier,jdbcType=VARCHAR},
+      factory_name = #{record.factoryName,jdbcType=VARCHAR},
+      category = #{record.category,jdbcType=VARCHAR},
+      bak1 = #{record.bak1,jdbcType=VARCHAR},
+      priceless_sign = #{record.pricelessSign,jdbcType=VARCHAR},
+      total_inventory = #{record.totalInventory,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    update buss_offer_pri
+    <set>
+      <if test="cateId != null">
+        cate_id = #{cateId,jdbcType=CHAR},
+      </if>
+      <if test="cateName != null">
+        cate_name = #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateStan != null">
+        cate_stan = #{cateStan,jdbcType=VARCHAR},
+      </if>
+      <if test="manuNum != null">
+        manu_num = #{manuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPla != null">
+        prod_pla = #{prodPla,jdbcType=VARCHAR},
+      </if>
+      <if test="artNo != null">
+        art_no = #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hisOfferPri != null">
+        his_offer_pri = #{hisOfferPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerNum != null">
+        offer_num = #{offerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="expiryDate != null">
+        expiry_date = #{expiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null">
+        deadline = #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        update_user = #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerWeight != null">
+        offer_weight = #{offerWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        offer_pri = #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        standard_catch = #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null">
+        offer_type = #{offerType,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStatus != null">
+        offer_status = #{offerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUser != null">
+        offer_user = #{offerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUserName != null">
+        offer_user_name = #{offerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerTime != null">
+        offer_time = #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null">
+        audit_user = #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name = #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerReason != null">
+        offer_reason = #{offerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cateEname != null">
+        cate_Ename = #{cateEname,jdbcType=VARCHAR},
+      </if>
+      <if test="northColloquialism != null">
+        north_colloquialism = #{northColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="southColloquialism != null">
+        south_colloquialism = #{southColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="hsCode != null">
+        HS_code = #{hsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        tax_rate = #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="rearingMode != null">
+        rearing_mode = #{rearingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="perWeight != null">
+        per_weight = #{perWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perWidth != null">
+        per_width = #{perWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="perLength != null">
+        per_length = #{perLength,jdbcType=VARCHAR},
+      </if>
+      <if test="netWeight != null">
+        net_weight = #{netWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perNumber != null">
+        per_number = #{perNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="avgBoxWeight != null">
+        avg_box_weight = #{avgBoxWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="cuttingMode != null">
+        cutting_mode = #{cuttingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="packingMode != null">
+        packing_mode = #{packingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherContent != null">
+        other_content = #{otherContent,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        supplier = #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        category = #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null">
+        bak1 = #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="pricelessSign != null">
+        priceless_sign = #{pricelessSign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        total_inventory = #{totalInventory,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where offer_pri_id = #{offerPriId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    update buss_offer_pri
+    set cate_id = #{cateId,jdbcType=CHAR},
+      cate_name = #{cateName,jdbcType=VARCHAR},
+      cate_stan = #{cateStan,jdbcType=VARCHAR},
+      manu_num = #{manuNum,jdbcType=VARCHAR},
+      prod_pla = #{prodPla,jdbcType=VARCHAR},
+      art_no = #{artNo,jdbcType=VARCHAR},
+      his_offer_pri = #{hisOfferPri,jdbcType=DECIMAL},
+      offer_num = #{offerNum,jdbcType=DECIMAL},
+      expiry_date = #{expiryDate,jdbcType=VARCHAR},
+      deadline = #{deadline,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_user = #{updateUser,jdbcType=CHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      offer_weight = #{offerWeight,jdbcType=DECIMAL},
+      offer_avg_weight = #{offerAvgWeight,jdbcType=DECIMAL},
+      catchweight_pri = #{catchweightPri,jdbcType=DECIMAL},
+      offer_pri = #{offerPri,jdbcType=DECIMAL},
+      standard_catch = #{standardCatch,jdbcType=VARCHAR},
+      offer_type = #{offerType,jdbcType=VARCHAR},
+      offer_status = #{offerStatus,jdbcType=VARCHAR},
+      offer_user = #{offerUser,jdbcType=VARCHAR},
+      offer_user_name = #{offerUserName,jdbcType=VARCHAR},
+      offer_time = #{offerTime,jdbcType=TIMESTAMP},
+      audit_user = #{auditUser,jdbcType=VARCHAR},
+      audit_user_name = #{auditUserName,jdbcType=VARCHAR},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      offer_reason = #{offerReason,jdbcType=VARCHAR},
+      cate_Ename = #{cateEname,jdbcType=VARCHAR},
+      north_colloquialism = #{northColloquialism,jdbcType=VARCHAR},
+      south_colloquialism = #{southColloquialism,jdbcType=VARCHAR},
+      HS_code = #{hsCode,jdbcType=VARCHAR},
+      tax_rate = #{taxRate,jdbcType=VARCHAR},
+      rearing_mode = #{rearingMode,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
+      per_weight = #{perWeight,jdbcType=VARCHAR},
+      per_width = #{perWidth,jdbcType=VARCHAR},
+      per_length = #{perLength,jdbcType=VARCHAR},
+      net_weight = #{netWeight,jdbcType=VARCHAR},
+      per_number = #{perNumber,jdbcType=VARCHAR},
+      avg_box_weight = #{avgBoxWeight,jdbcType=VARCHAR},
+      cutting_mode = #{cuttingMode,jdbcType=VARCHAR},
+      packing_mode = #{packingMode,jdbcType=VARCHAR},
+      other_content = #{otherContent,jdbcType=VARCHAR},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      bak1 = #{bak1,jdbcType=VARCHAR},
+      priceless_sign = #{pricelessSign,jdbcType=VARCHAR},
+      total_inventory = #{totalInventory,jdbcType=DECIMAL}
+    where offer_pri_id = #{offerPriId,jdbcType=CHAR}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="record.cateId != null">
+        cate_id,
+      </if>
+      <if test="record.cateName != null">
+        cate_name,
+      </if>
+      <if test="record.cateStan != null">
+        cate_stan,
+      </if>
+      <if test="record.manuNum != null">
+        manu_num,
+      </if>
+      <if test="record.prodPla != null">
+        prod_pla,
+      </if>
+      <if test="record.artNo != null">
+        art_no,
+      </if>
+      <if test="record.hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="record.offerNum != null">
+        offer_num,
+      </if>
+      <if test="record.expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="record.deadline != null">
+        deadline,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.offerType != null">
+        offer_type,
+      </if>
+      <if test="record.offerStatus != null">
+        offer_status,
+      </if>
+      <if test="record.offerUser != null">
+        offer_user,
+      </if>
+      <if test="record.offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="record.offerTime != null">
+        offer_time,
+      </if>
+      <if test="record.auditUser != null">
+        audit_user,
+      </if>
+      <if test="record.auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.offerReason != null">
+        offer_reason,
+      </if>
+      <if test="record.cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="record.northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="record.southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="record.hsCode != null">
+        HS_code,
+      </if>
+      <if test="record.taxRate != null">
+        tax_rate,
+      </if>
+      <if test="record.rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="record.grade != null">
+        grade,
+      </if>
+      <if test="record.perWeight != null">
+        per_weight,
+      </if>
+      <if test="record.perWidth != null">
+        per_width,
+      </if>
+      <if test="record.perLength != null">
+        per_length,
+      </if>
+      <if test="record.netWeight != null">
+        net_weight,
+      </if>
+      <if test="record.perNumber != null">
+        per_number,
+      </if>
+      <if test="record.avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="record.cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="record.packingMode != null">
+        packing_mode,
+      </if>
+      <if test="record.otherContent != null">
+        other_content,
+      </if>
+      <if test="record.supplier != null">
+        supplier,
+      </if>
+      <if test="record.factoryName != null">
+        factory_name,
+      </if>
+      <if test="record.category != null">
+        category,
+      </if>
+      <if test="record.bak1 != null">
+        bak1,
+      </if>
+      <if test="record.pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="record.totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.offerPriId != null">
+          #{listItem.offerPriId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateId != null">
+          #{listItem.cateId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateName != null">
+          #{listItem.cateName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateStan != null">
+          #{listItem.cateStan,jdbcType=VARCHAR},
+        </if>
+        <if test="record.manuNum != null">
+          #{listItem.manuNum,jdbcType=VARCHAR},
+        </if>
+        <if test="record.prodPla != null">
+          #{listItem.prodPla,jdbcType=VARCHAR},
+        </if>
+        <if test="record.artNo != null">
+          #{listItem.artNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hisOfferPri != null">
+          #{listItem.hisOfferPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerNum != null">
+          #{listItem.offerNum,jdbcType=DECIMAL},
+        </if>
+        <if test="record.expiryDate != null">
+          #{listItem.expiryDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deadline != null">
+          #{listItem.deadline,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerWeight != null">
+          #{listItem.offerWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerType != null">
+          #{listItem.offerType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerStatus != null">
+          #{listItem.offerStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUser != null">
+          #{listItem.offerUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUserName != null">
+          #{listItem.offerUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerTime != null">
+          #{listItem.offerTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditUser != null">
+          #{listItem.auditUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditUserName != null">
+          #{listItem.auditUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerReason != null">
+          #{listItem.offerReason,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateEname != null">
+          #{listItem.cateEname,jdbcType=VARCHAR},
+        </if>
+        <if test="record.northColloquialism != null">
+          #{listItem.northColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.southColloquialism != null">
+          #{listItem.southColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hsCode != null">
+          #{listItem.hsCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.taxRate != null">
+          #{listItem.taxRate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.rearingMode != null">
+          #{listItem.rearingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.grade != null">
+          #{listItem.grade,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWeight != null">
+          #{listItem.perWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWidth != null">
+          #{listItem.perWidth,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perLength != null">
+          #{listItem.perLength,jdbcType=VARCHAR},
+        </if>
+        <if test="record.netWeight != null">
+          #{listItem.netWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perNumber != null">
+          #{listItem.perNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="record.avgBoxWeight != null">
+          #{listItem.avgBoxWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cuttingMode != null">
+          #{listItem.cuttingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.packingMode != null">
+          #{listItem.packingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.otherContent != null">
+          #{listItem.otherContent,jdbcType=VARCHAR},
+        </if>
+        <if test="record.supplier != null">
+          #{listItem.supplier,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factoryName != null">
+          #{listItem.factoryName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.category != null">
+          #{listItem.category,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bak1 != null">
+          #{listItem.bak1,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pricelessSign != null">
+          #{listItem.pricelessSign,jdbcType=VARCHAR},
+        </if>
+        <if test="record.totalInventory != null">
+          #{listItem.totalInventory,jdbcType=DECIMAL},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="record.cateId != null">
+        cate_id,
+      </if>
+      <if test="record.cateName != null">
+        cate_name,
+      </if>
+      <if test="record.cateStan != null">
+        cate_stan,
+      </if>
+      <if test="record.manuNum != null">
+        manu_num,
+      </if>
+      <if test="record.prodPla != null">
+        prod_pla,
+      </if>
+      <if test="record.artNo != null">
+        art_no,
+      </if>
+      <if test="record.hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="record.offerNum != null">
+        offer_num,
+      </if>
+      <if test="record.expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="record.deadline != null">
+        deadline,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.offerType != null">
+        offer_type,
+      </if>
+      <if test="record.offerStatus != null">
+        offer_status,
+      </if>
+      <if test="record.offerUser != null">
+        offer_user,
+      </if>
+      <if test="record.offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="record.offerTime != null">
+        offer_time,
+      </if>
+      <if test="record.auditUser != null">
+        audit_user,
+      </if>
+      <if test="record.auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.offerReason != null">
+        offer_reason,
+      </if>
+      <if test="record.cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="record.northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="record.southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="record.hsCode != null">
+        HS_code,
+      </if>
+      <if test="record.taxRate != null">
+        tax_rate,
+      </if>
+      <if test="record.rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="record.grade != null">
+        grade,
+      </if>
+      <if test="record.perWeight != null">
+        per_weight,
+      </if>
+      <if test="record.perWidth != null">
+        per_width,
+      </if>
+      <if test="record.perLength != null">
+        per_length,
+      </if>
+      <if test="record.netWeight != null">
+        net_weight,
+      </if>
+      <if test="record.perNumber != null">
+        per_number,
+      </if>
+      <if test="record.avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="record.cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="record.packingMode != null">
+        packing_mode,
+      </if>
+      <if test="record.otherContent != null">
+        other_content,
+      </if>
+      <if test="record.supplier != null">
+        supplier,
+      </if>
+      <if test="record.factoryName != null">
+        factory_name,
+      </if>
+      <if test="record.category != null">
+        category,
+      </if>
+      <if test="record.bak1 != null">
+        bak1,
+      </if>
+      <if test="record.pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="record.totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.offerPriId != null">
+          #{listItem.offerPriId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateId != null">
+          #{listItem.cateId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateName != null">
+          #{listItem.cateName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateStan != null">
+          #{listItem.cateStan,jdbcType=VARCHAR},
+        </if>
+        <if test="record.manuNum != null">
+          #{listItem.manuNum,jdbcType=VARCHAR},
+        </if>
+        <if test="record.prodPla != null">
+          #{listItem.prodPla,jdbcType=VARCHAR},
+        </if>
+        <if test="record.artNo != null">
+          #{listItem.artNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hisOfferPri != null">
+          #{listItem.hisOfferPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerNum != null">
+          #{listItem.offerNum,jdbcType=DECIMAL},
+        </if>
+        <if test="record.expiryDate != null">
+          #{listItem.expiryDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deadline != null">
+          #{listItem.deadline,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerWeight != null">
+          #{listItem.offerWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerType != null">
+          #{listItem.offerType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerStatus != null">
+          #{listItem.offerStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUser != null">
+          #{listItem.offerUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUserName != null">
+          #{listItem.offerUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerTime != null">
+          #{listItem.offerTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditUser != null">
+          #{listItem.auditUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditUserName != null">
+          #{listItem.auditUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerReason != null">
+          #{listItem.offerReason,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateEname != null">
+          #{listItem.cateEname,jdbcType=VARCHAR},
+        </if>
+        <if test="record.northColloquialism != null">
+          #{listItem.northColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.southColloquialism != null">
+          #{listItem.southColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hsCode != null">
+          #{listItem.hsCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.taxRate != null">
+          #{listItem.taxRate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.rearingMode != null">
+          #{listItem.rearingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.grade != null">
+          #{listItem.grade,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWeight != null">
+          #{listItem.perWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWidth != null">
+          #{listItem.perWidth,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perLength != null">
+          #{listItem.perLength,jdbcType=VARCHAR},
+        </if>
+        <if test="record.netWeight != null">
+          #{listItem.netWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perNumber != null">
+          #{listItem.perNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="record.avgBoxWeight != null">
+          #{listItem.avgBoxWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cuttingMode != null">
+          #{listItem.cuttingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.packingMode != null">
+          #{listItem.packingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.otherContent != null">
+          #{listItem.otherContent,jdbcType=VARCHAR},
+        </if>
+        <if test="record.supplier != null">
+          #{listItem.supplier,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factoryName != null">
+          #{listItem.factoryName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.category != null">
+          #{listItem.category,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bak1 != null">
+          #{listItem.bak1,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pricelessSign != null">
+          #{listItem.pricelessSign,jdbcType=VARCHAR},
+        </if>
+        <if test="record.totalInventory != null">
+          #{listItem.totalInventory,jdbcType=DECIMAL},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    replace into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="cateName != null">
+        cate_name,
+      </if>
+      <if test="cateStan != null">
+        cate_stan,
+      </if>
+      <if test="manuNum != null">
+        manu_num,
+      </if>
+      <if test="prodPla != null">
+        prod_pla,
+      </if>
+      <if test="artNo != null">
+        art_no,
+      </if>
+      <if test="hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="offerNum != null">
+        offer_num,
+      </if>
+      <if test="expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="offerType != null">
+        offer_type,
+      </if>
+      <if test="offerStatus != null">
+        offer_status,
+      </if>
+      <if test="offerUser != null">
+        offer_user,
+      </if>
+      <if test="offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="offerTime != null">
+        offer_time,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="offerReason != null">
+        offer_reason,
+      </if>
+      <if test="cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="hsCode != null">
+        HS_code,
+      </if>
+      <if test="taxRate != null">
+        tax_rate,
+      </if>
+      <if test="rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="perWidth != null">
+        per_width,
+      </if>
+      <if test="perLength != null">
+        per_length,
+      </if>
+      <if test="netWeight != null">
+        net_weight,
+      </if>
+      <if test="perNumber != null">
+        per_number,
+      </if>
+      <if test="avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="packingMode != null">
+        packing_mode,
+      </if>
+      <if test="otherContent != null">
+        other_content,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="factoryName != null">
+        factory_name,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="bak1 != null">
+        bak1,
+      </if>
+      <if test="pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        #{offerPriId,jdbcType=CHAR},
+      </if>
+      <if test="cateId != null">
+        #{cateId,jdbcType=CHAR},
+      </if>
+      <if test="cateName != null">
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateStan != null">
+        #{cateStan,jdbcType=VARCHAR},
+      </if>
+      <if test="manuNum != null">
+        #{manuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPla != null">
+        #{prodPla,jdbcType=VARCHAR},
+      </if>
+      <if test="artNo != null">
+        #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hisOfferPri != null">
+        #{hisOfferPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerNum != null">
+        #{offerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="expiryDate != null">
+        #{expiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerWeight != null">
+        #{offerWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null">
+        #{offerType,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStatus != null">
+        #{offerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUser != null">
+        #{offerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUserName != null">
+        #{offerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerTime != null">
+        #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerReason != null">
+        #{offerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cateEname != null">
+        #{cateEname,jdbcType=VARCHAR},
+      </if>
+      <if test="northColloquialism != null">
+        #{northColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="southColloquialism != null">
+        #{southColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="hsCode != null">
+        #{hsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="rearingMode != null">
+        #{rearingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perWidth != null">
+        #{perWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="perLength != null">
+        #{perLength,jdbcType=VARCHAR},
+      </if>
+      <if test="netWeight != null">
+        #{netWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perNumber != null">
+        #{perNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="avgBoxWeight != null">
+        #{avgBoxWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="cuttingMode != null">
+        #{cuttingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="packingMode != null">
+        #{packingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherContent != null">
+        #{otherContent,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null">
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="pricelessSign != null">
+        #{pricelessSign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        #{totalInventory,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.domain.OfferPri">
+    insert into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="cateId != null">
+        cate_id,
+      </if>
+      <if test="cateName != null">
+        cate_name,
+      </if>
+      <if test="cateStan != null">
+        cate_stan,
+      </if>
+      <if test="manuNum != null">
+        manu_num,
+      </if>
+      <if test="prodPla != null">
+        prod_pla,
+      </if>
+      <if test="artNo != null">
+        art_no,
+      </if>
+      <if test="hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="offerNum != null">
+        offer_num,
+      </if>
+      <if test="expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="deadline != null">
+        deadline,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUser != null">
+        update_user,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="offerPri != null">
+        offer_pri,
+      </if>
+      <if test="standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="offerType != null">
+        offer_type,
+      </if>
+      <if test="offerStatus != null">
+        offer_status,
+      </if>
+      <if test="offerUser != null">
+        offer_user,
+      </if>
+      <if test="offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="offerTime != null">
+        offer_time,
+      </if>
+      <if test="auditUser != null">
+        audit_user,
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="offerReason != null">
+        offer_reason,
+      </if>
+      <if test="cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="hsCode != null">
+        HS_code,
+      </if>
+      <if test="taxRate != null">
+        tax_rate,
+      </if>
+      <if test="rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="perWeight != null">
+        per_weight,
+      </if>
+      <if test="perWidth != null">
+        per_width,
+      </if>
+      <if test="perLength != null">
+        per_length,
+      </if>
+      <if test="netWeight != null">
+        net_weight,
+      </if>
+      <if test="perNumber != null">
+        per_number,
+      </if>
+      <if test="avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="packingMode != null">
+        packing_mode,
+      </if>
+      <if test="otherContent != null">
+        other_content,
+      </if>
+      <if test="supplier != null">
+        supplier,
+      </if>
+      <if test="factoryName != null">
+        factory_name,
+      </if>
+      <if test="category != null">
+        category,
+      </if>
+      <if test="bak1 != null">
+        bak1,
+      </if>
+      <if test="pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="offerPriId != null">
+        #{offerPriId,jdbcType=CHAR},
+      </if>
+      <if test="cateId != null">
+        #{cateId,jdbcType=CHAR},
+      </if>
+      <if test="cateName != null">
+        #{cateName,jdbcType=VARCHAR},
+      </if>
+      <if test="cateStan != null">
+        #{cateStan,jdbcType=VARCHAR},
+      </if>
+      <if test="manuNum != null">
+        #{manuNum,jdbcType=VARCHAR},
+      </if>
+      <if test="prodPla != null">
+        #{prodPla,jdbcType=VARCHAR},
+      </if>
+      <if test="artNo != null">
+        #{artNo,jdbcType=VARCHAR},
+      </if>
+      <if test="hisOfferPri != null">
+        #{hisOfferPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerNum != null">
+        #{offerNum,jdbcType=DECIMAL},
+      </if>
+      <if test="expiryDate != null">
+        #{expiryDate,jdbcType=VARCHAR},
+      </if>
+      <if test="deadline != null">
+        #{deadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=CHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerWeight != null">
+        #{offerWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="offerAvgWeight != null">
+        #{offerAvgWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="catchweightPri != null">
+        #{catchweightPri,jdbcType=DECIMAL},
+      </if>
+      <if test="offerPri != null">
+        #{offerPri,jdbcType=DECIMAL},
+      </if>
+      <if test="standardCatch != null">
+        #{standardCatch,jdbcType=VARCHAR},
+      </if>
+      <if test="offerType != null">
+        #{offerType,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStatus != null">
+        #{offerStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUser != null">
+        #{offerUser,jdbcType=VARCHAR},
+      </if>
+      <if test="offerUserName != null">
+        #{offerUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="offerTime != null">
+        #{offerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditUser != null">
+        #{auditUser,jdbcType=VARCHAR},
+      </if>
+      <if test="auditUserName != null">
+        #{auditUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerReason != null">
+        #{offerReason,jdbcType=VARCHAR},
+      </if>
+      <if test="cateEname != null">
+        #{cateEname,jdbcType=VARCHAR},
+      </if>
+      <if test="northColloquialism != null">
+        #{northColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="southColloquialism != null">
+        #{southColloquialism,jdbcType=VARCHAR},
+      </if>
+      <if test="hsCode != null">
+        #{hsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="taxRate != null">
+        #{taxRate,jdbcType=VARCHAR},
+      </if>
+      <if test="rearingMode != null">
+        #{rearingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
+      </if>
+      <if test="perWeight != null">
+        #{perWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perWidth != null">
+        #{perWidth,jdbcType=VARCHAR},
+      </if>
+      <if test="perLength != null">
+        #{perLength,jdbcType=VARCHAR},
+      </if>
+      <if test="netWeight != null">
+        #{netWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="perNumber != null">
+        #{perNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="avgBoxWeight != null">
+        #{avgBoxWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="cuttingMode != null">
+        #{cuttingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="packingMode != null">
+        #{packingMode,jdbcType=VARCHAR},
+      </if>
+      <if test="otherContent != null">
+        #{otherContent,jdbcType=VARCHAR},
+      </if>
+      <if test="supplier != null">
+        #{supplier,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null">
+        #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="category != null">
+        #{category,jdbcType=VARCHAR},
+      </if>
+      <if test="bak1 != null">
+        #{bak1,jdbcType=VARCHAR},
+      </if>
+      <if test="pricelessSign != null">
+        #{pricelessSign,jdbcType=VARCHAR},
+      </if>
+      <if test="totalInventory != null">
+        #{totalInventory,jdbcType=DECIMAL},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="offerPriId != null">
+        offer_pri_id=values(offer_pri_id),
+      </if>
+      <if test="cateId != null">
+        cate_id=values(cate_id),
+      </if>
+      <if test="cateName != null">
+        cate_name=values(cate_name),
+      </if>
+      <if test="cateStan != null">
+        cate_stan=values(cate_stan),
+      </if>
+      <if test="manuNum != null">
+        manu_num=values(manu_num),
+      </if>
+      <if test="prodPla != null">
+        prod_pla=values(prod_pla),
+      </if>
+      <if test="artNo != null">
+        art_no=values(art_no),
+      </if>
+      <if test="hisOfferPri != null">
+        his_offer_pri=values(his_offer_pri),
+      </if>
+      <if test="offerNum != null">
+        offer_num=values(offer_num),
+      </if>
+      <if test="expiryDate != null">
+        expiry_date=values(expiry_date),
+      </if>
+      <if test="deadline != null">
+        deadline=values(deadline),
+      </if>
+      <if test="createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="offerWeight != null">
+        offer_weight=values(offer_weight),
+      </if>
+      <if test="offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+      <if test="offerType != null">
+        offer_type=values(offer_type),
+      </if>
+      <if test="offerStatus != null">
+        offer_status=values(offer_status),
+      </if>
+      <if test="offerUser != null">
+        offer_user=values(offer_user),
+      </if>
+      <if test="offerUserName != null">
+        offer_user_name=values(offer_user_name),
+      </if>
+      <if test="offerTime != null">
+        offer_time=values(offer_time),
+      </if>
+      <if test="auditUser != null">
+        audit_user=values(audit_user),
+      </if>
+      <if test="auditUserName != null">
+        audit_user_name=values(audit_user_name),
+      </if>
+      <if test="auditTime != null">
+        audit_time=values(audit_time),
+      </if>
+      <if test="offerReason != null">
+        offer_reason=values(offer_reason),
+      </if>
+      <if test="cateEname != null">
+        cate_Ename=values(cate_Ename),
+      </if>
+      <if test="northColloquialism != null">
+        north_colloquialism=values(north_colloquialism),
+      </if>
+      <if test="southColloquialism != null">
+        south_colloquialism=values(south_colloquialism),
+      </if>
+      <if test="hsCode != null">
+        HS_code=values(HS_code),
+      </if>
+      <if test="taxRate != null">
+        tax_rate=values(tax_rate),
+      </if>
+      <if test="rearingMode != null">
+        rearing_mode=values(rearing_mode),
+      </if>
+      <if test="grade != null">
+        grade=values(grade),
+      </if>
+      <if test="perWeight != null">
+        per_weight=values(per_weight),
+      </if>
+      <if test="perWidth != null">
+        per_width=values(per_width),
+      </if>
+      <if test="perLength != null">
+        per_length=values(per_length),
+      </if>
+      <if test="netWeight != null">
+        net_weight=values(net_weight),
+      </if>
+      <if test="perNumber != null">
+        per_number=values(per_number),
+      </if>
+      <if test="avgBoxWeight != null">
+        avg_box_weight=values(avg_box_weight),
+      </if>
+      <if test="cuttingMode != null">
+        cutting_mode=values(cutting_mode),
+      </if>
+      <if test="packingMode != null">
+        packing_mode=values(packing_mode),
+      </if>
+      <if test="otherContent != null">
+        other_content=values(other_content),
+      </if>
+      <if test="supplier != null">
+        supplier=values(supplier),
+      </if>
+      <if test="factoryName != null">
+        factory_name=values(factory_name),
+      </if>
+      <if test="category != null">
+        category=values(category),
+      </if>
+      <if test="bak1 != null">
+        bak1=values(bak1),
+      </if>
+      <if test="pricelessSign != null">
+        priceless_sign=values(priceless_sign),
+      </if>
+      <if test="totalInventory != null">
+        total_inventory=values(total_inventory),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into buss_offer_pri
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.offerPriId != null">
+        offer_pri_id,
+      </if>
+      <if test="record.cateId != null">
+        cate_id,
+      </if>
+      <if test="record.cateName != null">
+        cate_name,
+      </if>
+      <if test="record.cateStan != null">
+        cate_stan,
+      </if>
+      <if test="record.manuNum != null">
+        manu_num,
+      </if>
+      <if test="record.prodPla != null">
+        prod_pla,
+      </if>
+      <if test="record.artNo != null">
+        art_no,
+      </if>
+      <if test="record.hisOfferPri != null">
+        his_offer_pri,
+      </if>
+      <if test="record.offerNum != null">
+        offer_num,
+      </if>
+      <if test="record.expiryDate != null">
+        expiry_date,
+      </if>
+      <if test="record.deadline != null">
+        deadline,
+      </if>
+      <if test="record.createUser != null">
+        create_user,
+      </if>
+      <if test="record.createTime != null">
+        create_time,
+      </if>
+      <if test="record.updateUser != null">
+        update_user,
+      </if>
+      <if test="record.updateTime != null">
+        update_time,
+      </if>
+      <if test="record.offerWeight != null">
+        offer_weight,
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight,
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri,
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri,
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch,
+      </if>
+      <if test="record.offerType != null">
+        offer_type,
+      </if>
+      <if test="record.offerStatus != null">
+        offer_status,
+      </if>
+      <if test="record.offerUser != null">
+        offer_user,
+      </if>
+      <if test="record.offerUserName != null">
+        offer_user_name,
+      </if>
+      <if test="record.offerTime != null">
+        offer_time,
+      </if>
+      <if test="record.auditUser != null">
+        audit_user,
+      </if>
+      <if test="record.auditUserName != null">
+        audit_user_name,
+      </if>
+      <if test="record.auditTime != null">
+        audit_time,
+      </if>
+      <if test="record.offerReason != null">
+        offer_reason,
+      </if>
+      <if test="record.cateEname != null">
+        cate_Ename,
+      </if>
+      <if test="record.northColloquialism != null">
+        north_colloquialism,
+      </if>
+      <if test="record.southColloquialism != null">
+        south_colloquialism,
+      </if>
+      <if test="record.hsCode != null">
+        HS_code,
+      </if>
+      <if test="record.taxRate != null">
+        tax_rate,
+      </if>
+      <if test="record.rearingMode != null">
+        rearing_mode,
+      </if>
+      <if test="record.grade != null">
+        grade,
+      </if>
+      <if test="record.perWeight != null">
+        per_weight,
+      </if>
+      <if test="record.perWidth != null">
+        per_width,
+      </if>
+      <if test="record.perLength != null">
+        per_length,
+      </if>
+      <if test="record.netWeight != null">
+        net_weight,
+      </if>
+      <if test="record.perNumber != null">
+        per_number,
+      </if>
+      <if test="record.avgBoxWeight != null">
+        avg_box_weight,
+      </if>
+      <if test="record.cuttingMode != null">
+        cutting_mode,
+      </if>
+      <if test="record.packingMode != null">
+        packing_mode,
+      </if>
+      <if test="record.otherContent != null">
+        other_content,
+      </if>
+      <if test="record.supplier != null">
+        supplier,
+      </if>
+      <if test="record.factoryName != null">
+        factory_name,
+      </if>
+      <if test="record.category != null">
+        category,
+      </if>
+      <if test="record.bak1 != null">
+        bak1,
+      </if>
+      <if test="record.pricelessSign != null">
+        priceless_sign,
+      </if>
+      <if test="record.totalInventory != null">
+        total_inventory,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.offerPriId != null">
+          #{listItem.offerPriId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateId != null">
+          #{listItem.cateId,jdbcType=CHAR},
+        </if>
+        <if test="record.cateName != null">
+          #{listItem.cateName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateStan != null">
+          #{listItem.cateStan,jdbcType=VARCHAR},
+        </if>
+        <if test="record.manuNum != null">
+          #{listItem.manuNum,jdbcType=VARCHAR},
+        </if>
+        <if test="record.prodPla != null">
+          #{listItem.prodPla,jdbcType=VARCHAR},
+        </if>
+        <if test="record.artNo != null">
+          #{listItem.artNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hisOfferPri != null">
+          #{listItem.hisOfferPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerNum != null">
+          #{listItem.offerNum,jdbcType=DECIMAL},
+        </if>
+        <if test="record.expiryDate != null">
+          #{listItem.expiryDate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.deadline != null">
+          #{listItem.deadline,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.createUser != null">
+          #{listItem.createUser,jdbcType=CHAR},
+        </if>
+        <if test="record.createTime != null">
+          #{listItem.createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.updateUser != null">
+          #{listItem.updateUser,jdbcType=CHAR},
+        </if>
+        <if test="record.updateTime != null">
+          #{listItem.updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerWeight != null">
+          #{listItem.offerWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerAvgWeight != null">
+          #{listItem.offerAvgWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="record.catchweightPri != null">
+          #{listItem.catchweightPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.offerPri != null">
+          #{listItem.offerPri,jdbcType=DECIMAL},
+        </if>
+        <if test="record.standardCatch != null">
+          #{listItem.standardCatch,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerType != null">
+          #{listItem.offerType,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerStatus != null">
+          #{listItem.offerStatus,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUser != null">
+          #{listItem.offerUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerUserName != null">
+          #{listItem.offerUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.offerTime != null">
+          #{listItem.offerTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.auditUser != null">
+          #{listItem.auditUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditUserName != null">
+          #{listItem.auditUserName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.auditTime != null">
+          #{listItem.auditTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.offerReason != null">
+          #{listItem.offerReason,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cateEname != null">
+          #{listItem.cateEname,jdbcType=VARCHAR},
+        </if>
+        <if test="record.northColloquialism != null">
+          #{listItem.northColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.southColloquialism != null">
+          #{listItem.southColloquialism,jdbcType=VARCHAR},
+        </if>
+        <if test="record.hsCode != null">
+          #{listItem.hsCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.taxRate != null">
+          #{listItem.taxRate,jdbcType=VARCHAR},
+        </if>
+        <if test="record.rearingMode != null">
+          #{listItem.rearingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.grade != null">
+          #{listItem.grade,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWeight != null">
+          #{listItem.perWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perWidth != null">
+          #{listItem.perWidth,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perLength != null">
+          #{listItem.perLength,jdbcType=VARCHAR},
+        </if>
+        <if test="record.netWeight != null">
+          #{listItem.netWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.perNumber != null">
+          #{listItem.perNumber,jdbcType=VARCHAR},
+        </if>
+        <if test="record.avgBoxWeight != null">
+          #{listItem.avgBoxWeight,jdbcType=VARCHAR},
+        </if>
+        <if test="record.cuttingMode != null">
+          #{listItem.cuttingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.packingMode != null">
+          #{listItem.packingMode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.otherContent != null">
+          #{listItem.otherContent,jdbcType=VARCHAR},
+        </if>
+        <if test="record.supplier != null">
+          #{listItem.supplier,jdbcType=VARCHAR},
+        </if>
+        <if test="record.factoryName != null">
+          #{listItem.factoryName,jdbcType=VARCHAR},
+        </if>
+        <if test="record.category != null">
+          #{listItem.category,jdbcType=VARCHAR},
+        </if>
+        <if test="record.bak1 != null">
+          #{listItem.bak1,jdbcType=VARCHAR},
+        </if>
+        <if test="record.pricelessSign != null">
+          #{listItem.pricelessSign,jdbcType=VARCHAR},
+        </if>
+        <if test="record.totalInventory != null">
+          #{listItem.totalInventory,jdbcType=DECIMAL},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.offerPriId != null">
+        offer_pri_id=values(offer_pri_id),
+      </if>
+      <if test="record.cateId != null">
+        cate_id=values(cate_id),
+      </if>
+      <if test="record.cateName != null">
+        cate_name=values(cate_name),
+      </if>
+      <if test="record.cateStan != null">
+        cate_stan=values(cate_stan),
+      </if>
+      <if test="record.manuNum != null">
+        manu_num=values(manu_num),
+      </if>
+      <if test="record.prodPla != null">
+        prod_pla=values(prod_pla),
+      </if>
+      <if test="record.artNo != null">
+        art_no=values(art_no),
+      </if>
+      <if test="record.hisOfferPri != null">
+        his_offer_pri=values(his_offer_pri),
+      </if>
+      <if test="record.offerNum != null">
+        offer_num=values(offer_num),
+      </if>
+      <if test="record.expiryDate != null">
+        expiry_date=values(expiry_date),
+      </if>
+      <if test="record.deadline != null">
+        deadline=values(deadline),
+      </if>
+      <if test="record.createUser != null">
+        create_user=values(create_user),
+      </if>
+      <if test="record.createTime != null">
+        create_time=values(create_time),
+      </if>
+      <if test="record.updateUser != null">
+        update_user=values(update_user),
+      </if>
+      <if test="record.updateTime != null">
+        update_time=values(update_time),
+      </if>
+      <if test="record.offerWeight != null">
+        offer_weight=values(offer_weight),
+      </if>
+      <if test="record.offerAvgWeight != null">
+        offer_avg_weight=values(offer_avg_weight),
+      </if>
+      <if test="record.catchweightPri != null">
+        catchweight_pri=values(catchweight_pri),
+      </if>
+      <if test="record.offerPri != null">
+        offer_pri=values(offer_pri),
+      </if>
+      <if test="record.standardCatch != null">
+        standard_catch=values(standard_catch),
+      </if>
+      <if test="record.offerType != null">
+        offer_type=values(offer_type),
+      </if>
+      <if test="record.offerStatus != null">
+        offer_status=values(offer_status),
+      </if>
+      <if test="record.offerUser != null">
+        offer_user=values(offer_user),
+      </if>
+      <if test="record.offerUserName != null">
+        offer_user_name=values(offer_user_name),
+      </if>
+      <if test="record.offerTime != null">
+        offer_time=values(offer_time),
+      </if>
+      <if test="record.auditUser != null">
+        audit_user=values(audit_user),
+      </if>
+      <if test="record.auditUserName != null">
+        audit_user_name=values(audit_user_name),
+      </if>
+      <if test="record.auditTime != null">
+        audit_time=values(audit_time),
+      </if>
+      <if test="record.offerReason != null">
+        offer_reason=values(offer_reason),
+      </if>
+      <if test="record.cateEname != null">
+        cate_Ename=values(cate_Ename),
+      </if>
+      <if test="record.northColloquialism != null">
+        north_colloquialism=values(north_colloquialism),
+      </if>
+      <if test="record.southColloquialism != null">
+        south_colloquialism=values(south_colloquialism),
+      </if>
+      <if test="record.hsCode != null">
+        HS_code=values(HS_code),
+      </if>
+      <if test="record.taxRate != null">
+        tax_rate=values(tax_rate),
+      </if>
+      <if test="record.rearingMode != null">
+        rearing_mode=values(rearing_mode),
+      </if>
+      <if test="record.grade != null">
+        grade=values(grade),
+      </if>
+      <if test="record.perWeight != null">
+        per_weight=values(per_weight),
+      </if>
+      <if test="record.perWidth != null">
+        per_width=values(per_width),
+      </if>
+      <if test="record.perLength != null">
+        per_length=values(per_length),
+      </if>
+      <if test="record.netWeight != null">
+        net_weight=values(net_weight),
+      </if>
+      <if test="record.perNumber != null">
+        per_number=values(per_number),
+      </if>
+      <if test="record.avgBoxWeight != null">
+        avg_box_weight=values(avg_box_weight),
+      </if>
+      <if test="record.cuttingMode != null">
+        cutting_mode=values(cutting_mode),
+      </if>
+      <if test="record.packingMode != null">
+        packing_mode=values(packing_mode),
+      </if>
+      <if test="record.otherContent != null">
+        other_content=values(other_content),
+      </if>
+      <if test="record.supplier != null">
+        supplier=values(supplier),
+      </if>
+      <if test="record.factoryName != null">
+        factory_name=values(factory_name),
+      </if>
+      <if test="record.category != null">
+        category=values(category),
+      </if>
+      <if test="record.bak1 != null">
+        bak1=values(bak1),
+      </if>
+      <if test="record.pricelessSign != null">
+        priceless_sign=values(priceless_sign),
+      </if>
+      <if test="record.totalInventory != null">
+        total_inventory=values(total_inventory),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.domain.OfferPriCriteria" resultMap="BaseResultMap">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from buss_offer_pri
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

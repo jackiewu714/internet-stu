@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rhtop.buss.common.dao.sys.persistence.BizLogMapper">
+  <resultMap id="BaseResultMap" type="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    <id column="log_id" jdbcType="BIGINT" property="logId" />
+    <result column="biz_code" jdbcType="VARCHAR" property="bizCode" />
+    <result column="oper_user" jdbcType="VARCHAR" property="operUser" />
+    <result column="oper_time" jdbcType="TIMESTAMP" property="operTime" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="mac" jdbcType="VARCHAR" property="mac" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="logId != null and logId != ''">
+         and log_id = #{logId,jdbcType=BIGINT}
+      </if>
+      <if test="bizCode != null and bizCode != ''">
+         and biz_code = #{bizCode,jdbcType=VARCHAR}
+      </if>
+      <if test="bizCodeRange != null and bizCodeRange != ''">
+         and biz_code like concat('%',#{bizCodeRange},'%')
+      </if>
+      <if test="operUser != null and operUser != ''">
+         and oper_user = #{operUser,jdbcType=VARCHAR}
+      </if>
+      <if test="operUserRange != null and operUserRange != ''">
+         and oper_user like concat('%',#{operUserRange},'%')
+      </if>
+      <if test="operTime != null and operTime != ''">
+         and oper_time = #{operTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operTimeRange1 != null and operTimeRange1 != ''">
+         and oper_time &gt;= #{operTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="operTimeRange2 != null and operTimeRange2 != ''">
+         and oper_time &lt;= #{operTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="ip != null and ip != ''">
+         and ip = #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="ipRange != null and ipRange != ''">
+         and ip like concat('%',#{ipRange},'%')
+      </if>
+      <if test="mac != null and mac != ''">
+         and mac = #{mac,jdbcType=VARCHAR}
+      </if>
+      <if test="macRange != null and macRange != ''">
+         and mac like concat('%',#{macRange},'%')
+      </if>
+      <if test="content != null and content != ''">
+         and content = #{content,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="contentRange != null and contentRange != ''">
+         and content like concat('%',#{contentRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.logId != null and example.logId != ''">
+         and log_id = #{example.logId,jdbcType=BIGINT}
+      </if>
+      <if test="example.bizCode != null and example.bizCode != ''">
+         and biz_code = #{example.bizCode,jdbcType=VARCHAR}
+      </if>
+      <if test="example.bizCodeRange != null and example.bizCodeRange != ''">
+         and biz_code like concat('%',#{example.bizCodeRange},'%')
+      </if>
+      <if test="example.operUser != null and example.operUser != ''">
+         and oper_user = #{example.operUser,jdbcType=VARCHAR}
+      </if>
+      <if test="example.operUserRange != null and example.operUserRange != ''">
+         and oper_user like concat('%',#{example.operUserRange},'%')
+      </if>
+      <if test="example.operTime != null and example.operTime != ''">
+         and oper_time = #{example.operTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.operTimeRange1 != null and example.operTimeRange1 != ''">
+         and oper_time &gt;= #{example.operTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.operTimeRange2 != null and example.operTimeRange2 != ''">
+         and oper_time &lt;= #{example.operTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.ip != null and example.ip != ''">
+         and ip = #{example.ip,jdbcType=VARCHAR}
+      </if>
+      <if test="example.ipRange != null and example.ipRange != ''">
+         and ip like concat('%',#{example.ipRange},'%')
+      </if>
+      <if test="example.mac != null and example.mac != ''">
+         and mac = #{example.mac,jdbcType=VARCHAR}
+      </if>
+      <if test="example.macRange != null and example.macRange != ''">
+         and mac like concat('%',#{example.macRange},'%')
+      </if>
+      <if test="example.content != null and example.content != ''">
+         and content = #{example.content,jdbcType=LONGVARCHAR}
+      </if>
+      <if test="example.contentRange != null and example.contentRange != ''">
+         and content like concat('%',#{example.contentRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    log_id, biz_code, oper_user, oper_time, ip, mac
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLogCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_biz_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLogCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sys_biz_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_biz_log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sys_biz_log
+    where log_id = #{logId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLogCriteria">
+    delete from sys_biz_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    <selectKey keyProperty="logId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_biz_log (biz_code, oper_user, oper_time, 
+      ip, mac, content
+      )
+    values (#{bizCode,jdbcType=VARCHAR}, #{operUser,jdbcType=VARCHAR}, #{operTime,jdbcType=TIMESTAMP}, 
+      #{ip,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    <selectKey keyProperty="logId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="operUser != null">
+        oper_user,
+      </if>
+      <if test="operTime != null">
+        oper_time,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operUser != null">
+        #{operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLogCriteria" resultType="java.lang.Long">
+    select count(*) from sys_biz_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sys_biz_log
+    <set>
+      <if test="record.logId != null">
+        log_id = #{record.logId,jdbcType=BIGINT},
+      </if>
+      <if test="record.bizCode != null">
+        biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operUser != null">
+        oper_user = #{record.operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operTime != null">
+        oper_time = #{record.operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ip != null">
+        ip = #{record.ip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mac != null">
+        mac = #{record.mac,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update sys_biz_log
+    set log_id = #{record.logId,jdbcType=BIGINT},
+      biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      oper_user = #{record.operUser,jdbcType=VARCHAR},
+      oper_time = #{record.operTime,jdbcType=TIMESTAMP},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sys_biz_log
+    set log_id = #{record.logId,jdbcType=BIGINT},
+      biz_code = #{record.bizCode,jdbcType=VARCHAR},
+      oper_user = #{record.operUser,jdbcType=VARCHAR},
+      oper_time = #{record.operTime,jdbcType=TIMESTAMP},
+      ip = #{record.ip,jdbcType=VARCHAR},
+      mac = #{record.mac,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    update sys_biz_log
+    <set>
+      <if test="bizCode != null">
+        biz_code = #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operUser != null">
+        oper_user = #{operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        oper_time = #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    update sys_biz_log
+    set biz_code = #{bizCode,jdbcType=VARCHAR},
+      oper_user = #{operUser,jdbcType=VARCHAR},
+      oper_time = #{operTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    update sys_biz_log
+    set biz_code = #{bizCode,jdbcType=VARCHAR},
+      oper_user = #{operUser,jdbcType=VARCHAR},
+      oper_time = #{operTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where log_id = #{logId,jdbcType=BIGINT}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    insert into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.logId != null">
+        log_id,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.operUser != null">
+        oper_user,
+      </if>
+      <if test="record.operTime != null">
+        oper_time,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.content != null">
+        content,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.logId != null">
+          #{listItem.logId,jdbcType=BIGINT},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operUser != null">
+          #{listItem.operUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operTime != null">
+          #{listItem.operTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.content != null">
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceListSelective" parameterType="map">
+    replace into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.logId != null">
+        log_id,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.operUser != null">
+        oper_user,
+      </if>
+      <if test="record.operTime != null">
+        oper_time,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.content != null">
+        content,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.logId != null">
+          #{listItem.logId,jdbcType=BIGINT},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operUser != null">
+          #{listItem.operUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operTime != null">
+          #{listItem.operTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.content != null">
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="replaceSelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    replace into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="operUser != null">
+        oper_user,
+      </if>
+      <if test="operTime != null">
+        oper_time,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operUser != null">
+        #{operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertOnDuplicateKeySelective" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLog">
+    insert into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        log_id,
+      </if>
+      <if test="bizCode != null">
+        biz_code,
+      </if>
+      <if test="operUser != null">
+        oper_user,
+      </if>
+      <if test="operTime != null">
+        oper_time,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="logId != null">
+        #{logId,jdbcType=BIGINT},
+      </if>
+      <if test="bizCode != null">
+        #{bizCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operUser != null">
+        #{operUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        #{operTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="logId != null">
+        log_id=values(log_id),
+      </if>
+      <if test="bizCode != null">
+        biz_code=values(biz_code),
+      </if>
+      <if test="operUser != null">
+        oper_user=values(oper_user),
+      </if>
+      <if test="operTime != null">
+        oper_time=values(oper_time),
+      </if>
+      <if test="ip != null">
+        ip=values(ip),
+      </if>
+      <if test="mac != null">
+        mac=values(mac),
+      </if>
+      <if test="content != null">
+        content=values(content),
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertListOnDuplicateKeySelective" parameterType="map">
+    insert into sys_biz_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.logId != null">
+        log_id,
+      </if>
+      <if test="record.bizCode != null">
+        biz_code,
+      </if>
+      <if test="record.operUser != null">
+        oper_user,
+      </if>
+      <if test="record.operTime != null">
+        oper_time,
+      </if>
+      <if test="record.ip != null">
+        ip,
+      </if>
+      <if test="record.mac != null">
+        mac,
+      </if>
+      <if test="record.content != null">
+        content,
+      </if>
+    </trim>
+    <foreach close=" " collection="records" item="listItem" open="values " separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="record.logId != null">
+          #{listItem.logId,jdbcType=BIGINT},
+        </if>
+        <if test="record.bizCode != null">
+          #{listItem.bizCode,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operUser != null">
+          #{listItem.operUser,jdbcType=VARCHAR},
+        </if>
+        <if test="record.operTime != null">
+          #{listItem.operTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.ip != null">
+          #{listItem.ip,jdbcType=VARCHAR},
+        </if>
+        <if test="record.mac != null">
+          #{listItem.mac,jdbcType=VARCHAR},
+        </if>
+        <if test="record.content != null">
+          #{listItem.content,jdbcType=LONGVARCHAR},
+        </if>
+      </trim>
+    </foreach>
+     on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="record.logId != null">
+        log_id=values(log_id),
+      </if>
+      <if test="record.bizCode != null">
+        biz_code=values(biz_code),
+      </if>
+      <if test="record.operUser != null">
+        oper_user=values(oper_user),
+      </if>
+      <if test="record.operTime != null">
+        oper_time=values(oper_time),
+      </if>
+      <if test="record.ip != null">
+        ip=values(ip),
+      </if>
+      <if test="record.mac != null">
+        mac=values(mac),
+      </if>
+      <if test="record.content != null">
+        content=values(content),
+      </if>
+    </trim>
+  </insert>
+  <select id="listPage" parameterType="com.rhtop.buss.common.dao.sys.domain.BizLogCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_biz_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

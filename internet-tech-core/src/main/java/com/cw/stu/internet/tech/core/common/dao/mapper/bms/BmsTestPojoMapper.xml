@@ -244,9 +244,9 @@
     </if>
   </update>
   <insert id="insertListSelective" parameterType="map">
-    insert all 
+    INSERT ALL 
     <foreach close=" " collection="records" item="listItem" open=" " separator=" ">
-      into BMS.TEST
+      INTO BMS.TEST
       <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="listItem.name1 != null">
           NAME1,
@@ -264,7 +264,7 @@
           NAME5,
         </if>
       </trim>
-       values 
+       VALUES 
       <trim prefix="(" suffix=")" suffixOverrides=",">
         <if test="listItem.name1 != null">
           #{listItem.name1,jdbcType=VARCHAR},
@@ -282,11 +282,11 @@
           #{listItem.name5,jdbcType=VARCHAR},
         </if>
       </trim>
-       SELECT 1 FROM DUAL 
     </foreach>
+     SELECT 1 FROM DUAL aa
   </insert>
   <insert id="insertListSelectiveByUnion" parameterType="map">
-    insert into BMS.TEST
+    INSERT INTO BMS.TEST
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="record.name1 != null">
         NAME1,
@@ -305,7 +305,7 @@
       </if>
     </trim>
     <foreach close=" " collection="records" item="listItem" open=" " separator="union all">
-      select
+      SELECT
       <trim prefix=" " suffix=" " suffixOverrides=",">
         <if test="record.name1 != null">
           #{listItem.name1,jdbcType=VARCHAR},
@@ -323,7 +323,7 @@
           #{listItem.name5,jdbcType=VARCHAR},
         </if>
       </trim>
-      from dual
+      FROM DUAL
     </foreach>
   </insert>
 </mapper>

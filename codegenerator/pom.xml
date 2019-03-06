@@ -169,8 +169,9 @@
 
         <!-- oracle 驱动 -->
         <dependency>
-            <groupId>net.carefx.3rdparty.db</groupId>
-            <artifactId>ojdbc14</artifactId>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${ojdbc6.version}</version>
         </dependency>
 
     </dependencies>

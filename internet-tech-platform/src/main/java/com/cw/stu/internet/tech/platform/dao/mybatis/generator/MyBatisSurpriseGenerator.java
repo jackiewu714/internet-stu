@@ -131,6 +131,7 @@ public class MyBatisSurpriseGenerator extends MyBatisGenerator {
      * @throws IOException
      * @throws InterruptedException          if the method is canceled through the ProgressCallback
      */
+    @Override
     public void generate(ProgressCallback callback, Set<String> contextIds, Set<String> fullyQualifiedTableNames)
             throws SQLException, IOException, InterruptedException {
 
@@ -244,7 +245,7 @@ public class MyBatisSurpriseGenerator extends MyBatisGenerator {
                 targetFile = new File(directory, gjf.getFileName());
                 if (targetFile.exists()) {
                     if (shellCallback.isMergeSupported()) {
-                        source = shellCallback.mergeJavaFile(gjf.getFormattedContent(), targetFile.getAbsolutePath(),
+                        source = shellCallback.mergeJavaFile(gjf.getFormattedContent(), targetFile,
                                 MergeConstants.OLD_ELEMENT_TAGS, MbgConstants.DEFAULT_ENCODING);
                     } else if (shellCallback.isOverwriteEnabled()) {
                         source = gjf.getFormattedContent();

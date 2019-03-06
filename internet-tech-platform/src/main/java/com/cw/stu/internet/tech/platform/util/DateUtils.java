@@ -1,7 +1,7 @@
 package com.cw.stu.internet.tech.platform.util;
 
-import org.apache.commons.httpclient.util.DateParseException;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.impl.cookie.DateParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

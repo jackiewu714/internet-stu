@@ -25,6 +25,7 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -172,13 +173,15 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.41</version>
         </dependency>
+        -->
 
         <!-- oracle 驱动 -->
+        <!--
         <dependency>
             <groupId>net.carefx.3rdparty.db</groupId>
             <artifactId>ojdbc14</artifactId>
         </dependency>
-
+        -->
     </dependencies>
 
     <build>

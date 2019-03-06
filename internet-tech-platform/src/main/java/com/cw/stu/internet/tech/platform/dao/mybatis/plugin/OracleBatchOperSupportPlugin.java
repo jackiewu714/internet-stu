@@ -212,7 +212,7 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 	protected void genInsertAllXml(IntrospectedTable introspectedTable,
 								   XmlElement answer) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("insert all ");
+		sb.append("INSERT ALL ");
 		answer.addElement(new TextElement(sb.toString()));
 
 		XmlElement insertTrimElement = new XmlElement("trim");
@@ -263,13 +263,13 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 		}
 
 		String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
-		innerForEach.addElement(new TextElement(String.format("into %S", tableName)));
+		innerForEach.addElement(new TextElement(String.format("INTO %S", tableName)));
 		innerForEach.addElement(insertTrimElement);
-		innerForEach.addElement(new TextElement(" values "));
+		innerForEach.addElement(new TextElement(" VALUES "));
 		innerForEach.addElement(valuesTrimElement);
-		innerForEach.addElement(new TextElement(" SELECT 1 FROM DUAL "));
 
 		answer.addElement(innerForEach);
+		answer.addElement(new TextElement(" SELECT 1 FROM DUAL "));
 	}
 
 	/**
@@ -349,7 +349,7 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 		}
 
 		String tableName = introspectedTable.getFullyQualifiedTableNameAtRuntime();
-		answer.addElement(new TextElement(String.format("insert into %S", tableName)));
+		answer.addElement(new TextElement(String.format("INSERT INTO %S", tableName)));
 		answer.addElement(insertTrimElement);
 
 		XmlElement innerForEach = new XmlElement("foreach");
@@ -359,9 +359,9 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 		innerForEach.addAttribute(new Attribute("close", " "));
 		innerForEach.addAttribute(new Attribute("separator", "union all"));
 
-		innerForEach.addElement(new TextElement("select"));
+		innerForEach.addElement(new TextElement("SELECT"));
 		innerForEach.addElement(valuesTrimElement);
-		innerForEach.addElement(new TextElement("from dual"));
+		innerForEach.addElement(new TextElement("FROM DUAL"));
 
 		answer.addElement(innerForEach);
 	}

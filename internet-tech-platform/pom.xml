@@ -13,10 +13,10 @@
     <description>核心工程</description>
 
     <properties>
-        <spring.version>4.3.5.RELEASE</spring.version>
-        <jackson.version>2.8.1</jackson.version>
-        <slf4j.version>1.7.9</slf4j.version>
-        <log4j.version>1.2.17</log4j.version>
+        <spring.version>5.0.8.RELEASE</spring.version>
+        <!--<jackson.version>2.8.1</jackson.version>-->
+        <!--<slf4j.version>1.7.9</slf4j.version>-->
+        <!--<log4j.version>1.2.17</log4j.version>-->
     </properties>
     <dependencies>
         <dependency>
@@ -30,7 +30,6 @@
         <dependency>
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
-            <version>1.3.5</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -39,22 +38,18 @@
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
             <artifactId>xstream</artifactId>
-            <version>1.4.9</version>
         </dependency>
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils-core</artifactId>
-            <version>1.8.3</version>
         </dependency>
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
-            <version>1.9</version>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-            <version>1.9.7</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -69,7 +64,6 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
         </dependency>
 
         <dependency>
@@ -82,10 +76,15 @@
             <artifactId>commons-collections</artifactId>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.1</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
         </dependency>
 
         <dependency>
@@ -125,52 +124,44 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0.1</version>
         </dependency>
 
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
-            <version>${jackson.version}</version>
         </dependency>
 
         <dependency>
             <groupId>c3p0</groupId>
             <artifactId>c3p0</artifactId>
-            <version>0.9.1.2</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.41</version>
         </dependency>
 
         <!-- oracle 驱动 -->
         <dependency>
-            <groupId>net.carefx.3rdparty.db</groupId>
-            <artifactId>ojdbc14</artifactId>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
         </dependency>
 
     </dependencies>

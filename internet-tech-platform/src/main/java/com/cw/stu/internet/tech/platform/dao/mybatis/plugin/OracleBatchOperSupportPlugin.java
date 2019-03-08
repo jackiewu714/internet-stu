@@ -335,6 +335,10 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 			insertNotNullElement.addElement(new TextElement(sb.toString()));
 			insertTrimElement.addElement(insertNotNullElement);
 
+			//主键列，则不拼接了(采用序列方式生成主键ID的值)
+			if(introspectedColumn.isSequenceColumn()) {
+				continue;
+			}
 			XmlElement valuesNotNullElement = new XmlElement("if");
 			sb.setLength(0);
 			sb.append(introspectedColumn.getJavaProperty("record."));
@@ -363,7 +367,9 @@ public class OracleBatchOperSupportPlugin extends BasePluginAdapter {
 		innerForEach.addElement(valuesTrimElement);
 		innerForEach.addElement(new TextElement("FROM DUAL"));
 
+		answer.addElement(new TextElement(String.format(" SELECT %s_SEQ.NEXTVAL, A.* from( ", tableName)));
 		answer.addElement(innerForEach);
+		answer.addElement(new TextElement(" ) A "));
 	}
 
 	@Override

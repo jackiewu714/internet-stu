@@ -96,7 +96,7 @@ public class MySqlPaginationPlugin extends PluginAdapter {
 	}
 
 	protected void addSelectByExampleWithoutBLOBsMethod(Interface interfaze) {
-		if (introspectedTable.getRules().generateSelectByExampleWithoutBLOBs()) {
+		if (introspectedTable.getRules().generateSelectByExampleWithoutBLOBs() && introspectedTable.hasBLOBColumns()) {
 			AbstractJavaMapperMethodGenerator methodGenerator = new SelectByExampleWithPaginationGenerator();
 			initializeAndExecuteGenerator(methodGenerator, interfaze);
 		}

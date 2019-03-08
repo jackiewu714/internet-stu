@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cw.stu.internet.tech.core.common.dao.persistence.bms.TestStateChangeMapper">
+  <resultMap id="BaseResultMap" type="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="ORDER_NO" jdbcType="VARCHAR" property="orderNo" />
+    <result column="CUR_STATE" jdbcType="VARCHAR" property="curState" />
+    <result column="TARGET_STATE" jdbcType="VARCHAR" property="targetState" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="MOD_STAFF" jdbcType="VARCHAR" property="modStaff" />
+    <result column="MOD_TIME" jdbcType="TIMESTAMP" property="modTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    <result column="EXTRA_INFO" jdbcType="CLOB" property="extraInfo" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <if test="oredCriteria != null">
+        <foreach collection="oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="id != null and id != ''">
+         and ID = #{id,jdbcType=DECIMAL}
+      </if>
+      <if test="orderNo != null and orderNo != ''">
+         and ORDER_NO = #{orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="orderNoRange != null and orderNoRange != ''">
+         and ORDER_NO like concat('%',#{orderNoRange},'%')
+      </if>
+      <if test="curState != null and curState != ''">
+         and CUR_STATE = #{curState,jdbcType=VARCHAR}
+      </if>
+      <if test="curStateRange != null and curStateRange != ''">
+         and CUR_STATE like concat('%',#{curStateRange},'%')
+      </if>
+      <if test="targetState != null and targetState != ''">
+         and TARGET_STATE = #{targetState,jdbcType=VARCHAR}
+      </if>
+      <if test="targetStateRange != null and targetStateRange != ''">
+         and TARGET_STATE like concat('%',#{targetStateRange},'%')
+      </if>
+      <if test="remark != null and remark != ''">
+         and REMARK = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="remarkRange != null and remarkRange != ''">
+         and REMARK like concat('%',#{remarkRange},'%')
+      </if>
+      <if test="modStaff != null and modStaff != ''">
+         and MOD_STAFF = #{modStaff,jdbcType=VARCHAR}
+      </if>
+      <if test="modStaffRange != null and modStaffRange != ''">
+         and MOD_STAFF like concat('%',#{modStaffRange},'%')
+      </if>
+      <if test="modTime != null and modTime != ''">
+         and MOD_TIME = #{modTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modTimeRange1 != null and modTimeRange1 != ''">
+         and MOD_TIME &gt;= #{modTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="modTimeRange2 != null and modTimeRange2 != ''">
+         and MOD_TIME &lt;= #{modTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extraInfo != null and extraInfo != ''">
+         and EXTRA_INFO = #{extraInfo,jdbcType=CLOB}
+      </if>
+      <if test="extraInfoRange != null and extraInfoRange != ''">
+         and EXTRA_INFO like concat('%',#{extraInfoRange},'%')
+      </if>
+      <if test="extracClause != null and extracClause != ''">
+         and  ${extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <if test="example.oredCriteria != null">
+        <foreach collection="example.oredCriteria" item="criteria" separator="or">
+          <if test="criteria.valid">
+            <trim prefix="(" prefixOverrides="and" suffix=")">
+              <foreach collection="criteria.criteria" item="criterion">
+                <choose>
+                  <when test="criterion.noValue">
+                    and ${criterion.condition}
+                  </when>
+                  <when test="criterion.singleValue">
+                    and ${criterion.condition} #{criterion.value}
+                  </when>
+                  <when test="criterion.betweenValue">
+                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                  </when>
+                  <when test="criterion.listValue">
+                    and ${criterion.condition}
+                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                    </foreach>
+                  </when>
+                </choose>
+              </foreach>
+            </trim>
+          </if>
+        </foreach>
+      </if>
+      <if test="example.id != null and example.id != ''">
+         and ID = #{example.id,jdbcType=DECIMAL}
+      </if>
+      <if test="example.orderNo != null and example.orderNo != ''">
+         and ORDER_NO = #{example.orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="example.orderNoRange != null and example.orderNoRange != ''">
+         and ORDER_NO like concat('%',#{example.orderNoRange},'%')
+      </if>
+      <if test="example.curState != null and example.curState != ''">
+         and CUR_STATE = #{example.curState,jdbcType=VARCHAR}
+      </if>
+      <if test="example.curStateRange != null and example.curStateRange != ''">
+         and CUR_STATE like concat('%',#{example.curStateRange},'%')
+      </if>
+      <if test="example.targetState != null and example.targetState != ''">
+         and TARGET_STATE = #{example.targetState,jdbcType=VARCHAR}
+      </if>
+      <if test="example.targetStateRange != null and example.targetStateRange != ''">
+         and TARGET_STATE like concat('%',#{example.targetStateRange},'%')
+      </if>
+      <if test="example.remark != null and example.remark != ''">
+         and REMARK = #{example.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="example.remarkRange != null and example.remarkRange != ''">
+         and REMARK like concat('%',#{example.remarkRange},'%')
+      </if>
+      <if test="example.modStaff != null and example.modStaff != ''">
+         and MOD_STAFF = #{example.modStaff,jdbcType=VARCHAR}
+      </if>
+      <if test="example.modStaffRange != null and example.modStaffRange != ''">
+         and MOD_STAFF like concat('%',#{example.modStaffRange},'%')
+      </if>
+      <if test="example.modTime != null and example.modTime != ''">
+         and MOD_TIME = #{example.modTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modTimeRange1 != null and example.modTimeRange1 != ''">
+         and MOD_TIME &gt;= #{example.modTimeRange1,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.modTimeRange2 != null and example.modTimeRange2 != ''">
+         and MOD_TIME &lt;= #{example.modTimeRange2,jdbcType=TIMESTAMP}
+      </if>
+      <if test="example.extraInfo != null and example.extraInfo != ''">
+         and EXTRA_INFO = #{example.extraInfo,jdbcType=CLOB}
+      </if>
+      <if test="example.extraInfoRange != null and example.extraInfoRange != ''">
+         and EXTRA_INFO like concat('%',#{example.extraInfoRange},'%')
+      </if>
+      <if test="example.extracClause != null and example.extracClause != ''">
+         and  ${example.extracClause} 
+      </if>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, ORDER_NO, CUR_STATE, TARGET_STATE, REMARK, MOD_STAFF, MOD_TIME
+  </sql>
+  <sql id="Blob_Column_List">
+    EXTRA_INFO
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChangeCriteria" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BMS.TEST_STATE_CHANGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChangeCriteria" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from BMS.TEST_STATE_CHANGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from BMS.TEST_STATE_CHANGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from BMS.TEST_STATE_CHANGE
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChangeCriteria">
+    delete from BMS.TEST_STATE_CHANGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT BMS.TEST_STATE_CHANGE_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    insert into BMS.TEST_STATE_CHANGE (ID, ORDER_NO, CUR_STATE, 
+      TARGET_STATE, REMARK, MOD_STAFF, 
+      MOD_TIME, EXTRA_INFO)
+    values (#{id,jdbcType=DECIMAL}, #{orderNo,jdbcType=VARCHAR}, #{curState,jdbcType=VARCHAR}, 
+      #{targetState,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{modStaff,jdbcType=VARCHAR}, 
+      #{modTime,jdbcType=TIMESTAMP}, #{extraInfo,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+      SELECT BMS.TEST_STATE_CHANGE_SEQ.NEXTVAL FROM DUAL
+    </selectKey>
+    insert into BMS.TEST_STATE_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="curState != null">
+        CUR_STATE,
+      </if>
+      <if test="targetState != null">
+        TARGET_STATE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="modStaff != null">
+        MOD_STAFF,
+      </if>
+      <if test="modTime != null">
+        MOD_TIME,
+      </if>
+      <if test="extraInfo != null">
+        EXTRA_INFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=DECIMAL},
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="curState != null">
+        #{curState,jdbcType=VARCHAR},
+      </if>
+      <if test="targetState != null">
+        #{targetState,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null">
+        #{modStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="modTime != null">
+        #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extraInfo != null">
+        #{extraInfo,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChangeCriteria" resultType="java.lang.Long">
+    select count(*) from BMS.TEST_STATE_CHANGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BMS.TEST_STATE_CHANGE
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=DECIMAL},
+      </if>
+      <if test="record.orderNo != null">
+        ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.curState != null">
+        CUR_STATE = #{record.curState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.targetState != null">
+        TARGET_STATE = #{record.targetState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modStaff != null">
+        MOD_STAFF = #{record.modStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modTime != null">
+        MOD_TIME = #{record.modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.extraInfo != null">
+        EXTRA_INFO = #{record.extraInfo,jdbcType=CLOB},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update BMS.TEST_STATE_CHANGE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      CUR_STATE = #{record.curState,jdbcType=VARCHAR},
+      TARGET_STATE = #{record.targetState,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      MOD_STAFF = #{record.modStaff,jdbcType=VARCHAR},
+      MOD_TIME = #{record.modTime,jdbcType=TIMESTAMP},
+      EXTRA_INFO = #{record.extraInfo,jdbcType=CLOB}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BMS.TEST_STATE_CHANGE
+    set ID = #{record.id,jdbcType=DECIMAL},
+      ORDER_NO = #{record.orderNo,jdbcType=VARCHAR},
+      CUR_STATE = #{record.curState,jdbcType=VARCHAR},
+      TARGET_STATE = #{record.targetState,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      MOD_STAFF = #{record.modStaff,jdbcType=VARCHAR},
+      MOD_TIME = #{record.modTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    update BMS.TEST_STATE_CHANGE
+    <set>
+      <if test="orderNo != null">
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="curState != null">
+        CUR_STATE = #{curState,jdbcType=VARCHAR},
+      </if>
+      <if test="targetState != null">
+        TARGET_STATE = #{targetState,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="modStaff != null">
+        MOD_STAFF = #{modStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="modTime != null">
+        MOD_TIME = #{modTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extraInfo != null">
+        EXTRA_INFO = #{extraInfo,jdbcType=CLOB},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    update BMS.TEST_STATE_CHANGE
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      CUR_STATE = #{curState,jdbcType=VARCHAR},
+      TARGET_STATE = #{targetState,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MOD_STAFF = #{modStaff,jdbcType=VARCHAR},
+      MOD_TIME = #{modTime,jdbcType=TIMESTAMP},
+      EXTRA_INFO = #{extraInfo,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cw.stu.internet.tech.core.common.dao.domain.bms.TestStateChange">
+    update BMS.TEST_STATE_CHANGE
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      CUR_STATE = #{curState,jdbcType=VARCHAR},
+      TARGET_STATE = #{targetState,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MOD_STAFF = #{modStaff,jdbcType=VARCHAR},
+      MOD_TIME = #{modTime,jdbcType=TIMESTAMP},
+      EXTRA_INFO = #{extraInfo,jdbcType=CLOB}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <insert id="insertListSelective" parameterType="map">
+    INSERT ALL 
+    <foreach close=" " collection="records" item="listItem" open=" " separator=" ">
+      INTO BMS.TEST_STATE_CHANGE
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="listItem.id != null">
+          ID,
+        </if>
+        <if test="listItem.orderNo != null">
+          ORDER_NO,
+        </if>
+        <if test="listItem.curState != null">
+          CUR_STATE,
+        </if>
+        <if test="listItem.targetState != null">
+          TARGET_STATE,
+        </if>
+        <if test="listItem.remark != null">
+          REMARK,
+        </if>
+        <if test="listItem.modStaff != null">
+          MOD_STAFF,
+        </if>
+        <if test="listItem.modTime != null">
+          MOD_TIME,
+        </if>
+        <if test="listItem.extraInfo != null">
+          EXTRA_INFO,
+        </if>
+      </trim>
+       VALUES 
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="listItem.id != null">
+          #{listItem.id,jdbcType=DECIMAL},
+        </if>
+        <if test="listItem.orderNo != null">
+          #{listItem.orderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="listItem.curState != null">
+          #{listItem.curState,jdbcType=VARCHAR},
+        </if>
+        <if test="listItem.targetState != null">
+          #{listItem.targetState,jdbcType=VARCHAR},
+        </if>
+        <if test="listItem.remark != null">
+          #{listItem.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="listItem.modStaff != null">
+          #{listItem.modStaff,jdbcType=VARCHAR},
+        </if>
+        <if test="listItem.modTime != null">
+          #{listItem.modTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="listItem.extraInfo != null">
+          #{listItem.extraInfo,jdbcType=CLOB},
+        </if>
+      </trim>
+    </foreach>
+     SELECT 1 FROM DUAL 
+  </insert>
+  <insert id="insertListSelectiveByUnion" parameterType="map">
+    INSERT INTO BMS.TEST_STATE_CHANGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="record.id != null">
+        ID,
+      </if>
+      <if test="record.orderNo != null">
+        ORDER_NO,
+      </if>
+      <if test="record.curState != null">
+        CUR_STATE,
+      </if>
+      <if test="record.targetState != null">
+        TARGET_STATE,
+      </if>
+      <if test="record.remark != null">
+        REMARK,
+      </if>
+      <if test="record.modStaff != null">
+        MOD_STAFF,
+      </if>
+      <if test="record.modTime != null">
+        MOD_TIME,
+      </if>
+      <if test="record.extraInfo != null">
+        EXTRA_INFO,
+      </if>
+    </trim>
+     SELECT BMS.TEST_STATE_CHANGE_SEQ.NEXTVAL, A.* from( 
+    <foreach close=" " collection="records" item="listItem" open=" " separator="union all">
+      SELECT
+      <trim prefix=" " suffix=" " suffixOverrides=",">
+        <if test="record.orderNo != null">
+          #{listItem.orderNo,jdbcType=VARCHAR},
+        </if>
+        <if test="record.curState != null">
+          #{listItem.curState,jdbcType=VARCHAR},
+        </if>
+        <if test="record.targetState != null">
+          #{listItem.targetState,jdbcType=VARCHAR},
+        </if>
+        <if test="record.remark != null">
+          #{listItem.remark,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modStaff != null">
+          #{listItem.modStaff,jdbcType=VARCHAR},
+        </if>
+        <if test="record.modTime != null">
+          #{listItem.modTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="record.extraInfo != null">
+          #{listItem.extraInfo,jdbcType=CLOB},
+        </if>
+      </trim>
+      FROM DUAL
+    </foreach>
+     ) A 
+  </insert>
+</mapper>

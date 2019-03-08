@@ -283,7 +283,7 @@
         </if>
       </trim>
     </foreach>
-     SELECT 1 FROM DUAL aa
+     SELECT 1 FROM DUAL 
   </insert>
   <insert id="insertListSelectiveByUnion" parameterType="map">
     INSERT INTO BMS.TEST
@@ -304,6 +304,7 @@
         NAME5,
       </if>
     </trim>
+     SELECT BMS.TEST_SEQ.NEXTVAL, A.* from( 
     <foreach close=" " collection="records" item="listItem" open=" " separator="union all">
       SELECT
       <trim prefix=" " suffix=" " suffixOverrides=",">
@@ -325,5 +326,6 @@
       </trim>
       FROM DUAL
     </foreach>
+     ) A 
   </insert>
 </mapper>

@@ -33,7 +33,7 @@
 		<!-- 增加字段注释说明 -->
 		<plugin type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.AddCommentPlugin" />
 		<!-- 分页插件 -->
-		<!--<plugin type="PagerPlugin" />-->
+		<!--<plugin type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.PagerPlugin" />-->
 	
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />
@@ -83,10 +83,18 @@
 		-->
 
 		<table schema="bms" tableName="test" domainObjectName="BmsTestPojo"
-			   enableCountByExample="true" enableUpdateByExample="true"
-			   enableDeleteByExample="true" enableSelectByExample="true"
-			   selectByExampleQueryId="true">
+			   enableCountByExample="true" enableUpdateByExample="true" enableUpdateByPrimaryKey="true"
+			   enableSelectByPrimaryKey="true" enableSelectByExample="true" selectByExampleQueryId="true"
+			   enableDeleteByPrimaryKey="true" enableDeleteByExample="true" enableInsert="true">
 			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="BMS" tableName="TEST_STATE_CHANGE" domainObjectName="TestStateChange"
+			   enableCountByExample="true" enableUpdateByExample="true"
+			   enableSelectByExample="true" selectByExampleQueryId="true"
+			   enableDeleteByExample="true" enableInsert="true">
+			<property name="useActualColumnNames" value="false" />
+			<generatedKey column="ID" sqlStatement="SELECT BMS.TEST_STATE_CHANGE_SEQ.NEXTVAL FROM DUAL"/>
 		</table>
 		
 	</context>

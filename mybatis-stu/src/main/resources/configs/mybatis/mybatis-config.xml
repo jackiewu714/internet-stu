@@ -48,5 +48,6 @@
     <mappers>
         <mapper resource="com/cw/stu/mybatis/dao/mapper/ProductMapper.xml"/>
         <mapper resource="com/cw/stu/internet/tech/core/common/dao/mapper/bms/BmsTestPojoMapper.xml" />
+        <mapper resource="com/cw/stu/internet/tech/core/common/dao/mapper/bms/TestStateChangeMapper.xml" />
     </mappers>
 </configuration>

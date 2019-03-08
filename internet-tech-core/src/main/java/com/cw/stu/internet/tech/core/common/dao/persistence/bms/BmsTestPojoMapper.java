@@ -19,10 +19,6 @@ public interface BmsTestPojoMapper {
 
     int insertSelective(BmsTestPojo record);
 
-    List<BmsTestPojo> selectByExample(BmsTestPojoCriteria example, RowBounds rowbounds);
-
-    List<BmsTestPojo> selectByExampleWithBLOBs(BmsTestPojoCriteria example, RowBounds rowbounds);
-
     List<BmsTestPojo> selectByExample(BmsTestPojoCriteria example);
 
     int updateByExampleSelective(@Param("record") BmsTestPojo record, @Param("example") BmsTestPojoCriteria example);

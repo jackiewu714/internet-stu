@@ -1,0 +1,23 @@
+create table BMS.TEST_STATE_CHANGE
+(
+  ID                   NUMBER(10)           not null,
+  ORDER_NO             VARCHAR2(32)         not null,
+  CUR_STATE            VARCHAR2(32)         not null,
+  TARGET_STATE         VARCHAR2(32)         not null,
+  REMARK               VARCHAR2(255),
+  EXTRA_INFO           CLOB,
+  MOD_STAFF            VARCHAR2(32),
+  MOD_TIME             Date,
+  constraint PK_TEST_STATE_CHANGE primary key (ID)
+);
+
+--DROP SEQUENCE BMS.TEST_STATE_CHANGE_SEQ;
+
+CREATE SEQUENCE BMS.TEST_STATE_CHANGE_SEQ
+MINVALUE 1
+MAXVALUE 9999999999
+START WITH 1
+INCREMENT BY 1
+CACHE 20;
+
+SELECT BMS.TEST_STATE_CHANGE_SEQ.NEXTVAL FROM DUAL;

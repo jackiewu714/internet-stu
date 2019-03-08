@@ -18,7 +18,7 @@
         <module>spring-boot-stu</module>
         <module>mybatis-stu</module>
         <module>java-agent-stu</module>
-        <module>codegenerator</module>
+        <!--<module>codegenerator</module>-->
     </modules>
 
     <properties>

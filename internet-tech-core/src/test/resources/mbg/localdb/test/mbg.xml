@@ -19,20 +19,20 @@
 			<property name="replaceString" value="Criteria" />
 		</plugin>
 		<plugin
-			type="MySqlPaginationPlugin" />
+			type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.MySqlPaginationPlugin" />
 		<!-- 扩展Criteria对象，增加bean结构字段，增加一些常规搜索条件插件 -->
 		<plugin
-			type="FlatCauseSupportPlugin" />
+			type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.FlatCauseSupportPlugin" />
 		<!--	
 		<plugin
-			type="TranslateSupportPlugin" />
+			type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.TranslateSupportPlugin" />
 		-->
 		<plugin
-			type="BatchOperSupportPlugin" />
+			type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.BatchOperSupportPlugin" />
 		<!-- 增加字段注释说明 -->
-		<plugin type="AddCommentPlugin" />
+		<plugin type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.AddCommentPlugin" />
 		<!-- 分页插件 -->
-		<!--<plugin type="PagerPlugin" />-->
+		<!--<plugin type="com.cw.stu.internet.tech.platform.dao.mybatis.plugin.PagerPlugin" />-->
 	
 		<commentGenerator>
 			<property name="suppressAllComments" value="true" />

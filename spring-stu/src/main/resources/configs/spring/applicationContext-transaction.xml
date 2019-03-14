@@ -34,6 +34,7 @@
     </tx:advice>
     <aop:config proxy-target-class="true">
         <aop:advisor advice-ref="txAdvice"
-                     pointcut="execution(* com.cw.stu.spring.transaction.jta.service.impl.JtaTestServiceImpl.jtaUpdateTransaction(..))" />
+                     pointcut="execution(* com.cw.stu.spring.transaction.jta.service.impl.JtaTestServiceImpl.jtaUpdateTransaction(..)) ||
+                               execution(* com.cw.stu.spring.transaction.jta.service.impl.SingleDbTransactionServiceImpl.transacionWithThread(..))" />
     </aop:config>
 </beans>

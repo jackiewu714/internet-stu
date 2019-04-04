@@ -39,7 +39,7 @@ public class TestStateChangeMapperTest {
             System.out.println("testBatchInsert（insert操作前）, count: " + count);
 
             //测试单个插入 insertSelective
-            testInsertSelective(mapper);
+//            testInsertSelective(mapper);
 
             //测试批量插入 insertListSelective
 //            testInsertListSelective(mapper);
@@ -109,11 +109,12 @@ public class TestStateChangeMapperTest {
      * 测试批量插入 insertListSelectiveByUnion（效率较低，速度约为insert all方式的4倍）【推荐使用此方式】
      * 模拟结果:
      * 插入2000条数据，耗时 2405 ms
+     * 插入8000条数据，耗时 73031 ms
      * @param mapper    BmsTestPojoMapper
      */
     private void testInsertListSelectiveByUnion(TestStateChangeMapper mapper){
         String name1 = "insertListSelectiveByUnion";
-        List<TestStateChange> list = generateList(10, name1);
+        List<TestStateChange> list = generateList(8000, name1);
 
         TestStateChange record = new TestStateChange();
         record.setId(11L);

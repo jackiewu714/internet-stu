@@ -1,5 +1,7 @@
 package study.javabase.date;
 
+import com.cw.stu.internet.tech.platform.util.DateUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -28,9 +30,19 @@ public class DateTest {
         return dt;
     }
 
+    @Ignore
     @Test
     public void testFormat1() {
         String dateStr = formatDate(new Date(), "yyyy年MM月dd日");
         System.out.println("dateStr:" + dateStr);
+    }
+
+    @Test
+    public void testLongToDate(){
+        Long[] dateLongArr = new Long[]{1545982340000L, 1546272000000L, 1546841306000L};
+        for (Long dl : dateLongArr) {
+            Date date = new Date(dl);
+            System.out.println(String.format("dl: %s, date: %s", dl, DateUtils.dateToString(date, DateUtils.SHOWING_DATE_TIME_FORMAT)));
+        }
     }
 }

@@ -16,15 +16,14 @@
     <url>http://www.example.com</url>
 
     <modules>
-        <!--<module>java-agent-client</module>
-        <module>java-agent-test</module>-->
-        <module>spring-boot-helloworld-stu</module>
+        <module>spring-boot-helloworld</module>
+        <module>spring-boot-web</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
 
         <!--spring依赖版本控制（和spring-boot-parent版本保持一致）-->
         <org.springframework.version>5.1.7.RELEASE</org.springframework.version>
@@ -75,7 +74,8 @@
         </dependencies>
 
     </dependencyManagement>
-    <!--<dependencies>
+
+    <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -90,7 +90,7 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
-    </dependencies>-->
+    </dependencies>
 
     <build>
         <!-- 过滤器，用于过滤resource中的各个文件 -->
@@ -116,10 +116,10 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <!--指定编译时的jdk版本1.7 -->
+                <!--指定编译时的jdk版本1.8 -->
                 <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>

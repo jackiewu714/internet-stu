@@ -36,6 +36,7 @@ public class LongTest {
     }
 
     @Test
+    @Ignore
     public void testContains() {
         List<Long> list = new ArrayList<Long>();
         list.add(2002L);
@@ -44,6 +45,14 @@ public class LongTest {
         Long l1 = 2050L;
 //        Long l2 = 2050.5L;
         System.out.print("list.contains(l1)=" + list.contains(l1));
+    }
+
+    @Test
+    public void testConcate(){
+        Long ll = new Long("100");
+        String str = "123aaa";
+        String key = ll + str;
+        System.out.println("key=" + key);
     }
 
 }

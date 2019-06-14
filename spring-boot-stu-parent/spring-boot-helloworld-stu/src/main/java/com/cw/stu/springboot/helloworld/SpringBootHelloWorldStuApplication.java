@@ -1,13 +1,13 @@
-package com.cw.stu.springboot;
+package com.cw.stu.springboot.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootStuApplication {
+public class SpringBootHelloWorldStuApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootStuApplication.class, args);
+        SpringApplication.run(SpringBootHelloWorldStuApplication.class, args);
     }
 
 }

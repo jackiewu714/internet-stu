@@ -15,14 +15,17 @@
         <module>dubbo-test</module>
         <module>audit-webservice</module>
         <module>spring-stu</module>
-        <module>spring-boot-stu</module>
+        <module>spring-boot-stu-parent</module>
         <module>mybatis-stu</module>
         <module>java-agent-stu</module>
         <!--<module>codegenerator</module>-->
     </modules>
 
     <properties>
+        <!--依赖版本号管理-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.7</java.version>
 
         <!-- maven junit 跳过测试设置 -->
         <maven.junit.skip>true</maven.junit.skip>

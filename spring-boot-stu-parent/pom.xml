@@ -27,9 +27,10 @@
         <maven.compiler.target>1.7</maven.compiler.target>
 
         <!--spring依赖版本控制（和spring-boot-parent版本保持一致）-->
-        <springframework.version>4.3.13.RELEASE</springframework.version>
+        <org.springframework.version>5.1.7.RELEASE</org.springframework.version>
         <!--spring-boot-parent版本号，通过spring-boot管理其他第三方依赖版本-->
-        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
+        <jackson.version>2.9.5</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -38,7 +39,7 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-framework-bom</artifactId>
-                <version>${springframework.version}</version>
+                <version>${org.springframework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -48,6 +49,28 @@
                 <version>${spring.boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!--jackson依赖-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jaxb-annotations</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
         </dependencies>
 

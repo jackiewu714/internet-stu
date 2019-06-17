@@ -19,6 +19,7 @@
         <module>mybatis-stu</module>
         <module>java-agent-stu</module>
         <!--<module>codegenerator</module>-->
+        <module>big-file-handle</module>
     </modules>
 
     <properties>

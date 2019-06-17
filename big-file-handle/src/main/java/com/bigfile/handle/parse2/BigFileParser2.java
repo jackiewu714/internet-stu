@@ -1,20 +1,26 @@
-package com.bigfile.handle;
+package com.bigfile.handle.parse2;
 
 import com.alibaba.fastjson.JSON;
+import com.bigfile.handle.common.Constants;
+import com.bigfile.handle.parse1.ResultBean;
+import com.bigfile.handle.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 大文件解析器
  *
  * @author WuLiangzhi  2019/06/17 20:21
  */
-public class BigFileParser {
+public class BigFileParser2 {
 
-    private static final Logger logger = LoggerFactory.getLogger(BigFileParser.class);
+    private static final Logger logger = LoggerFactory.getLogger(BigFileParser2.class);
 
     /**
      * 查找符合条件的数据
@@ -23,8 +29,8 @@ public class BigFileParser {
      * @param searchStrList List<String>    搜索条件列表
      * @return
      */
-    public String findMatchResult(String filePath, List<String> searchStrList) {
-        logger.info("findMatchResult, filePath={}, searchStrList={}", filePath, JSON.toJSON(searchStrList));
+    public String findMatchResult(String filePath, String resultFilePath, List<String> searchStrList) {
+        logger.info("findMatchResult, filePath={}, searchStrList={}, resultFilePath={}", filePath, JSON.toJSON(searchStrList), resultFilePath);
 
         List<Double> searchDouList = new ArrayList<>();
         for (String str : searchStrList) {
@@ -39,9 +45,16 @@ public class BigFileParser {
             return null;
         }
 
+        //清空结果文件内容，如果文件不存在则新建一个空文件
+        FileUtil.clearFileContent(resultFilePath);
+
         FileInputStream fis = null;
         InputStreamReader isr = null;
         BufferedReader br = null;
+
+        FileOutputStream fos = null;
+        OutputStreamWriter osw = null;
+        BufferedWriter bw = null;
 
         List<ResultBean> resultBeanList = new ArrayList<>();
         try {
@@ -49,10 +62,22 @@ public class BigFileParser {
             isr = new InputStreamReader(fis);
             br = new BufferedReader(isr);
 
+            fos = new FileOutputStream(resultFilePath, true);
+            osw = new OutputStreamWriter(fos);
+            bw = new BufferedWriter(osw);
+
             int row = 1;
-            String line = "";
+            String line;
             while ((line = br.readLine()) != null) {
-                resultBeanList.addAll(parseRowData(row, line, searchDouList));
+//                resultBeanList.addAll(parseRowData(row, line, searchDouList));
+
+                //将解析的结果写入到结果文件中
+                List<ResultBean> list = parseRowData(row, line, searchDouList);
+                if(!list.isEmpty() ) {
+                    bw.write(JSON.toJSONString(list));
+                    bw.newLine();
+                    bw.flush();
+                }
                 row++;
             }
         } catch (FileNotFoundException e) {
@@ -61,7 +86,29 @@ public class BigFileParser {
             logger.error(e.getMessage(), e);
         } finally {
             try {
-                br.close();
+                if (br != null) {
+                    br.close();
+                }
+                if (isr != null) {
+                    isr.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                logger.error(e.getMessage(), e);
+            }
+
+            try {
+                if (bw != null) {
+                    bw.close();
+                }
+                if (osw != null) {
+                    osw.close();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
             } catch (IOException e) {
                 logger.error(e.getMessage(), e);
             }
@@ -139,78 +186,17 @@ public class BigFileParser {
         return resultBeanList;
     }
 
-    /**
-     * 清空文件内容
-     *
-     * @param resultFilePath    String  结果文件路径
-     */
-    public static void clearResultFileContent(String resultFilePath) {
-        File file = new File(resultFilePath);
-        FileWriter fileWriter = null;
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            fileWriter = new FileWriter(file);
-            fileWriter.write("");
-            fileWriter.flush();
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fileWriter != null) {
-                    fileWriter.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * 追加结果到文件中
-     * @param resultFilePath    String  结果文件路径
-     * @param jsonStr           String  结果json字符串
-     */
-    public void appendResultFileContent(String resultFilePath, String jsonStr) {
-        logger.info("generateLine, resultFilePath={}");
-
-        FileOutputStream fos = null;
-        OutputStreamWriter osw = null;
-        BufferedWriter bw = null;
-        try {
-            fos = new FileOutputStream(resultFilePath, true);
-            osw = new OutputStreamWriter(fos);
-            bw = new BufferedWriter(osw);
-
-            bw.write(jsonStr);
-            bw.newLine();
-        } catch (FileNotFoundException e) {
-            logger.error(e.getMessage(), e);
-        } catch (IOException e) {
-            logger.error(e.getMessage(), e);
-        } finally {
-            try {
-                if (bw != null) {
-                    bw.close();
-                }
-            } catch (IOException e) {
-                logger.error(e.getMessage(), e);
-            }
-        }
-    }
-
     public static void main(String[] args) {
-        BigFileParser bigFileParser = new BigFileParser();
+        BigFileParser2 bigFileParser = new BigFileParser2();
 
         long startTime = System.currentTimeMillis();
-        String filePath = Constants.FILE_PATH_1;
         List<String> searchList = Arrays.asList(new String[]{"96.2569"});
-        bigFileParser.findMatchResult(filePath, searchList);
+        bigFileParser.findMatchResult(Constants.FILE_PATH_1, Constants.FILE_PATH_1_RESULT, searchList);
         long endTime = System.currentTimeMillis();
 
-        logger.info("BigFileParser, findMatchResult 耗时 {} s", (endTime - startTime) / 1000);
+        logger.info("BigFileParser1, findMatchResult 耗时 {} s", (endTime - startTime) / 1000);
+
+        //BigFileParser1, findMatchResult 耗时 110 s（读取并解析500万行数据）
     }
 
 }

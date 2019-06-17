@@ -1,4 +1,4 @@
-package com.bigfile.handle;
+package com.bigfile.handle.parse1;
 
 /**
  * @author WuLiangzhi  2019/06/17 21:57

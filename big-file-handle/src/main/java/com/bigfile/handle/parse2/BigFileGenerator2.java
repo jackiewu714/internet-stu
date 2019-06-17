@@ -1,5 +1,7 @@
-package com.bigfile.handle;
+package com.bigfile.handle.parse2;
 
+import com.bigfile.handle.common.Constants;
+import com.bigfile.handle.util.FileUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,12 +13,15 @@ import java.text.DecimalFormat;
  *
  * @author WuLiangzhi  2019/06/17 20:21
  */
-public class BigFileGenerator {
+public class BigFileGenerator2 {
 
-    private static final Logger logger = LoggerFactory.getLogger(BigFileGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(BigFileGenerator2.class);
 
     public void appendContent(String filePath, int lineNum) {
         logger.info("generateLine, filePath={}, lineNum={}", filePath, lineNum);
+
+        //清空文件内容，如果文件不存在则新建一个空文件
+        FileUtil.clearFileContent(filePath);
 
         FileOutputStream fos = null;
         OutputStreamWriter osw = null;
@@ -27,8 +32,11 @@ public class BigFileGenerator {
             bw = new BufferedWriter(osw);
 
             for(int i=0; i<lineNum; i++) {
+                bw.write(generateLine(i+1));
                 bw.newLine();
-                bw.write(generateLine());
+                if(i%100==0) {
+                    bw.flush();
+                }
             }
         } catch (FileNotFoundException e) {
             logger.error(e.getMessage(), e);
@@ -45,7 +53,7 @@ public class BigFileGenerator {
         }
     }
 
-    private String generateLine() {
+    private String generateLine(int row) {
         double start = 1.0D;
         double end = 100.0D;
 //        double time = Math.nextAfter(start, end);
@@ -71,20 +79,23 @@ public class BigFileGenerator {
         }
 
         String rowDataStr = sb.toString().substring(0, sb.toString().length()-1);
-        logger.info("generateLine, rowDataStr={}", rowDataStr);
+        logger.info("generateLine, row={}", row);
         return rowDataStr;
     }
 
     public static void main(String[] args) {
-        BigFileGenerator bigFileGenerator = new BigFileGenerator();
+        BigFileGenerator2 bigFileGenerator = new BigFileGenerator2();
 //        bigFileGenerator.generateLine();
 
         long startTime = System.currentTimeMillis();
-        String filePath = Constants.FILE_PATH_1;
-        bigFileGenerator.appendContent(filePath, 1000000);
+        String filePath = Constants.FILE_PATH_2;
+        bigFileGenerator.appendContent(filePath, 100);
+//        bigFileGenerator.appendContent(filePath, 5000000);
         long endTime = System.currentTimeMillis();
 
-        logger.info("BigFileGenerator, appendContent 耗时 {} s", (endTime-startTime)/1000);
+        logger.info("BigFileGenerator1, appendContent 耗时 {} s", (endTime-startTime)/1000);
+
+        //BigFileGenerator1, appendContent 耗时 96 s（写入500万行数据）
     }
 
 }

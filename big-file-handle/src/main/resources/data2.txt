@@ -1,0 +1,30 @@
+
+/MESSAGE/ time = 2.0192013123 post data:
+GAP REALSEASE in RING 1
+
+/MESSAGE/ time = 2.1192013123 post data:
+HSOFF HEAT in CELL 1 Per
+
+/MESSAGE/ time = 2.0192013123 post data:
+GAP REALSEASE in RING2 2
+
+/MESSAGE/ time = 2.1192013123 post data:
+HSOFF HEAT in CELL2 2 Per
+
+/MESSAGE/ time = 2.0192013123 post data:
+GAP REALSEASE in RING3 3
+
+/MESSAGE/ time = 2.1192013123 post data:
+HSOFF HEAT in CELL3 3 Per
+
+/MESSAGE/ time = 2.0192013123 post data:
+GAP REALSEASE in RING4 4
+
+/MESSAGE/ time = 2.1192013123 post data:
+HSOFF HEAT in CELL4 4 Per
+
+/MESSAGE/ time = 2.0192013123 post data:
+GAP REALSEASE in RING5 5
+
+/MESSAGE/ time = 2.1192013123 post data:
+HSOFF HEAT in CELL5 5 Per

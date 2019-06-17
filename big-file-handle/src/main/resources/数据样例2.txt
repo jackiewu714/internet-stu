@@ -1,0 +1,39 @@
+ 数据样本如下：
+ .....
+ /MESSAGE/ time = 2.0192013123 post data:
+ GAP REALSEASE in RING 1
+
+ /MESSAGE/ time = 2.1192013123 post data:
+ HSOFF HEAT in CELL 1 Per
+
+
+ 文件说明：这个文件一般大小在500M到800M，数据测试的时候可以先模拟生成一个这样的文件。这个文件内容不是行列固定数据，是一种语法形式的数据，需要检索关键词来做数据提取
+ 文件解析：
+ 关键词需要从外部传递进来，方便扩展，这里的关键词分比较特殊，它是一组才能匹配到具体数据值，不是一个关键字就可以匹配到数据，如下：
+ [
+	[
+		{"prefix_key":"/MESSAGE/"},
+		{"key":"HSOFF HEAT"},
+		{"value_key":"CELL"},
+		{"format_value":"XX数据第%s圈失效"}
+	],
+	[
+		{"prefix_key":"/MESSAGE/"},
+		{"key":"GAP REALSEASE"},
+		{"value_key":"RING"},
+		{"format_value":"XX数据第%s层失效"}
+	]
+ ]
+
+文件解析说明：
+ 搜索关键词，例如：“GAP REALSEASE”先定位到数据行数，然后再搜索这个关键词的子关键词“RING”，得到数据“1”（做去空格处理），这样可以得到“GAP REALSEASE”数据值，再根据搜索到的“GAP REALSEASE”所在行向上搜索最近的一个关键字“/MESSAGE/”得到数据的时间所在行数，直接查找固定关键字“time”得到值“2.0192013123”，
+ 这里可以通过先查找“=”分隔后的数组，然后数组[1]再分隔“空格”，可以取到时间的数据值。或是使用正则表达式匹配都行，时间一定是浮点数值类型的，最终生成数据JSON:
+ [
+	[
+		{"key":"GAP REALSEASE"},
+		{"value":"1"},
+		{"time":"2.1192013123"},
+		{"format_value":"XX数据第1层失效"}
+	]
+]
+ 

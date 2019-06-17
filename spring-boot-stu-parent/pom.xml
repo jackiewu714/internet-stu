@@ -18,6 +18,7 @@
     <modules>
         <module>spring-boot-helloworld</module>
         <module>spring-boot-web</module>
+        <module>spring-boot-redis</module>
     </modules>
 
     <properties>
@@ -30,6 +31,7 @@
         <!--spring-boot-parent版本号，通过spring-boot管理其他第三方依赖版本-->
         <spring.boot.version>2.1.5.RELEASE</spring.boot.version>
         <jackson.version>2.9.5</jackson.version>
+        <spring.security.version>5.1.5.RELEASE</spring.security.version>
     </properties>
 
     <dependencyManagement>
@@ -50,7 +52,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--jackson依赖-->
+            <!-- jackson依赖 begin -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-core</artifactId>
@@ -71,6 +73,13 @@
                 <artifactId>jackson-module-jaxb-annotations</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <!-- jackson依赖 end -->
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>
@@ -90,6 +99,31 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- jackson依赖 begin -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+        </dependency>
+        <!-- jackson依赖 end -->
     </dependencies>
 
     <build>

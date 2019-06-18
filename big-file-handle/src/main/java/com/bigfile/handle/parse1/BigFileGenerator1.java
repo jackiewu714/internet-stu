@@ -1,7 +1,7 @@
 package com.bigfile.handle.parse1;
 
 import com.bigfile.handle.common.Constants;
-import com.bigfile.handle.util.FileUtil;
+import com.bigfile.handle.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class BigFileGenerator1 {
         logger.info("generateLine, filePath={}, lineNum={}", filePath, lineNum);
 
         //清空文件内容，如果文件不存在则新建一个空文件
-        FileUtil.clearFileContent(filePath);
+        FileUtils.clearFileContent(filePath);
 
         FileOutputStream fos = null;
         OutputStreamWriter osw = null;
@@ -56,9 +56,6 @@ public class BigFileGenerator1 {
     private String generateLine(int row) {
         double start = 1.0D;
         double end = 100.0D;
-//        double time = Math.nextAfter(start, end);
-//        double column2 = Math.nextAfter(start, end);
-//        double column3 = Math.nextAfter(start, end);
 
         DecimalFormat df = new DecimalFormat("00.####");
 

@@ -1,7 +1,7 @@
 package com.bigfile.handle.parse2;
 
 import com.bigfile.handle.common.Constants;
-import com.bigfile.handle.util.FileUtil;
+import com.bigfile.handle.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,11 +17,17 @@ public class BigFileGenerator2 {
 
     private static final Logger logger = LoggerFactory.getLogger(BigFileGenerator2.class);
 
+    private String firstRowData1 = "/MESSAGE/ time = %s post data:";
+    private String secondRowData1 = "GAP REALSEASE in RING%s %s";
+
+    private String firstRowData2 = "/MESSAGE/ time = %s post data:";
+    private String secondRowData2 = "HSOFF HEAT in CELL%s %s Per";
+
     public void appendContent(String filePath, int lineNum) {
         logger.info("generateLine, filePath={}, lineNum={}", filePath, lineNum);
 
         //清空文件内容，如果文件不存在则新建一个空文件
-        FileUtil.clearFileContent(filePath);
+        FileUtils.clearFileContent(filePath);
 
         FileOutputStream fos = null;
         OutputStreamWriter osw = null;
@@ -32,7 +38,16 @@ public class BigFileGenerator2 {
             bw = new BufferedWriter(osw);
 
             for(int i=0; i<lineNum; i++) {
-                bw.write(generateLine(i+1));
+                String[] dataArr = null;
+                if(i%2==0) {
+                    dataArr = generateDataBlock1(i+1);
+                } else {
+                    dataArr = generateDataBlock2(i+1);
+                }
+                for (String line : dataArr) {
+                    bw.write(line);
+                    bw.newLine();
+                }
                 bw.newLine();
                 if(i%100==0) {
                     bw.flush();
@@ -53,12 +68,10 @@ public class BigFileGenerator2 {
         }
     }
 
-    private String generateLine(int row) {
+    private String[] generateDataBlock1(int row) {
+        logger.info("generateDataBlock1, row={}", row);
         double start = 1.0D;
         double end = 100.0D;
-//        double time = Math.nextAfter(start, end);
-//        double column2 = Math.nextAfter(start, end);
-//        double column3 = Math.nextAfter(start, end);
 
         DecimalFormat df = new DecimalFormat("00.####");
 
@@ -66,36 +79,41 @@ public class BigFileGenerator2 {
         String column2 = df.format(Math.random()*(end-start) + start);
         String column3 = df.format(Math.random()*(end-start) + start);
 
+        String firstRowData = String.format(firstRowData1, time);
+        String secondRowData = String.format(secondRowData1, column2, column3);
 
+        return new String[]{firstRowData, secondRowData};
+    }
 
-        String[] rowData = new String[]{time,column2,column3,column3,column3,column3,column3,
-                column3,column3,column3,column3,column3,column3,column3,column3,column3,column3,
-                column3,column3,column3,column3,column3,column3,column3,column3,column3,column3,
-                column3};
+    private String[] generateDataBlock2(int row) {
+        logger.info("generateDataBlock2, row={}", row);
+        double start = 1.0D;
+        double end = 100.0D;
 
-        StringBuilder sb = new StringBuilder();
-        for(String str : rowData) {
-            sb.append(str).append(" ");
-        }
+        DecimalFormat df = new DecimalFormat("00.####");
 
-        String rowDataStr = sb.toString().substring(0, sb.toString().length()-1);
-        logger.info("generateLine, row={}", row);
-        return rowDataStr;
+        String time = df.format(Math.random()*(end-start) + start);
+        String column2 = df.format(Math.random()*(end-start) + start);
+        String column3 = df.format(Math.random()*(end-start) + start);
+
+        String firstRowData = String.format(firstRowData2, time);
+        String secondRowData = String.format(secondRowData2, column2, column3);
+
+        return new String[]{firstRowData, secondRowData};
     }
 
     public static void main(String[] args) {
         BigFileGenerator2 bigFileGenerator = new BigFileGenerator2();
-//        bigFileGenerator.generateLine();
 
         long startTime = System.currentTimeMillis();
         String filePath = Constants.FILE_PATH_2;
         bigFileGenerator.appendContent(filePath, 100);
-//        bigFileGenerator.appendContent(filePath, 5000000);
+//        bigFileGenerator.appendContent(filePath, 10000000);
         long endTime = System.currentTimeMillis();
 
         logger.info("BigFileGenerator1, appendContent 耗时 {} s", (endTime-startTime)/1000);
 
-        //BigFileGenerator1, appendContent 耗时 96 s（写入500万行数据）
+        //BigFileGenerator1, appendContent 耗时 195 s（写入3000万行数据，735 MB）
     }
 
 }

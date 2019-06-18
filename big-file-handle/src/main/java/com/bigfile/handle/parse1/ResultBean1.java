@@ -3,7 +3,7 @@ package com.bigfile.handle.parse1;
 /**
  * @author WuLiangzhi  2019/06/17 21:57
  */
-public class ResultBean {
+public class ResultBean1 {
 
     private int row;
     private int column;

@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * @author WuLiangzhi  2019/06/17 23:36
  */
-public class FileUtil {
+public class FileUtils {
 
     /**
      * 清空文件内容，如果文件不存在则新建一个空文件

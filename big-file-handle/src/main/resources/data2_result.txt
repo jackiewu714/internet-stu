@@ -1,0 +1,1 @@
+[{"format_value":"XX数据第97.7868圈失效","key":"HSOFF HEAT","time":"81.046","value":"97.7868"}]

@@ -2,7 +2,7 @@ package com.bigfile.handle.parse1;
 
 import com.alibaba.fastjson.JSON;
 import com.bigfile.handle.common.Constants;
-import com.bigfile.handle.util.FileUtil;
+import com.bigfile.handle.util.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +42,7 @@ public class BigFileParser1 {
         }
 
         //清空结果文件内容，如果文件不存在则新建一个空文件
-        FileUtil.clearFileContent(resultFilePath);
+        FileUtils.clearFileContent(resultFilePath);
 
         FileInputStream fis = null;
         InputStreamReader isr = null;
@@ -52,7 +52,6 @@ public class BigFileParser1 {
         OutputStreamWriter osw = null;
         BufferedWriter bw = null;
 
-        List<ResultBean> resultBeanList = new ArrayList<>();
         try {
             fis = new FileInputStream(filePath);
             isr = new InputStreamReader(fis);
@@ -65,10 +64,8 @@ public class BigFileParser1 {
             int row = 1;
             String line;
             while ((line = br.readLine()) != null) {
-//                resultBeanList.addAll(parseRowData(row, line, searchDouList));
-
                 //将解析的结果写入到结果文件中
-                List<ResultBean> list = parseRowData(row, line, searchDouList);
+                List<ResultBean1> list = parseRowData(row, line, searchDouList);
                 if(!list.isEmpty() ) {
                     bw.write(JSON.toJSONString(list));
                     bw.newLine();
@@ -110,41 +107,10 @@ public class BigFileParser1 {
             }
         }
 
-//        Scanner scanner = null;
-//        try {
-//            fis = new FileInputStream(filePath);
-//            scanner = new Scanner(fis);
-//
-//            int row = 1;
-//            while (scanner.hasNextLine()) {
-//                String line = scanner.nextLine();
-//                resultBeanList.addAll(parseRowData(row, line, searchDouList));
-//                row++;
-//            }
-//        } catch (FileNotFoundException e) {
-//            logger.error(e.getMessage(), e);
-//        } catch (IOException e) {
-//            logger.error(e.getMessage(), e);
-//        } finally {
-//            try {
-//                if(fis != null) {
-//                    fis.close();
-//                }
-//                if(scanner != null) {
-//                    scanner.close();
-//                }
-//            } catch (IOException e) {
-//                logger.error(e.getMessage(), e);
-//            }
-//        }
-
-        String jsonStr = JSON.toJSONString(resultBeanList);
-//        logger.info("findMatchResult, resultBeanList.size()={}, jsonStr={}", resultBeanList.size(), jsonStr);
-        logger.info("findMatchResult, resultBeanList.size()={}", resultBeanList.size());
-        return jsonStr;
+        return null;
     }
 
-    private List<ResultBean> parseRowData(int row, String rowData, List<Double> searchList) {
+    private List<ResultBean1> parseRowData(int row, String rowData, List<Double> searchList) {
         if (rowData == null || rowData.length() <= 0 || searchList == null || searchList.isEmpty()) {
             return Collections.emptyList();
         }
@@ -156,14 +122,14 @@ public class BigFileParser1 {
 
 //        logger.info("parseRowData, row={}, rowData={}", row, rowData);
 
-        List<ResultBean> resultBeanList = new ArrayList<>();
+        List<ResultBean1> resultBeanList = new ArrayList<>();
         for (int column = 1; column < strArr.length; column++) {
             try {
                 Double columnData = Double.valueOf(strArr[column]);
                 for (Double searchDou : searchList) {
 
                     if (columnData >= searchDou) {
-                        ResultBean bean = new ResultBean();
+                        ResultBean1 bean = new ResultBean1();
                         bean.setRow(row);
                         bean.setColumn(column);
                         bean.setTime(strArr[0]);

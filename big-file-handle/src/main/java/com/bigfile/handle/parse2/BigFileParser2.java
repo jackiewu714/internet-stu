@@ -2,16 +2,15 @@ package com.bigfile.handle.parse2;
 
 import com.alibaba.fastjson.JSON;
 import com.bigfile.handle.common.Constants;
-import com.bigfile.handle.parse1.ResultBean;
-import com.bigfile.handle.util.FileUtil;
+import com.bigfile.handle.parse1.ResultBean1;
+import com.bigfile.handle.util.CollectionUtils;
+import com.bigfile.handle.util.FileUtils;
+import com.bigfile.handle.util.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 大文件解析器
@@ -25,28 +24,30 @@ public class BigFileParser2 {
     /**
      * 查找符合条件的数据
      *
-     * @param filePath      String  文件路径
-     * @param searchStrList List<String>    搜索条件列表
+     * @param filePath       String  文件路径
+     * @param searchBeanList List<ParamBean2>    搜索条件列表
      * @return
      */
-    public String findMatchResult(String filePath, String resultFilePath, List<String> searchStrList) {
-        logger.info("findMatchResult, filePath={}, searchStrList={}, resultFilePath={}", filePath, JSON.toJSON(searchStrList), resultFilePath);
+    public String findMatchResult(String filePath, String resultFilePath, List<ParamBean2> searchBeanList) {
+        logger.info("findMatchResult, filePath={}, searchBeanList={}, resultFilePath={}", filePath, JSON.toJSON(searchBeanList), resultFilePath);
 
-        List<Double> searchDouList = new ArrayList<>();
-        for (String str : searchStrList) {
-            try {
-                searchDouList.add(Double.valueOf(str));
-            } catch (NumberFormatException e) {
-                logger.error("条件字符串格式化为数字错误， columnData={}", str, e);
+        List<ParamBean2> conditionList = new ArrayList<>();
+        for (ParamBean2 paramBean2 : searchBeanList) {
+            if (StringUtils.isNotEmpty(paramBean2.getPrefix_key())
+                    && StringUtils.isNotEmpty(paramBean2.getKey())
+                    && StringUtils.isNotEmpty(paramBean2.getValue_key())
+                    && StringUtils.isNotEmpty(paramBean2.getFormat_value())) {
+                conditionList.add(paramBean2);
             }
         }
 
-        if (searchStrList == null || searchStrList.isEmpty()) {
+        if (CollectionUtils.isEmpty(conditionList)) {
+            logger.error("查询条件列表不合法或者为空");
             return null;
         }
 
         //清空结果文件内容，如果文件不存在则新建一个空文件
-        FileUtil.clearFileContent(resultFilePath);
+        FileUtils.clearFileContent(resultFilePath);
 
         FileInputStream fis = null;
         InputStreamReader isr = null;
@@ -56,28 +57,42 @@ public class BigFileParser2 {
         OutputStreamWriter osw = null;
         BufferedWriter bw = null;
 
-        List<ResultBean> resultBeanList = new ArrayList<>();
+        Scanner scanner = null;
         try {
             fis = new FileInputStream(filePath);
-            isr = new InputStreamReader(fis);
-            br = new BufferedReader(isr);
+            scanner = new Scanner(fis);
 
             fos = new FileOutputStream(resultFilePath, true);
             osw = new OutputStreamWriter(fos);
             bw = new BufferedWriter(osw);
 
             int row = 1;
-            String line;
-            while ((line = br.readLine()) != null) {
-//                resultBeanList.addAll(parseRowData(row, line, searchDouList));
+            Stack<String> stack = new Stack<>();
+            boolean readValueLine = false;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
 
-                //将解析的结果写入到结果文件中
-                List<ResultBean> list = parseRowData(row, line, searchDouList);
-                if(!list.isEmpty() ) {
-                    bw.write(JSON.toJSONString(list));
-                    bw.newLine();
-                    bw.flush();
+                if(StringUtils.isEmpty(line)) {
+                    continue;
                 }
+
+                if(readValueLine) {
+                    stack.push(line);
+                    readValueLine = false;
+
+                    List<ResultBean2> resultBean2List = parseStackData(row, stack, conditionList);
+                    if (!resultBean2List.isEmpty()) {
+                        bw.write(JSON.toJSONString(resultBean2List));
+                        bw.newLine();
+                        bw.flush();
+                    }
+                }
+
+                if (isMatchPrefixKey(line, conditionList)) {
+                    stack.push(line);
+                    readValueLine = true;
+                }
+
                 row++;
             }
         } catch (FileNotFoundException e) {
@@ -86,14 +101,11 @@ public class BigFileParser2 {
             logger.error(e.getMessage(), e);
         } finally {
             try {
-                if (br != null) {
-                    br.close();
-                }
-                if (isr != null) {
-                    isr.close();
-                }
-                if (fis != null) {
+                if(fis != null) {
                     fis.close();
+                }
+                if(scanner != null) {
+                    scanner.close();
                 }
             } catch (IOException e) {
                 logger.error(e.getMessage(), e);
@@ -114,71 +126,49 @@ public class BigFileParser2 {
             }
         }
 
-//        Scanner scanner = null;
-//        try {
-//            fis = new FileInputStream(filePath);
-//            scanner = new Scanner(fis);
-//
-//            int row = 1;
-//            while (scanner.hasNextLine()) {
-//                String line = scanner.nextLine();
-//                resultBeanList.addAll(parseRowData(row, line, searchDouList));
-//                row++;
-//            }
-//        } catch (FileNotFoundException e) {
-//            logger.error(e.getMessage(), e);
-//        } catch (IOException e) {
-//            logger.error(e.getMessage(), e);
-//        } finally {
-//            try {
-//                if(fis != null) {
-//                    fis.close();
-//                }
-//                if(scanner != null) {
-//                    scanner.close();
-//                }
-//            } catch (IOException e) {
-//                logger.error(e.getMessage(), e);
-//            }
-//        }
-
-        String jsonStr = JSON.toJSONString(resultBeanList);
-//        logger.info("findMatchResult, resultBeanList.size()={}, jsonStr={}", resultBeanList.size(), jsonStr);
-        logger.info("findMatchResult, resultBeanList.size()={}", resultBeanList.size());
-        return jsonStr;
+        return null;
     }
 
-    private List<ResultBean> parseRowData(int row, String rowData, List<Double> searchList) {
-        if (rowData == null || rowData.length() <= 0 || searchList == null || searchList.isEmpty()) {
+    /**
+     * 判断是否满足搜索条件前缀匹配
+     * @param rowData           String  行数据
+     * @param conditionList     List<ParamBean2>    搜索条件列表
+     * @return  boolean true-满足  false-不满足
+     */
+    private boolean isMatchPrefixKey(String rowData, List<ParamBean2> conditionList) {
+        if (StringUtils.isEmpty(rowData) || CollectionUtils.isEmpty(conditionList)) {
+            return false;
+        }
+
+        boolean ret = false;
+        for(ParamBean2 paramBean2 : conditionList) {
+            if (rowData.startsWith(paramBean2.getPrefix_key())) {
+                ret = true;
+                break;
+            }
+        }
+        return ret;
+    }
+
+    private List<ResultBean2> parseStackData(int row, Stack<String> stack, List<ParamBean2> conditionList) {
+        if (CollectionUtils.isEmpty(stack) || CollectionUtils.isEmpty(conditionList)) {
             return Collections.emptyList();
         }
 
-        String[] strArr = rowData.split(" ");
-        if (strArr == null || strArr.length <= 1) {
-            return Collections.emptyList();
-        }
+        String secondRowData = stack.pop();
+        String firstRowData = stack.pop();
 
-//        logger.info("parseRowData, row={}, rowData={}", row, rowData);
-
-        List<ResultBean> resultBeanList = new ArrayList<>();
-        for (int column = 1; column < strArr.length; column++) {
+        List<ResultBean2> resultBeanList = new ArrayList<>();
+        for (ParamBean2 paramBean2 : conditionList) {
             try {
-                Double columnData = Double.valueOf(strArr[column]);
-                for (Double searchDou : searchList) {
-
-                    if (columnData >= searchDou) {
-                        ResultBean bean = new ResultBean();
-                        bean.setRow(row);
-                        bean.setColumn(column);
-                        bean.setTime(strArr[0]);
-                        bean.setValue(strArr[column]);
-
-                        resultBeanList.add(bean);
-                    }
-
+                ResultBean2 resultBean2 = matchSingle(firstRowData, secondRowData, paramBean2);
+                if (resultBean2 != null) {
+                    resultBeanList.add(resultBean2);
                 }
-            } catch (NumberFormatException e) {
-                logger.error("字符串格式化为数字错误， columnData={}", strArr[column], e);
+
+            } catch (Exception e) {
+                logger.error("单个匹配错误，firstRowData={}，secondRowData={}，paramBean2={}",
+                        firstRowData, secondRowData, JSON.toJSON(paramBean2), e);
             }
         }
 
@@ -186,17 +176,107 @@ public class BigFileParser2 {
         return resultBeanList;
     }
 
+    /**
+     * 匹配单个查询条件
+     * @param firstRowData      String  第一行数据
+     * @param secondRowData     String  第二行数据
+     * @param paramBean2        ParamBean2
+     * @return  ResultBean2
+     */
+    private ResultBean2 matchSingle(String firstRowData, String secondRowData, ParamBean2 paramBean2){
+        if(StringUtils.isEmpty(firstRowData) || StringUtils.isEmpty(secondRowData) || paramBean2 == null) {
+            return null;
+        }
+
+        if(secondRowData.contains(paramBean2.getKey())) {
+            String newStr = secondRowData.replaceAll(paramBean2.getKey(), "");
+            if(StringUtils.isEmpty(newStr)) {
+                return null;
+            }
+
+            if(newStr.contains(paramBean2.getValue_key()+" ")) {
+                String strArr[] = newStr.split(paramBean2.getValue_key());
+                if(strArr == null || strArr.length < 2) {
+                    return null;
+                }
+
+                String valueStr = strArr[1].trim();
+                if(StringUtils.isEmpty(valueStr)) {
+                    return null;
+                }
+
+                String[] valueStrArr = valueStr.split(" ");
+                if(valueStrArr == null || valueStrArr.length < 1) {
+                    return null;
+                }
+
+                String value = valueStrArr[0];
+                String time = getTime(firstRowData);
+                String format_value = String.format(paramBean2.getFormat_value(), value);
+
+                ResultBean2 resultBean2 = new ResultBean2();
+                resultBean2.setKey(paramBean2.getKey());
+                resultBean2.setValue(value);
+                resultBean2.setTime(time);
+                resultBean2.setFormat_value(format_value);
+                return resultBean2;
+            }
+
+        }
+        return null;
+    }
+
+    private String getTime(String rowData) {
+        if(StringUtils.isEmpty(rowData)){
+            return null;
+        }
+
+        String[] strArr = rowData.split("=");
+        if(strArr == null || strArr.length < 2) {
+            return null;
+        }
+
+        String rightStr= strArr[1];
+        if(StringUtils.isEmpty(rightStr)){
+            return null;
+        }
+
+        String[] rightStrArr = rightStr.trim().split(" ");
+        if(rightStrArr == null || rightStrArr.length < 1) {
+            return null;
+        }
+
+        return rightStrArr[0];
+    }
+
     public static void main(String[] args) {
         BigFileParser2 bigFileParser = new BigFileParser2();
 
         long startTime = System.currentTimeMillis();
-        List<String> searchList = Arrays.asList(new String[]{"96.2569"});
-        bigFileParser.findMatchResult(Constants.FILE_PATH_1, Constants.FILE_PATH_1_RESULT, searchList);
+
+        List<ParamBean2> searchBeanList = new ArrayList<>();
+        ParamBean2 bean1 = new ParamBean2();
+        bean1.setPrefix_key("/MESSAGE/");
+        bean1.setKey("GAP REALSEASE");
+        bean1.setValue_key("RING2");
+        bean1.setFormat_value("XX数据第%s层失效");
+
+        ParamBean2 bean2 = new ParamBean2();
+        bean2.setPrefix_key("/MESSAGE/");
+        bean2.setKey("HSOFF HEAT");
+        bean2.setValue_key("CELL1");
+        bean2.setValue_key("CELL33.9229");
+        bean2.setFormat_value("XX数据第%s圈失效");
+
+        searchBeanList.add(bean1);
+        searchBeanList.add(bean2);
+
+        bigFileParser.findMatchResult(Constants.FILE_PATH_2, Constants.FILE_PATH_2_RESULT, searchBeanList);
         long endTime = System.currentTimeMillis();
 
-        logger.info("BigFileParser1, findMatchResult 耗时 {} s", (endTime - startTime) / 1000);
+        logger.info("BigFileParser2, findMatchResult 耗时 {} s", (endTime - startTime) / 1000);
 
-        //BigFileParser1, findMatchResult 耗时 110 s（读取并解析500万行数据）
+        //BigFileParser2, findMatchResult 耗时 154 s（读取并解析3000万行数据，735 MB）
     }
 
 }

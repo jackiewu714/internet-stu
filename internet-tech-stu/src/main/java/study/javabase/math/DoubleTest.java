@@ -104,6 +104,7 @@ public class DoubleTest {
     /**
      * 测试double精度丢失问题
      */
+    @Ignore
     @Test
     public void testDoublePrecision() {
         Double balance = 3.14;
@@ -122,6 +123,52 @@ public class DoubleTest {
             System.out.println(String.format("recharge=%s", recharge));
         }
 
+    }
+
+    @Ignore
+    @Test
+    public void testDoubleMultiply() {
+//        Double salesPrice = 9.61D;
+//        Double amount = 0.5D;
+        Double salesPrice = 9.61;
+        Double amount = 0.5;
+        Double charges = salesPrice * amount;
+        System.out.println("testDoubleMultiply charges=" + charges);
+    }
+
+    @Test
+    public void testRetainDoubleTwo(){
+        Double charges = 4.805D;
+        Double result = retainDoubleTwo(charges);
+        System.out.println("testRetainDoubleTwo, result=" + result);
+
+        Double price = 9.61D;
+        Double amount = 0.5D;
+        Double result1 = ArithUtil.accuracy (ArithUtil.mul (price, amount));
+        System.out.println("testRetainDoubleTwo, result1=" + result1);
+
+        Double result2 = ArithUtil.accuracy (ArithUtil.mul (price, amount),2);
+        System.out.println("testRetainDoubleTwo, result2=" + result2);
+    }
+
+    /**
+     * double保留2位小数
+     *
+     * @param douBle 传入需要转换的double
+     * @return Double
+     */
+    public static Double retainDoubleTwo (final Double douBle)
+    {
+        Double db = 0.0D;
+        if (douBle != null)
+        {
+            db = douBle;
+        }
+//        final BigDecimal bigDecimal = new BigDecimal (db);
+//        final BigDecimal bigDecimal = new BigDecimal (String.valueOf(db));
+        final BigDecimal bigDecimal = new BigDecimal (Double.toString(db));
+        final Double d = bigDecimal.setScale (2, BigDecimal.ROUND_HALF_UP).doubleValue ();
+        return d;
     }
 
 }

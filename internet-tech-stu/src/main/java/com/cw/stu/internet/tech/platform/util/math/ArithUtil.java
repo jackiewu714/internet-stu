@@ -118,7 +118,11 @@ public final class ArithUtil
         {
             db = douBle;
         }
-        final BigDecimal bigDecimal = new BigDecimal(db);
+//        final BigDecimal bigDecimal = new BigDecimal(db); //直接以Double类型构造BigDecimal会导致精度丢失
+
+        // 以下面两种方式构建不会精度丢失
+//        final BigDecimal bigDecimal = new BigDecimal(Double.toString(db));    //方式1
+        final BigDecimal bigDecimal = BigDecimal.valueOf(db);   //方式2
         final Double d = bigDecimal.setScale (2, BigDecimal.ROUND_HALF_DOWN).doubleValue ();
         return d;
     }
@@ -135,7 +139,11 @@ public final class ArithUtil
         {
             db = douBle;
         }
-        final BigDecimal bigDecimal = new BigDecimal(db);
+//        final BigDecimal bigDecimal = new BigDecimal(db); //直接以Double类型构造BigDecimal会导致精度丢失
+
+        // 以下面两种方式构建不会精度丢失
+//        final BigDecimal bigDecimal = new BigDecimal(Double.toString(db));    //方式1
+        final BigDecimal bigDecimal = BigDecimal.valueOf(db);   //方式2
         final Double d = bigDecimal.setScale (newScale, BigDecimal.ROUND_HALF_UP).doubleValue ();
         return d;
     }

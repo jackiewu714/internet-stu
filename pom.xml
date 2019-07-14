@@ -20,6 +20,7 @@
         <module>java-agent-stu</module>
         <!--<module>codegenerator</module>-->
         <module>big-file-handle</module>
+        <module>netty-stu</module>
     </modules>
 
     <properties>
@@ -63,6 +64,7 @@
         <guava.version>23.0</guava.version>
         <servlet-api.version>2.5</servlet-api.version>
         <jsp-api.version>2.2</jsp-api.version>
+        <netty.version>4.1.6.Final</netty.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -454,6 +456,14 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
+
+            <!-- netty begin -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <!-- netty end -->
         </dependencies>
     </dependencyManagement>
 

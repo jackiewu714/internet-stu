@@ -6,6 +6,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 /**
@@ -142,6 +143,9 @@ public class DoubleTest {
         Double result = retainDoubleTwo(charges);
         System.out.println("testRetainDoubleTwo, result=" + result);
 
+        Double result11 = retainDoubleTwo(result);
+        System.out.println("testRetainDoubleTwo, result11=" + result11);
+
         Double price = 9.61D;
         Double amount = 0.5D;
         Double result1 = ArithUtil.accuracy (ArithUtil.mul (price, amount));
@@ -165,9 +169,12 @@ public class DoubleTest {
             db = douBle;
         }
 //        final BigDecimal bigDecimal = new BigDecimal (db);
+        final BigDecimal bigDecimal = BigDecimal.valueOf (db);
 //        final BigDecimal bigDecimal = new BigDecimal (String.valueOf(db));
-        final BigDecimal bigDecimal = new BigDecimal (Double.toString(db));
-        final Double d = bigDecimal.setScale (2, BigDecimal.ROUND_HALF_UP).doubleValue ();
+//        final BigDecimal bigDecimal = new BigDecimal (Double.toString(db));
+//        final Double d = bigDecimal.setScale (2, BigDecimal.ROUND_HALF_UP).doubleValue ();
+//        final Double d = bigDecimal.setScale (2, BigDecimal.ROUND_HALF_DOWN).doubleValue ();
+        final Double d = bigDecimal.setScale (2, RoundingMode.HALF_UP).doubleValue ();
         return d;
     }
 

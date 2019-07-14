@@ -36,7 +36,8 @@ public final class ArithUtil
         }
         final BigDecimal bd1 = new BigDecimal(Double.toString (d1));
         final BigDecimal bd2 = new BigDecimal(Double.toString (d2));
-        return bd1.divide (bd2, scale, BigDecimal.ROUND_HALF_UP).doubleValue ();
+//        return bd1.divide (bd2, scale, BigDecimal.ROUND_HALF_UP).doubleValue ();
+        return bd1.divide (bd2).doubleValue ();
     }
 
     /**
@@ -51,6 +52,7 @@ public final class ArithUtil
         final BigDecimal bd1 = new BigDecimal(Double.toString (d1));
         final BigDecimal bd2 = new BigDecimal(Double.toString (d2));
         return bd1.multiply (bd2).doubleValue ();
+//        return bd1.multiply (bd2).setScale (2, BigDecimal.ROUND_HALF_DOWN).doubleValue ();
     }
 
     /**

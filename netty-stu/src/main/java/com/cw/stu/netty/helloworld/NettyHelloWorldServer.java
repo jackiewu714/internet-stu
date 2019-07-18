@@ -1,5 +1,6 @@
 package com.cw.stu.netty.helloworld;
 
+import com.cw.stu.netty.common.Constants;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -21,8 +22,7 @@ public class NettyHelloWorldServer {
     private static final Logger logger = LoggerFactory.getLogger(NettyHelloWorldServer.class);
 
     public static void main(String[] args) {
-        int port = 9898;
-        new NettyHelloWorldServer().bind(port);
+        new NettyHelloWorldServer().bind(Constants.PORT);
     }
 
     private void bind(int port) {

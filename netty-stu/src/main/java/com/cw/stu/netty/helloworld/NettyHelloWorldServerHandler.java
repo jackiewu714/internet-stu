@@ -1,5 +1,6 @@
 package com.cw.stu.netty.helloworld;
 
+import com.cw.stu.netty.common.Constants;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,8 +18,6 @@ import org.slf4j.LoggerFactory;
 public class NettyHelloWorldServerHandler extends ChannelInboundHandlerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyHelloWorldServerHandler.class);
-
-    private static final String ENCODING = "UTF-8";
 
     /**
      * 收到客户端消息，自动触发
@@ -38,7 +37,7 @@ public class NettyHelloWorldServerHandler extends ChannelInboundHandlerAdapter {
 
         //readBytes：将缓冲区字节数组复制到新建的 byte 数组中，然后将字节数组转为字符串
         buf.readBytes(byteArr);
-        String body = new String(byteArr, ENCODING);
+        String body = new String(byteArr, Constants.ENCODING);
         logger.info("{}, The server receive  order : {}", Thread.currentThread().getName(), body);
 
         //回复消息
@@ -60,6 +59,7 @@ public class NettyHelloWorldServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         // 当发生异常时，关闭 ChannelHandlerContext，释放和它相关联的句柄等资源
+        logger.error("Unexcepted exception from downstream, 原因:", cause);
         ctx.close();
     }
 }

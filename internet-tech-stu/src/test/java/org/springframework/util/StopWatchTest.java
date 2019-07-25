@@ -13,7 +13,7 @@ public class StopWatchTest {
 
     @Test
     public void testStopWatch1() throws InterruptedException {
-        StopWatch stopWatch = new StopWatch();
+        StopWatch stopWatch = new StopWatch(Thread.currentThread().getName() + " -> testStopWatch1()");
 
         stopWatch.start("起床");
         Thread.sleep(1000);

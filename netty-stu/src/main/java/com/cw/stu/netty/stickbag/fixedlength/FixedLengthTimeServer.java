@@ -1,4 +1,4 @@
-package com.cw.stu.netty.stickbag;
+package com.cw.stu.netty.stickbag.fixedlength;
 
 import com.cw.stu.netty.common.Constants;
 import io.netty.bootstrap.ServerBootstrap;
@@ -9,18 +9,22 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.FixedLengthFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author WuLiangzhi  2019/10/08 16:32
  */
-public class TimeServer {
+public class FixedLengthTimeServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(TimeServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(FixedLengthTimeServer.class);
 
     public static void main(String[] args) {
-        new TimeServer().bind(Constants.PORT);
+        new FixedLengthTimeServer().bind(Constants.PORT);
     }
 
     public void bind(int port) {
@@ -37,6 +41,7 @@ public class TimeServer {
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
+                .handler(new LoggingHandler(LogLevel.INFO))
                 .childHandler(new ServerChildChannelHandler());
 
         try {
@@ -63,7 +68,16 @@ public class TimeServer {
 
         @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {
-            socketChannel.pipeline().addLast(new TimeServerHandler());
+            logger.info("{}, 服务器初始化通道...", Thread.currentThread().getName());
+
+            /*
+             * FixedLengthFrameDecoder(int frameLength)： frameLength：指定单条消息的长度
+             * 为了测试结果明显，这里设置消息长度为 64 字节，之后在发送消息时，会让部分消息长度小于等于 64，然后部分消息长度大于 64，以观察区别
+             * 实际应用中应该根据时间情况进行设置，比如 1024 字节
+             */
+            socketChannel.pipeline().addLast(new FixedLengthFrameDecoder(64));
+            socketChannel.pipeline().addLast(new StringDecoder(Constants.CHARSET));
+            socketChannel.pipeline().addLast(new FixedLengthTimeServerHandler());
         }
     }
 

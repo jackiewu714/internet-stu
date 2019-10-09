@@ -1,4 +1,4 @@
-package com.cw.stu.netty.stickbag;
+package com.cw.stu.netty.stickbag.delimiterbased;
 
 import com.cw.stu.netty.common.Constants;
 import io.netty.buffer.ByteBuf;
@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * ChannelInboundHandlerAdapter extends ChannelHandlerAdapter 用于对网络事件进行读写操作
  */
-public class TimeServerHandler extends ChannelInboundHandlerAdapter {
+public class DelimiterBasedTimeServerHandler extends ChannelInboundHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -32,22 +32,12 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        //将 msg 转为 Netty 的 ByteBuf 对象，类似 JDK 中的 java.nio.ByteBuffer，不过 ButeBuf 功能更强，更灵活
-        ByteBuf buf = (ByteBuf) msg;
-
         /*
-         * readableBytes：获取缓冲区可读字节数,然后创建字节数组
-         * 从而避免了像 java.nio.ByteBuffer 时，只能盲目的创建特定大小的字节数组，比如 1024
+         * DelimiterBasedFrameDecoder 自动对发送来的消息进行了解码，后续的 ChannelHandler 接收到的 msg 对象是完整的消息包
+         * 第二个 ChannelHandler 是 StringDecoder，它将 ByteBuf 解码成字符串对象
+         * 第三个 EchoServerHandler 接收到的 msg 对象就是解码后的字符串对象
          */
-        byte[] byteArr = new byte[buf.readableBytes()];
-
-        /*
-         * readBytes：将缓冲区字节数组复制到新建的 byte 数组中
-         * 然后将字节数组转为字符串
-         */
-        buf.readBytes(byteArr);
-
-        String body = new String(byteArr, Constants.ENCODING);
+        String body = (String) msg;
 //        System.out.println(atomicInteger.addAndGet(1) + "--->" + Thread.currentThread().getName()
 //                + ", The server receive order: " + body);
 
@@ -56,27 +46,21 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
         /*
          * 回复消息
-         * copiedBuffer：创建一个新的缓冲区，内容为里面的参数
-         * 通过 ChannelHandlerContext 的 write 方法将消息异步发送给客户端
+         * 由于创建的 DelimiterBasedFrameDecoder 解码器默认会自动去掉分隔符，所以返回给客户端时需要自己拼接分隔符
+         * DelimiterBasedFrameDecoder(int maxFrameLength, boolean stripDelimiter, ByteBuf delimiter)
+         *  这个构造器可以设置是否去除分隔符
+         * 最后创建 ByteBuf 将原始的消息重新返回给客户端
          */
-        String respMsg = "I'am server, 消息接收 success! " + Thread.currentThread().getName();
+        String respMsg = body + Constants.DELIMITER_SEPARATOR;
         ByteBuf respByteBuf = Unpooled.copiedBuffer(respMsg.getBytes());
-        ctx.write(respByteBuf);
 
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        /*
-         * flush：将消息发送队列中的消息写入到 SocketChannel 中发送给对方，为了频繁的唤醒 Selector 进行消息发送
-         * Netty 的 write 方法并不直接将消息写如 SocketChannel 中，调用 write 只是把待发送的消息放到发送缓存数组中，再通过调用 flush
-         * 方法，将发送缓冲区的消息全部写入到 SocketChannel 中
-         */
-        ctx.flush();
+        //每次写的时候，同时刷新，防止 TCP 粘包
+        ctx.writeAndFlush(respByteBuf);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        logger.info("-----客户端关闭:{}", ctx.channel().remoteAddress());
         //当发生异常时，关闭 ChannelHandlerContext，释放和它相关联的句柄等资源
         ctx.close();
     }

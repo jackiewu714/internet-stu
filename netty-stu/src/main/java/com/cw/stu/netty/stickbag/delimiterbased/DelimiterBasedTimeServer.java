@@ -1,7 +1,10 @@
-package com.cw.stu.netty.stickbag;
+package com.cw.stu.netty.stickbag.delimiterbased;
 
 import com.cw.stu.netty.common.Constants;
+import com.cw.stu.netty.stickbag.linebased.LineBasedTimeServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -9,18 +12,23 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author WuLiangzhi  2019/10/08 16:32
  */
-public class TimeServer {
+public class DelimiterBasedTimeServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(TimeServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(DelimiterBasedTimeServer.class);
 
     public static void main(String[] args) {
-        new TimeServer().bind(Constants.PORT);
+        new DelimiterBasedTimeServer().bind(Constants.PORT);
     }
 
     public void bind(int port) {
@@ -37,6 +45,7 @@ public class TimeServer {
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
+                .handler(new LoggingHandler(LogLevel.INFO))
                 .childHandler(new ServerChildChannelHandler());
 
         try {
@@ -63,7 +72,22 @@ public class TimeServer {
 
         @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {
-            socketChannel.pipeline().addLast(new TimeServerHandler());
+            logger.info("{}, 服务器初始化通道...", Thread.currentThread().getName());
+
+            /*
+             * 创建分隔符缓冲对象 ByteBuf，使用自定义的 "$_" 作为消息结束符，自己也可以定义为其它的字符作为结束符
+             *
+             * DelimiterBasedFrameDecoder(int maxFrameLength, ByteBuf delimiter)
+             * DelimiterBasedFrameDecoder(int maxFrameLength, ByteBuf... delimiters)
+             * 分隔符解码器重载了好几个构造器方法，其中常用的就是上面这两个
+             *      maxFrameLength：单条消息的最大长度,当达到该长度后仍然没有查找到分隔符时，则抛出 TooLongFrameException 异常
+             *      防止由于异常码流缺失分隔符导致内存溢出（亲测 Netty 4.1 版本，服务器并未抛出异常，而是客户端被强制断开连接了）
+             *      delimiter：分隔符缓冲对象,第二个构造器可见可以指定多个结束符
+             */
+            ByteBuf byteBuf = Unpooled.copiedBuffer(Constants.DELIMITER_SEPARATOR.getBytes());
+            socketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024, byteBuf));
+            socketChannel.pipeline().addLast(new StringDecoder());
+            socketChannel.pipeline().addLast(new DelimiterBasedTimeServerHandler());
         }
     }
 

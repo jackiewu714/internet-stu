@@ -1,4 +1,4 @@
-package com.cw.stu.netty.stickbag;
+package com.cw.stu.netty.stickbag.linebased;
 
 import com.cw.stu.netty.common.Constants;
 import io.netty.bootstrap.ServerBootstrap;
@@ -9,18 +9,20 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * @author WuLiangzhi  2019/10/08 16:32
  */
-public class TimeServer {
+public class LineBasedTimeServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(TimeServer.class);
+    private static final Logger logger = LoggerFactory.getLogger(LineBasedTimeServer.class);
 
     public static void main(String[] args) {
-        new TimeServer().bind(Constants.PORT);
+        new LineBasedTimeServer().bind(Constants.PORT);
     }
 
     public void bind(int port) {
@@ -63,7 +65,10 @@ public class TimeServer {
 
         @Override
         protected void initChannel(SocketChannel socketChannel) throws Exception {
-            socketChannel.pipeline().addLast(new TimeServerHandler());
+            //添加 LineBasedFrameDecoder 与 StringDecoder解码器
+            socketChannel.pipeline().addLast(new LineBasedFrameDecoder(1024));
+            socketChannel.pipeline().addLast(new StringDecoder());
+            socketChannel.pipeline().addLast(new LineBasedTimeServerHandler());
         }
     }
 

@@ -3,6 +3,8 @@ package study.javabase.math;
 import com.cw.stu.internet.tech.platform.util.math.ArithUtil;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+
 /**
  * @author WuLiangzhi  2019/07/01 13:50
  */
@@ -47,5 +49,23 @@ public class DoubleTest1 {
         System.out.println("charges=" + charges);
     }
 
+    @Test
+    public void test3(){
+        double d1 = 10.0d;
+        double d2 = 10.01d;
+        double d3 = d1 + d2;
+        double d4 = 39.90d;
+        BigDecimal bd1 = new BigDecimal(Double.toString(d2));
+        BigDecimal bd2 = BigDecimal.valueOf(d2);
+        BigDecimal bd3 = new BigDecimal(d2);
+        System.out.println("test3 d1=" + d1);
+        System.out.println("test3 d2=" + d2);
+        System.out.println("test3 d3=" + d3);
+        System.out.println("test3 d4=" + d4);
+        System.out.println("test3 bd1=" + bd1);
+        System.out.println("test3 bd2=" + bd2);
+        System.out.println("test3 bd3=" + bd3);
+
+    }
 
 }

@@ -1,6 +1,7 @@
 package study.javabase.collection;
 
 import org.junit.Test;
+import study.designpattern.proxy.Student;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,6 +27,22 @@ public class ListTest {
                 iterator.remove();
                 System.out.println("remove next:" + next);
             }
+        }
+    }
+
+    @Test
+    public void testIterator() {
+        List<Student> studentList1 = new ArrayList<>();
+        Student stu1 = new Student("Jackie");
+        Student stu2 = new Student("Nicky");
+
+        for (Student stu : studentList1) {
+            System.out.println(String.format("studentList1 stu=%s", stu));
+        }
+
+        List<Student> studentList2 = null;
+        for (Student stu : studentList2) {
+            System.out.println(String.format("studentList2 stu=%s", stu));
         }
     }
 

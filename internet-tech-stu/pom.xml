@@ -249,6 +249,11 @@
 			<artifactId>stax2-api</artifactId>
 		</dependency>
 		<!-- CXF end -->
+
+		<dependency>
+			<groupId>de.odysseus.staxon</groupId>
+			<artifactId>staxon</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

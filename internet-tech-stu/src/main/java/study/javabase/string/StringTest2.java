@@ -16,4 +16,11 @@ public class StringTest2 {
         System.out.println("comp=" + comp);
     }
 
+    @Test
+    public void testSplit(){
+        String str = "11";
+        String[] strArr = str.split(",");
+        System.out.println("strArr=" + strArr);
+    }
+
 }

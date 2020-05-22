@@ -3,9 +3,7 @@ package study.javabase.collection;
 import org.junit.Test;
 import study.designpattern.proxy.Student;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author WuLiangzhi  2018/12/24 11:30
@@ -43,6 +41,23 @@ public class ListTest {
         List<Student> studentList2 = null;
         for (Student stu : studentList2) {
             System.out.println(String.format("studentList2 stu=%s", stu));
+        }
+    }
+
+    @Test
+    public void testIterator2() {
+
+        Set<String> alipayAccountSet = new HashSet<String>();
+        alipayAccountSet.add("aaa");
+
+        List<Map<String, Object>> pcaPrepayRefundApplyList = new ArrayList<>();
+
+        for (String str : alipayAccountSet) {
+            for (Map<String, Object> map : pcaPrepayRefundApplyList) {
+                if(str.equals(map.get("aaa"))){
+                    System.out.println("str:" + str);
+                }
+            }
         }
     }
 

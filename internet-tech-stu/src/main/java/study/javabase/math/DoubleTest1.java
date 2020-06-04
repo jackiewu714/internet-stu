@@ -68,4 +68,19 @@ public class DoubleTest1 {
 
     }
 
+    @Test
+    public void test4(){
+//        double d1 = 547.74d;
+//        double d2 = -516.74d;
+//        double d3 = GwtArithUtil.sum(d1, d2);
+//
+//        System.out.println("test3 d1=" + d1);
+//        System.out.println("test3 d2=" + d2);
+//        System.out.println("test3 d3=" + d3);
+
+        BigDecimal bd1 = new BigDecimal(-516.74d);
+        System.out.println("test3 bd1=" + bd1);
+
+    }
+
 }

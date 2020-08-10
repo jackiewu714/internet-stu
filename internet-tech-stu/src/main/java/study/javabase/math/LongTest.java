@@ -1,9 +1,11 @@
 package study.javabase.math;
 
+import com.cw.stu.internet.tech.platform.util.DateUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +55,19 @@ public class LongTest {
         String str = "123aaa";
         String key = ll + str;
         System.out.println("key=" + key);
+    }
+
+    @Test
+    public void testDiv() {
+        Long ms = 9090L;
+//        Long dayMs = 24*60*60*1000;
+        Long days1 = ms / (1000*60*60*24);
+        System.out.println("days1=" + days1);
+
+        Date start = DateUtils.stringToDate("2020-04-07 12:11:11", DateUtils.SHOWING_DATE_TIME_FORMAT);
+        Date end = new Date();
+        Long days2 = (end.getTime() - start.getTime()) / (1000*60*60*24);
+        System.out.println("days2=" + days2);
     }
 
 }

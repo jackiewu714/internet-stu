@@ -83,4 +83,16 @@ public class DoubleTest1 {
 
     }
 
+    @Test
+    public void test5(){
+        Double d1 = -1d;
+
+        if(d1 == -1d) {
+            System.out.println("test5 bd1=-1d ");
+        } else {
+            System.out.println("test5 bd1!=-1d ");
+        }
+
+    }
+
 }
